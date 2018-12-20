@@ -46,3 +46,20 @@ library:
   - servant
   - servant-client
 
+# This binary generates the Servant bindings from the Swagger spec.
+executables:
+  servant-generator:
+    main:                Main.hs
+    source-dirs:         generator
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    default-extensions:
+    - NoImplicitPrelude
+    - OverloadedStrings
+    - ScopedTypeVariables
+    dependencies:
+    - aeson
+    - basic-prelude
+    - swagger2
