@@ -60,6 +60,6 @@ executables:
     - OverloadedStrings
     - ScopedTypeVariables
     dependencies:
-    - aeson
     - basic-prelude
     - swagger2
+    - yaml
