@@ -48,6 +48,7 @@ executables:
     dependencies:
     - basic-prelude
     - filepath
+    - haskell-generate
     - insert-ordered-containers
     - microlens
     - swagger2
