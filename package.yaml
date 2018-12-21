@@ -38,12 +38,19 @@ description:         Please see the README on GitHub at <https://github.com/rdne
 dependencies:
 - base >= 4.7 && < 5
 - mtl
+- servant
+
+# Although we use Prelude in the library itself, Intero gets confused by differences in extensions
+default-extensions:
+- NoImplicitPrelude
+- OverloadedStrings
+- ScopedTypeVariables
+- TupleSections
 
 library:
   source-dirs: src
   dependencies:
   - http-client-tls
-  - servant
   - servant-client
 
 # This binary generates the Servant bindings from the Swagger spec.
@@ -55,11 +62,11 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    default-extensions:
-    - NoImplicitPrelude
-    - OverloadedStrings
-    - ScopedTypeVariables
     dependencies:
     - basic-prelude
+    - filepath
+    - insert-ordered-containers
+    - microlens
     - swagger2
+    - text
     - yaml
