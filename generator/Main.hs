@@ -10,6 +10,7 @@ import Lens.Micro ((&), (^.), traversed)
 import Servant.API (StdMethod(..))
 
 import PathComponents
+import Translator
 
 
 main :: IO ()
