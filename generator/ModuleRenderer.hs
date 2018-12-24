@@ -16,6 +16,8 @@ apiModule :: String -> String -> TranslationResult -> Module NoLoc
 apiModule shortName modName tr = Module noLoc (Just modHead) pragmas imports decls' where
   modHead = ModuleHead noLoc (ModuleName noLoc $ modName ++ ".API") Nothing Nothing
   pragmas = [
+      -- Default stack depth for type simplification is 200, which is easily overflowed by the generated monstrosity
+      OptionsPragma noLoc (Just GHC) "-freduction-depth=0",
       -- Needed for promoting values to types
       LanguagePragma noLoc [Ident noLoc "DataKinds"],
       LanguagePragma noLoc [Ident noLoc "TypeOperators"]
