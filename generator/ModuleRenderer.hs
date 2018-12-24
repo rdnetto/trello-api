@@ -17,20 +17,29 @@ apiModule shortName modName tr = Module noLoc (Just modHead) pragmas imports dec
   modHead = ModuleHead noLoc (ModuleName noLoc $ modName ++ ".API") Nothing Nothing
   pragmas = [
       -- Needed for promoting values to types
-      LanguagePragma noLoc [Ident noLoc "DataKinds"]
+      LanguagePragma noLoc [Ident noLoc "DataKinds"],
+      LanguagePragma noLoc [Ident noLoc "TypeOperators"]
     ]
   imports = [
       -- Included for users using NoImplicitPrelude
       simpleImport "Prelude",
-      simpleImport "Servant.API"
+      simpleImport "Servant.API",
+      simpleImport "Data.Proxy",
+      scopedImport "Data.Text" ["Text"]
     ]
 
   -- e.g. usage for defining server API, or just a more flexible client typeclass impl
   decls' = (tr ^. decls) ++ [
+      unknownResponseType,    -- TODO: replace this with a general newtype mechanism
       apiType,
       apiProxySig,
       apiProxy
     ]
+
+  -- type UnknownResponseType = Text
+  unknownResponseType = TypeDecl noLoc
+    (DHead noLoc $ Ident noLoc "UnknownResponseType")
+    (TyCon noLoc $ unqualName "Text")
 
   -- type FooAPI = T0 :<|> T1 :<|> T2 ...
   apiType = TypeDecl noLoc
@@ -71,7 +80,8 @@ clientModule shortName modName tr = Module noLoc (Just modHead) [] imports decls
       -- Included for users using NoImplicitPrelude
       simpleImport "Prelude",
       simpleImport "Servant.API",
-      simpleImport "Servant.Client"
+      simpleImport "Servant.Client",
+      simpleImport (modName ++ ".API")
     ]
 
   decls' = [monadClass shortName, apiDefn]
@@ -141,3 +151,15 @@ simpleImport s = ImportDecl
   Nothing
   Nothing     -- import spec
 
+scopedImport :: String -> [String] -> ImportDecl NoLoc
+scopedImport mod symbols = ImportDecl
+    noLoc
+    (ModuleName noLoc mod)
+    False       -- qualified?
+    False
+    False
+    Nothing
+    Nothing
+    (Just . ImportSpecList noLoc False $ map spec symbols)
+  where
+    spec = IVar noLoc . Ident noLoc
