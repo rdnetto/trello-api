@@ -1,6 +1,7 @@
 module Translator(translate, renderModule) where
 
 import BasicPrelude
+import Data.Char (toUpper)
 import Data.Swagger (operationId)
 import Data.Text (unpack)
 import Language.Haskell.Exts.Syntax (
@@ -17,7 +18,7 @@ import Language.Haskell.Exts.Syntax (
         Type(..),
         QName(..)
     )
-import Lens.Micro ((^.), (&))
+import Lens.Micro ((^.))
 import qualified Prelude as P
 import Safe (fromJustNote)
 
@@ -34,9 +35,11 @@ translate :: EndpointInfo -> Decl NoLoc
 translate (EndpointInfo path method op) = TypeDecl noLoc declHead declBody where
     declHead = DHead noLoc
              . Ident noLoc
-             $ unpack aliasName
-    aliasName = op ^. operationId
-              & fromJustNote ("No id provided for operation at " ++ show (path, method))
+             $ aliasName
+    aliasName = capitalise
+              . unpack
+              . fromJustNote ("No id provided for operation at " ++ show (path, method))
+              $ op ^. operationId
     declBody = foldr (\a b -> TyInfix noLoc a servantPathCompOp b) terminalType
              $ map pathCompType path
 
@@ -109,3 +112,7 @@ renderModule = Module noLoc (Just modHead) pragmas imports where
                         Nothing
                         Nothing     -- import spec
 
+-- Needed to ensure that the type alias always starts with an uppercase character
+capitalise :: String -> String
+capitalise (x0:xs) = toUpper x0 : xs
+capitalise [] = []
