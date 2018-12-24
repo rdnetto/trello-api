@@ -31,7 +31,12 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
                       $ Symbol noLoc ":>"
 
     -- Get '[JSON] GamesResponse
-    terminalType = (TyApp noLoc) (tyList [methodType]) responseType
+    terminalType = foldl1 (TyApp noLoc) [
+        methodType,
+        (tyList [requestType]),
+        responseType
+      ]
+    requestType = TyCon noLoc $ unqualName "JSON"
 
     -- TODO: should really be encoding the expected return code here as well, but it doesn't matter because the Swagger spec only uses 200 and 400
     -- Note that we don't use the aliases here (e.g. Get) because they're not defined for all of the verbs
