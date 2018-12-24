@@ -32,6 +32,10 @@ parsePath =
 
 parseComp :: Text -> PathComponent
 parseComp s
-  | "{" `T.isPrefixOf` s && "}" `T.isSuffixOf` s = PathParam   s
-  | otherwise                                = PathLiteral s
+  | s0 == '{' && sN == '}' = PathParam sMid
+  | otherwise              = PathLiteral s
+  where
+    s0 = T.head s
+    sN = T.last s
+    sMid = T.init $ T.tail s
 
