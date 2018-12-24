@@ -12,6 +12,7 @@ import Lens.Micro ((&), (^.), traversed)
 import qualified Prelude as P
 import Servant.API (StdMethod(..))
 
+import ModuleRenderer
 import PathComponents
 import Translator
 
@@ -28,7 +29,8 @@ main = do
         & join
 
   let src = prettyPrint
-          . renderModule
+          . renderModule "trello"
+          . concat
           . map translate
           . pure  -- to undo the type change from head
           . head

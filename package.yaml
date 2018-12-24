@@ -51,6 +51,7 @@ executables:
     - insert-ordered-containers
     - haskell-src-exts
     - microlens
+    - microlens-th
     - safe
     - swagger2
     - text

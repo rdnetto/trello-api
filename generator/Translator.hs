@@ -1,7 +1,6 @@
-module Translator(translate, renderModule) where
+module Translator(translate) where
 
 import BasicPrelude
-import Data.Char (toUpper)
 import Data.Swagger (operationId)
 import Data.Text (unpack)
 import Language.Haskell.Exts.Syntax (
@@ -23,16 +22,13 @@ import qualified Prelude as P
 import Safe (fromJustNote)
 
 import PathComponents
+import TranslationResult
 
-
--- We don't care about location info
-type NoLoc = ()
-noLoc :: NoLoc
-noLoc = ()
 
 -- Translates an endpoint to its type representation
-translate :: EndpointInfo -> Decl NoLoc
-translate (EndpointInfo path method op) = TypeDecl noLoc declHead declBody where
+translate :: EndpointInfo -> TranslationResult
+translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] where
+    decl = TypeDecl noLoc declHead declBody
     declHead = DHead noLoc
              . Ident noLoc
              $ aliasName
@@ -88,31 +84,3 @@ unqualName = UnQual noLoc . Ident noLoc
 -- The undocumented bool on PromotedList/PromotedCon is whether the term is preceded by a single quote
 tyList :: [Type NoLoc] -> Type NoLoc
 tyList = TyPromoted noLoc . PromotedList noLoc True
-
--- Computes the module containing the declarations
-renderModule :: [Decl NoLoc] -> Module NoLoc
-renderModule = Module noLoc (Just modHead) pragmas imports where
-    modHead = ModuleHead noLoc (ModuleName noLoc "API") Nothing Nothing
-    pragmas = [
-            -- Needed for promoting values to types
-            LanguagePragma noLoc [Ident noLoc "DataKinds"]
-        ]
-    imports = [
-            simpleImport "Prelude",
-            simpleImport "Servant.API"
-        ]
-
-    simpleImport s = ImportDecl
-                        noLoc
-                        (ModuleName noLoc s)
-                        False       -- qualified?
-                        False
-                        False
-                        Nothing
-                        Nothing
-                        Nothing     -- import spec
-
--- Needed to ensure that the type alias always starts with an uppercase character
-capitalise :: String -> String
-capitalise (x0:xs) = toUpper x0 : xs
-capitalise [] = []
