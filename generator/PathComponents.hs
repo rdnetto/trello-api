@@ -1,8 +1,8 @@
 module PathComponents (EndpointInfo(..), PathComponent(..), parsePath) where
 
+import BasicPrelude
 import Data.Swagger (Operation)
-import Data.Text (Text, pack, isPrefixOf, isSuffixOf)
-import Prelude
+import qualified Data.Text as T
 import Servant.API (StdMethod(..))
 import System.FilePath.Posix (splitPath)
 
@@ -21,11 +21,17 @@ data EndpointInfo = EndpointInfo {
 } deriving (Eq, Show)
 
 
+-- Extracts the components from a path
 parsePath :: FilePath -> [PathComponent]
-parsePath fp = parseComp . pack <$> splitPath fp
+parsePath =
+  map parseComp
+  . filter (not . T.null)
+  . map (T.dropWhileEnd (== '/'))           -- Needed because splitPath doesn't remove the trailing slash
+  . map T.pack
+  . splitPath
 
 parseComp :: Text -> PathComponent
 parseComp s
-  | "{" `isPrefixOf` s && "}" `isSuffixOf` s = PathParam   s
+  | "{" `T.isPrefixOf` s && "}" `T.isSuffixOf` s = PathParam   s
   | otherwise                                = PathLiteral s
 
