@@ -3,20 +3,7 @@ module Translator(translate) where
 import BasicPrelude
 import Data.Swagger (operationId)
 import Data.Text (unpack)
-import Language.Haskell.Exts.Syntax (
-        Decl(TypeDecl),
-        DeclHead(DHead),
-        MaybePromotedName(UnpromotedName),
-        ImportDecl(ImportDecl),
-        Module(Module),
-        ModuleHead(ModuleHead),
-        ModuleName(ModuleName),
-        ModulePragma(LanguagePragma),
-        Name(..),
-        Promoted(..),
-        Type(..),
-        QName(..)
-    )
+import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.))
 import qualified Prelude as P
 import Safe (fromJustNote)
@@ -76,9 +63,6 @@ pathCompType (PathParam s)   = foldl1 (TyApp noLoc) args where
             -- TODO: support newtypes
             TyCon noLoc $ unqualName "Text"
         ]
-
-unqualName :: String -> QName NoLoc
-unqualName = UnQual noLoc . Ident noLoc
 
 -- Helper func for creating a type list
 -- The undocumented bool on PromotedList/PromotedCon is whether the term is preceded by a single quote

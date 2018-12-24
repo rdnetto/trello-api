@@ -6,7 +6,9 @@ module TranslationResult where
 import BasicPrelude
 import Data.Char (toLower, toUpper)
 import Language.Haskell.Exts.Syntax (
-    Decl(TypeDecl)
+    Decl(TypeDecl),
+    Name(..),
+    QName(..)
   )
 import Lens.Micro.TH (makeLenses)
 import Prelude (Semigroup(..))
@@ -18,8 +20,8 @@ noLoc :: NoLoc
 noLoc = ()
 
 data TranslationResult = TranslationResult {
-  _decls :: [Decl NoLoc],
-  _endpointNames :: [String]     -- names of types for endpoints
+  _decls :: [Decl NoLoc],        -- The type declarations of the endpoints.
+  _endpointNames :: [String]     -- Names of types for endpoints. These are capitalised.
 } deriving (Eq, Show)
 
 instance Semigroup TranslationResult where
@@ -39,4 +41,7 @@ capitalise [] = []
 unCapitalise :: String -> String
 unCapitalise (x0:xs) = toLower x0 : xs
 unCapitalise [] = []
+
+unqualName :: String -> QName NoLoc
+unqualName = UnQual noLoc . Ident noLoc
 
