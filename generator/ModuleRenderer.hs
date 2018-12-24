@@ -1,4 +1,4 @@
-module ModuleRenderer(renderModule) where
+module ModuleRenderer(apiModule, clientModule) where
 
 import BasicPrelude
 import Data.Char (toUpper)
@@ -9,38 +9,27 @@ import Lens.Micro ((^.))
 import TranslationResult
 
 
--- Computes the module containing the declarations
--- name should be camelcase
-renderModule :: String -> TranslationResult -> Module NoLoc
-renderModule name tr = Module noLoc (Just modHead) pragmas imports decls' where
-  modHead = ModuleHead noLoc (ModuleName noLoc "API") Nothing Nothing
+-- Computes module containing the Servant API types.
+-- shortName should be camelcase
+-- modName is the name of the package that will contain the module
+apiModule :: String -> String -> TranslationResult -> Module NoLoc
+apiModule shortName modName tr = Module noLoc (Just modHead) pragmas imports decls' where
+  modHead = ModuleHead noLoc (ModuleName noLoc $ modName ++ ".API") Nothing Nothing
   pragmas = [
       -- Needed for promoting values to types
       LanguagePragma noLoc [Ident noLoc "DataKinds"]
     ]
   imports = [
+      -- Included for users using NoImplicitPrelude
       simpleImport "Prelude",
       simpleImport "Servant.API"
     ]
 
-  simpleImport s = ImportDecl
-    noLoc
-    (ModuleName noLoc s)
-    False       -- qualified?
-    False
-    False
-    Nothing
-    Nothing
-    Nothing     -- import spec
-
-  -- TODO: client definition should go in a separate module, to provide more flexibility
   -- e.g. usage for defining server API, or just a more flexible client typeclass impl
   decls' = (tr ^. decls) ++ [
-      monadClass name,
       apiType,
       apiProxySig,
-      apiProxy,
-      apiDefn
+      apiProxy
     ]
 
   -- type FooAPI = T0 :<|> T1 :<|> T2 ...
@@ -57,8 +46,8 @@ renderModule name tr = Module noLoc (Just modHead) pragmas imports decls' where
     $ Symbol noLoc ":<|>"
 
   -- fooAPI :: Proxy FooAPI
-  apiName = name ++ "API"
-  apiTypeName = capitalise name ++ "API"
+  apiName = shortName ++ "API"
+  apiTypeName = capitalise shortName ++ "API"
   apiProxySig = TypeSig noLoc
     [Ident noLoc apiName]
     (TyApp noLoc
@@ -71,6 +60,21 @@ renderModule name tr = Module noLoc (Just modHead) pragmas imports decls' where
    (PVar noLoc (Ident noLoc apiName))
    (UnGuardedRhs noLoc . Con noLoc $ unqualName "Proxy")
    Nothing
+
+-- Computes module containing the Servant client definition.
+-- shortName should be camelcase
+-- modName is the name of the package that will contain the module
+clientModule :: String -> String -> TranslationResult -> Module NoLoc
+clientModule shortName modName tr = Module noLoc (Just modHead) [] imports decls' where
+  modHead = ModuleHead noLoc (ModuleName noLoc $ modName ++ ".Client") Nothing Nothing
+  imports = [
+      -- Included for users using NoImplicitPrelude
+      simpleImport "Prelude",
+      simpleImport "Servant.API",
+      simpleImport "Servant.Client"
+    ]
+
+  decls' = [monadClass shortName, apiDefn]
 
   -- t0 :<|> t1 :<|> t2 ... = hoistClient fooAPI liftFooClient (client fooAPI)
   apiDefn = PatBind noLoc apiLHS apiRHS Nothing
@@ -88,7 +92,8 @@ renderModule name tr = Module noLoc (Just modHead) pragmas imports decls' where
         (Var noLoc $ unqualName apiName)
       )
     ]
-  methodName = "lift" ++ capitalise name ++ "Client"
+  apiName = shortName ++ "API"
+  methodName = "lift" ++ capitalise shortName ++ "Client"
 
 -- Custom type class to allow any transformer stack to use this API. i.e.
 --    class Monad m => FooMonad m where
@@ -124,4 +129,15 @@ monadClass name = ClassDecl noLoc (Just ctx) declHead [] (Just [liftFooClient]) 
           (TyVar noLoc a)
         )
       )
+
+simpleImport :: String -> ImportDecl NoLoc
+simpleImport s = ImportDecl
+  noLoc
+  (ModuleName noLoc s)
+  False       -- qualified?
+  False
+  False
+  Nothing
+  Nothing
+  Nothing     -- import spec
 

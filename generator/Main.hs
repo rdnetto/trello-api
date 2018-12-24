@@ -28,14 +28,14 @@ main = do
         & map (uncurry parsePaths)
         & join
 
-  let src = prettyPrint
-          . renderModule "trello"
-          . concat
+  let tr = concat
           . map translate
-          . pure  -- to undo the type change from head
-          . head
           $ endpoints
-  writeFile "output.hs" $ T.pack src
+  let apiMod    = T.pack . prettyPrint $ apiModule    "trello" "Trello" tr
+      clientMod = T.pack . prettyPrint $ clientModule "trello" "Trello" tr
+
+  writeFile "out/API.hs"    apiMod
+  writeFile "out/Client.hs" clientMod
 
 parsePaths :: FilePath -> PathItem -> [EndpointInfo]
 parsePaths fp pi = uncurry (EndpointInfo $ parsePath fp) <$> pathOps pi

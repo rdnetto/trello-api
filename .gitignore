@@ -22,5 +22,5 @@ cabal.project.local
 # using hpack
 *.cabal
 bin
-output.hs
+out/
 Notes.md
