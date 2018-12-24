@@ -49,7 +49,9 @@ executables:
     - basic-prelude
     - filepath
     - insert-ordered-containers
+    - haskell-src-exts
     - microlens
+    - safe
     - swagger2
     - text
     - yaml
