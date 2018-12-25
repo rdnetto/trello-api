@@ -1,7 +1,7 @@
 module Translator(translate) where
 
 import BasicPrelude
-import Data.Swagger (operationId)
+import Data.Swagger (operationId, Operation, Param, Referenced(..), parameters, required, name)
 import Data.Text (unpack)
 import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.))
@@ -24,7 +24,7 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
               . fromJustNote ("No id provided for operation at " ++ show (path, method))
               $ op ^. operationId
     declBody = foldr (\a b -> TyInfix noLoc a servantPathCompOp b) terminalType
-             $ map pathCompType path
+             $ map pathCompType path ++ map queryParam (getParams op)
 
     servantPathCompOp = UnpromotedName noLoc
                       . UnQual noLoc
@@ -53,17 +53,12 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
     responseType = TyCon noLoc $ unqualName "UnknownResponseType"
 
 -- Either a simple string or something like:
---      QueryParam' '[Required] "key" ApiKey
+--    Capture "key" ApiKey
 pathCompType :: PathComponent -> Type NoLoc
 pathCompType (PathLiteral s) = TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s)
 pathCompType (PathParam s)   = foldl1 (TyApp noLoc) args where
     args = [
-            TyCon noLoc $ unqualName "QueryParam'",
-            tyList [
-                   TyCon noLoc $ unqualName "Strict",
-                   -- TODO: check if actually required or not
-                   TyCon noLoc $ unqualName "Required"
-                ],
+            TyCon noLoc $ unqualName "Capture",
             TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s),
             -- TODO: support newtypes
             TyCon noLoc $ unqualName "Text"
@@ -73,3 +68,30 @@ pathCompType (PathParam s)   = foldl1 (TyApp noLoc) args where
 -- The undocumented bool on PromotedList/PromotedCon is whether the term is preceded by a single quote
 tyList :: [Type NoLoc] -> Type NoLoc
 tyList = TyPromoted noLoc . PromotedList noLoc True
+
+getParams :: Operation -> [Param]
+getParams op = deref <$> op ^. parameters where
+  deref (Ref ref) = error $ "Not implemented; unable to dereference " ++ show ref
+  deref (Inline x) = x
+
+-- QueryParam' '[Required] "key" ApiKey
+queryParam :: Param -> Type NoLoc
+queryParam p = foldl1 (TyApp noLoc) args where
+  pName = unpack $ p ^. name
+  args = [
+      TyCon noLoc $ unqualName "QueryParam'",
+      mods,
+      TyPromoted noLoc $ PromotedString noLoc pName pName,
+      -- TODO: support newtypes
+      TyCon noLoc $ unqualName "Text"
+    ]
+  mods =
+    if (fromMaybe False $ p ^. required)
+    then tyList [
+        TyCon noLoc $ unqualName "Strict",
+        TyCon noLoc $ unqualName "Required"
+      ]
+    else tyList [
+        TyCon noLoc $ unqualName "Strict"
+      ]
+
