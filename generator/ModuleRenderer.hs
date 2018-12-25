@@ -4,7 +4,7 @@ import BasicPrelude
 import Data.Char (toUpper)
 import Data.Text (unpack)
 import qualified Data.Text as T
-import Language.Haskell.Exts.Pretty (prettyPrint)
+import Language.Haskell.Exts.Pretty (Style(..), PPHsMode(..), defaultMode, style, prettyPrintStyleMode)
 import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.))
 
@@ -170,5 +170,7 @@ scopedImport mod symbols = ImportDecl
 
 -- Helper method for serialising and writing out module
 writeModule :: MonadIO m => FilePath -> Module l -> m ()
-writeModule fp = liftIO . writeFile fp . T.pack . prettyPrint
+writeModule fp = liftIO . writeFile fp . T.pack . prettyPrintStyleMode style' mod where
+  style' = style {ribbonsPerLine = 0.1}
+  mod = defaultMode {onsideIndent = 0}
 
