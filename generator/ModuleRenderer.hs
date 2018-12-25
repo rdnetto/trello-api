@@ -1,8 +1,10 @@
-module ModuleRenderer(apiModule, clientModule) where
+module ModuleRenderer(apiModule, clientModule, writeModule) where
 
 import BasicPrelude
 import Data.Char (toUpper)
 import Data.Text (unpack)
+import qualified Data.Text as T
+import Language.Haskell.Exts.Pretty (prettyPrint)
 import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.))
 
@@ -165,3 +167,8 @@ scopedImport mod symbols = ImportDecl
     (Just . ImportSpecList noLoc False $ map spec symbols)
   where
     spec = IVar noLoc . Ident noLoc
+
+-- Helper method for serialising and writing out module
+writeModule :: MonadIO m => FilePath -> Module l -> m ()
+writeModule fp = liftIO . writeFile fp . T.pack . prettyPrint
+

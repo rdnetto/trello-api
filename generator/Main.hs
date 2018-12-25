@@ -4,12 +4,9 @@ import BasicPrelude
 import qualified Data.HashMap.Strict.InsOrd as IOM
 import qualified Data.Swagger as Sw
 import Data.Swagger (Swagger, PathItem, Operation, paths)
-import qualified Data.Text as T
 import Data.Tuple (uncurry)
 import Data.Yaml (decodeFileThrow)
-import Language.Haskell.Exts.Pretty (prettyPrint)
 import Lens.Micro ((&), (^.), traversed)
-import qualified Prelude as P
 import Servant.API (StdMethod(..))
 
 import ModuleRenderer
@@ -31,11 +28,9 @@ main = do
   let tr = concat
           . map translate
           $ endpoints
-  let apiMod    = T.pack . prettyPrint $ apiModule    "trello" "Trello" tr
-      clientMod = T.pack . prettyPrint $ clientModule "trello" "Trello" tr
 
-  writeFile "out/API.hs"    apiMod
-  writeFile "out/Client.hs" clientMod
+  writeModule "out/API.hs"    $ apiModule    "trello" "Trello" tr
+  writeModule "out/Client.hs" $ clientModule "trello" "Trello" tr
 
 parsePaths :: FilePath -> PathItem -> [EndpointInfo]
 parsePaths fp pi = uncurry (EndpointInfo $ parsePath fp) <$> pathOps pi
