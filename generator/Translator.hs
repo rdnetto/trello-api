@@ -46,7 +46,8 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
               . fromJustNote ("No id provided for operation at " ++ show (path, method))
               $ op ^. operationId
     declBody = foldr (\a b -> TyInfix noLoc a servantPathCompOp b) terminalType
-             $ map pathCompType path ++ map queryParam (getParams op)
+             $ map (pathCompType params) path ++ map queryParam params
+    params = getParams op
 
     servantPathCompOp = UnpromotedName noLoc
                       . UnQual noLoc
@@ -76,15 +77,28 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
 
 -- Either a simple string or something like:
 --    Capture "key" ApiKey
-pathCompType :: PathComponent -> Type NoLoc
-pathCompType (PathLiteral s) = TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s)
-pathCompType (PathParam s)   = foldl1 (TyApp noLoc) args where
-    args = [
-            TyCon noLoc $ unqualName "Capture",
-            TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s),
-            -- TODO: support newtypes
-            TyCon noLoc $ unqualName "Text"
-        ]
+pathCompType :: [Param] -> PathComponent -> Type NoLoc
+pathCompType _ (PathLiteral s)
+  = TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s)
+pathCompType params (PathParam s) = foldl1 (TyApp noLoc) args where
+  args = [
+      TyCon noLoc $ unqualName "Capture",
+      TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s),
+      tyCon
+    ]
+  tyCon
+    = paramTypeCon
+    . defaultParamType
+    . expectOne
+    . filter ((== s) . (^. name))
+    $ params
+  expectOne [p] = p
+  expectOne ps  = error $ concat [
+      "Failed to find unique param ",
+      show s,
+      " in ",
+      show ps
+    ]
 
 -- Helper func for creating a type list
 -- The undocumented bool on PromotedList/PromotedCon is whether the term is preceded by a single quote
