@@ -1,6 +1,7 @@
 module Main where
 
 import BasicPrelude
+import Control.Monad.Reader (runReader)
 import qualified Data.HashMap.Strict.InsOrd as IOM
 import qualified Data.Swagger as Sw
 import Data.Swagger (Swagger, PathItem, Operation, paths)
@@ -19,15 +20,18 @@ main = do
   swagger :: Swagger
           <- decodeFileThrow "openapi-directory/APIs/trello.com/1.0/swagger.yaml"
   -- TODO translate swagger entries to types
-  let endpoints = swagger
+  let endpoints
+        = swagger
         ^. paths
         & IOM.toList
         & map (uncurry parsePaths)
         & join
 
-  let tr = concat
-          . map translate
-          $ endpoints
+  let tr
+        = flip runReader swagger
+        $ map concat
+        . mapM translate
+        $ endpoints
 
   writeModule "out/API.hs"    $ apiModule    "trello" "Trello" tr
   writeModule "out/Client.hs" $ clientModule "trello" "Trello" tr

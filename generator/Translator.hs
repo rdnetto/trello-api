@@ -31,27 +31,39 @@ import Unsafe.Coerce (unsafeCoerce)
 import NoLoc
 import ParamType
 import PathComponents
+import SwaggerM
 import TranslationResult
 
 
 -- Translates an endpoint to its type representation
-translate :: EndpointInfo -> TranslationResult
-translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] where
-    decl = TypeDecl noLoc declHead declBody
-    declHead = DHead noLoc
-             . Ident noLoc
-             $ aliasName
-    aliasName = capitalise
-              . unpack
-              . fromJustNote ("No id provided for operation at " ++ show (path, method))
-              $ op ^. operationId
-    declBody = foldr (\a b -> TyInfix noLoc a servantPathCompOp b) terminalType
-             $ map (pathCompType params) path ++ map queryParam params
-    params = getParams op
+translate :: EndpointInfo -> SwaggerM TranslationResult
+translate (EndpointInfo path method op) = do
+  paramInfo   <- deref `mapM` (op ^. parameters)
+  queryParams <- queryParam `mapM` paramInfo
+  pathParams  <- (pathCompType paramInfo) `mapM` path
 
-    servantPathCompOp = UnpromotedName noLoc
-                      . UnQual noLoc
-                      $ Symbol noLoc ":>"
+  let
+    decl = TypeDecl noLoc declHead declBody
+
+    declHead
+      = DHead noLoc
+      . Ident noLoc
+      $ aliasName
+
+    aliasName
+      = capitalise
+      . unpack
+      . fromJustNote ("No id provided for operation at " ++ show (path, method))
+      $ op ^. operationId
+
+    declBody
+      = foldr (\a b -> TyInfix noLoc a servantPathCompOp b) terminalType
+      $ pathParams ++ queryParams
+
+    servantPathCompOp
+      = UnpromotedName noLoc
+      . UnQual noLoc
+      $ Symbol noLoc ":>"
 
     -- Get '[JSON] GamesResponse
     terminalType = foldl1 (TyApp noLoc) [
@@ -75,85 +87,94 @@ translate (EndpointInfo path method op) = TranslationResult [decl] [aliasName] w
     -- TODO: alias this to Data.Aeson.Value
     responseType = TyCon noLoc $ unqualName "UnknownResponseType"
 
+  return $ TranslationResult [decl] [aliasName] where
+
 -- Either a simple string or something like:
 --    Capture "key" ApiKey
-pathCompType :: [Param] -> PathComponent -> Type NoLoc
+pathCompType :: [Param] -> PathComponent -> SwaggerM (Type NoLoc)
 pathCompType _ (PathLiteral s)
-  = TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s)
-pathCompType params (PathParam s) = foldl1 (TyApp noLoc) args where
-  args = [
-      TyCon noLoc $ unqualName "Capture",
-      TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s),
-      tyCon
-    ]
+  = pure
+  . TyPromoted noLoc
+  $ PromotedString noLoc (unpack s) (unpack s)
+pathCompType params (PathParam s) = do
+  let
+    expectOne [p] = p
+    expectOne ps  = error $ concat [
+        "Failed to find unique param ",
+        show s,
+        " in ",
+        show ps
+      ]
+
   tyCon
-    = paramTypeCon
-    . defaultParamType
-    . expectOne
-    . filter ((== s) . (^. name))
-    $ params
-  expectOne [p] = p
-  expectOne ps  = error $ concat [
-      "Failed to find unique param ",
-      show s,
-      " in ",
-      show ps
-    ]
+    <- map paramTypeCon
+    .  defaultParamType
+    .  expectOne
+    .  filter ((== s) . (^. name))
+    $  params
+
+  let
+    args = [
+        TyCon noLoc $ unqualName "Capture",
+        TyPromoted noLoc $ PromotedString noLoc (unpack s) (unpack s),
+        tyCon
+      ]
+
+  return $ foldl1 (TyApp noLoc) args
 
 -- Helper func for creating a type list
 -- The undocumented bool on PromotedList/PromotedCon is whether the term is preceded by a single quote
 tyList :: [Type NoLoc] -> Type NoLoc
 tyList = TyPromoted noLoc . PromotedList noLoc True
 
-getParams :: Operation -> [Param]
-getParams op = deref <$> op ^. parameters where
-  deref (Ref ref) = error $ "Not implemented; unable to dereference " ++ show ref
-  deref (Inline x) = x
-
 -- QueryParam' '[Required] "key" ApiKey
-queryParam :: Param -> Type NoLoc
-queryParam p = foldl1 (TyApp noLoc) args where
-  pName = unpack $ p ^. name
-  args = [
-      TyCon noLoc $ unqualName "QueryParam'",
-      mods,
-      TyPromoted noLoc $ PromotedString noLoc pName pName,
-      paramTypeCon paramType
-    ]
-  mods =
-    if (fromMaybe False $ p ^. required)
-    then tyList [
-        TyCon noLoc $ unqualName "Strict",
-        TyCon noLoc $ unqualName "Required"
+queryParam :: Param -> SwaggerM (Type NoLoc)
+queryParam p = do
+  paramType <- defaultParamType p
+
+  let
+    pName = unpack $ p ^. name
+    args = [
+        TyCon noLoc $ unqualName "QueryParam'",
+        mods,
+        TyPromoted noLoc $ PromotedString noLoc pName pName,
+        paramTypeCon paramType
       ]
-    else tyList [
-        TyCon noLoc $ unqualName "Strict"
-      ]
-  paramType = defaultParamType p
+    mods =
+      if (fromMaybe False $ p ^. required)
+      then tyList [
+          TyCon noLoc $ unqualName "Strict",
+          TyCon noLoc $ unqualName "Required"
+        ]
+      else tyList [
+          TyCon noLoc $ unqualName "Strict"
+        ]
+
+  return $ foldl1 (TyApp noLoc) args
 
 -- Determines the type to use for a param
-defaultParamType :: Param -> ParamType
-defaultParamType p = res where
-  swaggerType
-    = p ^. schema
-    & paramSchema
-    & (^. type_)
-  preludeType = PreludeType . Ident noLoc
-  res = case swaggerType of
-             SwaggerString  -> preludeType "Text"
-             SwaggerNumber  -> preludeType "Float"
-             SwaggerInteger -> preludeType "Int"
-             SwaggerBoolean -> preludeType "Boolean"
-             s              -> error $ "Unsupported swagger type: " ++ show s
+defaultParamType :: Param -> SwaggerM ParamType
+defaultParamType p
+    =   match
+    .   (^. type_)
+    <$> paramSchema (p ^. schema)
+  where
+    match SwaggerString  = preludeType "Text"
+    match SwaggerNumber  = preludeType "Float"
+    match SwaggerInteger = preludeType "Int"
+    match SwaggerBoolean = preludeType "Boolean"
+    match s              = error $ "Unsupported swagger type: " ++ show s
+
+    preludeType = PreludeType . Ident noLoc
 
 -- Helper function for dereferencing schema
 -- Unfortunately the different cases are different types of form `ParamSchema _`,
 -- so we need to do evil things here. This is safe because its only a phantom type.
-paramSchema :: ParamAnySchema -> ParamSchema SwaggerKindParamOtherSchema
-paramSchema (ParamBody (Ref ref))
-  = error $ "Cannot dereference " ++ show ref
-paramSchema (ParamBody (Inline s))  -- This is the uncommon case
-  = unsafeCoerce $ _schemaParamSchema s
-paramSchema (ParamOther s)          -- This is the common case
-  = unsafeCoerce $ _paramOtherSchemaParamSchema s
+-- Note that Other is the common case, and Body is the uncommon case.
+paramSchema :: ParamAnySchema -> SwaggerM (ParamSchema SwaggerKindParamOtherSchema)
+paramSchema (ParamBody ref) = unsafeCoerce <$> deref ref
+paramSchema (ParamOther s)
+  = pure
+  . unsafeCoerce
+  $ _paramOtherSchemaParamSchema s
 

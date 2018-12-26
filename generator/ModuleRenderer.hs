@@ -2,6 +2,7 @@ module ModuleRenderer(apiModule, clientModule, writeModule) where
 
 import BasicPrelude
 import Data.Char (toUpper)
+import qualified Data.HashMap.Strict.InsOrd as IOM
 import Data.Text (unpack)
 import qualified Data.Text as T
 import Language.Haskell.Exts.Pretty (Style(..), PPHsMode(..), defaultMode, style, prettyPrintStyleMode)
