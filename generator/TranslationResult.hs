@@ -13,12 +13,10 @@ import Language.Haskell.Exts.Syntax (
 import Lens.Micro.TH (makeLenses)
 import Prelude (Semigroup(..))
 
+import NoLoc
 
--- We don't care about location info
-type NoLoc = ()
-noLoc :: NoLoc
-noLoc = ()
 
+-- The intermediate format of (path, method) endpoint.
 data TranslationResult = TranslationResult {
   _decls :: [Decl NoLoc],        -- The type declarations of the endpoints.
   _endpointNames :: [String]     -- Names of types for endpoints. These are capitalised.

@@ -8,6 +8,7 @@ import Language.Haskell.Exts.Pretty (Style(..), PPHsMode(..), defaultMode, style
 import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.))
 
+import NoLoc
 import TranslationResult
 
 
