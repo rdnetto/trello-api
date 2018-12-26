@@ -22,6 +22,7 @@ apiModule shortName modName tr = Module noLoc (Just modHead) pragmas imports dec
       OptionsPragma noLoc (Just GHC) "-freduction-depth=0",
       -- Needed for promoting values to types
       LanguagePragma noLoc [Ident noLoc "DataKinds"],
+      LanguagePragma noLoc [Ident noLoc "StrictData"],
       LanguagePragma noLoc [Ident noLoc "TypeOperators"]
     ]
   imports = [
