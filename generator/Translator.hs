@@ -160,7 +160,7 @@ defaultParamType p = paramSchema (match . (^. type_)) (p ^. schema)
     match SwaggerNumber  = preludeType "Float"
     match SwaggerInteger = preludeType "Int"
     match SwaggerBoolean = preludeType "Boolean"
-    match s              = error $ "Unsupported swagger type: " ++ show s
+    match s              = error $ "Unsupported swagger type: " ++ show s ++ "\nin\n" ++ show p
 
     preludeType = PreludeType . Ident noLoc
 
