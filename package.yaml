@@ -36,8 +36,8 @@ library:
   - http-client-tls
   - servant-client
 
-# This binary generates the Servant bindings from the Swagger spec.
 executables:
+  # This binary generates the Servant bindings from the Swagger spec.
   servant-generator:
     main:                Main.hs
     source-dirs:         generator
@@ -56,3 +56,25 @@ executables:
     - swagger2
     - text
     - yaml
+
+  # This binary scrapes the Trello website and generates a Swagger spec
+  trello-scraper:
+    main:                Main.hs
+    source-dirs:         scraper
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - basic-prelude
+    - bytestring
+    - filepath
+    - http-conduit
+    - html-parse
+    - microlens
+    - microlens-th
+    - safe
+    - swagger2
+    - text
+    - yaml
+
