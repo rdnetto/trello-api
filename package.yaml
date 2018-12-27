@@ -66,10 +66,12 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - attoparsec
     - basic-prelude
     - bytestring
     - filepath
     - http-conduit
+    - html-entities
     - html-parse
     - microlens
     - microlens-th

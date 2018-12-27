@@ -7,6 +7,8 @@ import Data.Text.Lazy.Encoding (decodeUtf8)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
 import Text.HTML.Parser (Attr(..), Token(..), parseTokensLazy)
 
+import HtmlDecoding
+
 
 main :: IO ()
 main = do
@@ -23,6 +25,8 @@ main = do
         . decodeUtf8
         $ html
 
+  -- TODO: implement parsing of the JSON schema of these files (and figure out which I care about)
+  -- NOTE: that format looks a *lot* like Swagger - would certainly explain what "oasFiles" means...
   mapM_ handleToken tokens
 
 
@@ -32,12 +36,11 @@ handleToken (TagOpen name attrs) | (T.toLower name == "script")
     attrs' = map (\(Attr k v) -> (k, v)) attrs
     info = do
       tagId <- lookup "id" attrs'
-      -- TODO: this is HTML encoded
       json <- lookup "data-json" attrs'
       return $ do
         let len = T.length json
         putStrLn $ "id=" ++ tagId ++ ", data length = " ++ tshow len
-        when (len > 100000) $ writeFile ("/tmp/" ++ T.unpack tagId ++ ".bin") json
+        when (len > 100000) $ writeFile ("/tmp/" ++ T.unpack tagId ++ ".bin") (htmlDecode json)
 
     res = fromMaybe (pure ()) info
 
