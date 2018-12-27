@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE Rank2Types #-}
 
 module Translator(translate) where
 
@@ -26,7 +27,6 @@ import Language.Haskell.Exts.Syntax
 import Lens.Micro ((^.), (&))
 import qualified Prelude as P
 import Safe (fromJustNote)
-import Unsafe.Coerce (unsafeCoerce)
 
 import NoLoc
 import ParamType
@@ -154,10 +154,7 @@ queryParam p = do
 
 -- Determines the type to use for a param
 defaultParamType :: Param -> SwaggerM ParamType
-defaultParamType p
-    =   match
-    .   (^. type_)
-    <$> paramSchema (p ^. schema)
+defaultParamType p = paramSchema (match . (^. type_)) (p ^. schema)
   where
     match SwaggerString  = preludeType "Text"
     match SwaggerNumber  = preludeType "Float"
@@ -168,13 +165,16 @@ defaultParamType p
     preludeType = PreludeType . Ident noLoc
 
 -- Helper function for dereferencing schema
--- Unfortunately the different cases are different types of form `ParamSchema _`,
--- so we need to do evil things here. This is safe because its only a phantom type.
+-- Unfortunately the different cases are different types of form `ParamSchema _`, to allow certain cases to be constrained to certain contexts.
+-- We therefore need to workaround it using a polymorphic function, requiring Rank2Types.
 -- Note that Other is the common case, and Body is the uncommon case.
-paramSchema :: ParamAnySchema -> SwaggerM (ParamSchema SwaggerKindParamOtherSchema)
-paramSchema (ParamBody ref) = unsafeCoerce <$> deref ref
-paramSchema (ParamOther s)
+paramSchema :: forall b
+            .  (forall a . ParamSchema a -> b)
+            -> ParamAnySchema
+            -> SwaggerM b
+paramSchema f (ParamBody ref) = f . _schemaParamSchema <$> deref ref
+paramSchema f (ParamOther s)
   = pure
-  . unsafeCoerce
+  . f
   $ _paramOtherSchemaParamSchema s
 
