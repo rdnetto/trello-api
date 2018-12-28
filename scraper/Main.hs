@@ -4,12 +4,12 @@ module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
 import Data.Aeson (Value, eitherDecode')
-import qualified Data.ByteString.Lazy as LBS
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Map.Lazy as DML
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 import Data.Text.Lazy.Encoding (decodeUtf8, encodeUtf8)
+import Data.Yaml (encodeFile)
 import Lens.Micro((^.), (^?), _3)
 import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
@@ -20,8 +20,7 @@ import HtmlDecoding
 
 main :: IO ()
 main = do
-  -- html <- downloadDocs
-  html <- LBS.readFile "reference.html"
+  html <- downloadDocs
 
   -- Rather than building up a syntax tree, we work directly with the tokens
   -- This has two advantages:
@@ -42,7 +41,8 @@ main = do
     return (uid, sw, n)
 
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
-  putStrLn $ "Selected " ++ uid
+  putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
+  encodeFile "swagger.yaml" selected
 
 processHtml :: LByteString -> [(Text, Value)]
 processHtml html = swaggers where
