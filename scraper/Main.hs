@@ -1,9 +1,17 @@
+{-# LANGUAGE TypeApplications #-}
+
 module Main where
 
-import BasicPrelude hiding (decodeUtf8)
+import BasicPrelude hiding (decodeUtf8, encodeUtf8)
+import Data.Aeson (eitherDecode')
 import qualified Data.ByteString.Lazy as LBS
+import qualified Data.HashMap.Strict.InsOrd as IOM
+import qualified Data.Map.Lazy as DML
+import Data.Swagger (Swagger, paths)
 import qualified Data.Text as T
-import Data.Text.Lazy.Encoding (decodeUtf8)
+import qualified Data.Text.Lazy as TL
+import Data.Text.Lazy.Encoding (decodeUtf8, encodeUtf8)
+import Lens.Micro((^.), _3)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
 import Text.HTML.Parser (Attr(..), Token(..), parseTokensLazy)
 
@@ -20,32 +28,41 @@ main = do
   --  - it works even in the presence of malformed trees (e.g. unclosed tags)
   --  - it is much simpler to stream
   putStrLn "Parsing"
-  let tokens
-        = parseTokensLazy
-        . decodeUtf8
-        $ html
+  let swaggers = processHtml html
 
-  -- TODO: implement parsing of the JSON schema of these files (and figure out which I care about)
-  -- NOTE: that format looks a *lot* like Swagger - would certainly explain what "oasFiles" means...
-  mapM_ handleToken tokens
+  swaggers' <- forM swaggers $ \(uid, sw) -> do
+    let n = IOM.size $ sw ^. paths
+    putStrLn $ concat [
+        "File ",
+        uid,
+        " has ",
+        tshow n,
+        " paths"
+      ]
+    return (uid, sw, n)
 
+  let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
+  putStrLn $ "Selected " ++ uid
 
-handleToken :: Token -> IO ()
-handleToken (TagOpen name attrs) | (T.toLower name == "script")
-  = res where
-    attrs' = map (\(Attr k v) -> (k, v)) attrs
-    info = do
-      tagId <- lookup "id" attrs'
-      json <- lookup "data-json" attrs'
-      return $ do
-        let len = T.length json
-        putStrLn $ "id=" ++ tagId ++ ", data length = " ++ tshow len
-        when (len > 100000) $ writeFile ("/tmp/" ++ T.unpack tagId ++ ".bin") (htmlDecode json)
+processHtml :: LByteString -> [(Text, Swagger)]
+processHtml html = swaggers where
+  tokens
+    = parseTokensLazy
+    . decodeUtf8
+    $ html
 
-    res = fromMaybe (pure ()) info
-
-handleToken (TagSelfClose name attrs) = handleToken $ TagOpen name attrs
-handleToken _ = pure ()
+  swaggers
+    = join
+    . map DML.toList
+    . map throwLeft
+    -- Format is a map of UID to swagger object
+    . map (eitherDecode' @ (Map Text Swagger))
+    . map encodeUtf8
+    . map TL.fromStrict
+    . map htmlDecode
+    . catMaybes
+    . map handleToken
+    $ tokens
 
 downloadDocs :: IO LByteString
 downloadDocs = do
@@ -54,3 +71,19 @@ downloadDocs = do
     let statusCode = getResponseStatusCode response
     when (statusCode /= 200) $ error ("Received status code: " ++ show statusCode)
     return $ getResponseBody response
+
+-- Matches `<script id="oasFiles" data-json="..." />` and extracts the contents
+handleToken :: Token -> Maybe Text
+handleToken (TagOpen name attrs) | (T.toLower name == "script")
+  = do
+    let attrs' = map (\(Attr k v) -> (k, v)) attrs
+    tagId <- lookup "id" attrs'
+    guard $ tagId == "oasFiles"
+    lookup "data-json" attrs'
+handleToken (TagSelfClose name attrs) = handleToken $ TagOpen name attrs
+handleToken _ = Nothing
+
+throwLeft :: Either String a -> a
+throwLeft (Left err) = error err
+throwLeft (Right x) = x
+

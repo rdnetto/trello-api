@@ -66,15 +66,17 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+    - aeson
     - attoparsec
     - basic-prelude
     - bytestring
+    - containers
     - filepath
     - http-conduit
     - html-entities
     - html-parse
+    - insert-ordered-containers
     - microlens
-    - microlens-th
     - safe
     - swagger2
     - text
