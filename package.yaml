@@ -30,6 +30,12 @@ default-extensions:
 - ScopedTypeVariables
 - TupleSections
 
+ghc-options:
+- -Wall
+- -Wextra
+# Sometimes it's just simpler to shadow names from prelude
+- -Wno-name-shadowing
+
 library:
   source-dirs: src
   dependencies:

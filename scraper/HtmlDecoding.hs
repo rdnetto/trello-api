@@ -2,7 +2,7 @@ module HtmlDecoding (htmlDecode) where
 
 import BasicPrelude hiding (takeWhile)
 import Control.Applicative (many)
-import Data.Attoparsec.Text (Parser, anyChar, notChar, endOfInput, parseOnly, takeWhile)
+import Data.Attoparsec.Text (Parser, anyChar, endOfInput, parseOnly, takeWhile)
 import qualified Data.Text as T
 import HTMLEntities.Parser (htmlEntity)
 

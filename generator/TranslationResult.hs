@@ -6,7 +6,7 @@ module TranslationResult where
 import BasicPrelude
 import Data.Char (toLower, toUpper)
 import Language.Haskell.Exts.Syntax (
-    Decl(TypeDecl),
+    Decl,
     Name(..),
     QName(..)
   )

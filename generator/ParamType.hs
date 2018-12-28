@@ -4,7 +4,7 @@ module ParamType where
 
 import BasicPrelude
 import Language.Haskell.Exts.Syntax (
-    Decl(TypeDecl),
+    Decl,
     ImportDecl(..),
     ImportSpec(..),
     ImportSpecList(..),

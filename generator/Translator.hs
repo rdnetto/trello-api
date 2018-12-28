@@ -5,14 +5,11 @@ module Translator(translate) where
 
 import BasicPrelude
 import Data.Swagger (
-    Operation,
     Param,
     ParamAnySchema(..),
     ParamOtherSchema(..),
     ParamSchema(..),
-    Schema,
     SwaggerType(..),
-    Referenced(..),
     _schemaParamSchema,
     parameters,
     operationId,
@@ -21,11 +18,9 @@ import Data.Swagger (
     type_,
     schema
   )
-import Data.Swagger.Internal(SwaggerKind(..))
 import Data.Text (unpack)
 import Language.Haskell.Exts.Syntax
-import Lens.Micro ((^.), (&))
-import qualified Prelude as P
+import Lens.Micro ((^.))
 import Safe (fromJustNote)
 
 import NoLoc

@@ -7,7 +7,7 @@ import qualified Data.Swagger as Sw
 import Data.Swagger (Swagger, PathItem, Operation, paths)
 import Data.Tuple (uncurry)
 import Data.Yaml (decodeFileThrow)
-import Lens.Micro ((&), (^.), traversed)
+import Lens.Micro ((&), (^.))
 import Servant.API (StdMethod(..))
 
 import ModuleRenderer
