@@ -3,15 +3,15 @@
 module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Data.Aeson (eitherDecode')
+import Data.Aeson (Value, eitherDecode')
 import qualified Data.ByteString.Lazy as LBS
-import qualified Data.HashMap.Strict.InsOrd as IOM
+import qualified Data.HashMap.Strict as HMS
 import qualified Data.Map.Lazy as DML
-import Data.Swagger (Swagger, paths)
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 import Data.Text.Lazy.Encoding (decodeUtf8, encodeUtf8)
-import Lens.Micro((^.), _3)
+import Lens.Micro((^.), (^?), _3)
+import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
 import Text.HTML.Parser (Attr(..), Token(..), parseTokensLazy)
 
@@ -31,7 +31,7 @@ main = do
   let swaggers = processHtml html
 
   swaggers' <- forM swaggers $ \(uid, sw) -> do
-    let n = IOM.size $ sw ^. paths
+    let n = pathCount sw
     putStrLn $ concat [
         "File ",
         uid,
@@ -44,7 +44,7 @@ main = do
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
   putStrLn $ "Selected " ++ uid
 
-processHtml :: LByteString -> [(Text, Swagger)]
+processHtml :: LByteString -> [(Text, Value)]
 processHtml html = swaggers where
   tokens
     = parseTokensLazy
@@ -56,7 +56,7 @@ processHtml html = swaggers where
     . map DML.toList
     . map throwLeft
     -- Format is a map of UID to swagger object
-    . map (eitherDecode' @ (Map Text Swagger))
+    . map (eitherDecode' @ (Map Text Value))
     . map encodeUtf8
     . map TL.fromStrict
     . map htmlDecode
@@ -86,4 +86,9 @@ handleToken _ = Nothing
 throwLeft :: Either String a -> a
 throwLeft (Left err) = error err
 throwLeft (Right x) = x
+
+-- Helper function for determining the number of paths from the JSON blob
+-- Note that we can't use the types from Swagger2, since the blob is Swagger 3
+pathCount :: Value -> Int
+pathCount obj = maybe 0 HMS.size (obj ^? key "paths" . _Object)
 

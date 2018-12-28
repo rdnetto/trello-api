@@ -77,14 +77,13 @@ executables:
     - basic-prelude
     - bytestring
     - containers
-    - filepath
     - http-conduit
     - html-entities
     - html-parse
-    - insert-ordered-containers
     - microlens
+    - microlens-aeson
     - safe
-    - swagger2
     - text
+    - unordered-containers
     - yaml
 
