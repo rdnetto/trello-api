@@ -37,10 +37,21 @@ ghc-options:
 - -Wno-name-shadowing
 
 library:
-  source-dirs: src
+  source-dirs: lib
   dependencies:
+  - aeson
+  - containers
+  - http-api-data
+  - http-client
   - http-client-tls
+  - http-types
+  - mmorph
+  - mtl
+  - network-uri
+  - servant
   - servant-client
+  - text
+  - transformers
 
 executables:
   # This binary scrapes the Trello website and generates a Swagger spec
