@@ -43,26 +43,6 @@ library:
   - servant-client
 
 executables:
-  # This binary generates the Servant bindings from the Swagger spec.
-  servant-generator:
-    main:                Main.hs
-    source-dirs:         generator
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - basic-prelude
-    - filepath
-    - insert-ordered-containers
-    - haskell-src-exts
-    - microlens
-    - microlens-th
-    - safe
-    - swagger2
-    - text
-    - yaml
-
   # This binary scrapes the Trello website and generates a Swagger spec
   trello-scraper:
     main:                Main.hs
