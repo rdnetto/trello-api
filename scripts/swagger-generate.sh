@@ -5,6 +5,8 @@ set -euxo pipefail
 
 JAVA_OPTS="-XX:MaxPermSize=256M -Xmx1024M -Dlogback.configurationFile=$HOME/swagger-codegen/bin/logback.xml"
 
+# JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+
 if [ ! -f swagger.yaml ] ; then
     echo "This script should be run from the root of the checkout."
     exit 1
