@@ -2991,29 +2991,6 @@ paths:
       tags: []
       deprecated: false
   /members/{id}/customStickers:
-    post:
-      summary: /members/{id}/customStickers
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/customStickers
-      operationId: membersidcustomstickers-1
-      description: Upload a new custom sticker
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customStickers
       _method: get
@@ -4564,29 +4541,6 @@ paths:
       tags: []
       deprecated: false
   /organizations/{id}/logo:
-    post:
-      summary: /organizations/{id}/logo
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or name of the team
-      - required: false
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: Image file for the logo
-      _path: /organizations/{id}/logo
-      operationId: organizationsidlogo
-      description: Set the logo image for a team
-      requestBody: null
-      tags: []
-      deprecated: false
     delete:
       summary: /organizations/{id}/logo
       _method: delete
@@ -6162,35 +6116,6 @@ paths:
       tags: []
       deprecated: false
   /members/{id}/customEmoji:
-    post:
-      summary: /members/{id}/customEmoji
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      - required: true
-        schema:
-          type: string
-        in: query
-        name: name
-        description: Name for the emoji. 2 - 64 characters
-      _path: /members/{id}/customEmoji
-      operationId: membersidcustomemoji-1
-      description: Upload a new custom emoji
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customEmoji
       _method: get
@@ -6208,29 +6133,6 @@ paths:
       tags: []
       deprecated: false
   /members/{id}/boardBackgrounds:
-    post:
-      summary: /members/{id}/boardBackgrounds
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/boardBackgrounds
-      operationId: membersidboardbackgrounds-1
-      description: Upload a new boardBackground
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/boardBackgrounds
       _method: get
@@ -6339,13 +6241,6 @@ paths:
         in: query
         name: urlSource
         description: A URL starting with `http://` or `https://`
-      - required: false
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: fileSource
-        description: ''
       - required: false
         schema:
           type: string
@@ -6665,29 +6560,6 @@ paths:
       tags: []
       deprecated: false
   /members/{id}/customBoardBackgrounds:
-    post:
-      summary: /members/{id}/customBoardBackgrounds
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/customBoardBackgrounds
-      operationId: membersidcustomboardbackgrounds-1
-      description: Upload a new custom board background
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customBoardBackgrounds
       _method: get
@@ -6928,30 +6800,6 @@ paths:
       _path: /actions/{id}
       operationId: actionsid
       description: Update a comment action
-      requestBody: null
-      tags: []
-      deprecated: false
-  /members/{id}/avatar:
-    post:
-      summary: /members/{id}/avatar
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/avatar
-      operationId: membersidavatar
-      description: Create a new avatar for a member
       requestBody: null
       tags: []
       deprecated: false
@@ -7221,13 +7069,6 @@ paths:
         in: query
         name: name
         description: The name of the attachment. Max length 256.
-      - required: false
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: The file to attach, as multipart/form-data
       - required: false
         schema:
           type: string
