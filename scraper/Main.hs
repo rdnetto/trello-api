@@ -13,6 +13,8 @@ import Data.Yaml (encodeFile)
 import Lens.Micro((^.), (^?), _3)
 import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
+import System.Directory (listDirectory)
+import System.Process (callProcess)
 import Text.HTML.Parser (Attr(..), Token(..), parseTokensLazy)
 
 import HtmlDecoding
@@ -43,6 +45,13 @@ main = do
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
   putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
   encodeFile "swagger.yaml" selected
+
+  -- Apply patches
+  putStrLn "Applying patches..."
+  let patchDir = "scraper/patches/"
+  patches <- map (patchDir ++) <$> listDirectory patchDir
+  mapM_ applyPatch patches
+
 
 processHtml :: LByteString -> [(Text, Value)]
 processHtml html = swaggers where
@@ -92,3 +101,7 @@ throwLeft (Right x) = x
 pathCount :: Value -> Int
 pathCount obj = maybe 0 HMS.size (obj ^? key "paths" . _Object)
 
+applyPatch :: FilePath -> IO ()
+applyPatch fp = do
+  putStrLn $ "Applying " ++ T.pack fp
+  callProcess "git" ["apply", "--verbose", fp]

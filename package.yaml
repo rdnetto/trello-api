@@ -70,11 +70,13 @@ executables:
     - basic-prelude
     - bytestring
     - containers
+    - directory
     - http-conduit
     - html-entities
     - html-parse
     - microlens
     - microlens-aeson
+    - process
     - safe
     - text
     - unordered-containers
