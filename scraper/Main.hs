@@ -12,6 +12,7 @@ import System.Directory (listDirectory)
 import System.Process (callProcess)
 
 import Scraper
+import SwaggerRewriting
 
 
 main :: IO ()
@@ -34,7 +35,7 @@ main = do
 
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
   putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
-  encodeFile "swagger.yaml" selected
+  encodeFile "swagger.yaml" $ rewriteSwagger selected
 
   -- Apply patches
   putStrLn "Applying patches..."
