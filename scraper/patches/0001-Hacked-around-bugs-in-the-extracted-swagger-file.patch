@@ -41,7 +41,7 @@ index 506d194..bd02776 100644
 +        name: idSearch
          description: The ID or username of the member
        _path: /members/{id}/savedSearches/{idSearch}
-       operationId: membersidsavedsearchesidsearch
+       operationId: getMembersSavedsearches
 @@ -2169,6 +2174,12 @@ paths:
          in: path
          name: id
