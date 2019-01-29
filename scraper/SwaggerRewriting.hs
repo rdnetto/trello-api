@@ -1,18 +1,19 @@
 module SwaggerRewriting (rewriteSwagger) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Data.Aeson (Value)
+import Data.Aeson (Value(Object), Object)
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
-import Lens.Micro ((%~), (.~))
-import Lens.Micro.Aeson (key, _Object, _String)
+import qualified Data.Vector as V
+import Lens.Micro ((&), (%~), (.~), (^..), Traversal', filtered)
+import Lens.Micro.Aeson (key, values, _Bool, _Object, _String, _Array)
 
 
 -- Rewrites the Swagger entry to:
 -- - have sane operation IDs
--- - TODO: filter out operations with unsupported binary params
+-- - filter out operations with unsupported binary params
 rewriteSwagger :: Value -> Value
-rewriteSwagger = rewriteOperationIDs
+rewriteSwagger = rewriteOperationIDs . stripBinaryParams
 
 -- Replace the default, incomprehensible operation IDs with something better
 -- e.g. instead of boardsboardididtags, use getBoardsTags
@@ -40,4 +41,76 @@ rewriteOperationIDs = key "paths" . _Object %~ HMS.mapWithKey transformPath wher
 -- Reimplementation of splitPath from filepath to work on Text
 splitPath :: Text -> [Text]
 splitPath = T.splitOn "/"
+
+
+-- Helper type for the following logic
+data ParamHandling
+  = NoHandling        -- No-op
+  | DropParam         -- Discard the param
+  | DropOperation     -- Discard the operation
+  deriving (Eq, Show)
+
+-- Since we currently don't support binary params, we either:
+-- - filter out the param, if its optional
+-- - filter out the entire operation
+stripBinaryParams :: Value -> Value
+stripBinaryParams = key "paths" . _Object %~ HMS.map transformPath where
+
+  transformPath :: Value -> Value
+  transformPath = _Object %~ HMS.mapMaybe transformOperation
+
+  transformOperation :: Value -> Maybe Value
+  transformOperation op = op' where
+    -- Required binary params
+    binaryReqParams :: [Object]
+    binaryReqParams
+      =   op
+      ^.. opParams
+      .   filtered isBinaryParam
+      .   filtered (not . isOptionalParam)
+
+    -- Remove optional binary params
+    strippedParams :: [Value]
+    strippedParams
+      = map Object
+      $   op
+      ^.. opParams
+      -- Because we have already established that there are no required
+      -- binary params when we use this, we can use a simplified test.
+      .   filtered (not . isBinaryParam)
+
+    -- If there are required binary params, we discard the operation completely,
+    -- otherwise we simply filter out the optional ones (if any)
+    op'
+      | null binaryReqParams = op
+                             & key "parameters" . _Array .~ V.fromList strippedParams
+                             & Just
+      | otherwise            = Nothing
+
+-- Traversal for parameters on an operation.
+opParams :: Traversal' Value Object
+opParams
+  = key "parameters"
+  . values
+  . _Object
+
+-- Parameters are optional by default
+isOptionalParam :: Object -> Bool
+isOptionalParam
+  = anyOr True
+  . map not
+  . (^.. key "required" . _Bool)
+  . Object
+
+isBinaryParam :: Object -> Bool
+isBinaryParam
+  = anyOr False
+  . map (== "binary")
+  . (^.. key "schema" . key "format" . _String)
+  . Object
+
+-- b for the empty case, or any for non-empty case
+anyOr :: Bool -> [Bool] -> Bool
+anyOr b [] = b
+anyOr _ xs = any id xs
 
