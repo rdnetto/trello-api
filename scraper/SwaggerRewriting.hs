@@ -1,7 +1,7 @@
 module SwaggerRewriting (rewriteSwagger) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Data.Aeson (Value(Object), Object)
+import Data.Aeson (Value)
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import qualified Data.Vector as V
@@ -62,7 +62,7 @@ stripBinaryParams = key "paths" . _Object %~ HMS.map transformPath where
   transformOperation :: Value -> Maybe Value
   transformOperation op = op' where
     -- Required binary params
-    binaryReqParams :: [Object]
+    binaryReqParams :: [Value]
     binaryReqParams
       =   op
       ^.. opParams
@@ -72,8 +72,7 @@ stripBinaryParams = key "paths" . _Object %~ HMS.map transformPath where
     -- Remove optional binary params
     strippedParams :: [Value]
     strippedParams
-      = map Object
-      $   op
+      =   op
       ^.. opParams
       -- Because we have already established that there are no required
       -- binary params when we use this, we can use a simplified test.
@@ -88,26 +87,23 @@ stripBinaryParams = key "paths" . _Object %~ HMS.map transformPath where
       | otherwise            = Nothing
 
 -- Traversal for parameters on an operation.
-opParams :: Traversal' Value Object
+opParams :: Traversal' Value Value
 opParams
   = key "parameters"
   . values
-  . _Object
 
 -- Parameters are optional by default
-isOptionalParam :: Object -> Bool
+isOptionalParam :: Value -> Bool
 isOptionalParam
   = anyOr True
   . map not
   . (^.. key "required" . _Bool)
-  . Object
 
-isBinaryParam :: Object -> Bool
+isBinaryParam :: Value -> Bool
 isBinaryParam
   = anyOr False
   . map (== "binary")
   . (^.. key "schema" . key "format" . _String)
-  . Object
 
 -- b for the empty case, or any for non-empty case
 anyOr :: Bool -> [Bool] -> Bool
