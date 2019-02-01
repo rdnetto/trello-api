@@ -1,6 +1,6 @@
 module SwaggerRewriting (rewriteSwagger) where
 
-import BasicPrelude hiding (decodeUtf8, encodeUtf8)
+import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
 import Data.Aeson (Value)
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
@@ -26,17 +26,53 @@ rewriteOperationIDs = key "paths" . _Object %~ HMS.mapWithKey transformPath wher
   transformPath path = _Object %~ HMS.mapWithKey (transformOperation path)
 
   transformOperation :: Text -> Text -> Value -> Value
-  transformOperation path method = (key "operationId" . _String) .~ generateOperationId path method
+  transformOperation path method op
+    = op & (key "operationId" . _String) .~ generateOperationId path method pathParams
+    where
+      pathParams
+        = op
+        ^.. opParams
+        .   filtered isPathParam
+        .   key "name"
+        .   _String
 
   -- heuristically generate a better operation ID
-  generateOperationId :: Text -> Text -> Text
-  generateOperationId path method
-    = concat (T.toLower method : path')
+  generateOperationId :: Text -> Text -> [Text] -> Text
+  generateOperationId path method pathParams
+    = concat (T.toLower method : path' ++ qualifier)
     where
       path'
         = map T.toTitle
         . filter (not . T.isPrefixOf "{")
         $ splitPath path
+
+      -- We get the params from parsing the string instead of from the actual object to ensure the order matches
+      -- TODO
+
+      -- Include params in the name, for additional disambiguation
+      -- We exclude params that start with `id`, as these are extremely common
+      -- and typically duplicate info already present
+      qualifier
+        | length pathParams <= 1
+          = []
+        | otherwise
+          = "By" : (
+            map T.toTitle
+          . map (stripPrefix "id")
+          . map (stripSuffix "id")
+          . filter (/= "id")
+          $ pathParams
+          )
+
+-- Drops a prefix, if present
+stripPrefix :: Text -> Text -> Text
+stripPrefix p s | T.isPrefixOf p s = T.drop (T.length p) s
+                | otherwise        = s
+
+-- Drops a suffix, if present
+stripSuffix :: Text -> Text -> Text
+stripSuffix x s | T.isSuffixOf x s = T.dropEnd (T.length x) s
+                | otherwise        = s
 
 -- Reimplementation of splitPath from filepath to work on Text
 splitPath :: Text -> [Text]
@@ -104,6 +140,12 @@ isBinaryParam
   = anyOr False
   . map (== "binary")
   . (^.. key "schema" . key "format" . _String)
+
+isPathParam :: Value -> Bool
+isPathParam
+  = anyOr False
+  . map (== "path")
+  . (^.. key "in")
 
 -- b for the empty case, or any for non-empty case
 anyOr :: Bool -> [Bool] -> Bool
