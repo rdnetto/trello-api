@@ -9,6 +9,7 @@ import Lens.Micro((^.), (^?), _3)
 import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
 import System.Directory (listDirectory)
+import System.Exit (exitFailure)
 import System.Process (callProcess)
 
 import Scraper
@@ -35,7 +36,10 @@ main = do
 
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
   putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
-  encodeFile "swagger.yaml" $ rewriteSwagger selected
+
+  case rewriteSwagger selected of
+       Right obj -> encodeFile "swagger.yaml" obj
+       Left  err -> putStrLn err >> exitFailure
 
   -- Apply patches
   putStrLn "Applying patches..."

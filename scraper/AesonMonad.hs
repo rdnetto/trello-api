@@ -139,7 +139,7 @@ forEachKey action = do
       (\k -> withChild k (action k))
   where
     keys (Object obj) = HMS.keys obj
-    keys _ = []
+    keys _ = error "type mismatch"
 
 -- For each key in the current object, apply the provided function in the context of that sub-object,
 -- discarding the result.

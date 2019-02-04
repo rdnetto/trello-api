@@ -1,8 +1,9 @@
 module SwaggerRewriting (rewriteSwagger) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
+import Control.Monad.Except (throwError)
 import Data.Aeson (Value(..))
-import qualified Data.HashMap.Strict as HMS
+import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
 import Lens.Micro ((&), (.~), (^..), Traversal', filtered)
@@ -19,9 +20,45 @@ rewriteSwagger obj
   = map snd
   . flip runAeson obj
   $ do
+    -- Validation
+    checkParamConsistency
+
+    -- Rewrite passes
     rewriteOperationIDs
     stripOptionalBinaryParams
     stripOperationsWithRequiredBinaryParams
+
+
+-- Throws an error if a path implies a different set of params to what it actually uses
+checkParamConsistency :: AesonM ()
+checkParamConsistency
+  = withChild "paths"
+  . forEachKey_ $ \path ->
+      forEachValue_ $ checkParams path
+  where
+    checkParams :: Text -> AesonM ()
+    checkParams path = do
+      -- Params as defined in path
+      let pathParams = S.fromList $ getPathParams path
+
+      -- Params as defined in Swagger
+      op <- getCurrent
+      let swParams
+            =   op
+            ^.. opParams
+            .   filtered isPathParam
+            .   key "name"
+            .   _String
+            &   S.fromList
+
+      when (pathParams /= swParams) $ do
+        pathStr <- T.intercalate "." <$> getPath
+        throwError $ concat [
+            "Entry at ",
+            pathStr,
+            " has inconsistent definition of path params: ",
+            tshow swParams
+          ]
 
 -- Replace the default, incomprehensible operation IDs with something better
 -- e.g. instead of boardsboardididtags, use getBoardsTags
@@ -48,7 +85,6 @@ rewriteOperationIDs
           setCurrent op'
         )
 
-
 -- heuristically generate a better operation ID
 generateOperationId :: Text -> Text -> [Text] -> Text
 generateOperationId path method pathParams
@@ -60,7 +96,6 @@ generateOperationId path method pathParams
       $ splitPath path
 
     -- We get the params from parsing the string instead of from the actual object to ensure the order matches
-    -- TODO
 
     -- Include params in the name, for additional disambiguation
     -- We exclude params that start with `id`, as these are extremely common
@@ -90,6 +125,14 @@ stripSuffix x s | T.isSuffixOf x s = T.dropEnd (T.length x) s
 -- Reimplementation of splitPath from filepath to work on Text
 splitPath :: Text -> [Text]
 splitPath = T.splitOn "/"
+
+-- Extracts the path params from the path string
+getPathParams :: Text -> [Text]
+getPathParams
+  = map (stripPrefix "{")
+  . map (stripSuffix "}")
+  . filter (T.isPrefixOf "{")
+  . splitPath
 
 
 -- Since we currently don't support binary params, we either:
