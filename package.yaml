@@ -76,6 +76,8 @@ executables:
     - html-parse
     - microlens
     - microlens-aeson
+    - microlens-mtl
+    - microlens-th
     - process
     - safe
     - text

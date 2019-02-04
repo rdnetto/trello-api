@@ -1,68 +1,81 @@
 module SwaggerRewriting (rewriteSwagger) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
-import Data.Aeson (Value)
+import Data.Aeson (Value(..))
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (%~), (.~), (^..), Traversal', filtered)
-import Lens.Micro.Aeson (key, values, _Bool, _Object, _String, _Array)
+import Lens.Micro ((&), (.~), (^..), Traversal', filtered)
+import Lens.Micro.Aeson (key, values, _Bool, _String)
+
+import AesonMonad
 
 
 -- Rewrites the Swagger entry to:
 -- - have sane operation IDs
 -- - filter out operations with unsupported binary params
-rewriteSwagger :: Value -> Value
-rewriteSwagger = rewriteOperationIDs . stripBinaryParams
+rewriteSwagger :: Value -> Either Text Value
+rewriteSwagger obj
+  = map snd
+  . flip runAeson obj
+  $ do
+    rewriteOperationIDs
+    stripOptionalBinaryParams
+    stripOperationsWithRequiredBinaryParams
 
 -- Replace the default, incomprehensible operation IDs with something better
 -- e.g. instead of boardsboardididtags, use getBoardsTags
 -- This is important because the operation IDs are used as function names.
 --
 -- value of interest is at ./paths/$PATH/$METHOD/operationId
-rewriteOperationIDs :: Value -> Value
-rewriteOperationIDs = key "paths" . _Object %~ HMS.mapWithKey transformPath where
-  transformPath :: Text -> Value -> Value
-  transformPath path = _Object %~ HMS.mapWithKey (transformOperation path)
+rewriteOperationIDs :: AesonM  ()
+rewriteOperationIDs
+  = withChild "paths"
+  . forEachKey_ $ \path ->
+      forEachKey_ $ \method -> (do
+          op <- getCurrent
 
-  transformOperation :: Text -> Text -> Value -> Value
-  transformOperation path method op
-    = op & (key "operationId" . _String) .~ generateOperationId path method pathParams
-    where
-      pathParams
-        = op
-        ^.. opParams
-        .   filtered isPathParam
-        .   key "name"
-        .   _String
+          let pathParams
+                = op
+                ^.. opParams
+                .   filtered isPathParam
+                .   key "name"
+                .   _String
+              op'
+                = op
+                & (key "operationId" . _String) .~ generateOperationId path method pathParams
 
-  -- heuristically generate a better operation ID
-  generateOperationId :: Text -> Text -> [Text] -> Text
-  generateOperationId path method pathParams
-    = concat (T.toLower method : path' ++ qualifier)
-    where
-      path'
-        = map T.toTitle
-        . filter (not . T.isPrefixOf "{")
-        $ splitPath path
+          setCurrent op'
+        )
 
-      -- We get the params from parsing the string instead of from the actual object to ensure the order matches
-      -- TODO
 
-      -- Include params in the name, for additional disambiguation
-      -- We exclude params that start with `id`, as these are extremely common
-      -- and typically duplicate info already present
-      qualifier
-        | length pathParams <= 1
-          = []
-        | otherwise
-          = "By" : (
-            map T.toTitle
-          . map (stripPrefix "id")
-          . map (stripSuffix "id")
-          . filter (/= "id")
-          $ pathParams
-          )
+-- heuristically generate a better operation ID
+generateOperationId :: Text -> Text -> [Text] -> Text
+generateOperationId path method pathParams
+  = concat (T.toLower method : path' ++ qualifier)
+  where
+    path'
+      = map T.toTitle
+      . filter (not . T.isPrefixOf "{")
+      $ splitPath path
+
+    -- We get the params from parsing the string instead of from the actual object to ensure the order matches
+    -- TODO
+
+    -- Include params in the name, for additional disambiguation
+    -- We exclude params that start with `id`, as these are extremely common
+    -- and typically duplicate info already present
+    qualifier
+      | length pathParams <= 1
+        = []
+      | otherwise
+        = "By" : (
+          map T.toTitle
+        . map (stripPrefix "id")
+        . map (stripSuffix "id")
+        . filter (/= "id")
+        $ pathParams
+        )
 
 -- Drops a prefix, if present
 stripPrefix :: Text -> Text -> Text
@@ -79,48 +92,49 @@ splitPath :: Text -> [Text]
 splitPath = T.splitOn "/"
 
 
--- Helper type for the following logic
-data ParamHandling
-  = NoHandling        -- No-op
-  | DropParam         -- Discard the param
-  | DropOperation     -- Discard the operation
-  deriving (Eq, Show)
-
 -- Since we currently don't support binary params, we either:
 -- - filter out the param, if its optional
 -- - filter out the entire operation
-stripBinaryParams :: Value -> Value
-stripBinaryParams = key "paths" . _Object %~ HMS.map transformPath where
 
-  transformPath :: Value -> Value
-  transformPath = _Object %~ HMS.mapMaybe transformOperation
+-- Remove optional binary params
+-- values of interest are at ./paths/$PATH/$METHOD/parameters[]/
+stripOptionalBinaryParams :: AesonM ()
+stripOptionalBinaryParams
+  = withChild "paths"
+  . forEachValue_
+  . forEachValue_
+  . withChild "parameters"
+  $ mapCurrent transformParams
+  where
+    transformParams :: Value -> Value
+    transformParams (Array params) = Array $ V.filter pred params
+    transformParams _ = error "Invalid type for params"
 
-  transformOperation :: Value -> Maybe Value
-  transformOperation op = op' where
-    -- Required binary params
-    binaryReqParams :: [Value]
-    binaryReqParams
-      =   op
-      ^.. opParams
-      .   filtered isBinaryParam
-      .   filtered (not . isOptionalParam)
+    pred p = isBinaryParam p && isOptionalParam p
 
-    -- Remove optional binary params
-    strippedParams :: [Value]
-    strippedParams
-      =   op
-      ^.. opParams
-      -- Because we have already established that there are no required
-      -- binary params when we use this, we can use a simplified test.
-      .   filtered (not . isBinaryParam)
+-- Removed operations containing required binary params
+stripOperationsWithRequiredBinaryParams :: AesonM ()
+stripOperationsWithRequiredBinaryParams
+  -- ./paths/$PATH/$METHOD
+  = withChild "paths"
+  . forEachValue_
+  . mapFilterChildren
+  $ transformOperation
+  where
+    transformOperation :: Value -> Maybe Value
+    transformOperation op = res where
+      -- Required binary params
+      required :: [Value]
+      required
+        =   op
+        ^.. opParams
+        .   filtered isBinaryParam
+        .   filtered (not . isOptionalParam)
 
-    -- If there are required binary params, we discard the operation completely,
-    -- otherwise we simply filter out the optional ones (if any)
-    op'
-      | null binaryReqParams = op
-                             & key "parameters" . _Array .~ V.fromList strippedParams
-                             & Just
-      | otherwise            = Nothing
+      res
+        | null required = Just op
+        | otherwise     = Nothing
+
 
 -- Traversal for parameters on an operation.
 opParams :: Traversal' Value Value
