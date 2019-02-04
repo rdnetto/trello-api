@@ -1,12 +1,13 @@
 module SwaggerRewriting (rewriteSwagger) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
-import Control.Monad.Except (throwError)
+import Control.Monad.Except (liftEither)
 import Data.Aeson (Value(..))
+import Data.Either (partitionEithers)
 import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (.~), (^..), Traversal', filtered)
+import Lens.Micro ((&), (.~), (^..), (%~), Traversal', _Left, filtered)
 import Lens.Micro.Aeson (key, values, _Bool, _String)
 
 import AesonMonad
@@ -31,12 +32,21 @@ rewriteSwagger obj
 
 -- Throws an error if a path implies a different set of params to what it actually uses
 checkParamConsistency :: AesonM ()
-checkParamConsistency
-  = withChild "paths"
-  . forEachKey_ $ \path ->
-      forEachValue_ $ checkParams path
+checkParamConsistency = do
+  out :: [Either Text ()]
+      <- map concat
+        . withChild "paths"
+        . forEachKey $ \path ->
+            forEachValue
+            $ checkParams path
+
+  void
+    . liftEither
+    . (_Left %~ T.intercalate "\n")
+    $ batchEithers out
+
   where
-    checkParams :: Text -> AesonM ()
+    checkParams :: Text -> AesonM (Either Text ())
     checkParams path = do
       -- Params as defined in path
       let pathParams = S.fromList $ getPathParams path
@@ -51,14 +61,16 @@ checkParamConsistency
             .   _String
             &   S.fromList
 
-      when (pathParams /= swParams) $ do
-        pathStr <- T.intercalate "." <$> getPath
-        throwError $ concat [
-            "Entry at ",
-            pathStr,
-            " has inconsistent definition of path params: ",
-            tshow swParams
-          ]
+      if (pathParams == swParams)
+         then pure (Right ())
+         else do
+           pathStr <- T.intercalate "." <$> getPath
+           pure . Left $ concat [
+               "Entry at ",
+               pathStr,
+               " has inconsistent definition of path params: ",
+               tshow swParams
+             ]
 
 -- Replace the default, incomprehensible operation IDs with something better
 -- e.g. instead of boardsboardididtags, use getBoardsTags
@@ -208,4 +220,12 @@ isPathParam
 anyOr :: Bool -> [Bool] -> Bool
 anyOr b [] = b
 anyOr _ xs = any id xs
+
+-- Like sequence, but preserves all left-values
+-- Useful for batch reporting of errors.
+batchEithers :: [Either a b] -> Either [a] [b]
+batchEithers xs = res where
+  (lefts, rights) = partitionEithers xs
+  res | null lefts = Right rights
+      | otherwise  = Left lefts
 
