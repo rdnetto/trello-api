@@ -69,7 +69,7 @@ paths:
         name: idCheckItem
         description: ID of the check item to retrieve.
       _path: /checklists/{id}/checkItems/{idCheckItem}
-      operationId: checklistsidcardscheckitemscheckitemid
+      operationId: getChecklistsCheckitemsByCheckitem
       description: ''
       requestBody: null
       tags: []
@@ -91,7 +91,7 @@ paths:
         name: idCheckItem
         description: ID of the checklist item to delete.
       _path: /checklists/{id}/checkItems/{idCheckItem}
-      operationId: checklistsidcheckitemsid
+      operationId: deleteChecklistsCheckitemsByCheckitem
       description: Remove an item from a checklist
       requestBody: null
       tags: []
@@ -120,7 +120,7 @@ paths:
         name: idCheckItem
         description: ID of the check item to retrieve.
       _path: /checklists/{id}/checkItems/{idCheckItem}
-      operationId: checklistsidcheckitemsidcheckitem
+      operationId: putChecklistsCheckitemsByCheckitem
       description: Update check item.
       requestBody: null
       tags: []
@@ -144,7 +144,7 @@ paths:
         description: ! 'The new color for the label. See: [fields](#label-object)
           for color options.'
       _path: /labels/{id}/color
-      operationId: idcolor
+      operationId: putLabelsColor
       description: Update the color of a label by ID.
       requestBody: null
       tags: []
@@ -161,7 +161,7 @@ paths:
         name: id
         description: ID of a checklist.
       _path: /checklists/{id}/cards
-      operationId: checklistsidcards
+      operationId: getChecklistsCards
       description: ''
       requestBody: null
       tags: []
@@ -185,7 +185,7 @@ paths:
         description: ! 'The Power-Up to be enabled on the board. One of: `calendar`,
           `cardAging`, `recap`, `voting`.'
       _path: /boards/{id}/powerUps
-      operationId: boardsidpowerups
+      operationId: postBoardsPowerups
       description: ''
       requestBody: null
       tags: []
@@ -221,7 +221,7 @@ paths:
         description: ! 'The position of the checklist on the card. One of: `top`,
           `bottom`, or a positive number.'
       _path: /cards/{id}/checklists
-      operationId: cardsidchecklists-1
+      operationId: postCardsChecklists
       description: Create a new checklist on a card
       requestBody: null
       tags: []
@@ -265,7 +265,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of: `idBoard,idCard,name,pos`'
       _path: /cards/{id}/checklists
-      operationId: cardsidchecklists
+      operationId: getCardsChecklists
       description: Get the checklists on a card
       requestBody: null
       tags: []
@@ -319,7 +319,7 @@ paths:
         description: ! 'Fields to show if `member=true`. Valid values: [nested member
           resource fields](https://developers.trello.com/v1.0/reference#members-nested-resource).'
       _path: /boards/{id}/memberships
-      operationId: boardsidmemberships
+      operationId: getBoardsMemberships
       description: Get information about the memberships users have to the board.
       requestBody: null
       tags: []
@@ -350,7 +350,7 @@ paths:
         description: ! 'Determines the position of the list. Valid values: `top`,
           `bottom`, or a positive number.'
       _path: /boards/{id}/lists
-      operationId: boardsidlists
+      operationId: postBoardsLists
       description: ''
       requestBody: null
       tags: []
@@ -394,7 +394,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of list [fields](#list-object)'
       _path: /boards/{id}/lists
-      operationId: boardsboardidlists
+      operationId: getBoardsLists
       description: ''
       requestBody: null
       tags: []
@@ -424,7 +424,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of sticker [fields](ref:stickers)'
       _path: /cards/{id}/stickers/{idSticker}
-      operationId: cardsidstickersidsticker
+      operationId: getCardsStickersBySticker
       description: Get a specific sticker on a card
       requestBody: null
       tags: []
@@ -446,7 +446,7 @@ paths:
         name: idSticker
         description: The ID of the sticker to remove from the card
       _path: /cards/{id}/stickers/{idSticker}
-      operationId: cardsidstickersidsticker-1
+      operationId: deleteCardsStickersBySticker
       description: Remove a sticker from the card
       requestBody: null
       tags: []
@@ -496,7 +496,7 @@ paths:
         name: rotate
         description: ''
       _path: /cards/{id}/stickers/{idSticker}
-      operationId: cardsidstickersidsticker-2
+      operationId: putCardsStickersBySticker
       description: Update a sticker on a card
       requestBody: null
       tags: []
@@ -519,7 +519,7 @@ paths:
         name: idChecklist
         description: The ID of the checklist to delete
       _path: /cards/{id}/checklists/{idChecklist}
-      operationId: cardsidchecklistsidchecklist
+      operationId: deleteCardsChecklistsByChecklist
       description: Delete a checklist from a card
       requestBody: null
       tags: []
@@ -542,7 +542,7 @@ paths:
         name: value
         description: Set to true to close (archive) the list
       _path: /lists/{id}/closed
-      operationId: listsidclosed
+      operationId: putListsClosed
       description: Archive or unarchive a list
       requestBody: null
       tags: []
@@ -566,7 +566,7 @@ paths:
         name: filter
         description: ! 'One of: `enabled` or `available`'
       _path: /boards/{id}/plugins
-      operationId: boardsidplugins
+      operationId: getBoardsPlugins
       description: List the Power-Ups for a board
       requestBody: null
       tags: []
@@ -590,7 +590,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](#board-object)'
       _path: /lists/{id}/board
-      operationId: listsidboard
+      operationId: getListsBoard
       description: Get the board a list is on
       requestBody: null
       tags: []
@@ -607,7 +607,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/members
-      operationId: organizationsidmembers
+      operationId: getOrganizationsMembers
       description: List the members in a team
       requestBody: null
       tags: []
@@ -643,7 +643,7 @@ paths:
         name: type
         description: ! 'One of: `admin`, `normal`'
       _path: /organizations/{id}/members
-      operationId: organizationsidmembers-1
+      operationId: putOrganizationsMembers
       description: ''
       requestBody: null
       tags: []
@@ -666,7 +666,7 @@ paths:
         name: value
         description: The id of an email list.
       _path: /boards/{id}/myPrefs/idEmailList
-      operationId: boardsidmyprefsidemaillist
+      operationId: putBoardsMyprefsIdemaillist
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -689,7 +689,7 @@ paths:
         name: value
         description: Determines whether to show the sidebar board actions.
       _path: /boards/{id}/myPrefs/showSidebarBoardActions
-      operationId: boardsidmyprefsshowsidebarboardactions
+      operationId: putBoardsMyprefsShowsidebarboardactions
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -721,7 +721,7 @@ paths:
           Custom Field value. The key used to set the value should match the type
           of Custom Field defined.
       _path: /card/{idCard}/customField/{idCustomField}/item
-      operationId: customfielditemsid
+      operationId: putCardCustomfieldItemByCardCustomfield
       description: Setting, updating, and removing the value for a Custom Field on
         a card.
       requestBody: null
@@ -760,7 +760,7 @@ paths:
         description: ! 'Valid values: all, avatarHash, bio, bioData, confirmed, fullName,
           idPremOrgsAdmin, initials, memberType, products, status, url, username'
       _path: /boards/{id}/memberships/{idMembership}
-      operationId: boardsidlabelnamesmembershipsidmembership
+      operationId: putBoardsMembershipsByMembership
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -784,7 +784,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /notifications/{id}/member
-      operationId: notificationsidmember
+      operationId: getNotificationsMember
       description: Get the member (not the creator) a notification is about
       requestBody: null
       tags: []
@@ -801,7 +801,7 @@ paths:
         name: boardId
         description: ''
       _path: /boards/{boardId}/actions
-      operationId: boardsboardidactions
+      operationId: getBoardsActions
       description: ''
       requestBody: null
       tags: []
@@ -818,7 +818,7 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/actions
-      operationId: membersidactions
+      operationId: getMembersActions
       description: List the actions for a member
       requestBody: null
       tags: []
@@ -842,7 +842,7 @@ paths:
         description: The name of the checklist to be created. 1 to 16384 characters
           long.
       _path: /boards/{id}/checklists
-      operationId: boardsidchecklists
+      operationId: postBoardsChecklists
       description: Create a new checklist.
       requestBody: null
       tags: []
@@ -858,7 +858,7 @@ paths:
         name: id
         description: The ID of the board
       _path: /boards/{id}/checklists
-      operationId: boardsboardidactions-3
+      operationId: getBoardsChecklists
       description: ''
       requestBody: null
       tags: []
@@ -888,7 +888,7 @@ paths:
         name: idBoard
         description: The ID of the board to create the label on.
       _path: /labels
-      operationId: page-1
+      operationId: postLabels
       description: Create a new label on a board.
       requestBody: null
       tags: []
@@ -905,7 +905,7 @@ paths:
         name: id
         description: The ID of the list
       _path: /lists/{id}/cards
-      operationId: listsidcards
+      operationId: getListsCards
       description: List the cards in a list
       requestBody: null
       tags: []
@@ -922,7 +922,7 @@ paths:
         name: id
         description: ''
       _path: /boards/{id}/cards
-      operationId: boardsboardidtest
+      operationId: getBoardsCards
       description: ''
       requestBody: null
       tags: []
@@ -958,7 +958,7 @@ paths:
         description: The position of the saved search. `top`, `bottom`, or a positive
           float.
       _path: /members/{id}/savedSearches
-      operationId: membersidsavedsearches-1
+      operationId: postMembersSavedsearches
       description: Create a new saved search
       requestBody: null
       tags: []
@@ -974,7 +974,7 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/savedSearches
-      operationId: membersidsavedsearches
+      operationId: getMembersSavedsearches
       description: List the saved searches of a member
       requestBody: null
       tags: []
@@ -991,7 +991,7 @@ paths:
         name: token
         description: ''
       _path: /tokens/{token}/
-      operationId: tokenstoken-1
+      operationId: deleteTokens
       description: Delete a token.
       requestBody: null
       tags: []
@@ -1014,7 +1014,7 @@ paths:
         name: idOrganization
         description: An ID of an Organization resource.
       _path: /enterprises/{id}/transferrable/organization/{idOrganization}
-      operationId: enterprisesidtransferrableorganizationidorganization
+      operationId: getEnterprisesTransferrableOrganizationByOrganization
       description: Get whether an organization can be transferred to an enterprise.
       requestBody: null
       tags: []
@@ -1038,7 +1038,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of organization [fields](ref:organization-object)'
       _path: /members/{id}/organizationsInvited
-      operationId: membersidorganizationsinvited
+      operationId: getMembersOrganizationsinvited
       description: Get a member's teams they have been invited to
       requestBody: null
       tags: []
@@ -1061,7 +1061,7 @@ paths:
         name: idCard
         description: The id the card to retrieve.
       _path: /boards/{id}/cards/{idCard}
-      operationId: boardsboardidactions-1
+      operationId: getBoardsCardsByCard
       description: ''
       requestBody: null
       tags: []
@@ -1072,7 +1072,7 @@ paths:
       _method: post
       parameters: []
       _path: /notifications/all/read
-      operationId: notificationsallread
+      operationId: postNotificationsAllRead
       description: Mark all notifications as read
       requestBody: null
       tags: []
@@ -1095,7 +1095,7 @@ paths:
         name: value
         description: The ID of the board to move the list to
       _path: /lists/{id}/idBoard
-      operationId: listsididboard
+      operationId: putListsIdboard
       description: Move a list to a new board
       requestBody: null
       tags: []
@@ -1119,7 +1119,7 @@ paths:
         description: The id, username, or organization name of the user to be removed
           from the board.
       _path: /boards/{id}/members/{idMember}
-      operationId: boardsidmembersidmember
+      operationId: deleteBoardsMembersByMember
       description: ''
       requestBody: null
       tags: []
@@ -1148,7 +1148,7 @@ paths:
         name: idMember
         description: The id of the member to add to the board.
       _path: /boards/{id}/members/{idMember}
-      operationId: boardsidlabelnamesmembersidmember
+      operationId: putBoardsMembersByMember
       description: Add a member to the board.
       requestBody: null
       tags: []
@@ -1172,7 +1172,7 @@ paths:
         name: filter
         description: ! 'Valid values: mine, none'
       _path: /boards/{boardId}/boardStars
-      operationId: boardsboardidactions-2
+      operationId: getBoardsBoardstars
       description: ''
       requestBody: null
       tags: []
@@ -1202,7 +1202,7 @@ paths:
         description: The position of the newly starred board. `top`, `bottom`, or
           a positive float.
       _path: /members/{id}/boardStars
-      operationId: membersidboardstars-1
+      operationId: postMembersBoardstars
       description: Star a new board
       requestBody: null
       tags: []
@@ -1218,7 +1218,7 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/boardStars
-      operationId: membersidboardstars
+      operationId: getMembersBoardstars
       description: List a member's board stars
       requestBody: null
       tags: []
@@ -1242,7 +1242,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of organization [fields](ref:organization-object)'
       _path: /actions/{id}/organization
-      operationId: actionsidorganization
+      operationId: getActionsOrganization
       description: Get the organization of an action
       requestBody: null
       tags: []
@@ -1266,7 +1266,7 @@ paths:
         name: expiration
         description: ! 'One of: `1hour`, `1day`, `30days`, `never`'
       _path: /enterprises/{id}/tokens
-      operationId: enterprisesidtokens
+      operationId: postEnterprisesTokens
       description: Generate an auth token for an enterprise.
       requestBody: null
       tags: []
@@ -1289,7 +1289,7 @@ paths:
         name: field
         description: An action [field](ref:action-object)
       _path: /actions/{id}/{field}
-      operationId: actionsidfield
+      operationId: getActionsByField
       description: Get a specific property of an action
       requestBody: null
       tags: []
@@ -1312,7 +1312,7 @@ paths:
         name: idWebhook
         description: ID of the [Webhooks](ref:webhooks) to retrieve.
       _path: /tokens/{token}/webhooks/{idWebhook}
-      operationId: tokenstokenwebhooksidwebhook
+      operationId: getTokensWebhooksByTokenWebhook
       description: Retrieve a webhook created with a token.
       requestBody: null
       tags: []
@@ -1334,7 +1334,7 @@ paths:
         name: idWebhook
         description: ID of the [webhook](ref:webhooks) to delete.
       _path: /tokens/{token}/webhooks/{idWebhook}
-      operationId: tokenstokenwebhooksidwebhook-1
+      operationId: deleteTokensWebhooksByTokenWebhook
       description: Delete a webhook created with given token.
       requestBody: null
       tags: []
@@ -1345,7 +1345,7 @@ paths:
       _method: post
       parameters: []
       _path: /customFields
-      operationId: customfields
+      operationId: postCustomfields
       description: Create a new Custom Field on a board.
       requestBody:
         content:
@@ -1403,7 +1403,7 @@ paths:
         name: idPlugin
         description: The ID of the Power-Up to enable
       _path: /boards/{id}/boardPlugins
-      operationId: boardsidboardplugins-1
+      operationId: postBoardsBoardplugins
       description: Enable a Power-Up on a board
       requestBody: null
       tags: []
@@ -1419,7 +1419,7 @@ paths:
         name: id
         description: The ID of the board
       _path: /boards/{id}/boardPlugins
-      operationId: boardsidboardplugins
+      operationId: getBoardsBoardplugins
       description: Get the enabled Power-Ups on a board
       requestBody: null
       tags: []
@@ -1451,7 +1451,7 @@ paths:
         name: webhooks
         description: Determines whether to include webhooks.
       _path: /tokens/{token}
-      operationId: tokenstoken
+      operationId: getTokens
       description: Retrieve information about a token.
       requestBody: null
       tags: []
@@ -1474,7 +1474,7 @@ paths:
         name: value
         description: The message to dismiss
       _path: /members/{id}/oneTimeMessagesDismissed
-      operationId: membersidonetimemessagesdismissed
+      operationId: postMembersOnetimemessagesdismissed
       description: Dismiss a message
       requestBody: null
       tags: []
@@ -1605,7 +1605,7 @@ paths:
         description: ! 'Comma-seperated list of: `me`, `normal`, `admin`, `active`,
           `deactivated`'
       _path: /enterprises/{id}
-      operationId: enterprisesid
+      operationId: getEnterprises
       description: Get an enterprise by its ID.
       requestBody: null
       tags: []
@@ -1622,7 +1622,7 @@ paths:
         name: idAction
         description: The ID of the action
       _path: /actions/{idAction}/reactions
-      operationId: actionsidactionreactions-1
+      operationId: postActionsReactions
       description: Adds a new reaction to an action
       requestBody:
         content:
@@ -1670,7 +1670,7 @@ paths:
         name: emoji
         description: Whether to load the emoji as a nested resource.
       _path: /actions/{idAction}/reactions
-      operationId: actionsidactionreactions
+      operationId: getActionsReactions
       description: List reactions for an action
       requestBody: null
       tags: []
@@ -1718,7 +1718,7 @@ paths:
         description: Any valid value that the [nested board resource](https://developers.trello.com/v1.0/reference#boards-nested-resource)
           accepts.
       _path: /enterprises/{id}/members/{idMember}
-      operationId: enterprisesidmembersidmember
+      operationId: getEnterprisesMembersByMember
       description: Get a specific member of an enterprise by ID.
       requestBody: null
       tags: []
@@ -1741,7 +1741,7 @@ paths:
         name: idMember
         description: The ID of the member to remove from the team
       _path: /organizations/{id}/members/{idMember}/all
-      operationId: organizationsidmembersidmemberall
+      operationId: deleteOrganizationsMembersAllByMember
       description: Remove a member from a team and from all team boards
       requestBody: null
       tags: []
@@ -1773,7 +1773,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](ref:board-object)'
       _path: /organizations/{id}/boards
-      operationId: organizationsidboards
+      operationId: getOrganizationsBoards
       description: List the boards in a team
       requestBody: null
       tags: []
@@ -1796,7 +1796,7 @@ paths:
         name: value
         description: Determines whether to show sidebar activity.
       _path: /boards/{id}/myPrefs/showSidebarActivity
-      operationId: boardsidmyprefsshowsidebaractivity
+      operationId: putBoardsMyprefsShowsidebaractivity
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -1819,7 +1819,7 @@ paths:
         name: field
         description: An organization [field](ref:organization-object)
       _path: /organizations/{id}/{field}
-      operationId: organizationsidfield
+      operationId: getOrganizationsByField
       description: ''
       requestBody: null
       tags: []
@@ -1854,7 +1854,7 @@ paths:
         name: active
         description: Determines whether the webhook is active and sending `POST` requests.
       _path: /webhooks/
-      operationId: webhooks-2
+      operationId: postWebhooks
       description: Create a new webhook.
       requestBody: null
       tags: []
@@ -1877,7 +1877,7 @@ paths:
         name: idMember
         description: The ID of the member whose vote to remove
       _path: /cards/{id}/membersVoted/{idMember}
-      operationId: cardsidmembersvotedidmember
+      operationId: deleteCardsMembersvotedByMember
       description: Remove a member's vote from a card
       requestBody: null
       tags: []
@@ -1901,7 +1901,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board[fields](ref:board-object)'
       _path: /notifications/{id}/board
-      operationId: notificationsidboard
+      operationId: getNotificationsBoard
       description: Get the board a notification is associated with
       requestBody: null
       tags: []
@@ -2056,7 +2056,7 @@ paths:
         name: tokens
         description: ! '`all` or `none`'
       _path: /members/{id}
-      operationId: membersid
+      operationId: getMembers
       description: Get a member
       requestBody: null
       tags: []
@@ -2122,7 +2122,7 @@ paths:
         name: prefs/minutesBetweenSummaries
         description: ! '`-1` for disabled, `1`, or `60`'
       _path: /members/{id}
-      operationId: membersid-1
+      operationId: putMembers
       description: Update a member
       requestBody: null
       tags: []
@@ -2145,7 +2145,7 @@ paths:
         name: idSearch
         description: The ID of the search
       _path: /members/{id}/savedSearches/{idSearch}
-      operationId: membersidsavedsearchesidsearch
+      operationId: getMembersSavedsearchesBySearch
       description: Get a saved search
       requestBody: null
       tags: []
@@ -2167,7 +2167,7 @@ paths:
         name: idSearch
         description: The ID of the saved search to delete
       _path: /members/{id}/savedSearches/{idSearch}
-      operationId: membersidsavedsearchesidsearch-2
+      operationId: deleteMembersSavedsearchesBySearch
       description: Delete a saved search
       requestBody: null
       tags: []
@@ -2208,7 +2208,7 @@ paths:
         description: New position for saves search. `top`, `bottom`, or a positive
           float.
       _path: /members/{id}/savedSearches/{idSearch}
-      operationId: membersidsavedsearchesidsearch-1
+      operationId: putMembersSavedsearchesBySearch
       description: Update a saved search
       requestBody: null
       tags: []
@@ -2238,7 +2238,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of `name`, `url`'
       _path: /members/{id}/customEmoji/{idEmoji}
-      operationId: membersidcustomemojiidemoji
+      operationId: getMembersCustomemojiByEmoji
       description: Get a custom emoji
       requestBody: null
       tags: []
@@ -2273,7 +2273,7 @@ paths:
         name: idChecklist
         description: The ID of the item to update.
       _path: /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}
-      operationId: cardsidcardchecklistidchecklistcheckitemidcheckitem
+      operationId: putCardsChecklistCheckitemByCardCheckitemChecklist
       description: Update an item in a checklist on a card.
       requestBody: null
       tags: []
@@ -2296,7 +2296,7 @@ paths:
         name: idMember
         description: The ID of the member to remove from the team
       _path: /organizations/{id}/members/{idMember}
-      operationId: organizationsidmembersidmember-1
+      operationId: deleteOrganizationsMembersByMember
       description: Remove a member from a team
       requestBody: null
       tags: []
@@ -2324,7 +2324,7 @@ paths:
         name: type
         description: ! 'One of: `admin`, `normal`'
       _path: /organizations/{id}/members/{idMember}
-      operationId: organizationsidmembersidmember
+      operationId: putOrganizationsMembersByMember
       description: Add a member to a team or update their member type.
       requestBody: null
       tags: []
@@ -2363,7 +2363,7 @@ paths:
         name: checked
         description: Determines whether the check item is already checked when created.
       _path: /checklists/{id}/checkItems
-      operationId: checklistsidcheckitems
+      operationId: postChecklistsCheckitems
       description: ''
       requestBody: null
       tags: []
@@ -2393,7 +2393,7 @@ paths:
         name: fields
         description: ! 'One of: `all`, `name`, `nameData`, `pos`, `state`, `type`.'
       _path: /checklists/{id}/checkItems
-      operationId: checklistsidcardscheckitems
+      operationId: getChecklistsCheckitems
       description: ''
       requestBody: null
       tags: []
@@ -2423,7 +2423,7 @@ paths:
         name: member
         description: Whether to include the member object in the response
       _path: /organizations/{id}/memberships/{idMembership}
-      operationId: organizationsidmembershipsidmembership
+      operationId: getOrganizationsMembershipsByMembership
       description: List the memberships of a team
       requestBody: null
       tags: []
@@ -2446,7 +2446,7 @@ paths:
         name: value
         description: ''
       _path: /notifications/{id}/unread
-      operationId: notificationsidunread
+      operationId: putNotificationsUnread
       description: Update the read status of a notification
       requestBody: null
       tags: []
@@ -2469,7 +2469,7 @@ paths:
         name: field
         description: One of the member [fields](ref:member-object)
       _path: /members/{id}/{field}
-      operationId: membersidfield
+      operationId: getMembersByField
       description: Get a particular property of a member
       requestBody: null
       tags: []
@@ -2492,7 +2492,7 @@ paths:
         name: idAction
         description: The ID of the comment action
       _path: /cards/{id}/actions/{idAction}/comments
-      operationId: cardsidactionsidactioncomments-1
+      operationId: deleteCardsActionsCommentsByAction
       description: Delete a comment
       requestBody: null
       tags: []
@@ -2520,7 +2520,7 @@ paths:
         name: text
         description: The new text for the comment
       _path: /cards/{id}/actions/{idAction}/comments
-      operationId: cardsidactionsidactioncomments
+      operationId: putCardsActionsCommentsByAction
       description: Update an existing comment
       requestBody: null
       tags: []
@@ -2543,7 +2543,7 @@ paths:
         name: value
         description: The ID of the label to add
       _path: /cards/{id}/idLabels
-      operationId: cardsididlabels
+      operationId: postCardsIdlabels
       description: Add a label to a card
       requestBody: null
       tags: []
@@ -2560,7 +2560,7 @@ paths:
         name: id
         description: The ID of the action
       _path: /actions/{id}/display
-      operationId: actionsiddisplay
+      operationId: getActionsDisplay
       description: Get the display information for an action.
       requestBody: null
       tags: []
@@ -2583,7 +2583,7 @@ paths:
         name: idTag
         description: The ID of the tag to delete
       _path: /organizations/{id}/tags/{idTag}
-      operationId: organizationsidtagsidtag
+      operationId: deleteOrganizationsTagsByTag
       description: Delete an organization's tag
       requestBody: null
       tags: []
@@ -2608,7 +2608,7 @@ paths:
         name: spritesheets
         description: ! '`true` to return spritesheet URLs in the response'
       _path: /emoji
-      operationId: emoji
+      operationId: getEmoji
       security: []
       description: List available emoji
       requestBody: null
@@ -2628,7 +2628,7 @@ paths:
           should begin with a forward slash and should not include the API version
           number - e.g. "urls=/members/trello,/cards/[cardId]"
       _path: /batch
-      operationId: batch-1
+      operationId: getBatch
       description: ''
       requestBody: null
       tags: []
@@ -2645,7 +2645,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}
-      operationId: organizationsid
+      operationId: getOrganizations
       description: ''
       requestBody: null
       tags: []
@@ -2661,7 +2661,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}
-      operationId: organizationsid-2
+      operationId: deleteOrganizations
       description: Delete a team
       requestBody: null
       tags: []
@@ -2755,7 +2755,7 @@ paths:
         description: ! 'Whether the team page is publicly visible. One of: `private`,
           `public`'
       _path: /organizations/{id}
-      operationId: organizationsid-1
+      operationId: putOrganizations
       description: Update an organization
       requestBody: null
       tags: []
@@ -2772,7 +2772,7 @@ paths:
         name: id
         description: The ID of the card
       _path: /cards/{id}/actions
-      operationId: cardsidactions
+      operationId: getCardsActions
       description: List the actions on a card
       requestBody: null
       tags: []
@@ -2795,7 +2795,7 @@ paths:
         name: field
         description: A notification [field](ref:notifcation-object)
       _path: /notifications/{id}/{field}
-      operationId: notificationsidfield
+      operationId: getNotificationsByField
       description: Get a specific property of a notification
       requestBody: null
       tags: []
@@ -2824,7 +2824,7 @@ paths:
         name: name
         description: A name for the label
       _path: /cards/{id}/labels
-      operationId: cardsidlabels
+      operationId: postCardsLabels
       description: Add a new label to a card
       requestBody: null
       tags: []
@@ -2848,7 +2848,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of card [fields](ref:card-object)'
       _path: /notifications/{id}/card
-      operationId: notificationsidcard
+      operationId: getNotificationsCard
       description: Get the card a notification is associated with
       requestBody: null
       tags: []
@@ -2865,7 +2865,7 @@ paths:
         name: id
         description: The ID of the board
       _path: /boards/{id}/members
-      operationId: boardsboardidmembers
+      operationId: getBoardsMembers
       description: Get the members for a board
       requestBody: null
       tags: []
@@ -2894,7 +2894,7 @@ paths:
         description: ! 'Valid values: admin, normal, observer. Determines what type
           of member the user being added should be of the board.'
       _path: /boards/{id}/members
-      operationId: boardsidlabelnamesmembers
+      operationId: putBoardsMembers
       description: Update an existing board by id
       requestBody:
         content:
@@ -2940,7 +2940,7 @@ paths:
         description: Position of the list. `top`, `bottom`, or a positive floating
           point number
       _path: /lists
-      operationId: lists-1
+      operationId: postLists
       description: Create a new list on a board
       requestBody: null
       tags: []
@@ -2957,7 +2957,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/prefs/orgInviteRestrict
-      operationId: organizationsidprefsorginviterestrict
+      operationId: deleteOrganizationsPrefsOrginviterestrict
       description: Remove the email domain restriction on who can be invited to the
         team
       requestBody: null
@@ -2993,35 +2993,12 @@ paths:
         name: tile
         description: Whether to tile the background
       _path: /members/{id}//customBoardBackgrounds/{idBackground}
-      operationId: put-membersidcustomboardbackgroundsidbackground
+      operationId: putMembersCustomboardbackgroundsByBackground
       description: ''
       requestBody: null
       tags: []
       deprecated: false
   /members/{id}/customStickers:
-    post:
-      summary: /members/{id}/customStickers
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/customStickers
-      operationId: membersidcustomstickers-1
-      description: Upload a new custom sticker
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customStickers
       _method: get
@@ -3033,7 +3010,7 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/customStickers
-      operationId: membersidcustomstickers
+      operationId: getMembersCustomstickers
       description: Get a member's uploaded stickers
       requestBody: null
       tags: []
@@ -3095,7 +3072,7 @@ paths:
         name: organization_fields
         description: ! '`all` or a comma-separated list of organization [fields](ref:organization-object)'
       _path: /members/{id}/boards
-      operationId: membersidboards
+      operationId: getMembersBoards
       description: Lists the boards a member has access to
       requestBody: null
       tags: []
@@ -3148,7 +3125,7 @@ paths:
         description: Any valid value that the [nested board resource](https://developers.trello.com/v1.0/reference#boards-nested-resource)
           accepts.
       _path: /enterprises/{id}/members/{idMember}/deactivated
-      operationId: enterprisesidmembersidmemberdeactivated-1
+      operationId: putEnterprisesMembersDeactivatedByMember
       description: Deactivate a member of an enterprise.
       requestBody: null
       tags: []
@@ -3275,7 +3252,7 @@ paths:
         description: ! 'Determines the type of card aging that should take place on
           the board if card aging is enabled. One of: `pirate`, `regular`.'
       _path: /boards/
-      operationId: boardsid
+      operationId: postBoards
       description: Create a new board.
       requestBody: null
       tags: []
@@ -3299,7 +3276,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of sticker [fields](ref:stickers)'
       _path: /cards/{id}/stickers
-      operationId: cardsidstickers
+      operationId: getCardsStickers
       description: Get the stickers on a card
       requestBody: null
       tags: []
@@ -3323,7 +3300,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](#board-object)'
       _path: /cards/{id}/board
-      operationId: cardsidboard
+      operationId: getCardsBoard
       description: Get the board a card is on
       requestBody: null
       tags: []
@@ -3347,7 +3324,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /actions/{id}/member
-      operationId: actionsidmember
+      operationId: getActionsMember
       description: Gets the member of an action (not the creator)
       requestBody: null
       tags: []
@@ -3371,7 +3348,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of list [fields](ref:list-object)'
       _path: /cards/{id}/list
-      operationId: cardsidlist
+      operationId: getCardsList
       description: Get the list a card is in
       requestBody: null
       tags: []
@@ -3388,7 +3365,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/actions
-      operationId: organizationsidactions
+      operationId: getOrganizationsActions
       description: List the actions on a team
       requestBody: null
       tags: []
@@ -3482,7 +3459,7 @@ paths:
         name: memberCreator_fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /members/{id}/notifications
-      operationId: membersidnotifications
+      operationId: getMembersNotifications
       description: Get a member's notifications
       requestBody: null
       tags: []
@@ -3505,7 +3482,7 @@ paths:
         name: value
         description: The id of a tag from the organization to which this board belongs.
       _path: /boards/{id}/idTags
-      operationId: boardsididtags
+      operationId: postBoardsIdtags
       description: ''
       requestBody: null
       tags: []
@@ -3529,7 +3506,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of organization [fields](ref:organization-object)'
       _path: /notifications/{id}/organization
-      operationId: notificationsidorganization
+      operationId: getNotificationsOrganization
       description: Get the organization a notification is associated with
       requestBody: null
       tags: []
@@ -3553,7 +3530,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](ref:board-object)'
       _path: /checklists/{id}/board
-      operationId: checklistsidboard
+      operationId: getChecklistsBoard
       description: ''
       requestBody: null
       tags: []
@@ -3576,7 +3553,7 @@ paths:
         name: value
         description: ! '`true` to subscribe, `false` to unsubscribe'
       _path: /lists/{id}/subscribed
-      operationId: listsidsubscribed
+      operationId: putListsSubscribed
       description: Subscribe or unsubscribe from a list
       requestBody: null
       tags: []
@@ -3593,7 +3570,7 @@ paths:
         name: id
         description: The ID of the list
       _path: /lists/{id}/archiveAllCards
-      operationId: listsidarchiveallcards
+      operationId: postListsArchiveallcards
       description: Archive all cards in a list
       requestBody: null
       tags: []
@@ -3689,7 +3666,7 @@ paths:
         description: Any valid value that the [nested board resource](https://developers.trello.com/v1.0/reference#boards-nested-resource)
           accepts.
       _path: /enterprises/{id}/members
-      operationId: enterprisesidmembers
+      operationId: getEnterprisesMembers
       description: Get the members of an enterprise.
       requestBody: null
       tags: []
@@ -3720,7 +3697,7 @@ paths:
         description: ! '`all` or a comma-separated list of `brightness`, `fullSizeUrl`,
           `scaled`, `tile`'
       _path: /members/{id}/customBoardBackgrounds/{idBackground}
-      operationId: membersidcustomboardbackgroundsidbackground
+      operationId: getMembersCustomboardbackgroundsByBackground
       description: Get a specific custom board background
       requestBody: null
       tags: []
@@ -3742,7 +3719,7 @@ paths:
         name: idBackground
         description: The ID of the custom board background to delete
       _path: /members/{id}/customBoardBackgrounds/{idBackground}
-      operationId: membersidcustomboardbackgroundsidbackground-1
+      operationId: deleteMembersCustomboardbackgroundsByBackground
       description: Delete a custom board background
       requestBody: null
       tags: []
@@ -3765,7 +3742,7 @@ paths:
         name: value
         description: ! '`top`, `bottom`, or a positive float'
       _path: /lists/{id}/pos
-      operationId: listsidpos
+      operationId: putListsPos
       description: Change the position of a list
       requestBody: null
       tags: []
@@ -3788,7 +3765,7 @@ paths:
         name: filter
         description: ! 'Valid Values: all, closed, none, open, visible.'
       _path: /boards/{boardId}/cards/{filter}
-      operationId: boardsboardidcardsfilter
+      operationId: getBoardsCardsByBoardidFilter
       description: ''
       requestBody: null
       tags: []
@@ -3811,7 +3788,7 @@ paths:
         name: value
         description: The new text for the comment
       _path: /actions/{id}/text
-      operationId: actionsidtext
+      operationId: putActionsText
       description: Update a comment action
       requestBody: null
       tags: []
@@ -3835,7 +3812,7 @@ paths:
         description: The value to change the checklist name to. Should be a string
           of length 1 to 16384.
       _path: /checklists/{id}/name
-      operationId: checklistsidname
+      operationId: putChecklistsName
       description: ''
       requestBody: null
       tags: []
@@ -3982,7 +3959,7 @@ paths:
         name: customFieldItems
         description: Whether to include the customFieldItems
       _path: /cards/{id}
-      operationId: cardsid
+      operationId: getCards
       description: Get a card by its ID
       requestBody: null
       tags: []
@@ -3998,7 +3975,7 @@ paths:
         name: id
         description: The ID of the card
       _path: /cards/{id}
-      operationId: delete-card
+      operationId: deleteCards
       description: Delete a card
       requestBody: null
       tags: []
@@ -4089,7 +4066,7 @@ paths:
         name: subscribed
         description: Whether the member is should be subscribed to the card
       _path: /cards/{id}
-      operationId: cardsid-1
+      operationId: putCards
       description: Update a card
       requestBody: null
       tags: []
@@ -4112,7 +4089,7 @@ paths:
         name: idBoard
         description: The ID of the board to check for new billable guests.
       _path: /organizations/{id}/newBillableGuests/{idBoard}
-      operationId: organizationsidnewbillableguestsidboard
+      operationId: getOrganizationsNewbillableguestsByBoard
       description: Used to check whether the given board has new billable guests on
         it.
       requestBody: null
@@ -4130,7 +4107,7 @@ paths:
         name: id
         description: The ID of the card
       _path: /cards/{id}/customFieldItems
-      operationId: cardsidcustomfielditems
+      operationId: getCardsCustomfielditems
       description: Get the custom field items for a card.
       requestBody: null
       tags: []
@@ -4160,7 +4137,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of attachment [fields](ref:attachments)'
       _path: /cards/{id}/attachments/{idAttachment}
-      operationId: cardsidattachmentsidattachment
+      operationId: getCardsAttachmentsByAttachment
       description: Get a specific attachment on a card
       requestBody: null
       tags: []
@@ -4182,7 +4159,7 @@ paths:
         name: idAttachment
         description: The ID of the attachment to delete
       _path: /cards/{id}/attachments/{idAttachment}
-      operationId: cardsidattachmentsidattachment-1
+      operationId: deleteCardsAttachmentsByAttachment
       description: Delete an attachment
       requestBody: null
       tags: []
@@ -4231,7 +4208,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of checklist [fields](ref:checklist-object)'
       _path: /checklists/{id}
-      operationId: checklistsid
+      operationId: getChecklists
       description: ''
       requestBody: null
       tags: []
@@ -4247,7 +4224,7 @@ paths:
         name: id
         description: ID of a checklist.
       _path: /checklists/{id}
-      operationId: checklistsid-2
+      operationId: deleteChecklists
       description: Delete a checklist
       requestBody: null
       tags: []
@@ -4277,7 +4254,7 @@ paths:
         description: ! 'Determines the position of the checklist on the card. One
           of: `top`, `bottom`, or a positive number.'
       _path: /checklists/{id}
-      operationId: checklistsid-1
+      operationId: putChecklists
       description: Update an existing checklist.
       requestBody: null
       tags: []
@@ -4294,7 +4271,7 @@ paths:
         name: id
         description: The ID of the board
       _path: /boards/{id}/tags
-      operationId: boardsboardididtags
+      operationId: getBoardsTags
       description: ''
       requestBody: null
       tags: []
@@ -4311,7 +4288,7 @@ paths:
         name: id
         description: The id of the board to update
       _path: /boards/{id}/calendarKey/generate
-      operationId: boardsidcalendarkeygenerate
+      operationId: postBoardsCalendarkeyGenerate
       description: Create a new board.
       requestBody: null
       tags: []
@@ -4335,7 +4312,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of: `idCheckItem`, `state`'
       _path: /cards/{id}/checkItemStates
-      operationId: cardsidcheckitemstates
+      operationId: getCardsCheckitemstates
       description: Get the completed checklist items on a card
       requestBody: null
       tags: []
@@ -4358,7 +4335,7 @@ paths:
         name: value
         description: The ID of the member to vote 'yes' on the card
       _path: /cards/{id}/membersVoted
-      operationId: cardsidmembersvoted-1
+      operationId: postCardsMembersvoted
       description: Vote on the card
       requestBody: null
       tags: []
@@ -4381,7 +4358,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /cards/{id}/membersVoted
-      operationId: cardsidmembersvoted
+      operationId: getCardsMembersvoted
       description: Get the members who have voted on a card
       requestBody: null
       tags: []
@@ -4404,7 +4381,7 @@ paths:
         name: field
         description: The desired field. One of [fields](ref:card-object)
       _path: /cards/{id}/{field}
-      operationId: cardsidfield
+      operationId: getCardsByField
       description: Get a specific property of a card
       requestBody: null
       tags: []
@@ -4421,7 +4398,7 @@ paths:
         name: id
         description: The ID of the board
       _path: /boards/{id}/customFields
-      operationId: boardsidcustomfields-1
+      operationId: getBoardsCustomfields
       description: Get the Custom Field Definitions that exist on a board.
       requestBody: null
       tags: []
@@ -4438,7 +4415,7 @@ paths:
         name: id
         description: The id of the board to update
       _path: /boards/{id}/markedAsViewed
-      operationId: boardsidmarkedasviewed
+      operationId: postBoardsMarkedasviewed
       description: ''
       requestBody: null
       tags: []
@@ -4461,7 +4438,7 @@ paths:
         name: value
         description: Determines whether to show the list guide.
       _path: /boards/{id}/myPrefs/showListGuide
-      operationId: boardsidmyprefsshowlistguide
+      operationId: putBoardsMyprefsShowlistguide
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -4485,7 +4462,7 @@ paths:
         name: webhooks
         description: Whether to include webhooks
       _path: /members/{id}/tokens
-      operationId: membersidtokens
+      operationId: getMembersTokens
       description: List a members app tokens
       requestBody: null
       tags: []
@@ -4524,7 +4501,7 @@ paths:
         name: paid_account
         description: ''
       _path: /members/{id}/organizations
-      operationId: membersidorganizations
+      operationId: getMembersOrganizations
       description: Get a member's teams
       requestBody: null
       tags: []
@@ -4547,7 +4524,7 @@ paths:
         name: field
         description: A checklist [field](ref:checklist-object)
       _path: /checklists/{id}/{field}
-      operationId: checklistsidfield
+      operationId: getChecklistsByField
       description: ''
       requestBody: null
       tags: []
@@ -4583,7 +4560,7 @@ paths:
         name: website
         description: A URL starting with `http://` or `https://`
       _path: /organizations
-      operationId: organizations-1
+      operationId: postOrganizations
       description: Create a new team
       requestBody: null
       tags: []
@@ -4599,15 +4576,8 @@ paths:
         in: path
         name: id
         description: The ID or name of the team
-      - required: false
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: Image file for the logo
       _path: /organizations/{id}/logo
-      operationId: organizationsidlogo
+      operationId: postOrganizationsLogo
       description: Set the logo image for a team
       requestBody: null
       tags: []
@@ -4623,7 +4593,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/logo
-      operationId: organizationsidlogo-1
+      operationId: deleteOrganizationsLogo
       description: Delete a the logo from a team
       requestBody: null
       tags: []
@@ -4653,7 +4623,7 @@ paths:
         name: idCheckItem
         description: The ID of the checkitem
       _path: /cards/{id}/checkItem/{idCheckItem}
-      operationId: cardsidcheckitemidcheckitem
+      operationId: getCardsCheckitemByCheckitem
       description: Get a specific checkItem on a card
       requestBody: null
       tags: []
@@ -4675,7 +4645,7 @@ paths:
         name: idCheckItem
         description: The ID of the checklist item to delete
       _path: /cards/{id}/checkItem/{idCheckItem}
-      operationId: cardsidcheckitemidcheckitem-2
+      operationId: deleteCardsCheckitemByCheckitem
       description: Delete a checklist item
       requestBody: null
       tags: []
@@ -4721,7 +4691,7 @@ paths:
         name: pos
         description: ! '`top`, `bottom`, or a positive float'
       _path: /cards/{id}/checkItem/{idCheckItem}
-      operationId: cardsidcheckitemidcheckitem-1
+      operationId: putCardsCheckitemByCheckitem
       description: Update an item in a checklist on a card.
       requestBody: null
       tags: []
@@ -4745,7 +4715,7 @@ paths:
         description: ! 'The Power-Up to be enabled on the board. One of: `calendar`,
           `cardAging`, `recap`, `voting`.'
       _path: /boards/{id}/powerUps/{powerUp}
-      operationId: boardsidpowerupspowerup
+      operationId: deleteBoardsPowerupsByPowerup
       description: ''
       requestBody: null
       tags: []
@@ -4791,7 +4761,7 @@ paths:
         description: Designates whether the user has seen/consented to the Trello
           ToS prior to being redirected to the enterprise signup page/their IdP.
       _path: /enterprises/{id}/signupUrl
-      operationId: enterprisesidsignupurl
+      operationId: getEnterprisesSignupurl
       description: Get the signup URL for an enterprise.
       requestBody: null
       tags: []
@@ -4808,7 +4778,7 @@ paths:
         name: id
         description: The id of the board to update
       _path: /boards/{id}/emailKey/generate
-      operationId: boardsidemailkeygenerate
+      operationId: postBoardsEmailkeyGenerate
       description: ''
       requestBody: null
       tags: []
@@ -4837,7 +4807,7 @@ paths:
         name: idList
         description: The ID of the list that the cards should be moved to
       _path: /lists/{id}/moveAllCards
-      operationId: listsidmoveallcards
+      operationId: postListsMoveallcards
       description: Move all cards in a list
       requestBody: null
       tags: []
@@ -4862,7 +4832,7 @@ paths:
         description: ! '`all` or a comma-separated list of valid fields for [Member
           Object](ref:member-object).'
       _path: /tokens/{token}/member
-      operationId: tokenstokenmember
+      operationId: getTokensMember
       description: Retrieve information about a token's owner by token.
       requestBody: null
       tags: []
@@ -4886,7 +4856,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /organizations/{id}/membersInvited
-      operationId: organizationsidmembersinvited
+      operationId: getOrganizationsMembersinvited
       description: List the members with pending invites to a team
       requestBody: null
       tags: []
@@ -4910,7 +4880,7 @@ paths:
         name: fields
         description: ! '`all` or a comma separated list of [fields](#list-object)'
       _path: /lists/{id}
-      operationId: listsid
+      operationId: getLists
       description: Get information about a list
       requestBody: null
       tags: []
@@ -4957,7 +4927,7 @@ paths:
         name: subscribed
         description: Whether the active member is subscribed to this list
       _path: /lists/{id}
-      operationId: listsid-1
+      operationId: putLists
       description: Update the properties of a list
       requestBody: null
       tags: []
@@ -4980,7 +4950,7 @@ paths:
         name: idMember
         description: ID of member to be made an admin of enterprise.
       _path: /enterprises/{id}/admins/{idMember}
-      operationId: enterprisesidadminsidmember-1
+      operationId: putEnterprisesAdminsByMember
       description: Make member an admin of enterprise.
       requestBody: null
       tags: []
@@ -5016,7 +4986,7 @@ paths:
         name: idModel
         description: ID of the object to create a webhook on.
       _path: /tokens/{token}/webhooks
-      operationId: tokenstokenwebhooks-2
+      operationId: postTokensWebhooks
       description: Create a new webhook for a token.
       requestBody: null
       tags: []
@@ -5032,7 +5002,7 @@ paths:
         name: token
         description: ''
       _path: /tokens/{token}/webhooks
-      operationId: tokenstokenwebhooks
+      operationId: getTokensWebhooks
       description: Retrieve all webhooks created with a token.
       requestBody: null
       tags: []
@@ -5063,7 +5033,7 @@ paths:
         name: idBackground
         description: The ID of the board background
       _path: /members/{id}/boardBackgrounds/{idBackground}
-      operationId: membersidboardbackgroundsidbackground
+      operationId: getMembersBoardbackgroundsByBackground
       description: Get a member's board background
       requestBody: null
       tags: []
@@ -5085,7 +5055,7 @@ paths:
         name: idBackground
         description: The ID of the board background to delete
       _path: /members/{id}/boardBackgrounds/{idBackground}
-      operationId: membersidboardbackgroundsidbackground-2
+      operationId: deleteMembersBoardbackgroundsByBackground
       description: Delete a board background
       requestBody: null
       tags: []
@@ -5119,7 +5089,7 @@ paths:
         name: tile
         description: Whether the background should be tiled
       _path: /members/{id}/boardBackgrounds/{idBackground}
-      operationId: membersidboardbackgroundsidbackground-1
+      operationId: putMembersBoardbackgroundsByBackground
       description: Update a board background
       requestBody: null
       tags: []
@@ -5283,7 +5253,7 @@ paths:
         description: Also known as collections, tags, refer to the collection(s) that
           a Board belongs to.
       _path: /boards/{id}
-      operationId: boardsboardid-1
+      operationId: getBoards
       description: Request a single board.
       requestBody: null
       tags: []
@@ -5299,7 +5269,7 @@ paths:
         name: id
         description: The id of the board to delete
       _path: /boards/{id}
-      operationId: boardsid-1
+      operationId: deleteBoards
       description: Delete a board.
       requestBody: null
       tags: []
@@ -5438,7 +5408,7 @@ paths:
         name: labelNames/blue
         description: Name for the blue label. 1 to 16384 characters long
       _path: /boards/{id}
-      operationId: idnext
+      operationId: putBoards
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -5455,7 +5425,7 @@ paths:
         name: id
         description: The ID of the card
       _path: /cards/{id}/markAssociatedNotificationsRead
-      operationId: cardsidmarkassociatednotificationsread
+      operationId: postCardsMarkassociatednotificationsread
       description: Mark notifications about this card as read
       requestBody: null
       tags: []
@@ -5478,7 +5448,7 @@ paths:
         name: idOrganization
         description: ID of organization to be transferred to enterprise.
       _path: /enterprises/{id}/organizations
-      operationId: enterprisesidadminsidmember
+      operationId: putEnterprisesOrganizations
       description: Transfer an organization to an enterprise.
       requestBody: null
       tags: []
@@ -5522,7 +5492,7 @@ paths:
         name: onlyOrgMembers
         description: ''
       _path: /search/members/
-      operationId: searchmembers
+      operationId: getSearchMembers
       description: Search for Trello members
       requestBody: null
       tags: []
@@ -5545,7 +5515,7 @@ paths:
         name: value
         description: The new name for the list
       _path: /lists/{id}/name
-      operationId: listsidname
+      operationId: putListsName
       description: Rename a list
       requestBody: null
       tags: []
@@ -5562,7 +5532,7 @@ paths:
         name: id
         description: The ID of the card
       _path: /cards/{id}/pluginData
-      operationId: cardsidplugindata
+      operationId: getCardsPlugindata
       description: Get any shared pluginData on a card
       requestBody: null
       tags: []
@@ -5585,7 +5555,7 @@ paths:
         name: idStar
         description: The ID of the board star
       _path: /members/{id}/boardStars/{idStar}
-      operationId: membersidboardstarsidstar
+      operationId: getMembersBoardstarsByStar
       description: Get a specific boardStar
       requestBody: null
       tags: []
@@ -5607,7 +5577,7 @@ paths:
         name: idStar
         description: The ID of the board star to remove
       _path: /members/{id}/boardStars/{idStar}
-      operationId: membersidboardstarsidstar-2
+      operationId: deleteMembersBoardstarsByStar
       description: Unstar a board
       requestBody: null
       tags: []
@@ -5636,7 +5606,7 @@ paths:
         description: New position for the starred board. `top`, `bottom`, or a positive
           float.
       _path: /members/{id}/boardStars/{idStar}
-      operationId: membersidboardstarsidstar-1
+      operationId: putMembersBoardstarsByStar
       description: Update the position of a starred board
       requestBody: null
       tags: []
@@ -5653,7 +5623,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/pluginData
-      operationId: organizationsidplugindata
+      operationId: getOrganizationsPlugindata
       description: Get organization scoped pluginData on this team
       requestBody: null
       tags: []
@@ -5685,7 +5655,7 @@ paths:
         name: member
         description: Whether to include the member objects with the memberships
       _path: /organizations/{id}/memberships
-      operationId: organizationsidmemberships
+      operationId: getOrganizationsMemberships
       description: List the memberships of a team
       requestBody: null
       tags: []
@@ -5709,7 +5679,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /actions/{id}/memberCreator
-      operationId: actionsidmembercreator
+      operationId: getActionsMembercreator
       description: Gets the member who created the action
       requestBody: null
       tags: []
@@ -5751,7 +5721,7 @@ paths:
         name: webhookId
         description: ID of the webhook to update
       _path: /tokens/{token}/webhooks/{webhookId}
-      operationId: tokenstokenwebhooks-1
+      operationId: putTokensWebhooksByTokenWebhookid
       description: Update an existing webhook.
       requestBody: null
       tags: []
@@ -5774,7 +5744,7 @@ paths:
         name: name
         description: The name for the new collection
       _path: /organizations/{id}/tags
-      operationId: organizationsidtags-1
+      operationId: postOrganizationsTags
       description: Create a new collection in a team
       requestBody: null
       tags: []
@@ -5790,7 +5760,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/tags
-      operationId: organizationsidtags
+      operationId: getOrganizationsTags
       description: List the organization's collections
       requestBody: null
       tags: []
@@ -5813,7 +5783,7 @@ paths:
         name: value
         description: The ID of the member to add to the card
       _path: /cards/{id}/idMembers
-      operationId: cardsididmembers
+      operationId: postCardsIdmembers
       description: Add a member to a card
       requestBody: null
       tags: []
@@ -5836,7 +5806,7 @@ paths:
         name: value
         description: Determines whether to show the side bar.
       _path: /boards/{id}/myPrefs/showSidebar
-      operationId: boardsidmyprefsshowsidebae
+      operationId: putBoardsMyprefsShowsidebar
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -5859,7 +5829,7 @@ paths:
         name: filter
         description: One of `all`, `closed`, `none`, `open`
       _path: /boards/{id}/lists/{filter}
-      operationId: boardsboardidlistsfilter
+      operationId: getBoardsListsByFilter
       description: ''
       requestBody: null
       tags: []
@@ -5883,7 +5853,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of card [fields](ref:card-object)'
       _path: /actions/{id}/card
-      operationId: actionsidcard
+      operationId: getActionsCard
       description: Get the card for an action
       requestBody: null
       tags: []
@@ -5906,7 +5876,7 @@ paths:
         name: idOrganization
         description: ID of the organization
       _path: /enterprises/{id}/organizations/{idOrganization}
-      operationId: enterprisesidadminsidmember-2
+      operationId: deleteEnterprisesOrganizationsByOrganization
       description: Remove an member as admin from an enterprise.
       requestBody: null
       tags: []
@@ -6021,7 +5991,7 @@ paths:
         name: organization_fields
         description: ! '`all` or a comma-separated list of organization [fields](ref:organization-object)'
       _path: /notifications/{id}
-      operationId: notificationsid
+      operationId: getNotifications
       description: ''
       requestBody: null
       tags: []
@@ -6043,7 +6013,7 @@ paths:
         name: unread
         description: ''
       _path: /notifications/{id}
-      operationId: notificationsid-1
+      operationId: putNotifications
       description: Update the read status of a notification
       requestBody: null
       tags: []
@@ -6067,7 +6037,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of list [fields](ref:list-object)'
       _path: /notifications/{id}/list
-      operationId: notificationsidlist
+      operationId: getNotificationsList
       description: Get the list a notification is associated with
       requestBody: null
       tags: []
@@ -6097,7 +6067,7 @@ paths:
         description: Sets the color of the new label. Valid values are a label color
           or `null`.
       _path: /boards/{id}/labels
-      operationId: boardsidlabels
+      operationId: postBoardsLabels
       description: ''
       requestBody: null
       tags: []
@@ -6128,7 +6098,7 @@ paths:
         name: limit
         description: 0 to 1000
       _path: /boards/{id}/labels
-      operationId: boardsboardidlabels
+      operationId: getBoardsLabels
       description: ''
       requestBody: null
       tags: []
@@ -6152,7 +6122,7 @@ paths:
         description: ! 'Field to retrieve. One of: `active`, `callbackURL`, `description`,
           `idModel`'
       _path: /webhooks/{id}/{field}
-      operationId: webhooksidfield
+      operationId: getWebhooksByField
       description: Get a webhook's field.
       requestBody: null
       tags: []
@@ -6175,41 +6145,12 @@ paths:
         name: idCustomFieldOption
         description: ID of the customfieldoption to delete.
       _path: /customfields/{id}/options/{idCustomFieldOption}
-      operationId: customfieldsidoptionsidcustomfieldoption-1
+      operationId: deleteCustomfieldsOptionsByCustomfieldoption
       description: Delete an option from a Custom Field dropdown.
       requestBody: null
       tags: []
       deprecated: false
   /members/{id}/customEmoji:
-    post:
-      summary: /members/{id}/customEmoji
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      - required: true
-        schema:
-          type: string
-        in: query
-        name: name
-        description: Name for the emoji. 2 - 64 characters
-      _path: /members/{id}/customEmoji
-      operationId: membersidcustomemoji-1
-      description: Upload a new custom emoji
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customEmoji
       _method: get
@@ -6221,35 +6162,12 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/customEmoji
-      operationId: membersidcustomemoji
+      operationId: getMembersCustomemoji
       description: Get a member's uploaded custom emoji
       requestBody: null
       tags: []
       deprecated: false
   /members/{id}/boardBackgrounds:
-    post:
-      summary: /members/{id}/boardBackgrounds
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/boardBackgrounds
-      operationId: membersidboardbackgrounds-1
-      description: Upload a new boardBackground
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/boardBackgrounds
       _method: get
@@ -6268,7 +6186,7 @@ paths:
         name: filter
         description: ! 'One of: `all`, `custom`, `default`, `none`, `premium`'
       _path: /members/{id}/boardBackgrounds
-      operationId: membersidboardbackgrounds
+      operationId: getMembersBoardbackgrounds
       description: Get a member's custom board backgrounds
       requestBody: null
       tags: []
@@ -6292,7 +6210,7 @@ paths:
         name: filter
         description: ! 'One of: `all`, `closed`, `none`, `open`, `visible`'
       _path: /members/{id}/cards
-      operationId: membersidcards
+      operationId: getMembersCards
       description: Gets the cards a member is on
       requestBody: null
       tags: []
@@ -6360,13 +6278,6 @@ paths:
         description: A URL starting with `http://` or `https://`
       - required: false
         schema:
-          format: binary
-          type: string
-        in: query
-        name: fileSource
-        description: ''
-      - required: false
-        schema:
           type: string
         in: query
         name: idCardSource
@@ -6380,7 +6291,7 @@ paths:
         description: ! 'If using `idCardSource` you can specify which properties to
           copy over. `all` or comma-separated list of: `attachments,checklists,comments,due,labels,members,stickers`'
       _path: /cards
-      operationId: cards-2
+      operationId: postCards
       description: Create a new card
       requestBody: null
       tags: []
@@ -6417,7 +6328,7 @@ paths:
         name: idChecklistSource
         description: The ID of a checklist to copy into the new checklist.
       _path: /checklists
-      operationId: checklists
+      operationId: postChecklists
       description: ''
       requestBody: null
       tags: []
@@ -6441,7 +6352,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /cards/{id}/members
-      operationId: cardsidmembers
+      operationId: getCardsMembers
       description: Get the members on a card
       requestBody: null
       tags: []
@@ -6464,7 +6375,7 @@ paths:
         name: idCustomFieldOption
         description: ID of the customfieldoption to retrieve.
       _path: /customFields/{id}/options/{idCustomFieldOption}
-      operationId: customfieldsidoptionsidcustomfieldoption-3
+      operationId: getCustomfieldsOptionsByCustomfieldoption
       description: ''
       requestBody: null
       tags: []
@@ -6481,7 +6392,7 @@ paths:
         name: id
         description: The ID of the list
       _path: /lists/{id}/actions
-      operationId: listsidactions
+      operationId: getListsActions
       description: List the actions on a list
       requestBody: null
       tags: []
@@ -6510,7 +6421,7 @@ paths:
         name: value
         description: ''
       _path: /organizations/{id}/members/{idMember}/deactivated
-      operationId: organizationsidmembersidmemberdeactivated
+      operationId: putOrganizationsMembersDeactivatedByMember
       description: Deactivate or reactivate a member of a team
       requestBody: null
       tags: []
@@ -6533,7 +6444,7 @@ paths:
         name: idPlugin
         description: The ID of the Power-Up to disable
       _path: /boards/{id}/boardPlugins/{idPlugin}
-      operationId: boardsidboardplugins-2
+      operationId: deleteBoardsBoardpluginsByPlugin
       description: Disable a Power-Up on a board
       requestBody: null
       tags: []
@@ -6557,7 +6468,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](ref:board-object)'
       _path: /members/{id}/boardsInvited
-      operationId: membersidboardsinvited
+      operationId: getMembersBoardsinvited
       description: Get the boards the member has been invited to
       requestBody: null
       tags: []
@@ -6581,7 +6492,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of board [fields](ref:board-object)'
       _path: /actions/{id}/board
-      operationId: actionsidboard
+      operationId: getActionsBoard
       description: Get the board for an action
       requestBody: null
       tags: []
@@ -6605,7 +6516,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of list [fields](ref:list-object)'
       _path: /actions/{id}/list
-      operationId: actionsidlist
+      operationId: getActionsList
       description: Get the list for an action
       requestBody: null
       tags: []
@@ -6622,7 +6533,7 @@ paths:
         name: id
         description: ID of the webhook to retrieve.
       _path: /webhooks/{id}
-      operationId: webhook-object-1
+      operationId: getWebhooks
       description: Get a webhook by ID.
       requestBody: null
       tags: []
@@ -6638,7 +6549,7 @@ paths:
         name: id
         description: ID of the webhook to delete.
       _path: /webhooks/{id}
-      operationId: webhooksid-1
+      operationId: deleteWebhooks
       description: Delete a webhook by ID.
       requestBody: null
       tags: []
@@ -6678,35 +6589,12 @@ paths:
         name: id
         description: ID of the webhook to update.
       _path: /webhooks/{id}
-      operationId: webhooksid
+      operationId: putWebhooks
       description: Update a webhook by ID.
       requestBody: null
       tags: []
       deprecated: false
   /members/{id}/customBoardBackgrounds:
-    post:
-      summary: /members/{id}/customBoardBackgrounds
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/customBoardBackgrounds
-      operationId: membersidcustomboardbackgrounds-1
-      description: Upload a new custom board background
-      requestBody: null
-      tags: []
-      deprecated: false
     get:
       summary: /members/{id}/customBoardBackgrounds
       _method: get
@@ -6718,7 +6606,7 @@ paths:
         name: id
         description: The ID or username of the member
       _path: /members/{id}/customBoardBackgrounds
-      operationId: membersidcustomboardbackgrounds
+      operationId: getMembersCustomboardbackgrounds
       description: Get a member's custom board backgrounds
       requestBody: null
       tags: []
@@ -6742,7 +6630,7 @@ paths:
         name: attachments
         description: Whether the CSV should include attachments or not.
       _path: /organizations/{id}/exports
-      operationId: organizationsidexports
+      operationId: postOrganizationsExports
       description: Kick off CSV export for an organization
       requestBody: null
       tags: []
@@ -6758,7 +6646,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/exports
-      operationId: organizationsidexports-1
+      operationId: getOrganizationsExports
       description: Retrieve the exports that exist for the given organization
       requestBody: null
       tags: []
@@ -6788,7 +6676,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of `scaled`, `url`'
       _path: /members/{id}/customStickers/{idSticker}
-      operationId: membersidenterprises
+      operationId: getMembersCustomstickersBySticker
       description: Get the enterprises that a member belongs to.
       requestBody: null
       tags: []
@@ -6810,7 +6698,7 @@ paths:
         name: idSticker
         description: The ID of the custom sticker to delete
       _path: /members/{id}/customStickers/{idSticker}
-      operationId: membersidcustomstickersidsticker-1
+      operationId: deleteMembersCustomstickersBySticker
       description: Delete a custom sticker
       requestBody: null
       tags: []
@@ -6834,7 +6722,7 @@ paths:
         name: fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /notifications/{id}/memberCreator
-      operationId: notificationsidmembercreator
+      operationId: getNotificationsMembercreator
       description: Get the member who created the notification
       requestBody: null
       tags: []
@@ -6857,7 +6745,7 @@ paths:
         name: value
         description: Determines whether to show members of the board in the sidebar.
       _path: /boards/{id}/myPrefs/showSidebarMembers
-      operationId: boardsidmyprefsshowsidebarmembers
+      operationId: putBoardsMyprefsShowsidebarmembers
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -6881,7 +6769,7 @@ paths:
         name: fields
         description: Any valid value that the [nested member field resource]() accepts.
       _path: /enterprises/{id}/admins
-      operationId: enterprisesidadmins
+      operationId: getEnterprisesAdmins
       description: Get an enterprise's admin members.
       requestBody: null
       tags: []
@@ -6947,7 +6835,7 @@ paths:
         name: memberCreator_fields
         description: ! '`all` or a comma-separated list of member [fields](ref:member-object)'
       _path: /actions/{id}
-      operationId: actionsactionid
+      operationId: getActions
       description: Get information about an action
       requestBody: null
       tags: []
@@ -6963,7 +6851,7 @@ paths:
         name: id
         description: The ID of the commentCard action to delete
       _path: /actions/{id}
-      operationId: actionsid-1
+      operationId: deleteActions
       description: Delete a comment action
       requestBody: null
       tags: []
@@ -6985,35 +6873,12 @@ paths:
         name: text
         description: The new text for the comment
       _path: /actions/{id}
-      operationId: actionsid
+      operationId: putActions
       description: Update a comment action
       requestBody: null
       tags: []
       deprecated: false
-  /members/{id}/avatar:
-    post:
-      summary: /members/{id}/avatar
-      _method: post
-      parameters:
-      - required: true
-        schema:
-          type: string
-        in: path
-        name: id
-        description: The ID or username of the member
-      - required: true
-        schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: ''
-      _path: /members/{id}/avatar
-      operationId: membersidavatar
-      description: Create a new avatar for a member
-      requestBody: null
-      tags: []
-      deprecated: false
+  /members/{id}/avatar: {}
   /customFields/{id}/options:
     post:
       summary: /customFields/{id}/options
@@ -7026,7 +6891,7 @@ paths:
         name: id
         description: ID of the customfield.
       _path: /customFields/{id}/options
-      operationId: customfieldsidoptions-2
+      operationId: postCustomfieldsOptions
       description: Add an option to a dropdown Custom Field
       requestBody: null
       tags: []
@@ -7042,7 +6907,7 @@ paths:
         name: id
         description: ID of the customfield.
       _path: /customFields/{id}/options
-      operationId: customfieldsidoptions-1
+      operationId: getCustomfieldsOptions
       description: Get the options of a drop down Custom Field
       requestBody: null
       tags: []
@@ -7065,7 +6930,7 @@ paths:
         name: filter
         description: ! 'One of: `all`, `admins`, `normal`'
       _path: /organizations/{id}/members/{filter}
-      operationId: organizationsidmembersfilter
+      operationId: getOrganizationsMembersByFilter
       description: ''
       requestBody: null
       tags: []
@@ -7088,7 +6953,7 @@ paths:
         name: value
         description: The new name for the label
       _path: /labels/{id}/name
-      operationId: idname
+      operationId: putLabelsName
       description: Update the name of a label by ID.
       requestBody: null
       tags: []
@@ -7112,7 +6977,7 @@ paths:
         name: id
         description: ''
       _path: /labels/{id}
-      operationId: id
+      operationId: getLabels
       description: Get information about a label by ID.
       requestBody: null
       tags: []
@@ -7128,7 +6993,7 @@ paths:
         name: id
         description: The ID of the label to delete.
       _path: /labels/{id}
-      operationId: id-2
+      operationId: deleteLabels
       description: Delete a label by ID.
       requestBody: null
       tags: []
@@ -7157,7 +7022,7 @@ paths:
         description: ! 'The new color for the label. See: [fields](#label-object)
           for color options'
       _path: /labels/{id}
-      operationId: id-1
+      operationId: putLabels
       description: Update a label by ID.
       requestBody: null
       tags: []
@@ -7174,7 +7039,7 @@ paths:
         name: idAction
         description: The ID of the action
       _path: /actions/{idAction}/reactionsSummary
-      operationId: actionsidactionreactionssummary
+      operationId: getActionsReactionssummary
       description: List a summary of all reactions for an action
       requestBody: null
       tags: []
@@ -7198,7 +7063,7 @@ paths:
         description: ! 'Valid values: bottom, top. Determines the position of the
           email address.'
       _path: /boards/{id}/myPrefs/emailPosition
-      operationId: boardsidmyprefsemailposition
+      operationId: putBoardsMyprefsEmailposition
       description: Update an existing board by id
       requestBody: null
       tags: []
@@ -7236,7 +7101,7 @@ paths:
         name: id
         description: The ID of the reaction
       _path: /actions/{idAction}/reactions/{id}
-      operationId: actionsidactionreactionsid
+      operationId: getActionsReactionsByAction
       description: Get information for a reaction
       requestBody: null
       tags: []
@@ -7258,7 +7123,7 @@ paths:
         name: id
         description: The ID of the reaction
       _path: /actions/{idAction}/reactions/{id}
-      operationId: actionsidactionreactionsid-1
+      operationId: deleteActionsReactionsByAction
       description: Deletes a reaction
       requestBody: null
       tags: []
@@ -7282,13 +7147,6 @@ paths:
         description: The name of the attachment. Max length 256.
       - required: false
         schema:
-          format: binary
-          type: string
-        in: query
-        name: file
-        description: The file to attach, as multipart/form-data
-      - required: false
-        schema:
           type: string
         in: query
         name: mimeType
@@ -7300,7 +7158,7 @@ paths:
         name: url
         description: A URL to attach. Must start with `http://` or `https://`
       _path: /cards/{id}/attachments
-      operationId: cardsidattachments-1
+      operationId: postCardsAttachments
       description: Add an attachment to a card
       requestBody: null
       tags: []
@@ -7330,7 +7188,7 @@ paths:
         name: filter
         description: Use `cover` to restrict to just the cover attachment
       _path: /cards/{id}/attachments
-      operationId: cardsidattachments
+      operationId: getCardsAttachments
       description: List the attachments on a card
       requestBody: null
       tags: []
@@ -7353,7 +7211,7 @@ paths:
         name: idLabel
         description: The ID of the label to remove
       _path: /cards/{id}/idLabels/{idLabel}
-      operationId: cardsididlabelsidlabel
+      operationId: deleteCardsIdlabelsByLabel
       description: Remove a label from a card
       requestBody: null
       tags: []
@@ -7524,7 +7382,7 @@ paths:
           Report", by default you would need to search for "Development". If you have
           partial enabled, you will be able to search for "dev" but not "velopment".
       _path: /search
-      operationId: search-1
+      operationId: getSearch
       description: Find what you're looking for in Trello
       requestBody: null
       tags: []
@@ -7541,7 +7399,7 @@ paths:
         name: id
         description: ID of the customfield to retrieve.
       _path: /customfields/{id}
-      operationId: customfieldsid-3
+      operationId: getCustomfields
       description: ''
       requestBody: null
       tags: []
@@ -7557,7 +7415,7 @@ paths:
         name: id
         description: ID of the customfield to delete.
       _path: /customfields/{id}
-      operationId: customfieldsid-1
+      operationId: deleteCustomfields
       description: Delete a Custom Field from a board.
       requestBody: null
       tags: []
@@ -7573,7 +7431,7 @@ paths:
         name: id
         description: ID of the customfield to update.
       _path: /customfields/{id}
-      operationId: customfieldsid
+      operationId: putCustomfields
       description: Update a Custom Field definition.
       requestBody:
         content:
@@ -7607,7 +7465,7 @@ paths:
         name: id
         description: The ID or name of the organization
       _path: /organizations/{id}/prefs/associatedDomain
-      operationId: organizationsidprefsassociateddomain
+      operationId: deleteOrganizationsPrefsAssociateddomain
       description: Remove the associated Google Apps domain from a team
       requestBody: null
       tags: []
@@ -7630,7 +7488,7 @@ paths:
         name: field
         description: The field to return. See [fields](#list-object)
       _path: /lists/{id}/{field}
-      operationId: listsidfield
+      operationId: getListsByField
       description: Get a specific property of a list
       requestBody: null
       tags: []
@@ -7653,7 +7511,7 @@ paths:
         name: text
         description: The comment
       _path: /cards/{id}/actions/comments
-      operationId: cardsidactionscomments
+      operationId: postCardsActionsComments
       description: Add a new comment to a card
       requestBody: null
       tags: []
@@ -7679,7 +7537,7 @@ paths:
           memberships, name, pinned, powerUps, prefs, shortLink, shortUrl, starred,
           subscribed, url.'
       _path: /boards/{id}/{field}
-      operationId: boards-nested-resources
+      operationId: getBoardsByField
       description: ''
       requestBody: null
       tags: []
@@ -7702,7 +7560,7 @@ paths:
         name: idMember
         description: The ID of the member to remove from the card
       _path: /cards/{id}/idMembers/{idMember}
-      operationId: cardsididmembersidmember
+      operationId: deleteCardsIdmembersByMember
       description: Remove a member from a card
       requestBody: null
       tags: []
