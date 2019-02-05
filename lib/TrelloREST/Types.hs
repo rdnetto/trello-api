@@ -22,7 +22,6 @@ import Data.Time.LocalTime (ZonedTime, zonedTimeToUTC)
 import GHC.Generics (Generic)
 import Prelude
 
-import Data.ByteString (ByteString)
 import Data.Text (Text)
 import Data.Time.Calendar (Day)
 

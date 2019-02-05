@@ -18,7 +18,6 @@ import Servant.API
 import Servant.API.Verbs (StdMethod(..), Verb)
 import Web.Internal.FormUrlEncoded (ToForm(..), FromForm(..), parseUnique)
 
-import Data.ByteString (ByteString)
 import Data.Time.Calendar (Day)
 import Data.Text (Text)
 
@@ -26,7 +25,242 @@ import Data.Text (Text)
 
 
 -- | Servant type-level API, generated from the Swagger spec for TrelloREST.
-type ActionsactionidRoute
+type DeleteActionsRoute
+  =  "actions"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteActionsReactionsByActionRoute
+  =  "actions"
+  :> Capture "idAction" Text
+  :> "reactions"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteBoardsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteBoardsBoardpluginsByPluginRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "boardPlugins"
+  :> Capture "idPlugin" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteBoardsMembersByMemberRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteBoardsPowerupsByPowerupRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "powerUps"
+  :> Capture "powerUp" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsActionsCommentsByActionRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "actions"
+  :> Capture "idAction" Text
+  :> "comments"
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsAttachmentsByAttachmentRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "attachments"
+  :> Capture "idAttachment" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsCheckitemByCheckitemRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "checkItem"
+  :> Capture "idCheckItem" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsChecklistsByChecklistRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "checklists"
+  :> Capture "idChecklist" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsIdlabelsByLabelRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "idLabels"
+  :> Capture "idLabel" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsIdmembersByMemberRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "idMembers"
+  :> Capture "idMember" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsMembersvotedByMemberRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "membersVoted"
+  :> Capture "idMember" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCardsStickersByStickerRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "stickers"
+  :> Capture "idSticker" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteChecklistsRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteChecklistsCheckitemsByCheckitemRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> "checkItems"
+  :> Capture "idCheckItem" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCustomfieldsRoute
+  =  "customfields"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteCustomfieldsOptionsByCustomfieldoptionRoute
+  =  "customfields"
+  :> Capture "id" Text
+  :> "options"
+  :> Capture "idCustomFieldOption" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteEnterprisesOrganizationsByOrganizationRoute
+  =  "enterprises"
+  :> Capture "id" Text
+  :> "organizations"
+  :> Capture "idOrganization" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteLabelsRoute
+  =  "labels"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteMembersBoardbackgroundsByBackgroundRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "boardBackgrounds"
+  :> Capture "idBackground" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteMembersBoardstarsByStarRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "boardStars"
+  :> Capture "idStar" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteMembersCustomboardbackgroundsByBackgroundRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "customBoardBackgrounds"
+  :> Capture "idBackground" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteMembersCustomstickersByStickerRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "customStickers"
+  :> Capture "idSticker" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteMembersSavedsearchesBySearchRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "savedSearches"
+  :> Capture "idSearch" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsLogoRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "logo"
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsMembersAllByMemberRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> "all"
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsMembersByMemberRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsPrefsAssociateddomainRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "prefs"
+  :> "associatedDomain"
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsPrefsOrginviterestrictRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "prefs"
+  :> "orgInviteRestrict"
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteOrganizationsTagsByTagRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "tags"
+  :> Capture "idTag" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteTokensRoute
+  =  "tokens"
+  :> Capture "token" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteTokensWebhooksByTokenWebhookRoute
+  =  "tokens"
+  :> Capture "token" Text
+  :> "webhooks"
+  :> Capture "idWebhook" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type DeleteWebhooksRoute
+  =  "webhooks"
+  :> Capture "id" Text
+  :> Verb 'DELETE 200 '[JSON] ()
+
+type GetActionsRoute
   =  "actions"
   :> Capture "id" Text
   :> QueryParam "display" Bool
@@ -38,127 +272,89 @@ type ActionsactionidRoute
   :> QueryParam "memberCreator_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidRoute
-  =  "actions"
-  :> Capture "id" Text
-  :> QueryParam "text" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Actionsid1Route
-  =  "actions"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type ActionsidactionreactionsRoute
-  =  "actions"
-  :> Capture "idAction" Text
-  :> "reactions"
-  :> QueryParam "member" Bool
-  :> QueryParam "emoji" Bool
-  :> Verb 'GET 200 '[JSON] ()
-
-type Actionsidactionreactions1Route
-  =  "actions"
-  :> Capture "idAction" Text
-  :> "reactions"
-  :> ReqBody '[JSON] Body_1
-  :> Verb 'POST 200 '[JSON] ()
-
-type ActionsidactionreactionsidRoute
-  =  "actions"
-  :> Capture "idAction" Text
-  :> "reactions"
-  :> Capture "id" Text
-  :> QueryParam "member" Bool
-  :> QueryParam "emoji" Bool
-  :> Verb 'GET 200 '[JSON] ()
-
-type Actionsidactionreactionsid1Route
-  =  "actions"
-  :> Capture "idAction" Text
-  :> "reactions"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type ActionsidactionreactionssummaryRoute
-  =  "actions"
-  :> Capture "idAction" Text
-  :> "reactionsSummary"
-  :> Verb 'GET 200 '[JSON] ()
-
-type ActionsidboardRoute
+type GetActionsBoardRoute
   =  "actions"
   :> Capture "id" Text
   :> "board"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidcardRoute
+type GetActionsByFieldRoute
+  =  "actions"
+  :> Capture "id" Text
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetActionsCardRoute
   =  "actions"
   :> Capture "id" Text
   :> "card"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsiddisplayRoute
+type GetActionsDisplayRoute
   =  "actions"
   :> Capture "id" Text
   :> "display"
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidfieldRoute
-  =  "actions"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type ActionsidlistRoute
+type GetActionsListRoute
   =  "actions"
   :> Capture "id" Text
   :> "list"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidmemberRoute
+type GetActionsMemberRoute
   =  "actions"
   :> Capture "id" Text
   :> "member"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidmembercreatorRoute
+type GetActionsMembercreatorRoute
   =  "actions"
   :> Capture "id" Text
   :> "memberCreator"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidorganizationRoute
+type GetActionsOrganizationRoute
   =  "actions"
   :> Capture "id" Text
   :> "organization"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ActionsidtextRoute
+type GetActionsReactionsRoute
   =  "actions"
-  :> Capture "id" Text
-  :> "text"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
+  :> Capture "idAction" Text
+  :> "reactions"
+  :> QueryParam "member" Bool
+  :> QueryParam "emoji" Bool
+  :> Verb 'GET 200 '[JSON] ()
 
-type Batch1Route
+type GetActionsReactionsByActionRoute
+  =  "actions"
+  :> Capture "idAction" Text
+  :> "reactions"
+  :> Capture "id" Text
+  :> QueryParam "member" Bool
+  :> QueryParam "emoji" Bool
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetActionsReactionssummaryRoute
+  =  "actions"
+  :> Capture "idAction" Text
+  :> "reactionsSummary"
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetBatchRoute
   =  "batch"
   :> QueryParam "urls" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsNestedResourcesRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type Boardsboardid1Route
+type GetBoardsRoute
   =  "boards"
   :> Capture "id" Text
   :> QueryParam "actions" Text
@@ -181,45 +377,64 @@ type Boardsboardid1Route
   :> QueryParam "tags" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidactionsRoute
+type GetBoardsActionsRoute
   =  "boards"
   :> Capture "boardId" Text
   :> "actions"
   :> Verb 'GET 200 '[JSON] ()
 
-type Boardsboardidactions1Route
+type GetBoardsBoardpluginsRoute
   =  "boards"
   :> Capture "id" Text
-  :> "cards"
-  :> Capture "idCard" Text
+  :> "boardPlugins"
   :> Verb 'GET 200 '[JSON] ()
 
-type Boardsboardidactions2Route
+type GetBoardsBoardstarsRoute
   =  "boards"
   :> Capture "boardId" Text
   :> "boardStars"
+  :> QueryParam "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Boardsboardidactions3Route
+type GetBoardsByFieldRoute
   =  "boards"
   :> Capture "id" Text
-  :> "checklists"
+  :> Capture "field" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidcardsfilterRoute
+type GetBoardsCardsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "cards"
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetBoardsCardsByBoardidFilterRoute
   =  "boards"
   :> Capture "boardId" Text
   :> "cards"
   :> Capture "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardididtagsRoute
+type GetBoardsCardsByCardRoute
   =  "boards"
   :> Capture "id" Text
-  :> "tags"
+  :> "cards"
+  :> Capture "idCard" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidlabelsRoute
+type GetBoardsChecklistsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "checklists"
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetBoardsCustomfieldsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "customFields"
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetBoardsLabelsRoute
   =  "boards"
   :> Capture "id" Text
   :> "labels"
@@ -227,7 +442,7 @@ type BoardsboardidlabelsRoute
   :> QueryParam "limit" Int
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidlistsRoute
+type GetBoardsListsRoute
   =  "boards"
   :> Capture "id" Text
   :> "lists"
@@ -237,146 +452,20 @@ type BoardsboardidlistsRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidlistsfilterRoute
+type GetBoardsListsByFilterRoute
   =  "boards"
   :> Capture "id" Text
   :> "lists"
   :> Capture "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidmembersRoute
+type GetBoardsMembersRoute
   =  "boards"
   :> Capture "id" Text
   :> "members"
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsboardidtestRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "cards"
-  :> Verb 'GET 200 '[JSON] ()
-
-type BoardsidRoute
-  =  "boards"
-  :> QueryParam "name" Text
-  :> QueryParam "defaultLabels" Bool
-  :> QueryParam "defaultLists" Bool
-  :> QueryParam "desc" Text
-  :> QueryParam "idOrganization" Text
-  :> QueryParam "idBoardSource" Text
-  :> QueryParam "keepFromSource" Text
-  :> QueryParam "powerUps" Text
-  :> QueryParam "prefs_permissionLevel" Text
-  :> QueryParam "prefs_voting" Text
-  :> QueryParam "prefs_comments" Text
-  :> QueryParam "prefs_invitations" Text
-  :> QueryParam "prefs_selfJoin" Bool
-  :> QueryParam "prefs_cardCovers" Bool
-  :> QueryParam "prefs_background" Text
-  :> QueryParam "prefs_cardAging" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type Boardsid1Route
-  =  "boards"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type BoardsidboardpluginsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "boardPlugins"
-  :> Verb 'GET 200 '[JSON] ()
-
-type Boardsidboardplugins1Route
-  =  "boards"
-  :> Capture "id" Text
-  :> "boardPlugins"
-  :> QueryParam "idPlugin" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type Boardsidboardplugins2Route
-  =  "boards"
-  :> Capture "id" Text
-  :> "boardPlugins"
-  :> Capture "idPlugin" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type BoardsidcalendarkeygenerateRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "calendarKey"
-  :> "generate"
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsidcustomfieldsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "customFields"
-  :> Verb 'GET 200 '[JSON] ()
-
-type BoardsidemailkeygenerateRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "emailKey"
-  :> "generate"
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsididtagsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "idTags"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsidlabelnamesmembersRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "members"
-  :> QueryParam "email" Text
-  :> ReqBody '[JSON] Body_2
-  :> Header "type" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidlabelnamesmembershipsidmembershipRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "memberships"
-  :> Capture "idMembership" Text
-  :> QueryParam "type" Text
-  :> QueryParam "member_fields" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidlabelnamesmembersidmemberRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> QueryParam "type" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidlabelsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "labels"
-  :> QueryParam "name" Text
-  :> QueryParam "color" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsidlistsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "lists"
-  :> QueryParam "name" Text
-  :> QueryParam "pos" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsidmarkedasviewedRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "checklists"
-  :> Verb 'POST 200 '[JSON] ()
-
-type BoardsidmembershipsRoute
+type GetBoardsMembershipsRoute
   =  "boards"
   :> Capture "id" Text
   :> "memberships"
@@ -387,107 +476,20 @@ type BoardsidmembershipsRoute
   :> QueryParam "member_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsidmembersidmemberRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type BoardsidmyprefsemailpositionRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "emailPosition"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsidemaillistRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "idEmailList"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsshowlistguideRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "showListGuide"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsshowsidebaeRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "showSidebar"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsshowsidebaractivityRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "showSidebarActivity"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsshowsidebarboardactionsRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "showSidebarBoardActions"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidmyprefsshowsidebarmembersRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "myPrefs"
-  :> "showSidebarMembers"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type BoardsidpluginsRoute
+type GetBoardsPluginsRoute
   =  "boards"
   :> Capture "id" Text
   :> "plugins"
   :> QueryParam "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type BoardsidpowerupsRoute
+type GetBoardsTagsRoute
   =  "boards"
   :> Capture "id" Text
-  :> "powerUps"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
+  :> "tags"
+  :> Verb 'GET 200 '[JSON] ()
 
-type BoardsidpowerupspowerupRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> "powerUps"
-  :> Capture "powerUp" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type Cards2Route
-  =  "cards"
-  :> QueryParam "name" Text
-  :> QueryParam "desc" Text
-  :> QueryParam "pos" Text
-  :> QueryParam "due" Day
-  :> QueryParam "dueComplete" Bool
-  :> QueryParam "idList" Text
-  :> QueryParam "idMembers" Text
-  :> QueryParam "idLabels" Text
-  :> QueryParam "urlSource" Text
-  :> QueryParam "fileSource" ByteString
-  :> QueryParam "idCardSource" Text
-  :> QueryParam "keepFromSource" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidRoute
+type GetCardsRoute
   =  "cards"
   :> Capture "id" Text
   :> QueryParam "fields" Text
@@ -510,71 +512,21 @@ type CardsidRoute
   :> QueryParam "customFieldItems" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsid1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "desc" Text
-  :> QueryParam "closed" Bool
-  :> QueryParam "idMembers" Text
-  :> QueryParam "idAttachmentCover" Text
-  :> QueryParam "idList" Text
-  :> QueryParam "idLabels" Text
-  :> QueryParam "idBoard" Text
-  :> QueryParam "pos" Text
-  :> QueryParam "due" Day
-  :> QueryParam "dueComplete" Bool
-  :> QueryParam "subscribed" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type CardsidactionsRoute
+type GetCardsActionsRoute
   =  "cards"
   :> Capture "id" Text
   :> "actions"
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidactionscommentsRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "actions"
-  :> "comments"
-  :> QueryParam "text" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidactionsidactioncommentsRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "actions"
-  :> Capture "idAction" Text
-  :> "comments"
-  :> QueryParam "text" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Cardsidactionsidactioncomments1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "actions"
-  :> Capture "idAction" Text
-  :> "comments"
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidattachmentsRoute
+type GetCardsAttachmentsRoute
   =  "cards"
   :> Capture "id" Text
   :> "attachments"
+  :> QueryParam "fields" Text
+  :> QueryParam "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidattachments1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "attachments"
-  :> QueryParam "name" Text
-  :> QueryParam "file" ByteString
-  :> QueryParam "mimeType" Text
-  :> QueryParam "url" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidattachmentsidattachmentRoute
+type GetCardsAttachmentsByAttachmentRoute
   =  "cards"
   :> Capture "id" Text
   :> "attachments"
@@ -582,31 +534,20 @@ type CardsidattachmentsidattachmentRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidattachmentsidattachment1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "attachments"
-  :> Capture "idAttachment" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidboardRoute
+type GetCardsBoardRoute
   =  "cards"
   :> Capture "id" Text
   :> "board"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidcardchecklistidchecklistcheckitemidcheckitemRoute
+type GetCardsByFieldRoute
   =  "cards"
-  :> Capture "idCard" Text
-  :> "checklist"
-  :> Capture "idChecklist" Text
-  :> "checkItem"
-  :> Capture "idCheckItem" Text
-  :> QueryParam "pos" Text
-  :> Verb 'PUT 200 '[JSON] ()
+  :> Capture "id" Text
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
 
-type CardsidcheckitemidcheckitemRoute
+type GetCardsCheckitemByCheckitemRoute
   =  "cards"
   :> Capture "id" Text
   :> "checkItem"
@@ -614,32 +555,14 @@ type CardsidcheckitemidcheckitemRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidcheckitemidcheckitem1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "checkItem"
-  :> Capture "idCheckItem" Text
-  :> QueryParam "name" Text
-  :> QueryParam "state" Text
-  :> QueryParam "idChecklist" Text
-  :> QueryParam "pos" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Cardsidcheckitemidcheckitem2Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "checkItem"
-  :> Capture "idCheckItem" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidcheckitemstatesRoute
+type GetCardsCheckitemstatesRoute
   =  "cards"
   :> Capture "id" Text
   :> "checkItemStates"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidchecklistsRoute
+type GetCardsChecklistsRoute
   =  "cards"
   :> Capture "id" Text
   :> "checklists"
@@ -649,125 +572,47 @@ type CardsidchecklistsRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidchecklists1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "checklists"
-  :> QueryParam "name" Text
-  :> QueryParam "idChecklistSource" Text
-  :> QueryParam "pos" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidchecklistsidchecklistRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "checklists"
-  :> Capture "idChecklist" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidcustomfielditemsRoute
+type GetCardsCustomfielditemsRoute
   =  "cards"
   :> Capture "id" Text
   :> "customFieldItems"
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidfieldRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type CardsididlabelsRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "idLabels"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsididlabelsidlabelRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "idLabels"
-  :> Capture "idLabel" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsididmembersRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "idMembers"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsididmembersidmemberRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "idMembers"
-  :> Capture "idMember" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidlabelsRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "labels"
-  :> QueryParam "color" Text
-  :> QueryParam "name" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidlistRoute
+type GetCardsListRoute
   =  "cards"
   :> Capture "id" Text
   :> "list"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidmarkassociatednotificationsreadRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "markAssociatedNotificationsRead"
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidmembersRoute
+type GetCardsMembersRoute
   =  "cards"
   :> Capture "id" Text
   :> "members"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidmembersvotedRoute
+type GetCardsMembersvotedRoute
   =  "cards"
   :> Capture "id" Text
   :> "membersVoted"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidmembersvoted1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "membersVoted"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type CardsidmembersvotedidmemberRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> "membersVoted"
-  :> Capture "idMember" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type CardsidplugindataRoute
+type GetCardsPlugindataRoute
   =  "cards"
   :> Capture "id" Text
   :> "pluginData"
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidstickersRoute
+type GetCardsStickersRoute
   =  "cards"
   :> Capture "id" Text
   :> "stickers"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type CardsidstickersidstickerRoute
+type GetCardsStickersByStickerRoute
   =  "cards"
   :> Capture "id" Text
   :> "stickers"
@@ -775,33 +620,7 @@ type CardsidstickersidstickerRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Cardsidstickersidsticker1Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "stickers"
-  :> Capture "idSticker" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type Cardsidstickersidsticker2Route
-  =  "cards"
-  :> Capture "id" Text
-  :> "stickers"
-  :> Capture "idSticker" Text
-  :> QueryParam "top" Float
-  :> QueryParam "left" Float
-  :> QueryParam "zIndex" Int
-  :> QueryParam "rotate" Float
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ChecklistsRoute
-  =  "checklists"
-  :> QueryParam "idCard" Text
-  :> QueryParam "name" Text
-  :> QueryParam "pos" Text
-  :> QueryParam "idChecklistSource" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type ChecklistsidRoute
+type GetChecklistsRoute
   =  "checklists"
   :> Capture "id" Text
   :> QueryParam "cards" Text
@@ -810,32 +629,26 @@ type ChecklistsidRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Checklistsid1Route
-  =  "checklists"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "pos" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Checklistsid2Route
-  =  "checklists"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type ChecklistsidboardRoute
+type GetChecklistsBoardRoute
   =  "checklists"
   :> Capture "id" Text
   :> "board"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ChecklistsidcardsRoute
+type GetChecklistsByFieldRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetChecklistsCardsRoute
   =  "checklists"
   :> Capture "id" Text
   :> "cards"
   :> Verb 'GET 200 '[JSON] ()
 
-type ChecklistsidcardscheckitemsRoute
+type GetChecklistsCheckitemsRoute
   =  "checklists"
   :> Capture "id" Text
   :> "checkItems"
@@ -843,7 +656,7 @@ type ChecklistsidcardscheckitemsRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ChecklistsidcardscheckitemscheckitemidRoute
+type GetChecklistsCheckitemsByCheckitemRoute
   =  "checklists"
   :> Capture "id" Text
   :> "checkItems"
@@ -851,111 +664,31 @@ type ChecklistsidcardscheckitemscheckitemidRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ChecklistsidcheckitemsRoute
-  =  "checklists"
-  :> Capture "id" Text
-  :> "checkItems"
-  :> QueryParam "name" Text
-  :> QueryParam "pos" Text
-  :> QueryParam "checked" Bool
-  :> Verb 'POST 200 '[JSON] ()
-
-type ChecklistsidcheckitemsidRoute
-  =  "checklists"
-  :> Capture "id" Text
-  :> "checkItems"
-  :> Capture "idCheckItem" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type ChecklistsidcheckitemsidcheckitemRoute
-  =  "checklists"
-  :> Capture "id" Text
-  :> "checkItems"
-  :> Capture "idCheckItem" Text
-  :> QueryParam "pos" Int
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ChecklistsidfieldRoute
-  =  "checklists"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type ChecklistsidnameRoute
-  =  "checklists"
-  :> Capture "id" Text
-  :> "name"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type CustomfielditemsidRoute
-  =  "card"
-  :> Capture "idCard" Text
-  :> "customField"
-  :> Capture "idCustomField" Text
-  :> "item"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type CustomfieldsRoute
-  =  "customFields"
-  :> ReqBody '[JSON] Body
-  :> Verb 'POST 200 '[JSON] ()
-
-type CustomfieldsidRoute
-  =  "customfields"
-  :> Capture "id" Text
-  :> ReqBody '[JSON] Body_3
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Customfieldsid1Route
-  =  "customfields"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type Customfieldsid3Route
+type GetCustomfieldsRoute
   =  "customfields"
   :> Capture "id" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Customfieldsidoptions1Route
+type GetCustomfieldsOptionsRoute
   =  "customFields"
   :> Capture "id" Text
   :> "options"
   :> Verb 'GET 200 '[JSON] ()
 
-type Customfieldsidoptions2Route
-  =  "customFields"
-  :> Capture "id" Text
-  :> "options"
-  :> Verb 'POST 200 '[JSON] ()
-
-type Customfieldsidoptionsidcustomfieldoption1Route
-  =  "customfields"
-  :> Capture "id" Text
-  :> "options"
-  :> Capture "idCustomFieldOption" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type Customfieldsidoptionsidcustomfieldoption3Route
+type GetCustomfieldsOptionsByCustomfieldoptionRoute
   =  "customFields"
   :> Capture "id" Text
   :> "options"
   :> Capture "idCustomFieldOption" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type DeleteCardRoute
-  =  "cards"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type EmojiRoute
+type GetEmojiRoute
   =  "emoji"
   :> QueryParam "locale" Text
   :> QueryParam "spritesheets" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type EnterprisesidRoute
+type GetEnterprisesRoute
   =  "enterprises"
   :> Capture "id" Text
   :> QueryParam "fields" Text
@@ -973,35 +706,14 @@ type EnterprisesidRoute
   :> QueryParam "organization_memberships" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type EnterprisesidadminsRoute
+type GetEnterprisesAdminsRoute
   =  "enterprises"
   :> Capture "id" Text
   :> "admins"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type EnterprisesidadminsidmemberRoute
-  =  "enterprises"
-  :> Capture "id" Text
-  :> "organizations"
-  :> QueryParam "idOrganization" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Enterprisesidadminsidmember1Route
-  =  "enterprises"
-  :> Capture "id" Text
-  :> "admins"
-  :> Capture "idMember" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Enterprisesidadminsidmember2Route
-  =  "enterprises"
-  :> Capture "id" Text
-  :> "organizations"
-  :> Capture "idOrganization" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type EnterprisesidmembersRoute
+type GetEnterprisesMembersRoute
   =  "enterprises"
   :> Capture "id" Text
   :> "members"
@@ -1016,7 +728,7 @@ type EnterprisesidmembersRoute
   :> QueryParam "board_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type EnterprisesidmembersidmemberRoute
+type GetEnterprisesMembersByMemberRoute
   =  "enterprises"
   :> Capture "id" Text
   :> "members"
@@ -1026,19 +738,7 @@ type EnterprisesidmembersidmemberRoute
   :> QueryParam "board_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Enterprisesidmembersidmemberdeactivated1Route
-  =  "enterprises"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> "deactivated"
-  :> QueryParam "value" Bool
-  :> QueryParam "fields" Text
-  :> QueryParam "organization_fields" Text
-  :> QueryParam "board_fields" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type EnterprisesidsignupurlRoute
+type GetEnterprisesSignupurlRoute
   =  "enterprises"
   :> Capture "id" Text
   :> "signupUrl"
@@ -1048,14 +748,7 @@ type EnterprisesidsignupurlRoute
   :> QueryParam "tosAccepted" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type EnterprisesidtokensRoute
-  =  "enterprises"
-  :> Capture "id" Text
-  :> "tokens"
-  :> QueryParam "expiration" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type EnterprisesidtransferrableorganizationidorganizationRoute
+type GetEnterprisesTransferrableOrganizationByOrganizationRoute
   =  "enterprises"
   :> Capture "id" Text
   :> "transferrable"
@@ -1063,162 +756,44 @@ type EnterprisesidtransferrableorganizationidorganizationRoute
   :> Capture "idOrganization" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type IdRoute
+type GetLabelsRoute
   =  "labels"
   :> Capture "id" Text
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Id1Route
-  =  "labels"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "color" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Id2Route
-  =  "labels"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type IdcolorRoute
-  =  "labels"
-  :> Capture "id" Text
-  :> "color"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type IdnameRoute
-  =  "labels"
-  :> Capture "id" Text
-  :> "name"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type IdnextRoute
-  =  "boards"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "desc" Text
-  :> QueryParam "closed" Bool
-  :> QueryParam "subscribed" Bool
-  :> QueryParam "idOrganization" Text
-  :> QueryParam "prefs/permissionLevel" Text
-  :> QueryParam "prefs/selfJoin" Bool
-  :> QueryParam "prefs/cardCovers" Bool
-  :> QueryParam "prefs/invitations" Text
-  :> QueryParam "prefs/voting" Text
-  :> QueryParam "prefs/comments" Text
-  :> QueryParam "prefs/background" Text
-  :> QueryParam "prefs/cardAging" Text
-  :> QueryParam "prefs/calendarFeedEnabled" Bool
-  :> QueryParam "labelNames/green" Text
-  :> QueryParam "labelNames/yellow" Text
-  :> QueryParam "labelNames/orange" Text
-  :> QueryParam "labelNames/red" Text
-  :> QueryParam "labelNames/purple" Text
-  :> QueryParam "labelNames/blue" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Lists1Route
-  =  "lists"
-  :> QueryParam "name" Text
-  :> QueryParam "idBoard" Text
-  :> QueryParam "idListSource" Text
-  :> QueryParam "pos" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type ListsidRoute
+type GetListsRoute
   =  "lists"
   :> Capture "id" Text
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Listsid1Route
-  =  "lists"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "closed" Bool
-  :> QueryParam "idBoard" Text
-  :> QueryParam "pos" Text
-  :> QueryParam "subscribed" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ListsidactionsRoute
+type GetListsActionsRoute
   =  "lists"
   :> Capture "id" Text
   :> "actions"
   :> Verb 'GET 200 '[JSON] ()
 
-type ListsidarchiveallcardsRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "archiveAllCards"
-  :> Verb 'POST 200 '[JSON] ()
-
-type ListsidboardRoute
+type GetListsBoardRoute
   =  "lists"
   :> Capture "id" Text
   :> "board"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ListsidcardsRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "cards"
-  :> Verb 'GET 200 '[JSON] ()
-
-type ListsidclosedRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "closed"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ListsidfieldRoute
+type GetListsByFieldRoute
   =  "lists"
   :> Capture "id" Text
   :> Capture "field" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type ListsididboardRoute
+type GetListsCardsRoute
   =  "lists"
   :> Capture "id" Text
-  :> "idBoard"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
+  :> "cards"
+  :> Verb 'GET 200 '[JSON] ()
 
-type ListsidmoveallcardsRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "moveAllCards"
-  :> QueryParam "idBoard" Text
-  :> QueryParam "idList" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type ListsidnameRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "name"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ListsidposRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "pos"
-  :> QueryParam "value" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type ListsidsubscribedRoute
-  =  "lists"
-  :> Capture "id" Text
-  :> "subscribed"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type MembersidRoute
+type GetMembersRoute
   =  "members"
   :> Capture "id" Text
   :> QueryParam "actions" Text
@@ -1243,47 +818,20 @@ type MembersidRoute
   :> QueryParam "tokens" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersid1Route
-  =  "members"
-  :> Capture "id" Text
-  :> QueryParam "fullName" Text
-  :> QueryParam "initials" Text
-  :> QueryParam "username" Text
-  :> QueryParam "bio" Text
-  :> QueryParam "avatarSource" Text
-  :> QueryParam "prefs/colorBlind" Bool
-  :> QueryParam "prefs/locale" Text
-  :> QueryParam "prefs/minutesBetweenSummaries" Int
-  :> Verb 'PUT 200 '[JSON] ()
-
-type MembersidactionsRoute
+type GetMembersActionsRoute
   =  "members"
   :> Capture "id" Text
   :> "actions"
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidavatarRoute
-  =  "members"
-  :> Capture "id" Text
-  :> "avatar"
-  :> QueryParam "file" ByteString
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidboardbackgroundsRoute
+type GetMembersBoardbackgroundsRoute
   =  "members"
   :> Capture "id" Text
   :> "boardBackgrounds"
   :> QueryParam "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidboardbackgrounds1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "boardBackgrounds"
-  :> QueryParam "file" ByteString
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidboardbackgroundsidbackgroundRoute
+type GetMembersBoardbackgroundsByBackgroundRoute
   =  "members"
   :> Capture "id" Text
   :> "boardBackgrounds"
@@ -1291,23 +839,7 @@ type MembersidboardbackgroundsidbackgroundRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidboardbackgroundsidbackground1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "boardBackgrounds"
-  :> Capture "idBackground" Text
-  :> QueryParam "brightness" Text
-  :> QueryParam "tile" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Membersidboardbackgroundsidbackground2Route
-  =  "members"
-  :> Capture "id" Text
-  :> "boardBackgrounds"
-  :> Capture "idBackground" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type MembersidboardsRoute
+type GetMembersBoardsRoute
   =  "members"
   :> Capture "id" Text
   :> "boards"
@@ -1319,70 +851,46 @@ type MembersidboardsRoute
   :> QueryParam "organization_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidboardsinvitedRoute
+type GetMembersBoardsinvitedRoute
   =  "members"
   :> Capture "id" Text
   :> "boardsInvited"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidboardstarsRoute
+type GetMembersBoardstarsRoute
   =  "members"
   :> Capture "id" Text
   :> "boardStars"
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidboardstars1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "boardStars"
-  :> QueryParam "idBoard" Text
-  :> QueryParam "pos" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidboardstarsidstarRoute
+type GetMembersBoardstarsByStarRoute
   =  "members"
   :> Capture "id" Text
   :> "boardStars"
   :> Capture "idStar" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidboardstarsidstar1Route
+type GetMembersByFieldRoute
   =  "members"
   :> Capture "id" Text
-  :> "boardStars"
-  :> Capture "idStar" Text
-  :> QueryParam "pos" Text
-  :> Verb 'PUT 200 '[JSON] ()
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
 
-type Membersidboardstarsidstar2Route
-  =  "members"
-  :> Capture "id" Text
-  :> "boardStars"
-  :> Capture "idStar" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type MembersidcardsRoute
+type GetMembersCardsRoute
   =  "members"
   :> Capture "id" Text
   :> "cards"
   :> QueryParam "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidcustomboardbackgroundsRoute
+type GetMembersCustomboardbackgroundsRoute
   =  "members"
   :> Capture "id" Text
   :> "customBoardBackgrounds"
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidcustomboardbackgrounds1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "customBoardBackgrounds"
-  :> QueryParam "file" ByteString
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidcustomboardbackgroundsidbackgroundRoute
+type GetMembersCustomboardbackgroundsByBackgroundRoute
   =  "members"
   :> Capture "id" Text
   :> "customBoardBackgrounds"
@@ -1390,28 +898,13 @@ type MembersidcustomboardbackgroundsidbackgroundRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidcustomboardbackgroundsidbackground1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "customBoardBackgrounds"
-  :> Capture "idBackground" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type MembersidcustomemojiRoute
+type GetMembersCustomemojiRoute
   =  "members"
   :> Capture "id" Text
   :> "customEmoji"
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidcustomemoji1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "customEmoji"
-  :> QueryParam "file" ByteString
-  :> QueryParam "name" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidcustomemojiidemojiRoute
+type GetMembersCustomemojiByEmojiRoute
   =  "members"
   :> Capture "id" Text
   :> "customEmoji"
@@ -1419,27 +912,13 @@ type MembersidcustomemojiidemojiRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidcustomstickersRoute
+type GetMembersCustomstickersRoute
   =  "members"
   :> Capture "id" Text
   :> "customStickers"
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidcustomstickers1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "customStickers"
-  :> QueryParam "file" ByteString
-  :> Verb 'POST 200 '[JSON] ()
-
-type Membersidcustomstickersidsticker1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "customStickers"
-  :> Capture "idSticker" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type MembersidenterprisesRoute
+type GetMembersCustomstickersByStickerRoute
   =  "members"
   :> Capture "id" Text
   :> "customStickers"
@@ -1447,13 +926,7 @@ type MembersidenterprisesRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidfieldRoute
-  =  "members"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type MembersidnotificationsRoute
+type GetMembersNotificationsRoute
   =  "members"
   :> Capture "id" Text
   :> "notifications"
@@ -1470,14 +943,7 @@ type MembersidnotificationsRoute
   :> QueryParam "memberCreator_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidonetimemessagesdismissedRoute
-  =  "members"
-  :> Capture "id" Text
-  :> "oneTimeMessagesDismissed"
-  :> QueryParam "value" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidorganizationsRoute
+type GetMembersOrganizationsRoute
   =  "members"
   :> Capture "id" Text
   :> "organizations"
@@ -1486,66 +952,34 @@ type MembersidorganizationsRoute
   :> QueryParam "paid_account" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidorganizationsinvitedRoute
+type GetMembersOrganizationsinvitedRoute
   =  "members"
   :> Capture "id" Text
   :> "organizationsInvited"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type MembersidsavedsearchesRoute
+type GetMembersSavedsearchesRoute
   =  "members"
   :> Capture "id" Text
   :> "savedSearches"
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidsavedsearches1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "savedSearches"
-  :> QueryParam "name" Text
-  :> QueryParam "query" Text
-  :> QueryParam "pos" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type MembersidsavedsearchesidsearchRoute
+type GetMembersSavedsearchesBySearchRoute
   =  "members"
   :> Capture "id" Text
   :> "savedSearches"
   :> Capture "idSearch" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Membersidsavedsearchesidsearch1Route
-  =  "members"
-  :> Capture "id" Text
-  :> "savedSearches"
-  :> Capture "idSearch" Text
-  :> QueryParam "name" Text
-  :> QueryParam "query" Text
-  :> QueryParam "pos" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Membersidsavedsearchesidsearch2Route
-  =  "members"
-  :> Capture "id" Text
-  :> "savedSearches"
-  :> Capture "idSearch" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type MembersidtokensRoute
+type GetMembersTokensRoute
   =  "members"
   :> Capture "id" Text
   :> "tokens"
   :> QueryParam "webhooks" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsallreadRoute
-  =  "notifications"
-  :> "all"
-  :> "read"
-  :> Verb 'POST 200 '[JSON] ()
-
-type NotificationsidRoute
+type GetNotificationsRoute
   =  "notifications"
   :> Capture "id" Text
   :> QueryParam "board" Bool
@@ -1564,109 +998,66 @@ type NotificationsidRoute
   :> QueryParam "organization_fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Notificationsid1Route
-  =  "notifications"
-  :> Capture "id" Text
-  :> QueryParam "unread" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type NotificationsidboardRoute
+type GetNotificationsBoardRoute
   =  "notifications"
   :> Capture "id" Text
   :> "board"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidcardRoute
+type GetNotificationsByFieldRoute
+  =  "notifications"
+  :> Capture "id" Text
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetNotificationsCardRoute
   =  "notifications"
   :> Capture "id" Text
   :> "card"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidfieldRoute
-  =  "notifications"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type NotificationsidlistRoute
+type GetNotificationsListRoute
   =  "notifications"
   :> Capture "id" Text
   :> "list"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidmemberRoute
+type GetNotificationsMemberRoute
   =  "notifications"
   :> Capture "id" Text
   :> "member"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidmembercreatorRoute
+type GetNotificationsMembercreatorRoute
   =  "notifications"
   :> Capture "id" Text
   :> "memberCreator"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidorganizationRoute
+type GetNotificationsOrganizationRoute
   =  "notifications"
   :> Capture "id" Text
   :> "organization"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type NotificationsidunreadRoute
-  =  "notifications"
-  :> Capture "id" Text
-  :> "unread"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Organizations1Route
-  =  "organizations"
-  :> QueryParam "displayName" Text
-  :> QueryParam "desc" Text
-  :> QueryParam "name" Text
-  :> QueryParam "website" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type OrganizationsidRoute
+type GetOrganizationsRoute
   =  "organizations"
   :> Capture "id" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type Organizationsid1Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> QueryParam "name" Text
-  :> QueryParam "displayName" Text
-  :> QueryParam "desc" Text
-  :> QueryParam "website" Text
-  :> QueryParam "prefs/associatedDomain" Text
-  :> QueryParam "prefs/externalMembersDisabled" Bool
-  :> QueryParam "prefs/googleAppsVersion" Int
-  :> QueryParam "prefs/boardVisibilityRestrict/org" Text
-  :> QueryParam "prefs/boardVisibilityRestrict/private" Text
-  :> QueryParam "prefs/boardVisibilityRestrict/public" Text
-  :> QueryParam "prefs/orgInviteRestrict" Text
-  :> QueryParam "prefs/permissionLevel" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Organizationsid2Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidactionsRoute
+type GetOrganizationsActionsRoute
   =  "organizations"
   :> Capture "id" Text
   :> "actions"
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidboardsRoute
+type GetOrganizationsBoardsRoute
   =  "organizations"
   :> Capture "id" Text
   :> "boards"
@@ -1674,48 +1065,32 @@ type OrganizationsidboardsRoute
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidfieldRoute
+type GetOrganizationsByFieldRoute
   =  "organizations"
   :> Capture "id" Text
   :> Capture "field" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidlogoRoute
+type GetOrganizationsExportsRoute
   =  "organizations"
   :> Capture "id" Text
-  :> "logo"
-  :> QueryParam "file" ByteString
-  :> Verb 'POST 200 '[JSON] ()
+  :> "exports"
+  :> Verb 'GET 200 '[JSON] ()
 
-type Organizationsidlogo1Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> "logo"
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidmembersRoute
+type GetOrganizationsMembersRoute
   =  "organizations"
   :> Capture "id" Text
   :> "members"
   :> Verb 'GET 200 '[JSON] ()
 
-type Organizationsidmembers1Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> "members"
-  :> QueryParam "email" Text
-  :> QueryParam "fullName" Text
-  :> QueryParam "type" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type OrganizationsidmembersfilterRoute
+type GetOrganizationsMembersByFilterRoute
   =  "organizations"
   :> Capture "id" Text
   :> "members"
   :> Capture "filter" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidmembershipsRoute
+type GetOrganizationsMembershipsRoute
   =  "organizations"
   :> Capture "id" Text
   :> "memberships"
@@ -1723,7 +1098,7 @@ type OrganizationsidmembershipsRoute
   :> QueryParam "member" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidmembershipsidmembershipRoute
+type GetOrganizationsMembershipsByMembershipRoute
   =  "organizations"
   :> Capture "id" Text
   :> "memberships"
@@ -1731,110 +1106,33 @@ type OrganizationsidmembershipsidmembershipRoute
   :> QueryParam "member" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidmembersidmemberRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> QueryParam "type" Text
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Organizationsidmembersidmember1Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidmembersidmemberallRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> "all"
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidmembersidmemberdeactivatedRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "members"
-  :> Capture "idMember" Text
-  :> "deactivated"
-  :> QueryParam "value" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type OrganizationsidmembersinvitedRoute
+type GetOrganizationsMembersinvitedRoute
   =  "organizations"
   :> Capture "id" Text
   :> "membersInvited"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidnewbillableguestsidboardRoute
+type GetOrganizationsNewbillableguestsByBoardRoute
   =  "organizations"
   :> Capture "id" Text
   :> "newBillableGuests"
   :> Capture "idBoard" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidplugindataRoute
+type GetOrganizationsPlugindataRoute
   =  "organizations"
   :> Capture "id" Text
   :> "pluginData"
   :> Verb 'GET 200 '[JSON] ()
 
-type OrganizationsidprefsassociateddomainRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "prefs"
-  :> "associatedDomain"
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidprefsorginviterestrictRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "prefs"
-  :> "orgInviteRestrict"
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type OrganizationsidtagsRoute
+type GetOrganizationsTagsRoute
   =  "organizations"
   :> Capture "id" Text
   :> "tags"
   :> Verb 'GET 200 '[JSON] ()
 
-type Organizationsidtags1Route
-  =  "organizations"
-  :> Capture "id" Text
-  :> "tags"
-  :> QueryParam "name" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type OrganizationsidtagsidtagRoute
-  =  "organizations"
-  :> Capture "id" Text
-  :> "tags"
-  :> Capture "idTag" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type Page1Route
-  =  "labels"
-  :> QueryParam "name" Text
-  :> QueryParam "color" Text
-  :> QueryParam "idBoard" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type PutMembersidcustomboardbackgroundsidbackgroundRoute
-  =  "members"
-  :> Capture "id" Text
-  :> ""
-  :> "customBoardBackgrounds"
-  :> Capture "idBackground" Text
-  :> QueryParam "brightness" Text
-  :> QueryParam "tile" Bool
-  :> Verb 'PUT 200 '[JSON] ()
-
-type Search1Route
+type GetSearchRoute
   =  "search"
   :> QueryParam "query" Text
   :> QueryParam "idBoards" Text
@@ -1858,7 +1156,7 @@ type Search1Route
   :> QueryParam "partial" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type SearchmembersRoute
+type GetSearchMembersRoute
   =  "search"
   :> "members"
   :> QueryParam "query" Text
@@ -1868,32 +1166,764 @@ type SearchmembersRoute
   :> QueryParam "onlyOrgMembers" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type TokenstokenRoute
+type GetTokensRoute
   =  "tokens"
   :> Capture "token" Text
   :> QueryParam "fields" Text
   :> QueryParam "webhooks" Bool
   :> Verb 'GET 200 '[JSON] ()
 
-type Tokenstoken1Route
-  =  "tokens"
-  :> Capture "token" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type TokenstokenmemberRoute
+type GetTokensMemberRoute
   =  "tokens"
   :> Capture "token" Text
   :> "member"
   :> QueryParam "fields" Text
   :> Verb 'GET 200 '[JSON] ()
 
-type TokenstokenwebhooksRoute
+type GetTokensWebhooksRoute
   =  "tokens"
   :> Capture "token" Text
   :> "webhooks"
   :> Verb 'GET 200 '[JSON] ()
 
-type Tokenstokenwebhooks1Route
+type GetTokensWebhooksByTokenWebhookRoute
+  =  "tokens"
+  :> Capture "token" Text
+  :> "webhooks"
+  :> Capture "idWebhook" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetWebhooksRoute
+  =  "webhooks"
+  :> Capture "id" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type GetWebhooksByFieldRoute
+  =  "webhooks"
+  :> Capture "id" Text
+  :> Capture "field" Text
+  :> Verb 'GET 200 '[JSON] ()
+
+type PostActionsReactionsRoute
+  =  "actions"
+  :> Capture "idAction" Text
+  :> "reactions"
+  :> ReqBody '[JSON] Body_1
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsRoute
+  =  "boards"
+  :> QueryParam "name" Text
+  :> QueryParam "defaultLabels" Bool
+  :> QueryParam "defaultLists" Bool
+  :> QueryParam "desc" Text
+  :> QueryParam "idOrganization" Text
+  :> QueryParam "idBoardSource" Text
+  :> QueryParam "keepFromSource" Text
+  :> QueryParam "powerUps" Text
+  :> QueryParam "prefs_permissionLevel" Text
+  :> QueryParam "prefs_voting" Text
+  :> QueryParam "prefs_comments" Text
+  :> QueryParam "prefs_invitations" Text
+  :> QueryParam "prefs_selfJoin" Bool
+  :> QueryParam "prefs_cardCovers" Bool
+  :> QueryParam "prefs_background" Text
+  :> QueryParam "prefs_cardAging" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsBoardpluginsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "boardPlugins"
+  :> QueryParam "idPlugin" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsCalendarkeyGenerateRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "calendarKey"
+  :> "generate"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsChecklistsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "checklists"
+  :> QueryParam "name" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsEmailkeyGenerateRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "emailKey"
+  :> "generate"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsIdtagsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "idTags"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsLabelsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "labels"
+  :> QueryParam "name" Text
+  :> QueryParam "color" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsListsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "lists"
+  :> QueryParam "name" Text
+  :> QueryParam "pos" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsMarkedasviewedRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "markedAsViewed"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostBoardsPowerupsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "powerUps"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsRoute
+  =  "cards"
+  :> QueryParam "name" Text
+  :> QueryParam "desc" Text
+  :> QueryParam "pos" Text
+  :> QueryParam "due" Day
+  :> QueryParam "dueComplete" Bool
+  :> QueryParam "idList" Text
+  :> QueryParam "idMembers" Text
+  :> QueryParam "idLabels" Text
+  :> QueryParam "urlSource" Text
+  :> QueryParam "idCardSource" Text
+  :> QueryParam "keepFromSource" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsActionsCommentsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "actions"
+  :> "comments"
+  :> QueryParam "text" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsAttachmentsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "attachments"
+  :> QueryParam "name" Text
+  :> QueryParam "mimeType" Text
+  :> QueryParam "url" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsChecklistsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "checklists"
+  :> QueryParam "name" Text
+  :> QueryParam "idChecklistSource" Text
+  :> QueryParam "pos" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsIdlabelsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "idLabels"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsIdmembersRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "idMembers"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsLabelsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "labels"
+  :> QueryParam "color" Text
+  :> QueryParam "name" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsMarkassociatednotificationsreadRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "markAssociatedNotificationsRead"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCardsMembersvotedRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "membersVoted"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostChecklistsRoute
+  =  "checklists"
+  :> QueryParam "idCard" Text
+  :> QueryParam "name" Text
+  :> QueryParam "pos" Text
+  :> QueryParam "idChecklistSource" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostChecklistsCheckitemsRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> "checkItems"
+  :> QueryParam "name" Text
+  :> QueryParam "pos" Text
+  :> QueryParam "checked" Bool
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCustomfieldsRoute
+  =  "customFields"
+  :> ReqBody '[JSON] Body
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostCustomfieldsOptionsRoute
+  =  "customFields"
+  :> Capture "id" Text
+  :> "options"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostEnterprisesTokensRoute
+  =  "enterprises"
+  :> Capture "id" Text
+  :> "tokens"
+  :> QueryParam "expiration" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostLabelsRoute
+  =  "labels"
+  :> QueryParam "name" Text
+  :> QueryParam "color" Text
+  :> QueryParam "idBoard" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostListsRoute
+  =  "lists"
+  :> QueryParam "name" Text
+  :> QueryParam "idBoard" Text
+  :> QueryParam "idListSource" Text
+  :> QueryParam "pos" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostListsArchiveallcardsRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "archiveAllCards"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostListsMoveallcardsRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "moveAllCards"
+  :> QueryParam "idBoard" Text
+  :> QueryParam "idList" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostMembersBoardstarsRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "boardStars"
+  :> QueryParam "idBoard" Text
+  :> QueryParam "pos" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostMembersOnetimemessagesdismissedRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "oneTimeMessagesDismissed"
+  :> QueryParam "value" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostMembersSavedsearchesRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "savedSearches"
+  :> QueryParam "name" Text
+  :> QueryParam "query" Text
+  :> QueryParam "pos" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostNotificationsAllReadRoute
+  =  "notifications"
+  :> "all"
+  :> "read"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostOrganizationsRoute
+  =  "organizations"
+  :> QueryParam "displayName" Text
+  :> QueryParam "desc" Text
+  :> QueryParam "name" Text
+  :> QueryParam "website" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostOrganizationsExportsRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "exports"
+  :> QueryParam "attachments" Bool
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostOrganizationsLogoRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "logo"
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostOrganizationsTagsRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "tags"
+  :> QueryParam "name" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostTokensWebhooksRoute
+  =  "tokens"
+  :> Capture "token" Text
+  :> "webhooks"
+  :> QueryParam "description" Text
+  :> QueryParam "callbackURL" Text
+  :> QueryParam "idModel" Text
+  :> Verb 'POST 200 '[JSON] ()
+
+type PostWebhooksRoute
+  =  "webhooks"
+  :> QueryParam "description" Text
+  :> QueryParam "callbackURL" Text
+  :> QueryParam "idModel" Text
+  :> QueryParam "active" Bool
+  :> Verb 'POST 200 '[JSON] ()
+
+type PutActionsRoute
+  =  "actions"
+  :> Capture "id" Text
+  :> QueryParam "text" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutActionsTextRoute
+  =  "actions"
+  :> Capture "id" Text
+  :> "text"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "desc" Text
+  :> QueryParam "closed" Bool
+  :> QueryParam "subscribed" Bool
+  :> QueryParam "idOrganization" Text
+  :> QueryParam "prefs/permissionLevel" Text
+  :> QueryParam "prefs/selfJoin" Bool
+  :> QueryParam "prefs/cardCovers" Bool
+  :> QueryParam "prefs/invitations" Text
+  :> QueryParam "prefs/voting" Text
+  :> QueryParam "prefs/comments" Text
+  :> QueryParam "prefs/background" Text
+  :> QueryParam "prefs/cardAging" Text
+  :> QueryParam "prefs/calendarFeedEnabled" Bool
+  :> QueryParam "labelNames/green" Text
+  :> QueryParam "labelNames/yellow" Text
+  :> QueryParam "labelNames/orange" Text
+  :> QueryParam "labelNames/red" Text
+  :> QueryParam "labelNames/purple" Text
+  :> QueryParam "labelNames/blue" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMembersRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "members"
+  :> QueryParam "email" Text
+  :> ReqBody '[JSON] Body_2
+  :> Header "type" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMembersByMemberRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> QueryParam "type" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMembershipsByMembershipRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "memberships"
+  :> Capture "idMembership" Text
+  :> QueryParam "type" Text
+  :> QueryParam "member_fields" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsEmailpositionRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "emailPosition"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsIdemaillistRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "idEmailList"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsShowlistguideRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "showListGuide"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsShowsidebarRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "showSidebar"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsShowsidebaractivityRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "showSidebarActivity"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsShowsidebarboardactionsRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "showSidebarBoardActions"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutBoardsMyprefsShowsidebarmembersRoute
+  =  "boards"
+  :> Capture "id" Text
+  :> "myPrefs"
+  :> "showSidebarMembers"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardCustomfieldItemByCardCustomfieldRoute
+  =  "card"
+  :> Capture "idCard" Text
+  :> "customField"
+  :> Capture "idCustomField" Text
+  :> "item"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardsRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "desc" Text
+  :> QueryParam "closed" Bool
+  :> QueryParam "idMembers" Text
+  :> QueryParam "idAttachmentCover" Text
+  :> QueryParam "idList" Text
+  :> QueryParam "idLabels" Text
+  :> QueryParam "idBoard" Text
+  :> QueryParam "pos" Text
+  :> QueryParam "due" Day
+  :> QueryParam "dueComplete" Bool
+  :> QueryParam "subscribed" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardsActionsCommentsByActionRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "actions"
+  :> Capture "idAction" Text
+  :> "comments"
+  :> QueryParam "text" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardsCheckitemByCheckitemRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "checkItem"
+  :> Capture "idCheckItem" Text
+  :> QueryParam "name" Text
+  :> QueryParam "state" Text
+  :> QueryParam "idChecklist" Text
+  :> QueryParam "pos" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardsChecklistCheckitemByCardCheckitemChecklistRoute
+  =  "cards"
+  :> Capture "idCard" Text
+  :> "checklist"
+  :> Capture "idChecklist" Text
+  :> "checkItem"
+  :> Capture "idCheckItem" Text
+  :> QueryParam "pos" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCardsStickersByStickerRoute
+  =  "cards"
+  :> Capture "id" Text
+  :> "stickers"
+  :> Capture "idSticker" Text
+  :> QueryParam "top" Float
+  :> QueryParam "left" Float
+  :> QueryParam "zIndex" Int
+  :> QueryParam "rotate" Float
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutChecklistsRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "pos" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutChecklistsCheckitemsByCheckitemRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> "checkItems"
+  :> Capture "idCheckItem" Text
+  :> QueryParam "pos" Int
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutChecklistsNameRoute
+  =  "checklists"
+  :> Capture "id" Text
+  :> "name"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutCustomfieldsRoute
+  =  "customfields"
+  :> Capture "id" Text
+  :> ReqBody '[JSON] Body_3
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutEnterprisesAdminsByMemberRoute
+  =  "enterprises"
+  :> Capture "id" Text
+  :> "admins"
+  :> Capture "idMember" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutEnterprisesMembersDeactivatedByMemberRoute
+  =  "enterprises"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> "deactivated"
+  :> QueryParam "value" Bool
+  :> QueryParam "fields" Text
+  :> QueryParam "organization_fields" Text
+  :> QueryParam "board_fields" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutEnterprisesOrganizationsRoute
+  =  "enterprises"
+  :> Capture "id" Text
+  :> "organizations"
+  :> QueryParam "idOrganization" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutLabelsRoute
+  =  "labels"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "color" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutLabelsColorRoute
+  =  "labels"
+  :> Capture "id" Text
+  :> "color"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutLabelsNameRoute
+  =  "labels"
+  :> Capture "id" Text
+  :> "name"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "closed" Bool
+  :> QueryParam "idBoard" Text
+  :> QueryParam "pos" Text
+  :> QueryParam "subscribed" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsClosedRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "closed"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsIdboardRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "idBoard"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsNameRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "name"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsPosRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "pos"
+  :> QueryParam "value" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutListsSubscribedRoute
+  =  "lists"
+  :> Capture "id" Text
+  :> "subscribed"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutMembersRoute
+  =  "members"
+  :> Capture "id" Text
+  :> QueryParam "fullName" Text
+  :> QueryParam "initials" Text
+  :> QueryParam "username" Text
+  :> QueryParam "bio" Text
+  :> QueryParam "avatarSource" Text
+  :> QueryParam "prefs/colorBlind" Bool
+  :> QueryParam "prefs/locale" Text
+  :> QueryParam "prefs/minutesBetweenSummaries" Int
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutMembersBoardbackgroundsByBackgroundRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "boardBackgrounds"
+  :> Capture "idBackground" Text
+  :> QueryParam "brightness" Text
+  :> QueryParam "tile" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutMembersBoardstarsByStarRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "boardStars"
+  :> Capture "idStar" Text
+  :> QueryParam "pos" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutMembersCustomboardbackgroundsByBackgroundRoute
+  =  "members"
+  :> Capture "id" Text
+  :> ""
+  :> "customBoardBackgrounds"
+  :> Capture "idBackground" Text
+  :> QueryParam "brightness" Text
+  :> QueryParam "tile" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutMembersSavedsearchesBySearchRoute
+  =  "members"
+  :> Capture "id" Text
+  :> "savedSearches"
+  :> Capture "idSearch" Text
+  :> QueryParam "name" Text
+  :> QueryParam "query" Text
+  :> QueryParam "pos" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutNotificationsRoute
+  =  "notifications"
+  :> Capture "id" Text
+  :> QueryParam "unread" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutNotificationsUnreadRoute
+  =  "notifications"
+  :> Capture "id" Text
+  :> "unread"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutOrganizationsRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> QueryParam "name" Text
+  :> QueryParam "displayName" Text
+  :> QueryParam "desc" Text
+  :> QueryParam "website" Text
+  :> QueryParam "prefs/associatedDomain" Text
+  :> QueryParam "prefs/externalMembersDisabled" Bool
+  :> QueryParam "prefs/googleAppsVersion" Int
+  :> QueryParam "prefs/boardVisibilityRestrict/org" Text
+  :> QueryParam "prefs/boardVisibilityRestrict/private" Text
+  :> QueryParam "prefs/boardVisibilityRestrict/public" Text
+  :> QueryParam "prefs/orgInviteRestrict" Text
+  :> QueryParam "prefs/permissionLevel" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutOrganizationsMembersRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "members"
+  :> QueryParam "email" Text
+  :> QueryParam "fullName" Text
+  :> QueryParam "type" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutOrganizationsMembersByMemberRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> QueryParam "type" Text
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutOrganizationsMembersDeactivatedByMemberRoute
+  =  "organizations"
+  :> Capture "id" Text
+  :> "members"
+  :> Capture "idMember" Text
+  :> "deactivated"
+  :> QueryParam "value" Bool
+  :> Verb 'PUT 200 '[JSON] ()
+
+type PutTokensWebhooksByTokenWebhookidRoute
   =  "tokens"
   :> Capture "token" Text
   :> "webhooks"
@@ -1903,43 +1933,7 @@ type Tokenstokenwebhooks1Route
   :> QueryParam "idModel" Text
   :> Verb 'PUT 200 '[JSON] ()
 
-type Tokenstokenwebhooks2Route
-  =  "tokens"
-  :> Capture "token" Text
-  :> "webhooks"
-  :> QueryParam "description" Text
-  :> QueryParam "callbackURL" Text
-  :> QueryParam "idModel" Text
-  :> Verb 'POST 200 '[JSON] ()
-
-type TokenstokenwebhooksidwebhookRoute
-  =  "tokens"
-  :> Capture "token" Text
-  :> "webhooks"
-  :> Capture "idWebhook" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type Tokenstokenwebhooksidwebhook1Route
-  =  "tokens"
-  :> Capture "token" Text
-  :> "webhooks"
-  :> Capture "idWebhook" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type WebhookObject1Route
-  =  "webhooks"
-  :> Capture "id" Text
-  :> Verb 'GET 200 '[JSON] ()
-
-type Webhooks2Route
-  =  "webhooks"
-  :> QueryParam "description" Text
-  :> QueryParam "callbackURL" Text
-  :> QueryParam "idModel" Text
-  :> QueryParam "active" Bool
-  :> Verb 'POST 200 '[JSON] ()
-
-type WebhooksidRoute
+type PutWebhooksRoute
   =  "webhooks"
   :> Capture "id" Text
   :> QueryParam "description" Text
@@ -1948,262 +1942,249 @@ type WebhooksidRoute
   :> QueryParam "active" Bool
   :> Verb 'PUT 200 '[JSON] ()
 
-type Webhooksid1Route
-  =  "webhooks"
-  :> Capture "id" Text
-  :> Verb 'DELETE 200 '[JSON] ()
-
-type WebhooksidfieldRoute
-  =  "webhooks"
-  :> Capture "id" Text
-  :> Capture "field" Text
-  :> Verb 'GET 200 '[JSON] ()
-
 
 type TrelloRESTAPI
-    =    ActionsactionidRoute
-    :<|> ActionsidRoute
-    :<|> Actionsid1Route
-    :<|> ActionsidactionreactionsRoute
-    :<|> Actionsidactionreactions1Route
-    :<|> ActionsidactionreactionsidRoute
-    :<|> Actionsidactionreactionsid1Route
-    :<|> ActionsidactionreactionssummaryRoute
-    :<|> ActionsidboardRoute
-    :<|> ActionsidcardRoute
-    :<|> ActionsiddisplayRoute
-    :<|> ActionsidfieldRoute
-    :<|> ActionsidlistRoute
-    :<|> ActionsidmemberRoute
-    :<|> ActionsidmembercreatorRoute
-    :<|> ActionsidorganizationRoute
-    :<|> ActionsidtextRoute
-    :<|> Batch1Route
-    :<|> BoardsNestedResourcesRoute
-    :<|> Boardsboardid1Route
-    :<|> BoardsboardidactionsRoute
-    :<|> Boardsboardidactions1Route
-    :<|> Boardsboardidactions2Route
-    :<|> Boardsboardidactions3Route
-    :<|> BoardsboardidcardsfilterRoute
-    :<|> BoardsboardididtagsRoute
-    :<|> BoardsboardidlabelsRoute
-    :<|> BoardsboardidlistsRoute
-    :<|> BoardsboardidlistsfilterRoute
-    :<|> BoardsboardidmembersRoute
-    :<|> BoardsboardidtestRoute
-    :<|> BoardsidRoute
-    :<|> Boardsid1Route
-    :<|> BoardsidboardpluginsRoute
-    :<|> Boardsidboardplugins1Route
-    :<|> Boardsidboardplugins2Route
-    :<|> BoardsidcalendarkeygenerateRoute
-    :<|> BoardsidcustomfieldsRoute
-    :<|> BoardsidemailkeygenerateRoute
-    :<|> BoardsididtagsRoute
-    :<|> BoardsidlabelnamesmembersRoute
-    :<|> BoardsidlabelnamesmembershipsidmembershipRoute
-    :<|> BoardsidlabelnamesmembersidmemberRoute
-    :<|> BoardsidlabelsRoute
-    :<|> BoardsidlistsRoute
-    :<|> BoardsidmarkedasviewedRoute
-    :<|> BoardsidmembershipsRoute
-    :<|> BoardsidmembersidmemberRoute
-    :<|> BoardsidmyprefsemailpositionRoute
-    :<|> BoardsidmyprefsidemaillistRoute
-    :<|> BoardsidmyprefsshowlistguideRoute
-    :<|> BoardsidmyprefsshowsidebaeRoute
-    :<|> BoardsidmyprefsshowsidebaractivityRoute
-    :<|> BoardsidmyprefsshowsidebarboardactionsRoute
-    :<|> BoardsidmyprefsshowsidebarmembersRoute
-    :<|> BoardsidpluginsRoute
-    :<|> BoardsidpowerupsRoute
-    :<|> BoardsidpowerupspowerupRoute
-    :<|> Cards2Route
-    :<|> CardsidRoute
-    :<|> Cardsid1Route
-    :<|> CardsidactionsRoute
-    :<|> CardsidactionscommentsRoute
-    :<|> CardsidactionsidactioncommentsRoute
-    :<|> Cardsidactionsidactioncomments1Route
-    :<|> CardsidattachmentsRoute
-    :<|> Cardsidattachments1Route
-    :<|> CardsidattachmentsidattachmentRoute
-    :<|> Cardsidattachmentsidattachment1Route
-    :<|> CardsidboardRoute
-    :<|> CardsidcardchecklistidchecklistcheckitemidcheckitemRoute
-    :<|> CardsidcheckitemidcheckitemRoute
-    :<|> Cardsidcheckitemidcheckitem1Route
-    :<|> Cardsidcheckitemidcheckitem2Route
-    :<|> CardsidcheckitemstatesRoute
-    :<|> CardsidchecklistsRoute
-    :<|> Cardsidchecklists1Route
-    :<|> CardsidchecklistsidchecklistRoute
-    :<|> CardsidcustomfielditemsRoute
-    :<|> CardsidfieldRoute
-    :<|> CardsididlabelsRoute
-    :<|> CardsididlabelsidlabelRoute
-    :<|> CardsididmembersRoute
-    :<|> CardsididmembersidmemberRoute
-    :<|> CardsidlabelsRoute
-    :<|> CardsidlistRoute
-    :<|> CardsidmarkassociatednotificationsreadRoute
-    :<|> CardsidmembersRoute
-    :<|> CardsidmembersvotedRoute
-    :<|> Cardsidmembersvoted1Route
-    :<|> CardsidmembersvotedidmemberRoute
-    :<|> CardsidplugindataRoute
-    :<|> CardsidstickersRoute
-    :<|> CardsidstickersidstickerRoute
-    :<|> Cardsidstickersidsticker1Route
-    :<|> Cardsidstickersidsticker2Route
-    :<|> ChecklistsRoute
-    :<|> ChecklistsidRoute
-    :<|> Checklistsid1Route
-    :<|> Checklistsid2Route
-    :<|> ChecklistsidboardRoute
-    :<|> ChecklistsidcardsRoute
-    :<|> ChecklistsidcardscheckitemsRoute
-    :<|> ChecklistsidcardscheckitemscheckitemidRoute
-    :<|> ChecklistsidcheckitemsRoute
-    :<|> ChecklistsidcheckitemsidRoute
-    :<|> ChecklistsidcheckitemsidcheckitemRoute
-    :<|> ChecklistsidfieldRoute
-    :<|> ChecklistsidnameRoute
-    :<|> CustomfielditemsidRoute
-    :<|> CustomfieldsRoute
-    :<|> CustomfieldsidRoute
-    :<|> Customfieldsid1Route
-    :<|> Customfieldsid3Route
-    :<|> Customfieldsidoptions1Route
-    :<|> Customfieldsidoptions2Route
-    :<|> Customfieldsidoptionsidcustomfieldoption1Route
-    :<|> Customfieldsidoptionsidcustomfieldoption3Route
-    :<|> DeleteCardRoute
-    :<|> EmojiRoute
-    :<|> EnterprisesidRoute
-    :<|> EnterprisesidadminsRoute
-    :<|> EnterprisesidadminsidmemberRoute
-    :<|> Enterprisesidadminsidmember1Route
-    :<|> Enterprisesidadminsidmember2Route
-    :<|> EnterprisesidmembersRoute
-    :<|> EnterprisesidmembersidmemberRoute
-    :<|> Enterprisesidmembersidmemberdeactivated1Route
-    :<|> EnterprisesidsignupurlRoute
-    :<|> EnterprisesidtokensRoute
-    :<|> EnterprisesidtransferrableorganizationidorganizationRoute
-    :<|> IdRoute
-    :<|> Id1Route
-    :<|> Id2Route
-    :<|> IdcolorRoute
-    :<|> IdnameRoute
-    :<|> IdnextRoute
-    :<|> Lists1Route
-    :<|> ListsidRoute
-    :<|> Listsid1Route
-    :<|> ListsidactionsRoute
-    :<|> ListsidarchiveallcardsRoute
-    :<|> ListsidboardRoute
-    :<|> ListsidcardsRoute
-    :<|> ListsidclosedRoute
-    :<|> ListsidfieldRoute
-    :<|> ListsididboardRoute
-    :<|> ListsidmoveallcardsRoute
-    :<|> ListsidnameRoute
-    :<|> ListsidposRoute
-    :<|> ListsidsubscribedRoute
-    :<|> MembersidRoute
-    :<|> Membersid1Route
-    :<|> MembersidactionsRoute
-    :<|> MembersidavatarRoute
-    :<|> MembersidboardbackgroundsRoute
-    :<|> Membersidboardbackgrounds1Route
-    :<|> MembersidboardbackgroundsidbackgroundRoute
-    :<|> Membersidboardbackgroundsidbackground1Route
-    :<|> Membersidboardbackgroundsidbackground2Route
-    :<|> MembersidboardsRoute
-    :<|> MembersidboardsinvitedRoute
-    :<|> MembersidboardstarsRoute
-    :<|> Membersidboardstars1Route
-    :<|> MembersidboardstarsidstarRoute
-    :<|> Membersidboardstarsidstar1Route
-    :<|> Membersidboardstarsidstar2Route
-    :<|> MembersidcardsRoute
-    :<|> MembersidcustomboardbackgroundsRoute
-    :<|> Membersidcustomboardbackgrounds1Route
-    :<|> MembersidcustomboardbackgroundsidbackgroundRoute
-    :<|> Membersidcustomboardbackgroundsidbackground1Route
-    :<|> MembersidcustomemojiRoute
-    :<|> Membersidcustomemoji1Route
-    :<|> MembersidcustomemojiidemojiRoute
-    :<|> MembersidcustomstickersRoute
-    :<|> Membersidcustomstickers1Route
-    :<|> Membersidcustomstickersidsticker1Route
-    :<|> MembersidenterprisesRoute
-    :<|> MembersidfieldRoute
-    :<|> MembersidnotificationsRoute
-    :<|> MembersidonetimemessagesdismissedRoute
-    :<|> MembersidorganizationsRoute
-    :<|> MembersidorganizationsinvitedRoute
-    :<|> MembersidsavedsearchesRoute
-    :<|> Membersidsavedsearches1Route
-    :<|> MembersidsavedsearchesidsearchRoute
-    :<|> Membersidsavedsearchesidsearch1Route
-    :<|> Membersidsavedsearchesidsearch2Route
-    :<|> MembersidtokensRoute
-    :<|> NotificationsallreadRoute
-    :<|> NotificationsidRoute
-    :<|> Notificationsid1Route
-    :<|> NotificationsidboardRoute
-    :<|> NotificationsidcardRoute
-    :<|> NotificationsidfieldRoute
-    :<|> NotificationsidlistRoute
-    :<|> NotificationsidmemberRoute
-    :<|> NotificationsidmembercreatorRoute
-    :<|> NotificationsidorganizationRoute
-    :<|> NotificationsidunreadRoute
-    :<|> Organizations1Route
-    :<|> OrganizationsidRoute
-    :<|> Organizationsid1Route
-    :<|> Organizationsid2Route
-    :<|> OrganizationsidactionsRoute
-    :<|> OrganizationsidboardsRoute
-    :<|> OrganizationsidfieldRoute
-    :<|> OrganizationsidlogoRoute
-    :<|> Organizationsidlogo1Route
-    :<|> OrganizationsidmembersRoute
-    :<|> Organizationsidmembers1Route
-    :<|> OrganizationsidmembersfilterRoute
-    :<|> OrganizationsidmembershipsRoute
-    :<|> OrganizationsidmembershipsidmembershipRoute
-    :<|> OrganizationsidmembersidmemberRoute
-    :<|> Organizationsidmembersidmember1Route
-    :<|> OrganizationsidmembersidmemberallRoute
-    :<|> OrganizationsidmembersidmemberdeactivatedRoute
-    :<|> OrganizationsidmembersinvitedRoute
-    :<|> OrganizationsidnewbillableguestsidboardRoute
-    :<|> OrganizationsidplugindataRoute
-    :<|> OrganizationsidprefsassociateddomainRoute
-    :<|> OrganizationsidprefsorginviterestrictRoute
-    :<|> OrganizationsidtagsRoute
-    :<|> Organizationsidtags1Route
-    :<|> OrganizationsidtagsidtagRoute
-    :<|> Page1Route
-    :<|> PutMembersidcustomboardbackgroundsidbackgroundRoute
-    :<|> Search1Route
-    :<|> SearchmembersRoute
-    :<|> TokenstokenRoute
-    :<|> Tokenstoken1Route
-    :<|> TokenstokenmemberRoute
-    :<|> TokenstokenwebhooksRoute
-    :<|> Tokenstokenwebhooks1Route
-    :<|> Tokenstokenwebhooks2Route
-    :<|> TokenstokenwebhooksidwebhookRoute
-    :<|> Tokenstokenwebhooksidwebhook1Route
-    :<|> WebhookObject1Route
-    :<|> Webhooks2Route
-    :<|> WebhooksidRoute
-    :<|> Webhooksid1Route
-    :<|> WebhooksidfieldRoute
+    =    DeleteActionsRoute
+    :<|> DeleteActionsReactionsByActionRoute
+    :<|> DeleteBoardsRoute
+    :<|> DeleteBoardsBoardpluginsByPluginRoute
+    :<|> DeleteBoardsMembersByMemberRoute
+    :<|> DeleteBoardsPowerupsByPowerupRoute
+    :<|> DeleteCardsRoute
+    :<|> DeleteCardsActionsCommentsByActionRoute
+    :<|> DeleteCardsAttachmentsByAttachmentRoute
+    :<|> DeleteCardsCheckitemByCheckitemRoute
+    :<|> DeleteCardsChecklistsByChecklistRoute
+    :<|> DeleteCardsIdlabelsByLabelRoute
+    :<|> DeleteCardsIdmembersByMemberRoute
+    :<|> DeleteCardsMembersvotedByMemberRoute
+    :<|> DeleteCardsStickersByStickerRoute
+    :<|> DeleteChecklistsRoute
+    :<|> DeleteChecklistsCheckitemsByCheckitemRoute
+    :<|> DeleteCustomfieldsRoute
+    :<|> DeleteCustomfieldsOptionsByCustomfieldoptionRoute
+    :<|> DeleteEnterprisesOrganizationsByOrganizationRoute
+    :<|> DeleteLabelsRoute
+    :<|> DeleteMembersBoardbackgroundsByBackgroundRoute
+    :<|> DeleteMembersBoardstarsByStarRoute
+    :<|> DeleteMembersCustomboardbackgroundsByBackgroundRoute
+    :<|> DeleteMembersCustomstickersByStickerRoute
+    :<|> DeleteMembersSavedsearchesBySearchRoute
+    :<|> DeleteOrganizationsRoute
+    :<|> DeleteOrganizationsLogoRoute
+    :<|> DeleteOrganizationsMembersAllByMemberRoute
+    :<|> DeleteOrganizationsMembersByMemberRoute
+    :<|> DeleteOrganizationsPrefsAssociateddomainRoute
+    :<|> DeleteOrganizationsPrefsOrginviterestrictRoute
+    :<|> DeleteOrganizationsTagsByTagRoute
+    :<|> DeleteTokensRoute
+    :<|> DeleteTokensWebhooksByTokenWebhookRoute
+    :<|> DeleteWebhooksRoute
+    :<|> GetActionsRoute
+    :<|> GetActionsBoardRoute
+    :<|> GetActionsByFieldRoute
+    :<|> GetActionsCardRoute
+    :<|> GetActionsDisplayRoute
+    :<|> GetActionsListRoute
+    :<|> GetActionsMemberRoute
+    :<|> GetActionsMembercreatorRoute
+    :<|> GetActionsOrganizationRoute
+    :<|> GetActionsReactionsRoute
+    :<|> GetActionsReactionsByActionRoute
+    :<|> GetActionsReactionssummaryRoute
+    :<|> GetBatchRoute
+    :<|> GetBoardsRoute
+    :<|> GetBoardsActionsRoute
+    :<|> GetBoardsBoardpluginsRoute
+    :<|> GetBoardsBoardstarsRoute
+    :<|> GetBoardsByFieldRoute
+    :<|> GetBoardsCardsRoute
+    :<|> GetBoardsCardsByBoardidFilterRoute
+    :<|> GetBoardsCardsByCardRoute
+    :<|> GetBoardsChecklistsRoute
+    :<|> GetBoardsCustomfieldsRoute
+    :<|> GetBoardsLabelsRoute
+    :<|> GetBoardsListsRoute
+    :<|> GetBoardsListsByFilterRoute
+    :<|> GetBoardsMembersRoute
+    :<|> GetBoardsMembershipsRoute
+    :<|> GetBoardsPluginsRoute
+    :<|> GetBoardsTagsRoute
+    :<|> GetCardsRoute
+    :<|> GetCardsActionsRoute
+    :<|> GetCardsAttachmentsRoute
+    :<|> GetCardsAttachmentsByAttachmentRoute
+    :<|> GetCardsBoardRoute
+    :<|> GetCardsByFieldRoute
+    :<|> GetCardsCheckitemByCheckitemRoute
+    :<|> GetCardsCheckitemstatesRoute
+    :<|> GetCardsChecklistsRoute
+    :<|> GetCardsCustomfielditemsRoute
+    :<|> GetCardsListRoute
+    :<|> GetCardsMembersRoute
+    :<|> GetCardsMembersvotedRoute
+    :<|> GetCardsPlugindataRoute
+    :<|> GetCardsStickersRoute
+    :<|> GetCardsStickersByStickerRoute
+    :<|> GetChecklistsRoute
+    :<|> GetChecklistsBoardRoute
+    :<|> GetChecklistsByFieldRoute
+    :<|> GetChecklistsCardsRoute
+    :<|> GetChecklistsCheckitemsRoute
+    :<|> GetChecklistsCheckitemsByCheckitemRoute
+    :<|> GetCustomfieldsRoute
+    :<|> GetCustomfieldsOptionsRoute
+    :<|> GetCustomfieldsOptionsByCustomfieldoptionRoute
+    :<|> GetEmojiRoute
+    :<|> GetEnterprisesRoute
+    :<|> GetEnterprisesAdminsRoute
+    :<|> GetEnterprisesMembersRoute
+    :<|> GetEnterprisesMembersByMemberRoute
+    :<|> GetEnterprisesSignupurlRoute
+    :<|> GetEnterprisesTransferrableOrganizationByOrganizationRoute
+    :<|> GetLabelsRoute
+    :<|> GetListsRoute
+    :<|> GetListsActionsRoute
+    :<|> GetListsBoardRoute
+    :<|> GetListsByFieldRoute
+    :<|> GetListsCardsRoute
+    :<|> GetMembersRoute
+    :<|> GetMembersActionsRoute
+    :<|> GetMembersBoardbackgroundsRoute
+    :<|> GetMembersBoardbackgroundsByBackgroundRoute
+    :<|> GetMembersBoardsRoute
+    :<|> GetMembersBoardsinvitedRoute
+    :<|> GetMembersBoardstarsRoute
+    :<|> GetMembersBoardstarsByStarRoute
+    :<|> GetMembersByFieldRoute
+    :<|> GetMembersCardsRoute
+    :<|> GetMembersCustomboardbackgroundsRoute
+    :<|> GetMembersCustomboardbackgroundsByBackgroundRoute
+    :<|> GetMembersCustomemojiRoute
+    :<|> GetMembersCustomemojiByEmojiRoute
+    :<|> GetMembersCustomstickersRoute
+    :<|> GetMembersCustomstickersByStickerRoute
+    :<|> GetMembersNotificationsRoute
+    :<|> GetMembersOrganizationsRoute
+    :<|> GetMembersOrganizationsinvitedRoute
+    :<|> GetMembersSavedsearchesRoute
+    :<|> GetMembersSavedsearchesBySearchRoute
+    :<|> GetMembersTokensRoute
+    :<|> GetNotificationsRoute
+    :<|> GetNotificationsBoardRoute
+    :<|> GetNotificationsByFieldRoute
+    :<|> GetNotificationsCardRoute
+    :<|> GetNotificationsListRoute
+    :<|> GetNotificationsMemberRoute
+    :<|> GetNotificationsMembercreatorRoute
+    :<|> GetNotificationsOrganizationRoute
+    :<|> GetOrganizationsRoute
+    :<|> GetOrganizationsActionsRoute
+    :<|> GetOrganizationsBoardsRoute
+    :<|> GetOrganizationsByFieldRoute
+    :<|> GetOrganizationsExportsRoute
+    :<|> GetOrganizationsMembersRoute
+    :<|> GetOrganizationsMembersByFilterRoute
+    :<|> GetOrganizationsMembershipsRoute
+    :<|> GetOrganizationsMembershipsByMembershipRoute
+    :<|> GetOrganizationsMembersinvitedRoute
+    :<|> GetOrganizationsNewbillableguestsByBoardRoute
+    :<|> GetOrganizationsPlugindataRoute
+    :<|> GetOrganizationsTagsRoute
+    :<|> GetSearchRoute
+    :<|> GetSearchMembersRoute
+    :<|> GetTokensRoute
+    :<|> GetTokensMemberRoute
+    :<|> GetTokensWebhooksRoute
+    :<|> GetTokensWebhooksByTokenWebhookRoute
+    :<|> GetWebhooksRoute
+    :<|> GetWebhooksByFieldRoute
+    :<|> PostActionsReactionsRoute
+    :<|> PostBoardsRoute
+    :<|> PostBoardsBoardpluginsRoute
+    :<|> PostBoardsCalendarkeyGenerateRoute
+    :<|> PostBoardsChecklistsRoute
+    :<|> PostBoardsEmailkeyGenerateRoute
+    :<|> PostBoardsIdtagsRoute
+    :<|> PostBoardsLabelsRoute
+    :<|> PostBoardsListsRoute
+    :<|> PostBoardsMarkedasviewedRoute
+    :<|> PostBoardsPowerupsRoute
+    :<|> PostCardsRoute
+    :<|> PostCardsActionsCommentsRoute
+    :<|> PostCardsAttachmentsRoute
+    :<|> PostCardsChecklistsRoute
+    :<|> PostCardsIdlabelsRoute
+    :<|> PostCardsIdmembersRoute
+    :<|> PostCardsLabelsRoute
+    :<|> PostCardsMarkassociatednotificationsreadRoute
+    :<|> PostCardsMembersvotedRoute
+    :<|> PostChecklistsRoute
+    :<|> PostChecklistsCheckitemsRoute
+    :<|> PostCustomfieldsRoute
+    :<|> PostCustomfieldsOptionsRoute
+    :<|> PostEnterprisesTokensRoute
+    :<|> PostLabelsRoute
+    :<|> PostListsRoute
+    :<|> PostListsArchiveallcardsRoute
+    :<|> PostListsMoveallcardsRoute
+    :<|> PostMembersBoardstarsRoute
+    :<|> PostMembersOnetimemessagesdismissedRoute
+    :<|> PostMembersSavedsearchesRoute
+    :<|> PostNotificationsAllReadRoute
+    :<|> PostOrganizationsRoute
+    :<|> PostOrganizationsExportsRoute
+    :<|> PostOrganizationsLogoRoute
+    :<|> PostOrganizationsTagsRoute
+    :<|> PostTokensWebhooksRoute
+    :<|> PostWebhooksRoute
+    :<|> PutActionsRoute
+    :<|> PutActionsTextRoute
+    :<|> PutBoardsRoute
+    :<|> PutBoardsMembersRoute
+    :<|> PutBoardsMembersByMemberRoute
+    :<|> PutBoardsMembershipsByMembershipRoute
+    :<|> PutBoardsMyprefsEmailpositionRoute
+    :<|> PutBoardsMyprefsIdemaillistRoute
+    :<|> PutBoardsMyprefsShowlistguideRoute
+    :<|> PutBoardsMyprefsShowsidebarRoute
+    :<|> PutBoardsMyprefsShowsidebaractivityRoute
+    :<|> PutBoardsMyprefsShowsidebarboardactionsRoute
+    :<|> PutBoardsMyprefsShowsidebarmembersRoute
+    :<|> PutCardCustomfieldItemByCardCustomfieldRoute
+    :<|> PutCardsRoute
+    :<|> PutCardsActionsCommentsByActionRoute
+    :<|> PutCardsCheckitemByCheckitemRoute
+    :<|> PutCardsChecklistCheckitemByCardCheckitemChecklistRoute
+    :<|> PutCardsStickersByStickerRoute
+    :<|> PutChecklistsRoute
+    :<|> PutChecklistsCheckitemsByCheckitemRoute
+    :<|> PutChecklistsNameRoute
+    :<|> PutCustomfieldsRoute
+    :<|> PutEnterprisesAdminsByMemberRoute
+    :<|> PutEnterprisesMembersDeactivatedByMemberRoute
+    :<|> PutEnterprisesOrganizationsRoute
+    :<|> PutLabelsRoute
+    :<|> PutLabelsColorRoute
+    :<|> PutLabelsNameRoute
+    :<|> PutListsRoute
+    :<|> PutListsClosedRoute
+    :<|> PutListsIdboardRoute
+    :<|> PutListsNameRoute
+    :<|> PutListsPosRoute
+    :<|> PutListsSubscribedRoute
+    :<|> PutMembersRoute
+    :<|> PutMembersBoardbackgroundsByBackgroundRoute
+    :<|> PutMembersBoardstarsByStarRoute
+    :<|> PutMembersCustomboardbackgroundsByBackgroundRoute
+    :<|> PutMembersSavedsearchesBySearchRoute
+    :<|> PutNotificationsRoute
+    :<|> PutNotificationsUnreadRoute
+    :<|> PutOrganizationsRoute
+    :<|> PutOrganizationsMembersRoute
+    :<|> PutOrganizationsMembersByMemberRoute
+    :<|> PutOrganizationsMembersDeactivatedByMemberRoute
+    :<|> PutTokensWebhooksByTokenWebhookidRoute
+    :<|> PutWebhooksRoute
 
 

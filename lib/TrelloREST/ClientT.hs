@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
@@ -11,7 +12,8 @@ import Control.Monad.Morph (MFunctor(..))
 import Control.Monad.Reader (ReaderT(..))
 import Control.Monad.Reader (MonadReader(..))
 import Control.Monad.Trans.Class (MonadTrans(..))
-import Servant.Client (ClientEnv, ServantError, runClientM)
+import Prelude
+import Servant.Client (BaseUrl(..), ClientEnv, ServantError, Scheme(..), runClientM)
 
 
 -- | Monad transformer for client calls.
@@ -22,14 +24,18 @@ newtype TrelloRESTClientT m a = TrelloRESTClientT {
 instance MonadTrans TrelloRESTClientT where
   lift ma = TrelloRESTClientT (ReaderT (\_ -> ExceptT (fmap Right ma)))
 
-instance MFunctor SwaggerPetstoreClientT where
-  hoist f m = SwaggerPetstoreClientT (ReaderT (\env -> ExceptT (f $ runClientT env m)))
+instance MFunctor TrelloRESTClientT where
+  hoist f m = TrelloRESTClientT (ReaderT (\env -> ExceptT (f $ runClientT env m)))
 
 instance MonadIO m => TrelloRESTClientMonad (TrelloRESTClientT m) where
   liftTrelloRESTClient clientM = TrelloRESTClientT $ do
     env <- ask
     res <- liftIO $ runClientM clientM env
     liftEither res
+
+
+baseUrl :: BaseUrl
+baseUrl = BaseUrl Https "api.trello.com" 443 "/1"
 
 runClientT :: ClientEnv -> TrelloRESTClientT m a -> m (Either ServantError a)
 runClientT env =  runExceptT . flip runReaderT env . unClientT
