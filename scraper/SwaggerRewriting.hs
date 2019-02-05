@@ -165,7 +165,7 @@ stripOptionalBinaryParams
     transformParams (Array params) = Array $ V.filter pred params
     transformParams _ = error "Invalid type for params"
 
-    pred p = isBinaryParam p && isOptionalParam p
+    pred p = not (isBinaryParam p && isOptionalParam p)
 
 -- Removed operations containing required binary params
 stripOperationsWithRequiredBinaryParams :: AesonM ()
