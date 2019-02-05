@@ -4,7 +4,7 @@ import BasicPrelude hiding (decodeUtf8, encodeUtf8)
 import Data.Aeson (Value)
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
-import Data.Yaml (encodeFile)
+import Data.Yaml (encodeFile, decodeFileThrow)
 import Lens.Micro((^.), (^?), _3)
 import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
@@ -19,7 +19,26 @@ import SwaggerRewriting
 main :: IO ()
 main = do
   html <- downloadDocs
+  rawSwagger <- extractSwagger html
+  encodeFile "swagger.yaml" rawSwagger
 
+  -- We need to apply the patches *before* the rewrite & validation stage,
+  -- so we can workaround broken-ness in the upstream file
+  putStrLn "Applying patches..."
+  let patchDir = "scraper/patches/"
+  patches <- map (patchDir ++) <$> listDirectory patchDir
+  mapM_ applyPatch patches
+
+  patchedSwagger <- decodeFileThrow "swagger.yaml"
+
+  -- Apply the validation / rewrite pass
+  case rewriteSwagger patchedSwagger of
+       Right obj -> encodeFile "swagger.yaml" obj
+       Left  err -> putStrLn err >> exitFailure
+
+
+extractSwagger :: LByteString -> IO Value
+extractSwagger html = do
   putStrLn "Parsing"
   let swaggers = processHtml html
 
@@ -36,16 +55,7 @@ main = do
 
   let (uid, selected, _) = maximumBy (compare `on` (^. _3)) swaggers'
   putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
-
-  case rewriteSwagger selected of
-       Right obj -> encodeFile "swagger.yaml" obj
-       Left  err -> putStrLn err >> exitFailure
-
-  -- Apply patches
-  putStrLn "Applying patches..."
-  let patchDir = "scraper/patches/"
-  patches <- map (patchDir ++) <$> listDirectory patchDir
-  mapM_ applyPatch patches
+  return selected
 
 
 -- Downloads the API docs
