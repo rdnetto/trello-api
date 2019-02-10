@@ -2,6 +2,7 @@ module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
 import Data.Aeson (Value)
+import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import Data.Yaml (encodeFile, decodeFileThrow)
@@ -18,7 +19,11 @@ import SwaggerRewriting
 
 main :: IO ()
 main = do
-  html <- downloadDocs
+  -- Use cached version of file to improve dev loop
+  html <- if False
+             then downloadDocs
+             else BSL.readFile "/home/reuben/scratch/reference.html"
+
   rawSwagger <- extractSwagger html
   encodeFile "swagger.yaml" rawSwagger
 
