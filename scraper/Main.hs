@@ -45,7 +45,8 @@ main = do
 extractSwagger :: LByteString -> IO Value
 extractSwagger html = do
   putStrLn "Parsing"
-  let swaggers = processHtml html
+  let jsonBlobs = getJsonBlobs html
+      swaggers = extractSwaggers jsonBlobs
 
   swaggers' <- forM swaggers $ \(uid, sw) -> do
     let n = pathCount sw
