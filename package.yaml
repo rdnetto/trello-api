@@ -111,6 +111,7 @@ tests:
     - basic-prelude
     - tasty
     - tasty-hunit
+    - text
     - raw-strings-qq
     - scraper-lib
 

@@ -4,6 +4,7 @@ module Main (main) where
 
 import BasicPrelude
 import Data.Either (isRight)
+import Data.Text (stripEnd)
 import Test.Tasty (TestTree, defaultMain, testGroup)
 import Test.Tasty.HUnit (testCase, assertBool)
 import Text.RawString.QQ (r)
@@ -21,16 +22,29 @@ docParseTests :: TestTree
 docParseTests
   = testGroup "extractCodeBlockContents" (map test cases)
   where
-    test x
-      = testCase "Code block test"
+    test (name, input)
+      = testCase name
       . assertBool (show res)
       . isRight
       $ res
       where
-        res = extractCodeBlockContents "" x
+        res = extractCodeBlockContents "" (stripEnd input)
 
     cases = [
-        [r|
+        ("Simple case", [r|
+          [block:code]
+          {
+            "codes": [
+              {
+                "code": "https://api.trello.com/1/actions/592f11060f95a3d3d46a987a",
+                "language": "curl"
+              }
+            ]
+          }
+          [/block]
+        |]),
+
+        ("Multiple blocks", [r|
           Here's some data
           [block:parameters]
           {
@@ -72,6 +86,6 @@ docParseTests
             ]
           }
           [/block]
-        |]
+        |])
       ]
 
