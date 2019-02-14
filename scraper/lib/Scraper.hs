@@ -1,6 +1,4 @@
-{-# LANGUAGE TypeApplications #-}
-
-module Scraper (getJsonBlobs, extractSwaggers) where
+module Scraper (getJsonBlobs, extractSwaggers, extractDocs) where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
 import Data.Aeson (Value(Object), eitherDecode')
@@ -12,6 +10,7 @@ import Safe (fromJustNote)
 import Text.HTML.Parser (Attr(..), Token(..), parseTokensLazy)
 
 import HtmlDecoding
+import Util
 
 
 {-
@@ -55,10 +54,16 @@ extractSwaggers
     unObject (Object obj) = obj
     unObject x = error $ "Not an object: " ++ show x
 
+-- Extracts the documentation from the (id, JSON) entries returned by getJsonBlobs
+extractDocs :: [(Text, Value)] -> Value
+extractDocs
+  = fromJustNote "Could not find docs in JSON blobs"
+  . lookup "docs"
+
 parseBlob :: (Text, Text) -> (Text, Value)
 parseBlob (key, blob) = (key, res) where
   res
-    = fromLeftNote ("Error parsing entry for " ++ T.unpack key)
+    = fromRightNote ("Error parsing entry for " ++ T.unpack key)
     . eitherDecode'
     . encodeUtf8
     . TL.fromStrict
@@ -76,8 +81,4 @@ handleToken (TagOpen name attrs) = do
       <*> lookup "data-json" attrs'
 handleToken (TagSelfClose name attrs) = handleToken $ TagOpen name attrs
 handleToken _ = Nothing
-
-fromLeftNote :: String -> Either String a -> a
-fromLeftNote msg (Left err) = error (msg ++ ": " ++ err)
-fromLeftNote _ (Right x) = x
 

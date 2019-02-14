@@ -3,7 +3,6 @@ module SwaggerRewriting (rewriteSwagger) where
 import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
 import Control.Monad.Except (liftEither)
 import Data.Aeson (Value(..))
-import Data.Either (partitionEithers)
 import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
@@ -11,6 +10,7 @@ import Lens.Micro ((&), (.~), (^..), (%~), Traversal', _Left, filtered)
 import Lens.Micro.Aeson (key, values, _Bool, _String)
 
 import AesonMonad
+import Util
 
 
 -- Rewrites the Swagger entry to:
@@ -215,17 +215,4 @@ isPathParam
   = anyOr False
   . map (== "path")
   . (^.. key "in")
-
--- b for the empty case, or any for non-empty case
-anyOr :: Bool -> [Bool] -> Bool
-anyOr b [] = b
-anyOr _ xs = any id xs
-
--- Like sequence, but preserves all left-values
--- Useful for batch reporting of errors.
-batchEithers :: [Either a b] -> Either [a] [b]
-batchEithers xs = res where
-  (lefts, rights) = partitionEithers xs
-  res | null lefts = Right rights
-      | otherwise  = Left lefts
 

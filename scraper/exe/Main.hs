@@ -13,6 +13,7 @@ import System.Directory (listDirectory)
 import System.Exit (exitFailure)
 import System.Process (callProcess)
 
+import DocParsing
 import Scraper
 import SwaggerRewriting
 
@@ -24,8 +25,17 @@ main = do
              then downloadDocs
              else BSL.readFile "/home/reuben/scratch/reference.html"
 
-  rawSwagger <- extractSwagger html
+  let jsonBlobs
+        = getJsonBlobs html
+      responseSchemas
+        = HMS.map inferSchema
+        . extractExampleResponses
+        . extractDocs
+        $ jsonBlobs
+  rawSwagger <- getSwagger $ extractSwaggers jsonBlobs
   encodeFile "swagger.yaml" rawSwagger
+
+  print responseSchemas
 
   -- We need to apply the patches *before* the rewrite & validation stage,
   -- so we can workaround broken-ness in the upstream file
@@ -41,13 +51,9 @@ main = do
        Right obj -> encodeFile "swagger.yaml" obj
        Left  err -> putStrLn err >> exitFailure
 
-
-extractSwagger :: LByteString -> IO Value
-extractSwagger html = do
-  putStrLn "Parsing"
-  let jsonBlobs = getJsonBlobs html
-      swaggers = extractSwaggers jsonBlobs
-
+-- Selects the appropriate swagger entry
+getSwagger :: [(Text, Value)] -> IO Value
+getSwagger swaggers = do
   swaggers' <- forM swaggers $ \(uid, sw) -> do
     let n = pathCount sw
     putStrLn $ concat [
