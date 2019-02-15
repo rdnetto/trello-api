@@ -7,7 +7,7 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import Data.Text.Encoding (encodeUtf8)
 import qualified Data.Vector as V
-import Lens.Micro ((^..), (&))
+import Lens.Micro ((^..), (&), (^?), _Right)
 import Lens.Micro.Aeson (_String, key, values)
 import Safe (fromJustNote)
 import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
@@ -44,11 +44,15 @@ getResponse obj = do
   body <- getStringKey "body" obj
   guard $ body /= ""
 
+  -- Used for failure messages
+  let objString
+        = T.unpack
+        . decodeUtf8
+        . BSL.toStrict
+        $ encode obj
+
   codeBlockContents :: [Text]
-    <- (case extractCodeBlockContents (T.unpack . decodeUtf8 . BSL.toStrict $ encode obj) body of
-            Right x -> Just x
-            Left e -> traceShow e $ Nothing
-       )
+    <- extractCodeBlockContents objString body ^? _Right
 
   let decoder = decodeJson $ "Failed to decode code blobs in " ++ show obj
       responses :: [Value]
