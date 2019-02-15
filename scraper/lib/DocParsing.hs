@@ -13,7 +13,6 @@ import Safe (fromJustNote)
 import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
 import Text.Parsec.Char (string, anyChar)
 
-import Debug.Trace
 import Util
 
 
@@ -62,10 +61,11 @@ getResponse obj = do
         & map (fromJustNote "Could not find `code` attribute")
         & map decoder
 
-  let response = case responses of
-                      [x] -> x
-                      _   -> error $ "Could not find unique response for " ++ show obj
-  return (operationId, response)
+  case responses of
+       -- Not all endpoints have example code blocks
+       []  -> Nothing
+       [x] -> Just (operationId, x)
+       _   -> error $ "Could not find unique response for " ++ show obj
 
 {- Body has the following structure:
    Optional header explaining stuff.
@@ -81,13 +81,16 @@ getResponse obj = do
    Note that there may be multiple code blocks in some cases, though not all of them may be JSON.
    e.g. 'http' is used for examples of query params
 -}
--- TODO: see how many blocks don't parse
 extractCodeBlockContents :: String -> Text -> Either ParseError [Text]
-extractCodeBlockContents name raw = parse (many codeBlockParser <* eof) name raw where
-  codeBlockParser = do
+extractCodeBlockContents name raw = parse p name raw where
+  p = (try codeBlockParser <|> whatever) <* eof
+  codeBlockParser = many $ do
     void $ manyTill anyChar (try $ string "[block:code]")
     txt <- manyTill anyChar (try $ string "[/block]")
     return $ T.pack txt
+
+  -- If there are no code blocks, we still want the parse to succeed
+  whatever = many anyChar >> pure []
 
 -- Determines if a given code block contains JSON
 isJsonCodeBlob :: Value -> Bool
@@ -123,7 +126,7 @@ zeroOrOne xs = error $ "Expected <2 results: " ++ show xs
 -- Deserializes a JSON snippet
 decodeJson :: FromJSON a => String -> Text -> a
 decodeJson err txt
-  = fromRightNote (err ++ ": " ++ T.unpack txt)
+  = fromRightNote (err ++ "\nJSON:\n" ++ T.unpack txt ++ "\n")
   . eitherDecode
   . BSL.fromStrict
   . encodeUtf8

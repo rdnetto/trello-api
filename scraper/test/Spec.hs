@@ -86,6 +86,17 @@ docParseTests
             ]
           }
           [/block]
-        |])
+        |]),
+
+        -- This isn't a code block, so we expect no parse
+        ("Empty case", [r|
+          [block:callout]
+          {
+            "type": "danger",
+            "title": "",
+            "body": "Deleting a custom field definition will also delete all of the values across all cards that have been set for that custom field. There is no way to get those values back after they have been deleted."
+          }
+          [/block]
+      |])
       ]
 
