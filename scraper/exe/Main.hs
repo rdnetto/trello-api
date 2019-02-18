@@ -1,9 +1,11 @@
 module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
+import Control.Exception (evaluate)
 import Data.Aeson (Value)
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
+import qualified Data.List as L
 import qualified Data.Text as T
 import Data.Yaml (encodeFile, decodeFileThrow)
 import Lens.Micro((^.), (^?), _3)
@@ -25,28 +27,29 @@ main = do
              then downloadDocs
              else BSL.readFile "/home/reuben/scratch/reference.html"
 
+  -- Parse and patch the swagger file and docs
   let jsonBlobs
         = getJsonBlobs html
-      responseSchemas
+
+  patchedSwagger
+    <-  applyPatches "swagger"
+    =<< (getSwagger $ extractSwaggers jsonBlobs)
+
+  docs
+    <- applyPatches "docs"
+    $  extractDocs jsonBlobs
+
+  -- Compute the schema for responses from docs (not present in swagger)
+  let responseSchemas
         = HMS.map inferSchema
         . extractExampleResponses
-        . extractDocs
-        $ jsonBlobs
-  rawSwagger <- getSwagger $ extractSwaggers jsonBlobs
-  encodeFile "swagger.yaml" rawSwagger
+        $ docs
 
-  print responseSchemas
-
-  -- We need to apply the patches *before* the rewrite & validation stage,
-  -- so we can workaround broken-ness in the upstream file
-  putStrLn "Applying patches..."
-  let patchDir = "scraper/patches/"
-  patches <- map (patchDir ++) <$> listDirectory patchDir
-  mapM_ applyPatch patches
-
-  patchedSwagger <- decodeFileThrow "swagger.yaml"
+  -- DEBUG: Forcing thunk for debugging
+  void $ evaluate responseSchemas
 
   -- Apply the validation / rewrite pass
+  -- TODO: this should consume responseSchemas
   case rewriteSwagger patchedSwagger of
        Right obj -> encodeFile "swagger.yaml" obj
        Left  err -> putStrLn err >> exitFailure
@@ -69,6 +72,26 @@ getSwagger swaggers = do
   putStrLn $ "Selected " ++ uid ++ " - writing to swagger.yaml..."
   return selected
 
+-- General mechanism for patching files which are well-formed JSON, but broken in subtle ways.
+-- `name` is both the filename (minus extension) and the name of the patch directory
+applyPatches :: FilePath -> Value -> IO Value
+applyPatches name input = do
+  -- We intentionally write the patched file to the root dir instead of /tmp,
+  -- since this simplifies debugging and patch creation.
+  encodeFile (name ++ ".yaml") input
+
+  -- We need to apply the patches *before* the rewrite & validation stage,
+  -- so we can workaround broken-ness in the upstream file
+  putStrLn $ "Applying patches for " ++ T.pack name ++ "..."
+  let patchDir = "scraper/patches/" </> name
+
+  patches
+    <-  map (patchDir </>)
+    .   filter (L.isSuffixOf ".patch")
+    <$> listDirectory patchDir
+
+  mapM_ applyPatch patches
+  decodeFileThrow $ name ++ ".yaml"
 
 -- Downloads the API docs
 downloadDocs :: IO LByteString
