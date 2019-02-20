@@ -1,7 +1,6 @@
 module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Control.Exception (evaluate)
 import Data.Aeson (Value)
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
@@ -16,6 +15,7 @@ import System.Exit (exitFailure)
 import System.Process (callProcess)
 
 import DocParsing
+import SchemaInference
 import Scraper
 import SwaggerRewriting
 
@@ -45,12 +45,8 @@ main = do
         . extractExampleResponses
         $ docs
 
-  -- DEBUG: Forcing thunk for debugging
-  void $ evaluate responseSchemas
-
   -- Apply the validation / rewrite pass
-  -- TODO: this should consume responseSchemas
-  case rewriteSwagger patchedSwagger of
+  case rewriteSwagger responseSchemas patchedSwagger of
        Right obj -> encodeFile "swagger.yaml" obj
        Left  err -> putStrLn err >> exitFailure
 

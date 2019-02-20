@@ -16,8 +16,8 @@ import Util
 -- Rewrites the Swagger entry to:
 -- - have sane operation IDs
 -- - filter out operations with unsupported binary params
-rewriteSwagger :: Value -> Either Text Value
-rewriteSwagger obj
+rewriteSwagger :: HashMap Text Value -> Value -> Either Text Value
+rewriteSwagger responseSchemas obj
   = map snd
   . flip runAeson obj
   $ do

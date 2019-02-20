@@ -1,4 +1,4 @@
-module DocParsing {- (extractExampleResponses, inferSchema) -} where
+module DocParsing (extractExampleResponses, extractCodeBlockContents) where
 
 import BasicPrelude hiding (encodeUtf8)
 import Data.Aeson (FromJSON, Value(..), encode, eitherDecode)
