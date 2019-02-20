@@ -104,11 +104,6 @@ isJsonCodeBlob
   . getStringKey "language"
 
 
--- TODO: given a JSON object, infer a schema for it
-inferSchema :: Value -> Value
-inferSchema = undefined
-
-
 -- Generic helper for extracting a string from a JSOn object
 getStringKey :: Text -> Value -> Maybe Text
 getStringKey k obj
@@ -116,11 +111,6 @@ getStringKey k obj
   $   obj
   ^.. key k
   .   _String
-
--- Helper function for coercing the result of a traversal to a single value
-singletonNote :: Show a => String -> [a] -> a
-singletonNote _ [x] = x
-singletonNote msg xs = error $ msg ++ ": " ++ show xs
 
 zeroOrOne :: Show a => [a] -> Maybe a
 zeroOrOne [x] = Just x
