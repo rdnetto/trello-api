@@ -1,0 +1,41 @@
+parentDoc: 594d1212612674001b2d1fde
+swagger:
+  path: /webhooks/{id}
+slug: webhooksid-1
+excerpt: Delete a webhook by ID.
+title: /webhooks/{id}
+type: endpoint
+api:
+  results:
+    codes:
+    - status: 200
+      name: ''
+      language: json
+      code: |-
+        {
+            "_value": null
+        }
+    - status: 400
+      name: ''
+      language: json
+      code: ! '{}'
+  auth: required
+  url: /webhooks/{id}
+  params:
+  - _id: 595abe9574dc38001bf0645d
+    default: ''
+    required: false
+    in: path
+    name: id
+    type: string
+    desc: ID of the webhook to delete.
+    ref: ''
+  method: delete
+  examples:
+    codes:
+    - language: curl
+      code: curl -X "DELETE" https://api.trello.com/1/webhooks/595ab2fe6b90aed2223416d0?key=83746d11892523f2bf1aba93efc89fca
+  apiSetting: 5928856394d9382f0096d7f2
+sync_unique: ''
+order: 5
+isReference: true

@@ -1,0 +1,80 @@
+parentDoc: 5931c301d1f976000f7b4c0b
+link_url: ''
+next:
+  pages: []
+  description: ''
+githubsync: ''
+_id: 594d190cd8a2f7001b0b5481
+createdAt: 2017-06-23T13:35:08.120Z
+slug: action-object
+project: 592884a1bdc27e1b00e57967
+body: |-
+  [block:parameters]
+  {
+    "data": {
+      "0-0": "**id**\nstring",
+      "0-1": "The ID of the action",
+      "1-0": "**data**\nobject",
+      "2-0": "**date**\ndate",
+      "2-1": "When the action occurred",
+      "3-0": "**idMemberCreator**\nstring",
+      "3-1": "The ID of the member who caused the action",
+      "4-0": "**type**\nstring",
+      "4-1": "The type of the action. See list of [Action Types](ref:action-types) for options.",
+      "1-1": "Relevant information regarding the action"
+    },
+    "cols": 2,
+    "rows": 5
+  }
+  [/block]
+
+  [block:code]
+  {
+    "codes": [
+      {
+        "code": "https://api.trello.com/1/actions/592f11060f95a3d3d46a987a",
+        "language": "curl"
+      }
+    ]
+  }
+  [/block]
+
+  [block:code]
+  {
+    "codes": [
+      {
+        "code": "{\n  \"id\": \"592f11060f95a3d3d46a987a\",\n  \"idMemberCreator\": \"5191197f9433cf5507006338\",\n  \"data\": {\n    \"list\": {\n      \"name\": \"Professional\",\n      \"id\": \"54a17e9db559f0356ce022e4\"\n    },\n    \"board\": {\n      \"shortLink\": \"BdarzfKF\",\n      \"name\": \"Life Goals\",\n      \"id\": \"54a17d76d4a5072e3931736b\"\n    },\n    \"card\": {\n      \"shortLink\": \"gplJv6dx\",\n      \"idShort\": 2,\n      \"name\": \"Increase revenue by 10%\",\n      \"id\": \"54a1844d304d9736e54d2546\",\n      \"due\": \"2017-12-12T17:00:00.000Z\"\n    },\n    \"old\": {\n      \"due\": \"2017-05-01T16:00:00.000Z\"\n    }\n  },\n  \"type\": \"updateCard\",\n  \"date\": \"2017-05-31T18:52:54.933Z\",\n  \"memberCreator\": {\n    \"id\": \"5191197f9433cf5507006338\",\n    \"avatarHash\": \"ae0fde383cc2a195c053f1ad42c02022\",\n    \"fullName\": \"Brian Cervino\",\n    \"initials\": \"BC\",\n    \"username\": \"brian\"\n  },\n  \"display\": {\n    \"translationKey\": \"action_changed_a_due_date\",\n    \"entities\": {\n      \"card\": {\n        \"type\": \"card\",\n        \"due\": \"2017-12-12T17:00:00.000Z\",\n        \"id\": \"54a1844d304d9736e54d2546\",\n        \"shortLink\": \"gplJv6dx\",\n        \"text\": \"Increase revenue by 10%\"\n      },\n      \"date\": {\n        \"type\": \"date\",\n        \"date\": \"2017-12-12T17:00:00.000Z\"\n      },\n      \"memberCreator\": {\n        \"type\": \"member\",\n        \"id\": \"5191197f9433cf5507006338\",\n        \"username\": \"brian\",\n        \"text\": \"Brian Cervino\"\n      }\n    }\n  }\n}",
+        "language": "json"
+      }
+    ]
+  }
+  [/block]
+category: 5928856394d9382f0096d7f4
+__v: 1
+user: 592599f5d15a9d1900be545c
+version: 592884a2bdc27e1b00e5796a
+link_external: false
+hidden: false
+updates:
+- 59ffc09630f873001033cdbc
+excerpt: ''
+title: Action Object
+type: basic
+api:
+  results:
+    codes:
+    - status: 200
+      name: ''
+      language: json
+      code: ! '{}'
+    - status: 400
+      name: ''
+      language: json
+      code: ! '{}'
+  auth: required
+  url: ''
+  params: []
+  method: get
+sync_unique: ''
+order: 0
+isReference: true
