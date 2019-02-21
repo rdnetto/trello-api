@@ -110,10 +110,12 @@ tests:
     main:                Spec.hs
     source-dirs:         scraper/test
     dependencies:
+    - aeson
     - basic-prelude
+    - raw-strings-qq
+    - scraper-lib
     - tasty
     - tasty-hunit
     - text
-    - raw-strings-qq
-    - scraper-lib
+    - yaml
 
