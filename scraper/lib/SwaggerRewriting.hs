@@ -4,9 +4,11 @@ import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
 import Control.Monad.Except (liftEither)
 import Data.Aeson (Value(..))
 import qualified Data.Set as S
+import qualified Data.HashMap.Strict as HMS
+import Safe (fromJustNote)
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (.~), (^..), (%~), Traversal', _Left, filtered)
+import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has)
 import Lens.Micro.Aeson (key, values, _Bool, _String)
 
 import AesonMonad
@@ -16,6 +18,7 @@ import Util
 -- Rewrites the Swagger entry to:
 -- - have sane operation IDs
 -- - filter out operations with unsupported binary params
+-- - have sane response schemas
 rewriteSwagger :: HashMap Text Value -> Value -> Either Text Value
 rewriteSwagger responseSchemas obj
   = map snd
@@ -23,6 +26,9 @@ rewriteSwagger responseSchemas obj
   $ do
     -- Validation
     checkParamConsistency
+
+    -- This needs to be done *before* we rewrite the operation IDs, since we correlate on them
+    addResponseSchemas responseSchemas
 
     -- Rewrite passes
     rewriteOperationIDs
@@ -189,6 +195,45 @@ stripOperationsWithRequiredBinaryParams
       res
         | null required = Just op
         | otherwise     = Nothing
+
+
+-- Add inferred response schemas. responseSchemas is keyed on operationId
+addResponseSchemas :: HashMap Text Value -> AesonM ()
+addResponseSchemas responseSchemas
+  = withChild "paths"
+  . forEachKey_ $ \path ->
+      forEachKey_ $ \method -> (do
+          op <- getCurrent
+          let operationId
+                = fromJustNote ("No operation ID in " ++ show (path, method))
+                $ op ^? key "operationId" . _String
+
+          let f | key "responses" `has` op
+                  = id
+                | otherwise
+                  = case HMS.lookup operationId responseSchemas of
+                         Just schema -> key "responses" .~ generateResponse schema
+                         Nothing     -> id
+
+          setCurrent $ f op
+      )
+
+-- Generate a Swagger response definition given a schema
+-- See https://swagger.io/docs/specification/describing-responses/
+generateResponse :: Value -> Value
+generateResponse schema = res where
+  mkObject = Object . HMS.fromList
+  mkSimpleObject k v = mkObject [(k, v)]
+  res
+    = mkSimpleObject "200"
+    $ mkObject [
+      ("description", String "OK"),
+      ("content", content)
+    ]
+  content
+    = mkSimpleObject "application/json"
+    . mkSimpleObject "schema"
+    $ schema
 
 
 -- Traversal for parameters on an operation.
