@@ -2,7 +2,7 @@ module DocParsing (extractExampleResponses, extractCodeBlockContents, getRespons
 
 import BasicPrelude hiding (encodeUtf8)
 import Data.Aeson (FromJSON, Value(..), encode, eitherDecode)
-import qualified Data.ByteString.Lazy as BSL
+import qualified Data.ByteString.Lazy.Char8 as BSL
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import Data.Text.Encoding (encodeUtf8)
@@ -65,7 +65,7 @@ getResponseFromApi obj = do
   -- Ignore empty strings
   guard . not $ T.null json
 
-  let decoder = decodeJson $ "Failed to decode code blobs in " ++ show obj
+  let decoder = decodeJson $ "Failed to decode code blobs in " ++ renderJson obj
   return (operationId, decoder json)
 
 
@@ -86,7 +86,7 @@ getResponseFromBody obj = do
   codeBlockContents :: [Text]
     <- extractCodeBlockContents objString body ^? _Right
 
-  let decoder = decodeJson $ "Failed to decode code blobs in " ++ show obj
+  let decoder = decodeJson $ "Failed to decode code blobs in " ++ renderJson obj
       responses :: [Value]
         = codeBlockContents
         & map decoder
@@ -157,4 +157,12 @@ decodeJson err txt
   . BSL.fromStrict
   . encodeUtf8
   $ txt
+
+-- Serializes a JSON snippet for error reporting
+renderJson :: Value -> String
+renderJson
+  = T.unpack
+  . decodeUtf8
+  . BSL.toStrict
+  . encode
 
