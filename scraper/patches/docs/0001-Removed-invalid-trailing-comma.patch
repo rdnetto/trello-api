@@ -1,0 +1,43 @@
+From f5ed37a68a92c64f7b6c70926317a54fcb04b5fa Mon Sep 17 00:00:00 2001
+From: Reuben D'Netto <rdnetto@gmail.com>
+Date: Fri, 22 Feb 2019 18:59:02 +1100
+Subject: [PATCH] Removed invalid trailing comma
+
+---
+ docs.yaml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/docs.yaml b/docs.yaml
+index 81f1966..a76ecd2 100644
+--- a/docs.yaml
++++ b/docs.yaml
+@@ -64327,7 +64327,7 @@
+           code: |-
+             [
+                 {
+-                    "callbackURL": "https://trello.com/",
++                    "callbackURL": "https://trello.com/"
+                 }
+             ]
+         - status: 400
+@@ -64827,7 +64827,7 @@
+           code: |-
+             [
+                 {
+-                    "callbackURL": "https://trello.com/",
++                    "callbackURL": "https://trello.com/"
+                 }
+             ]
+         - status: 400
+@@ -65305,7 +65305,7 @@
+         code: |-
+           [
+               {
+-                  "callbackURL": "https://trello.com/",
++                  "callbackURL": "https://trello.com/"
+               }
+           ]
+       - status: 400
+-- 
+2.19.2
+
