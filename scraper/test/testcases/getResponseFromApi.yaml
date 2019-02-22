@@ -1,9 +1,25 @@
-parentDoc: 594d1212612674001b2d1fde
+parentDoc: 59304329b810fd000fccb51d
+link_url: ''
+next:
+  pages: []
+  description: ''
 swagger:
-  path: /webhooks/{id}
-slug: webhooksid-1
-excerpt: Delete a webhook by ID.
-title: /webhooks/{id}
+  path: /boards/{id}/plugins
+githubsync: ''
+_id: 5952d8072cc1e8001b6adb16
+createdAt: 2017-06-27T22:11:19.902Z
+slug: boardsidplugins
+project: 592884a1bdc27e1b00e57967
+body: ''
+category: 5928856394d9382f0096d7f4
+__v: 2
+user: 57b333148d94953200fd31b8
+version: 592884a2bdc27e1b00e5796a
+link_external: false
+hidden: false
+updates: []
+excerpt: List the Power-Ups for a board
+title: /boards/{id}/plugins
 type: endpoint
 api:
   results:
@@ -12,30 +28,49 @@ api:
       name: ''
       language: json
       code: |-
-        {
-            "_value": null
-        }
+        [
+          {
+            "id": "55a5d917446f517774210013",
+            "name": "Voting",
+            "public": true,
+            "url": "https://voting.trello.services/manifest.json"
+          },
+          {
+            "id": "568c143d95adcd7308cbc3fb",
+            "name": "SurveyMonkey",
+            "public": true,
+            "url": "https://surveymonkey.trello.services/manifest.json"
+          }
+        ]
     - status: 400
       name: ''
       language: json
       code: ! '{}'
   auth: required
-  url: /webhooks/{id}
+  url: /boards/{id}/plugins
   params:
-  - _id: 595abe9574dc38001bf0645d
+  - _id: 5952d8897d896d001b09b826
     default: ''
     required: false
     in: path
     name: id
     type: string
-    desc: ID of the webhook to delete.
+    desc: The ID of the board
     ref: ''
-  method: delete
+  - _id: 5952d8afa953c2001b3f5355
+    default: enabled
+    required: false
+    in: query
+    name: filter
+    type: string
+    desc: ! 'One of: `enabled` or `available`'
+    ref: ''
+  method: get
   examples:
     codes:
-    - language: curl
-      code: curl -X "DELETE" https://api.trello.com/1/webhooks/595ab2fe6b90aed2223416d0?key=83746d11892523f2bf1aba93efc89fca
+    - language: http
+      code: https://api.trello.com/1/boards/nC8QJJoZ/plugins?filter=enabled
   apiSetting: 5928856394d9382f0096d7f2
 sync_unique: ''
-order: 5
+order: 18
 isReference: true
