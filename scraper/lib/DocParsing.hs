@@ -1,4 +1,4 @@
-module DocParsing (extractExampleResponses, extractCodeBlockContents) where
+module DocParsing (extractExampleResponses, extractCodeBlockContents, getResponse) where
 
 import BasicPrelude hiding (encodeUtf8)
 import Data.Aeson (FromJSON, Value(..), encode, eitherDecode)
@@ -7,8 +7,8 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import Data.Text.Encoding (encodeUtf8)
 import qualified Data.Vector as V
-import Lens.Micro ((^..), (&), (^?), _Right)
-import Lens.Micro.Aeson (_String, key, values)
+import Lens.Micro ((^..), (&), (^?), _Right, filtered)
+import Lens.Micro.Aeson (_String, _Integer, key, values)
 import Safe (fromJustNote)
 import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
 import Text.Parsec.Char (string, anyChar)
@@ -39,7 +39,39 @@ getAllDocs x = error $ "Invalid document root: " ++ show x
 
 -- Converts a given document to a (operationId, exampleResponse)
 getResponse :: Value -> Maybe (Text, Value)
-getResponse obj = do
+getResponse obj = getResponseFromApi obj <|> getResponseFromBody obj
+
+-- Gets a sample response from the api definition
+--
+-- Note that while it would make sense to construct the response definition
+-- here (since it specifies the status codes), in practice the error case
+-- is always documented as a 400 without a body.
+getResponseFromApi :: Value -> Maybe (Text, Value)
+getResponseFromApi obj = do
+  operationId <- getStringKey "slug" obj
+  let is200 x
+        =  (x ^? key "status" . _Integer) == Just 200
+        && (x ^? key "language" . _String) == Just "json"
+
+  json <- obj
+    ^? key "api"
+    .  key "results"
+    .  key "codes"
+    .  values
+    .  filtered is200
+    .  key "code"
+    .  _String
+
+  -- Ignore empty strings
+  guard . not $ T.null json
+
+  let decoder = decodeJson $ "Failed to decode code blobs in " ++ show obj
+  return (operationId, decoder json)
+
+
+-- Gets a sample response from the documentation body
+getResponseFromBody :: Value -> Maybe (Text, Value)
+getResponseFromBody obj = do
   operationId <- getStringKey "slug" obj
   body <- getStringKey "body" obj
   guard $ body /= ""

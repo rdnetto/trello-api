@@ -45,6 +45,8 @@ main = do
         . extractExampleResponses
         $ docs
 
+  putStrLn $ tshow (HMS.size responseSchemas) ++ " schemas inferred"
+
   -- Apply the validation / rewrite pass
   case rewriteSwagger responseSchemas patchedSwagger of
        Right obj -> encodeFile "swagger.yaml" obj
