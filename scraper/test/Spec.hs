@@ -29,7 +29,7 @@ docParseTests
   where
     test (name, inputM) = testCase name $ do
       input <- inputM
-      let res = extractCodeBlockContents "" (stripEnd input)
+      let res = extractCodeBlockContents $ stripEnd input
 
       assertBool (show res)
         . isRight

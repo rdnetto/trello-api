@@ -1,7 +1,9 @@
 module DocParsing (extractExampleResponses, extractCodeBlockContents, getResponse) where
 
-import BasicPrelude hiding (encodeUtf8)
+import BasicPrelude hiding (encodeUtf8, takeWhile)
+import Control.Applicative (many)
 import Data.Aeson (FromJSON, Value(..), encode, eitherDecode)
+import Data.Attoparsec.Text (parseOnly, endOfInput, manyTill, string, anyChar, takeWhile)
 import qualified Data.ByteString.Lazy.Char8 as BSL
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
@@ -10,8 +12,6 @@ import qualified Data.Vector as V
 import Lens.Micro ((^..), (&), (^?), _Right, filtered)
 import Lens.Micro.Aeson (_String, _Integer, key, values)
 import Safe (fromJustNote)
-import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
-import Text.Parsec.Char (string, anyChar)
 
 import Util
 
@@ -76,15 +76,8 @@ getResponseFromBody obj = do
   body <- getStringKey "body" obj
   guard $ body /= ""
 
-  -- Used for failure messages
-  let objString
-        = T.unpack
-        . decodeUtf8
-        . BSL.toStrict
-        $ encode obj
-
   codeBlockContents :: [Text]
-    <- extractCodeBlockContents objString body ^? _Right
+    <- extractCodeBlockContents body ^? _Right
 
   let decoder = decodeJson $ "Failed to decode code blobs in " ++ renderJson obj
       responses :: [Value]
@@ -117,16 +110,19 @@ getResponseFromBody obj = do
    Note that there may be multiple code blocks in some cases, though not all of them may be JSON.
    e.g. 'http' is used for examples of query params
 -}
-extractCodeBlockContents :: String -> Text -> Either ParseError [Text]
-extractCodeBlockContents name raw = parse p name raw where
-  p = (try codeBlockParser <|> whatever) <* eof
+extractCodeBlockContents :: Text -> Either String [Text]
+extractCodeBlockContents raw = parseOnly codeBlockParser raw
+
+-- TODO: this isn't handling the non-matching case correctly
+codeBlockParser :: Parser [Text]
+codeBlockParser = (codeBlockParser <|> whatever) <* endOfInput
   codeBlockParser = many $ do
-    void $ manyTill anyChar (try $ string "[block:code]")
-    txt <- manyTill anyChar (try $ string "[/block]")
+    void $ manyTill anyChar (string "[block:code]")
+    txt <- manyTill anyChar (string "[/block]")
     return $ T.pack txt
 
   -- If there are no code blocks, we still want the parse to succeed
-  whatever = many anyChar >> pure []
+  whatever = takeWhile (const True) >> pure []
 
 -- Determines if a given code block contains JSON
 isJsonCodeBlob :: Value -> Bool
