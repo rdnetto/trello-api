@@ -3,13 +3,14 @@ module SwaggerRewriting (rewriteSwagger) where
 import BasicPrelude hiding (decodeUtf8, encodeUtf8, stripPrefix)
 import Control.Monad.Except (liftEither)
 import Data.Aeson (Value(..))
-import qualified Data.Set as S
 import qualified Data.HashMap.Strict as HMS
-import Safe (fromJustNote)
+import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has)
-import Lens.Micro.Aeson (key, values, _Bool, _String)
+import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at)
+import Lens.Micro.Aeson (key, values, _Bool, _String, _Object)
+import Lens.Micro.Platform ()
+import Safe (fromJustNote)
 
 import AesonMonad
 import Util
@@ -212,7 +213,13 @@ addResponseSchemas responseSchemas
                   = id
                 | otherwise
                   = case HMS.lookup operationId responseSchemas of
-                         Just schema -> key "responses" .~ generateResponse schema
+                         Just schema ->
+                           -- We need to use `at` here to insert a new element
+                           _Object
+                           .  at "responses"
+                           .~ (Just $ generateResponse schema)
+
+                         -- TODO: should probably be logging this, as it deserves a warning
                          Nothing     -> id
 
           setCurrent $ f op
@@ -260,4 +267,3 @@ isPathParam
   = anyOr False
   . map (== "path")
   . (^.. key "in")
-

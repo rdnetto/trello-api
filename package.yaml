@@ -72,6 +72,7 @@ internal-libraries:
     - microlens-aeson
     - microlens-mtl
     - microlens-th
+    - microlens-platform
     - parsec
     - safe
     - scientific
