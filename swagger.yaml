@@ -47,6 +47,14 @@ paths:
   /checklists/{id}/checkItems/{idCheckItem}:
     get:
       summary: /checklists/{id}/checkItems/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -76,6 +84,14 @@ paths:
       deprecated: false
     delete:
       summary: /checklists/{id}/checkItems/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -98,6 +114,14 @@ paths:
       deprecated: false
     put:
       summary: /checklists/{id}/checkItems/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -128,6 +152,14 @@ paths:
   /labels/{id}/color:
     put:
       summary: /labels/{id}/color
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -152,6 +184,14 @@ paths:
   /checklists/{id}/cards:
     get:
       summary: /checklists/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -169,6 +209,14 @@ paths:
   /boards/{id}/powerUps:
     post:
       summary: /boards/{id}/powerUps
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -193,6 +241,14 @@ paths:
   /cards/{id}/checklists:
     post:
       summary: /cards/{id}/checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -228,6 +284,14 @@ paths:
       deprecated: false
     get:
       summary: /cards/{id}/checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -327,6 +391,14 @@ paths:
   /boards/{id}/lists:
     post:
       summary: /boards/{id}/lists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -357,6 +429,14 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/lists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -402,6 +482,14 @@ paths:
   /cards/{id}/stickers/{idSticker}:
     get:
       summary: /cards/{id}/stickers/{idSticker}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -431,6 +519,14 @@ paths:
       deprecated: false
     delete:
       summary: /cards/{id}/stickers/{idSticker}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -453,6 +549,14 @@ paths:
       deprecated: false
     put:
       summary: /cards/{id}/stickers/{idSticker}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -504,6 +608,14 @@ paths:
   /cards/{id}/checklists/{idChecklist}:
     delete:
       summary: /cards/{id}/checklists/{idChecklist}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -527,6 +639,14 @@ paths:
   /lists/{id}/closed:
     put:
       summary: /lists/{id}/closed
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -550,6 +670,24 @@ paths:
   /boards/{id}/plugins:
     get:
       summary: /boards/{id}/plugins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                    name:
+                      type: string
+                    id:
+                      type: string
+                    public:
+                      type: boolean
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -574,6 +712,141 @@ paths:
   /lists/{id}/board:
     get:
       summary: /lists/{id}/board
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscribed:
+                    type: boolean
+                  idTags:
+                    items: {}
+                    type: array
+                  closed:
+                    type: boolean
+                  invitations:
+                    items: {}
+                    type: array
+                  invited:
+                    type: boolean
+                  pinned:
+                    type: boolean
+                  url:
+                    type: string
+                  powerUps:
+                    items: {}
+                    type: array
+                  datePluginDisable:
+                    nullable: true
+                  name:
+                    type: string
+                  starred:
+                    type: boolean
+                  shortLink:
+                    type: string
+                  prefs:
+                    type: object
+                    properties:
+                      invitations:
+                        type: string
+                      cardCovers:
+                        type: boolean
+                      canBePublic:
+                        type: boolean
+                      voting:
+                        type: string
+                      permissionLevel:
+                        type: string
+                      selfJoin:
+                        type: boolean
+                      canBeOrg:
+                        type: boolean
+                      backgroundImage:
+                        type: string
+                      backgroundBrightness:
+                        type: string
+                      backgroundTile:
+                        type: boolean
+                      cardAging:
+                        type: string
+                      calendarFeedEnabled:
+                        type: boolean
+                      backgroundImageScaled:
+                        items:
+                          type: object
+                          properties:
+                            height:
+                              type: integer
+                            url:
+                              type: string
+                            width:
+                              type: integer
+                        type: array
+                      canInvite:
+                        type: boolean
+                      comments:
+                        type: string
+                      background:
+                        type: string
+                      canBePrivate:
+                        type: boolean
+                  labelNames:
+                    type: object
+                    properties:
+                      pink:
+                        type: string
+                      red:
+                        type: string
+                      purple:
+                        type: string
+                      yellow:
+                        type: string
+                      black:
+                        type: string
+                      lime:
+                        type: string
+                      orange:
+                        type: string
+                      green:
+                        type: string
+                      blue:
+                        type: string
+                      sky:
+                        type: string
+                  id:
+                    type: string
+                  dateLastView:
+                    format: date-time
+                    type: string
+                  dateLastActivity:
+                    format: date-time
+                    type: string
+                  idOrganization:
+                    type: string
+                  descData:
+                    nullable: true
+                  memberships:
+                    items:
+                      type: object
+                      properties:
+                        idMember:
+                          type: string
+                        memberType:
+                          type: string
+                        deactivated:
+                          type: boolean
+                        id:
+                          type: string
+                        unconfirmed:
+                          type: boolean
+                    type: array
+                  desc:
+                    type: string
+                  shortUrl:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -598,6 +871,14 @@ paths:
   /organizations/{id}/members:
     get:
       summary: /organizations/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -614,6 +895,14 @@ paths:
       deprecated: false
     put:
       summary: /organizations/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -651,6 +940,14 @@ paths:
   /boards/{id}/myPrefs/idEmailList:
     put:
       summary: /boards/{id}/myPrefs/idEmailList
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -674,6 +971,14 @@ paths:
   /boards/{id}/myPrefs/showSidebarBoardActions:
     put:
       summary: /boards/{id}/myPrefs/showSidebarBoardActions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -697,6 +1002,27 @@ paths:
   /card/{idCard}/customField/{idCustomField}/item:
     put:
       summary: /card/{idCard}/customField/{idCustomField}/item
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modelType:
+                    type: string
+                  value:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                  idCustomField:
+                    type: string
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -730,6 +1056,14 @@ paths:
   /boards/{id}/memberships/{idMembership}:
     put:
       summary: /boards/{id}/memberships/{idMembership}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -768,6 +1102,14 @@ paths:
   /notifications/{id}/member:
     get:
       summary: /notifications/{id}/member
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -792,6 +1134,75 @@ paths:
   /boards/{boardId}/actions:
     get:
       summary: /boards/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        card:
+                          type: object
+                          properties:
+                            pos:
+                              type: integer
+                            name:
+                              type: string
+                            idShort:
+                              type: integer
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                        old:
+                          type: object
+                          properties:
+                            pos:
+                              type: number
+                        list:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                        board:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                    date:
+                      format: date-time
+                      type: string
+                    memberCreator:
+                      type: object
+                      properties:
+                        fullName:
+                          type: string
+                        username:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        avatarHash:
+                          type: string
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -809,6 +1220,14 @@ paths:
   /members/{id}/actions:
     get:
       summary: /members/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -826,6 +1245,14 @@ paths:
   /boards/{id}/checklists:
     post:
       summary: /boards/{id}/checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -849,6 +1276,31 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    checkItems:
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: string
+                          idChecklist:
+                            type: string
+                      type: array
+                    name:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -866,6 +1318,14 @@ paths:
   /labels:
     post:
       summary: /labels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -896,6 +1356,60 @@ paths:
   /lists/{id}/cards:
     get:
       summary: /lists/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    badges:
+                      type: object
+                      properties:
+                        subscribed:
+                          type: boolean
+                        due:
+                          nullable: true
+                        checkItemsChecked:
+                          type: integer
+                        attachments:
+                          type: integer
+                        checkItems:
+                          type: integer
+                        votes:
+                          type: integer
+                        viewingMemberVoted:
+                          type: boolean
+                        fogbugz:
+                          type: string
+                        dueComplete:
+                          type: boolean
+                        comments:
+                          type: integer
+                        description:
+                          type: boolean
+                    name:
+                      type: string
+                    id:
+                      type: string
+                    labels:
+                      items:
+                        type: object
+                        properties:
+                          color:
+                            type: string
+                          uses:
+                            type: integer
+                          name:
+                            type: string
+                          idBoard:
+                            type: string
+                          id:
+                            type: string
+                      type: array
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -913,6 +1427,23 @@ paths:
   /boards/{id}/cards:
     get:
       summary: /boards/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    members:
+                      items: {}
+                      type: array
+                    name:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -930,6 +1461,14 @@ paths:
   /members/{id}/savedSearches:
     post:
       summary: /members/{id}/savedSearches
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -965,6 +1504,14 @@ paths:
       deprecated: false
     get:
       summary: /members/{id}/savedSearches
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -982,6 +1529,47 @@ paths:
   /tokens/{token}/:
     delete:
       summary: /tokens/{token}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  origin:
+                    type: string
+                  idApplication:
+                    type: string
+                  _id:
+                    type: string
+                  idMember:
+                    type: string
+                  identifier:
+                    type: string
+                  token:
+                    type: string
+                  dateCreated:
+                    format: date-time
+                    type: string
+                  dateExpires:
+                    format: date-time
+                    type: string
+                  permissions:
+                    items:
+                      type: object
+                      properties:
+                        modelType:
+                          type: string
+                        read:
+                          type: boolean
+                        _id:
+                          type: string
+                        write:
+                          type: boolean
+                        idModel:
+                          type: string
+                    type: array
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -999,6 +1587,14 @@ paths:
   /enterprises/{id}/transferrable/organization/{idOrganization}:
     get:
       summary: /enterprises/{id}/transferrable/organization/{idOrganization}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1022,6 +1618,14 @@ paths:
   /members/{id}/organizationsInvited:
     get:
       summary: /members/{id}/organizationsInvited
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1046,6 +1650,96 @@ paths:
   /boards/{id}/cards/{idCard}:
     get:
       summary: /boards/{id}/cards/{cardId}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    nullable: true
+                  subscribed:
+                    type: boolean
+                  due:
+                    nullable: true
+                  checkItemStates:
+                    items: {}
+                    type: array
+                  closed:
+                    type: boolean
+                  idMembersVoted:
+                    items: {}
+                    type: array
+                  idLabels:
+                    items: {}
+                    type: array
+                  url:
+                    type: string
+                  badges:
+                    type: object
+                    properties:
+                      subscribed:
+                        type: boolean
+                      due:
+                        nullable: true
+                      checkItemsChecked:
+                        type: integer
+                      attachments:
+                        type: integer
+                      checkItems:
+                        type: integer
+                      votes:
+                        type: integer
+                      viewingMemberVoted:
+                        type: boolean
+                      fogbugz:
+                        type: string
+                      dueComplete:
+                        type: boolean
+                      comments:
+                        type: integer
+                      description:
+                        type: boolean
+                  pos:
+                    type: number
+                  name:
+                    type: string
+                  idList:
+                    type: string
+                  idShort:
+                    type: integer
+                  idBoard:
+                    type: string
+                  shortLink:
+                    type: string
+                  idChecklists:
+                    items: {}
+                    type: array
+                  id:
+                    type: string
+                  labels:
+                    items: {}
+                    type: array
+                  dueComplete:
+                    type: boolean
+                  dateLastActivity:
+                    format: date-time
+                    type: string
+                  idMembers:
+                    items: {}
+                    type: array
+                  manualCoverAttachment:
+                    type: boolean
+                  descData:
+                    nullable: true
+                  desc:
+                    type: string
+                  shortUrl:
+                    type: string
+                  idAttachmentCover:
+                    nullable: true
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1069,6 +1763,14 @@ paths:
   /notifications/all/read:
     post:
       summary: /notifications/all/read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters: []
       _path: /notifications/all/read
@@ -1080,6 +1782,14 @@ paths:
   /lists/{id}/idBoard:
     put:
       summary: /lists/{id}/idBoard
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -1103,6 +1813,14 @@ paths:
   /boards/{id}/members/{idMember}:
     delete:
       summary: /boards/{id}/members/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -1126,6 +1844,14 @@ paths:
       deprecated: false
     put:
       summary: /boards/{id}/members/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -1156,6 +1882,27 @@ paths:
   /boards/{boardId}/boardStars:
     get:
       summary: /boards/{boardId}/boardStars
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  boardStars:
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                        pos:
+                          type: integer
+                        idBoard:
+                          type: string
+                    type: array
+                  id:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1180,6 +1927,14 @@ paths:
   /members/{id}/boardStars:
     post:
       summary: /members/{id}/boardStars
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -1209,6 +1964,14 @@ paths:
       deprecated: false
     get:
       summary: /members/{id}/boardStars
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1226,6 +1989,14 @@ paths:
   /actions/{id}/organization:
     get:
       summary: /actions/{id}/organization
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1250,6 +2021,14 @@ paths:
   /enterprises/{id}/tokens:
     post:
       summary: /enterprises/{id}/tokens
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -1274,6 +2053,14 @@ paths:
   /actions/{id}/{field}:
     get:
       summary: /actions/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1297,6 +2084,24 @@ paths:
   /tokens/{token}/webhooks/{idWebhook}:
     get:
       summary: /tokens/{token}/webhooks/{idWebhook}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  callbackURL:
+                    type: string
+                  active:
+                    type: boolean
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  description:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1319,6 +2124,16 @@ paths:
       deprecated: false
     delete:
       summary: /tokens/{token}/webhooks/{idWebhook}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _value:
+                    nullable: true
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -1342,6 +2157,33 @@ paths:
   /customFields:
     post:
       summary: /customFields
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modelType:
+                    type: string
+                  display:
+                    type: object
+                    properties:
+                      cardFront:
+                        type: boolean
+                  fieldGroup:
+                    type: string
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  type:
+                    type: string
+          description: OK
       _method: post
       parameters: []
       _path: /customFields
@@ -1388,6 +2230,14 @@ paths:
   /boards/{id}/boardPlugins:
     post:
       summary: /boards/{id}/boardPlugins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -1410,6 +2260,22 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/boardPlugins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    idPlugin:
+                      type: string
+                    idBoard:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1427,6 +2293,41 @@ paths:
   /tokens/{token}:
     get:
       summary: /tokens/{token}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idMember:
+                    type: string
+                  identifier:
+                    type: string
+                  dateCreated:
+                    format: date-time
+                    type: string
+                  dateExpires:
+                    nullable: true
+                  id:
+                    type: string
+                  permissions:
+                    items:
+                      type: object
+                      properties:
+                        modelType:
+                          type: string
+                        read:
+                          type: boolean
+                        write:
+                          type: boolean
+                        idModel:
+                          type: string
+                    type: array
+                  webhooks:
+                    items: {}
+                    type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1459,6 +2360,14 @@ paths:
   /members/{id}/oneTimeMessagesDismissed:
     post:
       summary: /members/{id}/oneTimeMessagesDismissed
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -1482,6 +2391,75 @@ paths:
   /enterprises/{id}:
     get:
       summary: /enterprises/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ssoActivationFailed:
+                    type: boolean
+                  name:
+                    type: string
+                  userTypes:
+                    type: object
+                    properties:
+                      none:
+                        type: integer
+                      all:
+                        type: integer
+                      collaborator:
+                        type: integer
+                      member:
+                        type: integer
+                      saml:
+                        type: integer
+                  prefs:
+                    type: object
+                    properties:
+                      maxMembers:
+                        nullable: true
+                      ssoOnly:
+                        type: boolean
+                      signup:
+                        type: object
+                        properties:
+                          banner:
+                            type: string
+                          confirmationHtml:
+                            type: string
+                          confirmation:
+                            type: string
+                          message:
+                            type: string
+                          messageHtml:
+                            type: string
+                          bannerHtml:
+                            type: string
+                      mandatoryTransferDate:
+                        nullable: true
+                  displayName:
+                    type: string
+                  id:
+                    type: string
+                  idOrganizations:
+                    items:
+                      type: string
+                    type: array
+                  products:
+                    items:
+                      type: integer
+                    type: array
+                  idMembers:
+                    items:
+                      type: string
+                    type: array
+                  idAdmins:
+                    items:
+                      type: string
+                    type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1613,6 +2591,14 @@ paths:
   /actions/{idAction}/reactions:
     post:
       summary: /actions/{idAction}/reactions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -1646,6 +2632,14 @@ paths:
       deprecated: false
     get:
       summary: /actions/{idAction}/reactions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1678,6 +2672,14 @@ paths:
   /enterprises/{id}/members/{idMember}:
     get:
       summary: /enterprises/{id}/members/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1726,6 +2728,14 @@ paths:
   /organizations/{id}/members/{idMember}/all:
     delete:
       summary: /organizations/{id}/members/{idMember}/all
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -1749,6 +2759,14 @@ paths:
   /organizations/{id}/boards:
     get:
       summary: /organizations/{id}/boards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1781,6 +2799,14 @@ paths:
   /boards/{id}/myPrefs/showSidebarActivity:
     put:
       summary: /boards/{id}/myPrefs/showSidebarActivity
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -1804,6 +2830,14 @@ paths:
   /organizations/{id}/{field}:
     get:
       summary: /organizations/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1827,6 +2861,26 @@ paths:
   /webhooks/:
     post:
       summary: /webhooks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: post
       parameters:
       - required: false
@@ -1862,6 +2916,14 @@ paths:
   /cards/{id}/membersVoted/{idMember}:
     delete:
       summary: /cards/{id}/membersVoted/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -1885,6 +2947,14 @@ paths:
   /notifications/{id}/board:
     get:
       summary: /notifications/{id}/board
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1909,6 +2979,14 @@ paths:
   /members/{id}:
     get:
       summary: /members/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2063,6 +3141,14 @@ paths:
       deprecated: false
     put:
       summary: /members/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2130,6 +3216,14 @@ paths:
   /members/{id}/savedSearches/{idSearch}:
     get:
       summary: /members/{id}/savedSearches/{idSearch}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2152,6 +3246,14 @@ paths:
       deprecated: false
     delete:
       summary: /members/{id}/savedSearches/{idSearch}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2174,6 +3276,14 @@ paths:
       deprecated: false
     put:
       summary: /members/{id}/savedSearches/{idSearch}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2216,6 +3326,14 @@ paths:
   /members/{id}/customEmoji/{idEmoji}:
     get:
       summary: /members/{id}/customEmoji/{idEmoji}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2246,6 +3364,14 @@ paths:
   /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}:
     put:
       summary: /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2281,6 +3407,14 @@ paths:
   /organizations/{id}/members/{idMember}:
     delete:
       summary: /organizations/{id}/members/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2303,6 +3437,14 @@ paths:
       deprecated: false
     put:
       summary: /organizations/{id}/members/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2332,6 +3474,14 @@ paths:
   /checklists/{id}/checkItems:
     post:
       summary: /checklists/{id}/checkItems
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -2370,6 +3520,26 @@ paths:
       deprecated: false
     get:
       summary: /checklists/{id}/checkItems
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    state:
+                      type: string
+                    pos:
+                      type: integer
+                    name:
+                      type: string
+                    nameData:
+                      nullable: true
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2401,6 +3571,14 @@ paths:
   /organizations/{id}/memberships/{idMembership}:
     get:
       summary: /organizations/{id}/memberships/{idMembership}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2431,6 +3609,14 @@ paths:
   /notifications/{id}/unread:
     put:
       summary: /notifications/{id}/unread
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2477,6 +3663,14 @@ paths:
   /cards/{id}/actions/{idAction}/comments:
     delete:
       summary: /cards/{id}/actions/{idAction}/comments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2499,6 +3693,14 @@ paths:
       deprecated: false
     put:
       summary: /cards/{id}/actions/{idAction}/comments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2528,6 +3730,14 @@ paths:
   /cards/{id}/idLabels:
     post:
       summary: /cards/{id}/idLabels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -2551,6 +3761,50 @@ paths:
   /actions/{id}/display:
     get:
       summary: /actions/{id}/display
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entities:
+                    type: object
+                    properties:
+                      card:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          shortLink:
+                            type: string
+                          id:
+                            type: string
+                          type:
+                            type: string
+                      list:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          id:
+                            type: string
+                          type:
+                            type: string
+                      memberCreator:
+                        type: object
+                        properties:
+                          text:
+                            type: string
+                          username:
+                            type: string
+                          id:
+                            type: string
+                          type:
+                            type: string
+                  translationKey:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2568,6 +3822,14 @@ paths:
   /organizations/{id}/tags/{idTag}:
     delete:
       summary: /organizations/{id}/tags/{idTag}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2591,6 +3853,105 @@ paths:
   /emoji:
     get:
       summary: /emoji
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trello:
+                    items:
+                      type: object
+                      properties:
+                        sheetX:
+                          type: integer
+                        shortName:
+                          type: string
+                        skinVariations:
+                          type: object
+                          properties:
+                            1F3FE:
+                              type: object
+                              properties:
+                                sheetX:
+                                  type: integer
+                                native:
+                                  type: string
+                                unified:
+                                  type: string
+                                sheetY:
+                                  type: integer
+                            1F3FB:
+                              type: object
+                              properties:
+                                sheetX:
+                                  type: integer
+                                native:
+                                  type: string
+                                unified:
+                                  type: string
+                                sheetY:
+                                  type: integer
+                            1F3FC:
+                              type: object
+                              properties:
+                                sheetX:
+                                  type: integer
+                                native:
+                                  type: string
+                                unified:
+                                  type: string
+                                sheetY:
+                                  type: integer
+                            1F3FF:
+                              type: object
+                              properties:
+                                sheetX:
+                                  type: integer
+                                native:
+                                  type: string
+                                unified:
+                                  type: string
+                                sheetY:
+                                  type: integer
+                            1F3FD:
+                              type: object
+                              properties:
+                                sheetX:
+                                  type: integer
+                                native:
+                                  type: string
+                                unified:
+                                  type: string
+                                sheetY:
+                                  type: integer
+                        text:
+                          nullable: true
+                        category:
+                          type: string
+                        native:
+                          type: string
+                        unified:
+                          type: string
+                        name:
+                          type: string
+                        keywords:
+                          items:
+                            type: string
+                          type: array
+                        tts:
+                          type: string
+                        texts:
+                          nullable: true
+                        sheetY:
+                          type: integer
+                        shortNames:
+                          items:
+                            type: string
+                          type: array
+                    type: array
+          description: OK
       _method: get
       parameters:
       - required: false
@@ -2617,6 +3978,14 @@ paths:
   /batch:
     get:
       summary: /batch
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2636,6 +4005,14 @@ paths:
   /organizations/{id}:
     get:
       summary: /organizations/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2652,6 +4029,14 @@ paths:
       deprecated: false
     delete:
       summary: /organizations/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2668,6 +4053,14 @@ paths:
       deprecated: false
     put:
       summary: /organizations/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2763,6 +4156,14 @@ paths:
   /cards/{id}/actions:
     get:
       summary: /cards/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2780,6 +4181,14 @@ paths:
   /notifications/{id}/{field}:
     get:
       summary: /notifications/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2803,6 +4212,14 @@ paths:
   /cards/{id}/labels:
     post:
       summary: /cards/{id}/labels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -2832,6 +4249,14 @@ paths:
   /notifications/{id}/card:
     get:
       summary: /notifications/{id}/card
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2856,6 +4281,14 @@ paths:
   /boards/{id}/members:
     get:
       summary: /boards/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2872,6 +4305,14 @@ paths:
       deprecated: false
     put:
       summary: /boards/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -2912,6 +4353,14 @@ paths:
   /lists:
     post:
       summary: /lists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -2948,6 +4397,14 @@ paths:
   /organizations/{id}/prefs/orgInviteRestrict:
     delete:
       summary: /organizations/{id}/prefs/orgInviteRestrict
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -2966,6 +4423,14 @@ paths:
   /members/{id}//customBoardBackgrounds/{idBackground}:
     put:
       summary: /members/{id}/customBoardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3001,6 +4466,14 @@ paths:
   /members/{id}/customStickers:
     get:
       summary: /members/{id}/customStickers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3018,6 +4491,14 @@ paths:
   /members/{id}/boards:
     get:
       summary: /members/{id}/boards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3080,6 +4561,14 @@ paths:
   /enterprises/{id}/members/{idMember}/deactivated:
     put:
       summary: /enterprises/{id}/members/{idMember}/deactivated
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3133,6 +4622,14 @@ paths:
   /boards/:
     post:
       summary: /boards/
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -3260,6 +4757,14 @@ paths:
   /cards/{id}/stickers:
     get:
       summary: /cards/{id}/stickers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3284,6 +4789,14 @@ paths:
   /cards/{id}/board:
     get:
       summary: /cards/{id}/board
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3308,6 +4821,14 @@ paths:
   /actions/{id}/member:
     get:
       summary: /actions/{id}/member
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3332,6 +4853,14 @@ paths:
   /cards/{id}/list:
     get:
       summary: /cards/{id}/list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3356,6 +4885,14 @@ paths:
   /organizations/{id}/actions:
     get:
       summary: /organizations/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3373,6 +4910,14 @@ paths:
   /members/{id}/notifications:
     get:
       summary: /members/{id}/notifications
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3467,6 +5012,14 @@ paths:
   /boards/{id}/idTags:
     post:
       summary: /boards/{id}/idTags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -3490,6 +5043,14 @@ paths:
   /notifications/{id}/organization:
     get:
       summary: /notifications/{id}/organization
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3514,6 +5075,14 @@ paths:
   /checklists/{id}/board:
     get:
       summary: /checklists/{id}/board
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3538,6 +5107,14 @@ paths:
   /lists/{id}/subscribed:
     put:
       summary: /lists/{id}/subscribed
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3561,6 +5138,14 @@ paths:
   /lists/{id}/archiveAllCards:
     post:
       summary: /lists/{id}/archiveAllCards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -3578,6 +5163,14 @@ paths:
   /enterprises/{id}/members:
     get:
       summary: /enterprises/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3674,6 +5267,14 @@ paths:
   /members/{id}/customBoardBackgrounds/{idBackground}:
     get:
       summary: /members/{id}/customBoardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3704,6 +5305,14 @@ paths:
       deprecated: false
     delete:
       summary: /members/{id}/customBoardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -3727,6 +5336,14 @@ paths:
   /lists/{id}/pos:
     put:
       summary: /lists/{id}/pos
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3750,6 +5367,95 @@ paths:
   /boards/{boardId}/cards/{filter}:
     get:
       summary: /boards/{id}/cards/{filter}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    subscribed:
+                      type: boolean
+                    due:
+                      nullable: true
+                    checkItemStates:
+                      nullable: true
+                    closed:
+                      type: boolean
+                    idMembersVoted:
+                      items: {}
+                      type: array
+                    idLabels:
+                      items: {}
+                      type: array
+                    url:
+                      type: string
+                    badges:
+                      type: object
+                      properties:
+                        subscribed:
+                          type: boolean
+                        due:
+                          nullable: true
+                        checkItemsChecked:
+                          type: integer
+                        attachments:
+                          type: integer
+                        checkItems:
+                          type: integer
+                        votes:
+                          type: integer
+                        viewingMemberVoted:
+                          type: boolean
+                        fogbugz:
+                          type: string
+                        dueComplete:
+                          type: boolean
+                        comments:
+                          type: integer
+                        description:
+                          type: boolean
+                    pos:
+                      type: number
+                    name:
+                      type: string
+                    idList:
+                      type: string
+                    idShort:
+                      type: integer
+                    idBoard:
+                      type: string
+                    shortLink:
+                      type: string
+                    idChecklists:
+                      items: {}
+                      type: array
+                    id:
+                      type: string
+                    labels:
+                      items: {}
+                      type: array
+                    dueComplete:
+                      type: boolean
+                    dateLastActivity:
+                      format: date-time
+                      type: string
+                    idMembers:
+                      items: {}
+                      type: array
+                    manualCoverAttachment:
+                      type: boolean
+                    descData:
+                      nullable: true
+                    desc:
+                      type: string
+                    shortUrl:
+                      type: string
+                    idAttachmentCover:
+                      nullable: true
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3773,6 +5479,14 @@ paths:
   /actions/{id}/text:
     put:
       summary: /actions/{id}/text
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3796,6 +5510,14 @@ paths:
   /checklists/{id}/name:
     put:
       summary: /checklists/{id}/name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -3820,6 +5542,91 @@ paths:
   /cards/{id}:
     get:
       summary: /cards/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  due:
+                    nullable: true
+                  checkItemStates:
+                    items: {}
+                    type: array
+                  closed:
+                    type: boolean
+                  idLabels:
+                    items: {}
+                    type: array
+                  url:
+                    type: string
+                  badges:
+                    type: object
+                    properties:
+                      subscribed:
+                        type: boolean
+                      due:
+                        nullable: true
+                      checkItemsChecked:
+                        type: integer
+                      attachments:
+                        type: integer
+                      checkItems:
+                        type: integer
+                      votes:
+                        type: integer
+                      viewingMemberVoted:
+                        type: boolean
+                      fogbugz:
+                        type: string
+                      dueComplete:
+                        type: boolean
+                      comments:
+                        type: integer
+                      description:
+                        type: boolean
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  idList:
+                    type: string
+                  idShort:
+                    type: integer
+                  idBoard:
+                    type: string
+                  idChecklists:
+                    items: {}
+                    type: array
+                  id:
+                    type: string
+                  labels:
+                    items: {}
+                    type: array
+                  dueComplete:
+                    type: boolean
+                  dateLastActivity:
+                    format: date-time
+                    type: string
+                  idMembers:
+                    items: {}
+                    type: array
+                  manualCoverAttachment:
+                    type: boolean
+                  descData:
+                    type: object
+                    properties:
+                      emoji:
+                        type: object
+                        properties: {}
+                  desc:
+                    type: string
+                  shortUrl:
+                    type: string
+                  idAttachmentCover:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -3966,6 +5773,14 @@ paths:
       deprecated: false
     delete:
       summary: /cards/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -3982,6 +5797,14 @@ paths:
       deprecated: false
     put:
       summary: /cards/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4074,6 +5897,14 @@ paths:
   /organizations/{id}/newBillableGuests/{idBoard}:
     get:
       summary: /organizations/{id}/newBillableGuests/{idBoard}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4098,6 +5929,14 @@ paths:
   /cards/{id}/customFieldItems:
     get:
       summary: /cards/{id}/customFieldItems
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4115,6 +5954,14 @@ paths:
   /cards/{id}/attachments/{idAttachment}:
     get:
       summary: /cards/{id}/attachments/{idAttachment}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4144,6 +5991,14 @@ paths:
       deprecated: false
     delete:
       summary: /cards/{id}/attachments/{idAttachment}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -4167,6 +6022,42 @@ paths:
   /checklists/{id}:
     get:
       summary: /checklists/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkItems:
+                    items:
+                      type: object
+                      properties:
+                        state:
+                          type: string
+                        pos:
+                          type: integer
+                        name:
+                          type: string
+                        nameData:
+                          nullable: true
+                        id:
+                          type: string
+                    type: array
+                  name:
+                    type: string
+                  cards:
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        id:
+                          type: string
+                    type: array
+                  id:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4215,6 +6106,14 @@ paths:
       deprecated: false
     delete:
       summary: /checklists/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -4231,6 +6130,14 @@ paths:
       deprecated: false
     put:
       summary: /checklists/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4262,6 +6169,14 @@ paths:
   /boards/{id}/tags:
     get:
       summary: /boards/{id}/tags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4279,6 +6194,14 @@ paths:
   /boards/{id}/calendarKey/generate:
     post:
       summary: /boards/{id}/calendarKey/generate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4296,6 +6219,14 @@ paths:
   /cards/{id}/checkItemStates:
     get:
       summary: /cards/{id}/checkItemStates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4320,6 +6251,14 @@ paths:
   /cards/{id}/membersVoted:
     post:
       summary: /cards/{id}/membersVoted
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4342,6 +6281,14 @@ paths:
       deprecated: false
     get:
       summary: /cards/{id}/membersVoted
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4366,6 +6313,14 @@ paths:
   /cards/{id}/{field}:
     get:
       summary: /cards/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4389,6 +6344,28 @@ paths:
   /boards/{id}/customFields:
     get:
       summary: /boards/{id}/customFields
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modelType:
+                    type: string
+                  fieldGroup:
+                    type: string
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  type:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4406,6 +6383,14 @@ paths:
   /boards/{id}/markedAsViewed:
     post:
       summary: /boards/{id}/markedAsViewed
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4423,6 +6408,14 @@ paths:
   /boards/{id}/myPrefs/showListGuide:
     put:
       summary: /boards/{id}/myPrefs/showListGuide
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4446,6 +6439,14 @@ paths:
   /members/{id}/tokens:
     get:
       summary: /members/{id}/tokens
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4470,6 +6471,14 @@ paths:
   /members/{id}/organizations:
     get:
       summary: /members/{id}/organizations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4509,6 +6518,14 @@ paths:
   /checklists/{id}/{field}:
     get:
       summary: /checklists/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4532,6 +6549,14 @@ paths:
   /organizations:
     post:
       summary: /organizations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4568,6 +6593,14 @@ paths:
   /organizations/{id}/logo:
     post:
       summary: /organizations/{id}/logo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4584,6 +6617,14 @@ paths:
       deprecated: false
     delete:
       summary: /organizations/{id}/logo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -4601,6 +6642,14 @@ paths:
   /cards/{id}/checkItem/{idCheckItem}:
     get:
       summary: /cards/{id}/checkItem/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4630,6 +6679,14 @@ paths:
       deprecated: false
     delete:
       summary: /cards/{id}/checkItem/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -4652,6 +6709,14 @@ paths:
       deprecated: false
     put:
       summary: /cards/{id}/checkItem/{idCheckItem}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4699,6 +6764,14 @@ paths:
   /boards/{id}/powerUps/{powerUp}:
     delete:
       summary: /boards/{id}/powerUps/{powerUp}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -4723,6 +6796,14 @@ paths:
   /enterprises/{id}/signupUrl:
     get:
       summary: /enterprises/{id}/signupUrl
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4769,6 +6850,14 @@ paths:
   /boards/{id}/emailKey/generate:
     post:
       summary: /boards/{id}/emailKey/generate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4786,6 +6875,14 @@ paths:
   /lists/{id}/moveAllCards:
     post:
       summary: /lists/{id}/moveAllCards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4815,6 +6912,41 @@ paths:
   /tokens/{token}/member:
     get:
       summary: /tokens/{token}/member
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idMember:
+                    type: string
+                  identifier:
+                    type: string
+                  dateCreated:
+                    format: date-time
+                    type: string
+                  dateExpires:
+                    nullable: true
+                  id:
+                    type: string
+                  permissions:
+                    items:
+                      type: object
+                      properties:
+                        modelType:
+                          type: string
+                        read:
+                          type: boolean
+                        write:
+                          type: boolean
+                        idModel:
+                          type: string
+                    type: array
+                  webhooks:
+                    items: {}
+                    type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4840,6 +6972,14 @@ paths:
   /organizations/{id}/membersInvited:
     get:
       summary: /organizations/{id}/membersInvited
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4864,6 +7004,14 @@ paths:
   /lists/{id}:
     get:
       summary: /lists/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4887,6 +7035,14 @@ paths:
       deprecated: false
     put:
       summary: /lists/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4935,6 +7091,14 @@ paths:
   /enterprises/{id}/admins/{idMember}:
     put:
       summary: /enterprises/{id}/admins/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -4958,6 +7122,24 @@ paths:
   /tokens/{token}/webhooks:
     post:
       summary: /tokens/{token}/webhooks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  callbackURL:
+                    type: string
+                  active:
+                    type: boolean
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  description:
+                    type: string
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -4993,6 +7175,26 @@ paths:
       deprecated: false
     get:
       summary: /tokens/{token}/webhooks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5010,6 +7212,14 @@ paths:
   /members/{id}/boardBackgrounds/{idBackground}:
     get:
       summary: /members/{id}/boardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5040,6 +7250,14 @@ paths:
       deprecated: false
     delete:
       summary: /members/{id}/boardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -5062,6 +7280,14 @@ paths:
       deprecated: false
     put:
       summary: /members/{id}/boardBackgrounds/{idBackground}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5260,6 +7486,14 @@ paths:
       deprecated: false
     delete:
       summary: /boards/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -5276,6 +7510,14 @@ paths:
       deprecated: false
     put:
       summary: /boards/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5416,6 +7658,14 @@ paths:
   /cards/{id}/markAssociatedNotificationsRead:
     post:
       summary: /cards/{id}/markAssociatedNotificationsRead
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -5433,6 +7683,14 @@ paths:
   /enterprises/{id}/organizations:
     put:
       summary: /enterprises/{id}/organizations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5456,6 +7714,14 @@ paths:
   /search/members/:
     get:
       summary: /search/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5500,6 +7766,14 @@ paths:
   /lists/{id}/name:
     put:
       summary: /lists/{id}/name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5523,6 +7797,14 @@ paths:
   /cards/{id}/pluginData:
     get:
       summary: /cards/{id}/pluginData
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5540,6 +7822,14 @@ paths:
   /members/{id}/boardStars/{idStar}:
     get:
       summary: /members/{id}/boardStars/{idStar}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5562,6 +7852,14 @@ paths:
       deprecated: false
     delete:
       summary: /members/{id}/boardStars/{idStar}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -5584,6 +7882,14 @@ paths:
       deprecated: false
     put:
       summary: /members/{id}/boardStars/{idStar}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5614,6 +7920,14 @@ paths:
   /organizations/{id}/pluginData:
     get:
       summary: /organizations/{id}/pluginData
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5631,6 +7945,14 @@ paths:
   /organizations/{id}/memberships:
     get:
       summary: /organizations/{id}/memberships
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5663,6 +7985,14 @@ paths:
   /actions/{id}/memberCreator:
     get:
       summary: /actions/{id}/memberCreator
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5687,6 +8017,24 @@ paths:
   /tokens/{token}/webhooks/{webhookId}:
     put:
       summary: /tokens/{token}/webhooks/{webhookId}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  callbackURL:
+                    type: string
+                  active:
+                    type: boolean
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  description:
+                    type: string
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5729,6 +8077,14 @@ paths:
   /organizations/{id}/tags:
     post:
       summary: /organizations/{id}/tags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -5751,6 +8107,14 @@ paths:
       deprecated: false
     get:
       summary: /organizations/{id}/tags
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5768,6 +8132,14 @@ paths:
   /cards/{id}/idMembers:
     post:
       summary: /cards/{id}/idMembers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -5791,6 +8163,14 @@ paths:
   /boards/{id}/myPrefs/showSidebar:
     put:
       summary: /boards/{id}/myPrefs/showSidebar
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -5814,6 +8194,14 @@ paths:
   /boards/{id}/lists/{filter}:
     get:
       summary: /boards/{id}/lists/{filter}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5837,6 +8225,14 @@ paths:
   /actions/{id}/card:
     get:
       summary: /actions/{id}/card
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5861,6 +8257,14 @@ paths:
   /enterprises/{id}/organizations/{idOrganization}:
     delete:
       summary: /enterprises/{id}/organizations/{idOrganization}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -5884,6 +8288,14 @@ paths:
   /notifications/{id}:
     get:
       summary: /notifications/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5998,6 +8410,14 @@ paths:
       deprecated: false
     put:
       summary: /notifications/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -6021,6 +8441,14 @@ paths:
   /notifications/{id}/list:
     get:
       summary: /notifications/{id}/list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6045,6 +8473,14 @@ paths:
   /boards/{id}/labels:
     post:
       summary: /boards/{id}/labels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -6074,6 +8510,14 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/labels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6106,6 +8550,18 @@ paths:
   /webhooks/{id}/{field}:
     get:
       summary: /webhooks/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6130,6 +8586,14 @@ paths:
   /customfields/{id}/options/{idCustomFieldOption}:
     delete:
       summary: /customfields/{id}/options/{idCustomFieldOption}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -6153,6 +8617,14 @@ paths:
   /members/{id}/customEmoji:
     get:
       summary: /members/{id}/customEmoji
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6170,6 +8642,14 @@ paths:
   /members/{id}/boardBackgrounds:
     get:
       summary: /members/{id}/boardBackgrounds
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6194,6 +8674,14 @@ paths:
   /members/{id}/cards:
     get:
       summary: /members/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6218,6 +8706,14 @@ paths:
   /cards:
     post:
       summary: /cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: false
@@ -6299,6 +8795,14 @@ paths:
   /checklists:
     post:
       summary: /checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -6336,6 +8840,14 @@ paths:
   /cards/{id}/members:
     get:
       summary: /cards/{id}/members
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6360,6 +8872,27 @@ paths:
   /customFields/{id}/options/{idCustomFieldOption}:
     get:
       summary: /customFields/{id}/options/{idCustomFieldOption}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  color:
+                    type: string
+                  value:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                  pos:
+                    type: integer
+                  idCustomField:
+                    type: string
+                  id:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6383,6 +8916,81 @@ paths:
   /lists/{id}/actions:
     get:
       summary: /lists/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        card:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            idShort:
+                              type: integer
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                        list:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                        attachment:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            previewUrl2x:
+                              type: string
+                            previewUrl:
+                              type: string
+                        board:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                    date:
+                      format: date-time
+                      type: string
+                    memberCreator:
+                      type: object
+                      properties:
+                        fullName:
+                          type: string
+                        username:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        avatarHash:
+                          type: string
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6400,6 +9008,14 @@ paths:
   /organizations/{id}/members/{idMember}/deactivated:
     put:
       summary: /organizations/{id}/members/{idMember}/deactivated
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -6429,6 +9045,14 @@ paths:
   /boards/{id}/boardPlugins/{idPlugin}:
     delete:
       summary: /boards/{id}/boardPlugins/{idPlugin}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -6452,6 +9076,14 @@ paths:
   /members/{id}/boardsInvited:
     get:
       summary: /members/{id}/boardsInvited
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6476,6 +9108,14 @@ paths:
   /actions/{id}/board:
     get:
       summary: /actions/{id}/board
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6500,6 +9140,14 @@ paths:
   /actions/{id}/list:
     get:
       summary: /actions/{id}/list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6524,6 +9172,26 @@ paths:
   /webhooks/{id}:
     get:
       summary: /webhooks/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6540,6 +9208,16 @@ paths:
       deprecated: false
     delete:
       summary: /webhooks/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _value:
+                    nullable: true
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -6556,6 +9234,26 @@ paths:
       deprecated: false
     put:
       summary: /webhooks/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: put
       parameters:
       - required: false
@@ -6597,6 +9295,14 @@ paths:
   /members/{id}/customBoardBackgrounds:
     get:
       summary: /members/{id}/customBoardBackgrounds
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6614,6 +9320,32 @@ paths:
   /organizations/{id}/exports:
     post:
       summary: /organizations/{id}/exports
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      stage:
+                        type: string
+                      attempts:
+                        type: integer
+                      finished:
+                        type: boolean
+                  exportUrl:
+                    nullable: true
+                  size:
+                    nullable: true
+                  startedAt:
+                    format: date-time
+                    type: string
+                  id:
+                    type: string
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -6637,6 +9369,38 @@ paths:
       deprecated: false
     get:
       summary: /organizations/{id}/exports
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    status:
+                      type: object
+                      properties:
+                        stage:
+                          type: string
+                        progress:
+                          type: integer
+                        attempts:
+                          type: integer
+                        total:
+                          type: integer
+                        finished:
+                          type: boolean
+                    exportUrl:
+                      type: string
+                    size:
+                      type: integer
+                    startedAt:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6654,6 +9418,14 @@ paths:
   /members/{id}/customStickers/{idSticker}:
     get:
       summary: /members/{id}/enterprises/
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6683,6 +9455,14 @@ paths:
       deprecated: false
     delete:
       summary: /members/{id}/customStickers/{idSticker}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -6706,6 +9486,14 @@ paths:
   /notifications/{id}/memberCreator:
     get:
       summary: /notifications/{id}/memberCreator
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6730,6 +9518,14 @@ paths:
   /boards/{id}/myPrefs/showSidebarMembers:
     put:
       summary: /boards/{id}/myPrefs/showSidebarMembers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -6753,6 +9549,14 @@ paths:
   /enterprises/{id}/admins:
     get:
       summary: /enterprises/{id}/admins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6777,6 +9581,14 @@ paths:
   /actions/{id}:
     get:
       summary: /actions/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6842,6 +9654,14 @@ paths:
       deprecated: false
     delete:
       summary: /actions/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -6858,6 +9678,14 @@ paths:
       deprecated: false
     put:
       summary: /actions/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -6882,6 +9710,27 @@ paths:
   /customFields/{id}/options:
     post:
       summary: /customFields/{id}/options
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  color:
+                    type: string
+                  value:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                  pos:
+                    type: integer
+                  idCustomField:
+                    type: string
+                  id:
+                    type: string
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -6898,6 +9747,27 @@ paths:
       deprecated: false
     get:
       summary: /customFields/{id}/options
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    color:
+                      type: string
+                    value:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                    pos:
+                      type: integer
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6915,6 +9785,14 @@ paths:
   /organizations/{id}/members/{filter}:
     get:
       summary: /organizations/{id}/members/{filter}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6938,6 +9816,14 @@ paths:
   /labels/{id}/name:
     put:
       summary: /labels/{id}/name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -6961,6 +9847,14 @@ paths:
   /labels/{id}:
     get:
       summary: /labels/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: false
@@ -6984,6 +9878,14 @@ paths:
       deprecated: false
     delete:
       summary: /labels/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -7000,6 +9902,14 @@ paths:
       deprecated: false
     put:
       summary: /labels/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -7030,6 +9940,14 @@ paths:
   /actions/{idAction}/reactionsSummary:
     get:
       summary: /actions/{idAction}/reactionsSummary
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7047,6 +9965,14 @@ paths:
   /boards/{id}/myPrefs/emailPosition:
     put:
       summary: /boards/{id}/myPrefs/emailPosition
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -7071,6 +9997,14 @@ paths:
   /actions/{idAction}/reactions/{id}:
     get:
       summary: /actions/{idAction}/reactions/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7108,6 +10042,14 @@ paths:
       deprecated: false
     delete:
       summary: /actions/{idAction}/reactions/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -7131,6 +10073,41 @@ paths:
   /cards/{id}/attachments:
     post:
       summary: /cards/{id}/attachments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idMember:
+                    type: string
+                  url:
+                    type: string
+                  limits:
+                    type: object
+                    properties: {}
+                  previews:
+                    items: {}
+                    type: array
+                  isUpload:
+                    type: boolean
+                  date:
+                    format: date-time
+                    type: string
+                  mimeType:
+                    nullable: true
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  id:
+                    type: string
+                  edgeColor:
+                    nullable: true
+                  bytes:
+                    type: integer
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -7165,6 +10142,14 @@ paths:
       deprecated: false
     get:
       summary: /cards/{id}/attachments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7196,6 +10181,14 @@ paths:
   /cards/{id}/idLabels/{idLabel}:
     delete:
       summary: /cards/{id}/idLabels/{idLabel}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -7219,6 +10212,14 @@ paths:
   /search:
     get:
       summary: /search
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7390,6 +10391,33 @@ paths:
   /customfields/{id}:
     get:
       summary: /customFields/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modelType:
+                    type: string
+                  display:
+                    type: object
+                    properties:
+                      cardFront:
+                        type: boolean
+                  fieldGroup:
+                    type: string
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  type:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7406,6 +10434,14 @@ paths:
       deprecated: false
     delete:
       summary: /customFields/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -7422,6 +10458,33 @@ paths:
       deprecated: false
     put:
       summary: /customFields/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modelType:
+                    type: string
+                  display:
+                    type: object
+                    properties:
+                      cardFront:
+                        type: boolean
+                  fieldGroup:
+                    type: string
+                  pos:
+                    type: integer
+                  name:
+                    type: string
+                  idModel:
+                    type: string
+                  id:
+                    type: string
+                  type:
+                    type: string
+          description: OK
       _method: put
       parameters:
       - required: true
@@ -7456,6 +10519,14 @@ paths:
   /organizations/{id}/prefs/associatedDomain:
     delete:
       summary: /organizations/{id}/prefs/associatedDomain
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
@@ -7473,6 +10544,14 @@ paths:
   /lists/{id}/{field}:
     get:
       summary: /lists/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7496,6 +10575,14 @@ paths:
   /cards/{id}/actions/comments:
     post:
       summary: /cards/{id}/actions/comments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: post
       parameters:
       - required: true
@@ -7519,6 +10606,16 @@ paths:
   /boards/{id}/{field}:
     get:
       summary: /boards/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _value:
+                    type: string
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7545,6 +10642,14 @@ paths:
   /cards/{id}/idMembers/{idMember}:
     delete:
       summary: /cards/{id}/idMembers/{idMember}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+          description: OK
       _method: delete
       parameters:
       - required: true
