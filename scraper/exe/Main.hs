@@ -1,7 +1,7 @@
 module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Data.Aeson (Value)
+import Data.Aeson (Value(Object))
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.List as L
@@ -40,8 +40,13 @@ main = do
     $  extractDocs jsonBlobs
 
   -- Compute the schema for responses from docs (not present in swagger)
-  let responseSchemas
+  -- We exclude instances of {} since it's just a placeholder / represents ANY
+  let isNonEmptyObject (Object obj) = not $ HMS.null obj
+      isNonEmptyObject _            = False
+
+      responseSchemas
         = HMS.map inferSchema
+        . HMS.filter isNonEmptyObject
         . extractExampleResponses
         $ docs
 
