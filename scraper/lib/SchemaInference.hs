@@ -37,7 +37,7 @@ inferSchema (Array arr)
         ]
 inferSchema (Object obj)
   = mkObject [
-      ("type", String "array"),
+      ("type", String "object"),
       ("properties", Object $ HMS.map inferSchema obj)
     ]
 
