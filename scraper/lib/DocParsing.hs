@@ -1,3 +1,5 @@
+{-# LANGUAGE RankNTypes #-}
+
 module DocParsing (extractExampleResponses, extractCodeBlockContents, getResponse) where
 
 import BasicPrelude hiding (encodeUtf8)
@@ -7,7 +9,7 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import Data.Text.Encoding (encodeUtf8)
 import qualified Data.Vector as V
-import Lens.Micro ((^..), (&), (^?), _Right, filtered)
+import Lens.Micro ((^..), (&), (^?), _Right, filtered, toListOf)
 import Lens.Micro.Aeson (_String, _Integer, key, values)
 import Safe (fromJustNote)
 import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
@@ -31,9 +33,17 @@ extractExampleResponses
 
 
 -- Traverse structure recursively to get a complete list of documents
--- TODO: make this recursive
 getAllDocs :: Value -> [Value]
-getAllDocs (Array v) = V.toList v
+getAllDocs (Array v) = join . map f $ V.toList v where
+  f :: Value -> [Value]
+  f x = x : inner x
+
+  inner :: Value -> [Value]
+  inner
+    = join
+    . map f
+    . toListOf
+    (key "children" . values)
 getAllDocs x = error $ "Invalid document root: " ++ show x
 
 
