@@ -41,12 +41,13 @@ main = do
 
   -- Compute the schema for responses from docs (not present in swagger)
   -- We exclude instances of {} since it's just a placeholder / represents ANY
-  let isNonEmptyObject (Object obj) = not $ HMS.null obj
-      isNonEmptyObject _            = False
+  -- Note that responses can be things other than objects. e.g. arrays
+  let isEmptyObject (Object obj) = HMS.null obj
+      isEmptyObject _            = False
 
       responseSchemas
         = HMS.map inferSchema
-        . HMS.filter isNonEmptyObject
+        . HMS.filter (not . isEmptyObject)
         . extractExampleResponses
         $ docs
 
