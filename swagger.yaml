@@ -550,6 +550,24 @@ paths:
   /boards/{id}/plugins:
     get:
       summary: /boards/{id}/plugins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                    name:
+                      type: string
+                    id:
+                      type: string
+                    public:
+                      type: boolean
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -948,6 +966,75 @@ paths:
   /boards/{boardId}/actions:
     get:
       summary: /boards/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        card:
+                          type: object
+                          properties:
+                            pos:
+                              type: integer
+                            name:
+                              type: string
+                            idShort:
+                              type: integer
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                        old:
+                          type: object
+                          properties:
+                            pos:
+                              type: number
+                        list:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                        board:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                    date:
+                      format: date-time
+                      type: string
+                    memberCreator:
+                      type: object
+                      properties:
+                        fullName:
+                          type: string
+                        username:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        avatarHash:
+                          type: string
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1005,6 +1092,31 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/checklists
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    checkItems:
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          id:
+                            type: string
+                          idChecklist:
+                            type: string
+                      type: array
+                    name:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1052,6 +1164,60 @@ paths:
   /lists/{id}/cards:
     get:
       summary: /lists/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    badges:
+                      type: object
+                      properties:
+                        subscribed:
+                          type: boolean
+                        due:
+                          nullable: true
+                        checkItemsChecked:
+                          type: integer
+                        attachments:
+                          type: integer
+                        checkItems:
+                          type: integer
+                        votes:
+                          type: integer
+                        viewingMemberVoted:
+                          type: boolean
+                        fogbugz:
+                          type: string
+                        dueComplete:
+                          type: boolean
+                        comments:
+                          type: integer
+                        description:
+                          type: boolean
+                    name:
+                      type: string
+                    id:
+                      type: string
+                    labels:
+                      items:
+                        type: object
+                        properties:
+                          color:
+                            type: string
+                          uses:
+                            type: integer
+                          name:
+                            type: string
+                          idBoard:
+                            type: string
+                          id:
+                            type: string
+                      type: array
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1069,6 +1235,23 @@ paths:
   /boards/{id}/cards:
     get:
       summary: /boards/{id}/cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    members:
+                      items: {}
+                      type: array
+                    name:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -1773,6 +1956,22 @@ paths:
       deprecated: false
     get:
       summary: /boards/{id}/boardPlugins
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    idPlugin:
+                      type: string
+                    idBoard:
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -2294,6 +2493,26 @@ paths:
   /webhooks/:
     post:
       summary: /webhooks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: post
       parameters:
       - required: false
@@ -2837,6 +3056,26 @@ paths:
       deprecated: false
     get:
       summary: /checklists/{id}/checkItems
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    state:
+                      type: string
+                    pos:
+                      type: integer
+                    name:
+                      type: string
+                    nameData:
+                      nullable: true
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -4360,6 +4599,95 @@ paths:
   /boards/{boardId}/cards/{filter}:
     get:
       summary: /boards/{id}/cards/{filter}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    subscribed:
+                      type: boolean
+                    due:
+                      nullable: true
+                    checkItemStates:
+                      nullable: true
+                    closed:
+                      type: boolean
+                    idMembersVoted:
+                      items: {}
+                      type: array
+                    idLabels:
+                      items: {}
+                      type: array
+                    url:
+                      type: string
+                    badges:
+                      type: object
+                      properties:
+                        subscribed:
+                          type: boolean
+                        due:
+                          nullable: true
+                        checkItemsChecked:
+                          type: integer
+                        attachments:
+                          type: integer
+                        checkItems:
+                          type: integer
+                        votes:
+                          type: integer
+                        viewingMemberVoted:
+                          type: boolean
+                        fogbugz:
+                          type: string
+                        dueComplete:
+                          type: boolean
+                        comments:
+                          type: integer
+                        description:
+                          type: boolean
+                    pos:
+                      type: number
+                    name:
+                      type: string
+                    idList:
+                      type: string
+                    idShort:
+                      type: integer
+                    idBoard:
+                      type: string
+                    shortLink:
+                      type: string
+                    idChecklists:
+                      items: {}
+                      type: array
+                    id:
+                      type: string
+                    labels:
+                      items: {}
+                      type: array
+                    dueComplete:
+                      type: boolean
+                    dateLastActivity:
+                      format: date-time
+                      type: string
+                    idMembers:
+                      items: {}
+                      type: array
+                    manualCoverAttachment:
+                      type: boolean
+                    descData:
+                      nullable: true
+                    desc:
+                      type: string
+                    shortUrl:
+                      type: string
+                    idAttachmentCover:
+                      nullable: true
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -5799,6 +6127,26 @@ paths:
       deprecated: false
     get:
       summary: /tokens/{token}/webhooks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -6930,6 +7278,18 @@ paths:
   /webhooks/{id}/{field}:
     get:
       summary: /webhooks/{id}/{field}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7228,6 +7588,81 @@ paths:
   /lists/{id}/actions:
     get:
       summary: /lists/{id}/actions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        card:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            idShort:
+                              type: integer
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                        list:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            id:
+                              type: string
+                        attachment:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            name:
+                              type: string
+                            id:
+                              type: string
+                            previewUrl2x:
+                              type: string
+                            previewUrl:
+                              type: string
+                        board:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                            id:
+                              type: string
+                    date:
+                      format: date-time
+                      type: string
+                    memberCreator:
+                      type: object
+                      properties:
+                        fullName:
+                          type: string
+                        username:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        avatarHash:
+                          type: string
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7369,6 +7804,26 @@ paths:
   /webhooks/{id}:
     get:
       summary: /webhooks/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7411,6 +7866,26 @@ paths:
       deprecated: false
     put:
       summary: /webhooks/{id}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    callbackURL:
+                      type: string
+                    active:
+                      type: boolean
+                    idModel:
+                      type: string
+                    id:
+                      type: string
+                    description:
+                      type: string
+                type: array
+          description: OK
       _method: put
       parameters:
       - required: false
@@ -7518,6 +7993,38 @@ paths:
       deprecated: false
     get:
       summary: /organizations/{id}/exports
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    status:
+                      type: object
+                      properties:
+                        stage:
+                          type: string
+                        progress:
+                          type: integer
+                        attempts:
+                          type: integer
+                        total:
+                          type: integer
+                        finished:
+                          type: boolean
+                    exportUrl:
+                      type: string
+                    size:
+                      type: integer
+                    startedAt:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
@@ -7800,6 +8307,27 @@ paths:
       deprecated: false
     get:
       summary: /customFields/{id}/options
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                    color:
+                      type: string
+                    value:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                    pos:
+                      type: integer
+                type: array
+          description: OK
       _method: get
       parameters:
       - required: true
