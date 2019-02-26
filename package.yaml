@@ -113,6 +113,7 @@ tests:
     dependencies:
     - aeson
     - basic-prelude
+    - microlens
     - raw-strings-qq
     - scraper-lib
     - tasty

@@ -3,11 +3,11 @@
 module Main (main) where
 
 import BasicPrelude
-import Data.Either (isRight)
 import Data.Text (stripEnd)
 import Data.Yaml (decodeFileThrow)
+import Lens.Micro((^?), _Right)
 import Test.Tasty (TestTree, defaultMain, testGroup)
-import Test.Tasty.HUnit (testCase, assertBool)
+import Test.Tasty.HUnit (testCase, assertBool, assertEqual)
 import Text.RawString.QQ (r)
 
 import DocParsing
@@ -23,19 +23,22 @@ main
 testCasePath :: FilePath
 testCasePath = "scraper/test/testcases"
 
+-- Tests the extraction of code blocks from documentation blocks
 docParseTests :: TestTree
 docParseTests
   = testGroup "extractCodeBlockContents" (map test cases)
   where
-    test (name, inputM) = testCase name $ do
+    test (name, inputM, expectedCount) = testCase name $ do
       input <- inputM
       let res = extractCodeBlockContents "" (stripEnd input)
 
-      assertBool (show res)
-        . isRight
-        $ res
+      assertEqual
+        (show res)
+        (Just expectedCount)
+        (length <$> res ^? _Right)
 
-    cases = [
+    cases :: [(String, IO Text, Int)]
+      = [
         ("Simple case", pure [r|
           [block:code]
           {
@@ -47,12 +50,18 @@ docParseTests
             ]
           }
           [/block]
-        |]),
+        |],
+        1
+        ),
 
-        ("Multiple blocks", readFile $ testCasePath </> "docParseMultiBlock.txt"),
+        ("Multiple blocks",
+         readFile $ testCasePath </> "docParseMultiBlock.txt",
+         2
+        ),
 
         -- This isn't a code block, so we expect no parse
-        ("Empty case", pure [r|
+        ("Empty case",
+         pure [r|
           [block:callout]
           {
             "type": "danger",
@@ -60,9 +69,11 @@ docParseTests
             "body": "Deleting a custom field definition will also delete all of the values across all cards that have been set for that custom field. There is no way to get those values back after they have been deleted."
           }
           [/block]
-      |])
+        |],
+        0)
       ]
 
+-- End-to-end test of the extraction of the response from a documentation blob
 getResponseTests :: TestTree
 getResponseTests
   = testGroup "getResponseTests" [
