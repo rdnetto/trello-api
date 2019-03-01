@@ -6,7 +6,7 @@ import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.List as L
 import qualified Data.Text as T
-import Data.Yaml (encodeFile, decodeFileThrow)
+import Data.Yaml (decodeFileThrow)
 import Lens.Micro((^.), (^?), _3)
 import Lens.Micro.Aeson (_Object, key)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
@@ -18,6 +18,7 @@ import DocParsing
 import SchemaInference
 import Scraper
 import SwaggerRewriting
+import Util
 
 
 main :: IO ()
@@ -55,7 +56,7 @@ main = do
 
   -- Apply the validation / rewrite pass
   case rewriteSwagger responseSchemas patchedSwagger of
-       Right obj -> encodeFile "swagger.yaml" obj
+       Right obj -> encodeFilePretty "swagger.yaml" obj
        Left  err -> putStrLn err >> exitFailure
 
 -- Selects the appropriate swagger entry
@@ -82,7 +83,7 @@ applyPatches :: FilePath -> Value -> IO Value
 applyPatches name input = do
   -- We intentionally write the patched file to the root dir instead of /tmp,
   -- since this simplifies debugging and patch creation.
-  encodeFile (name ++ ".yaml") input
+  encodeFilePretty (name ++ ".yaml") input
 
   -- We need to apply the patches *before* the rewrite & validation stage,
   -- so we can workaround broken-ness in the upstream file
