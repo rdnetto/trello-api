@@ -138,9 +138,16 @@ patchDocs = mapDocsRecursively (removeExtraQuote . removeExtraComma) where
 -- Apply the specified transformaion to the root and all its (transitive children)
 mapDocsRecursively :: (Value -> Value) -> (Value -> Value)
 mapDocsRecursively f root
-  = (key "children"      . values %~ f)
-  . (key "childrenPages" . values %~ f)
-  $ f root
+  | has _Object root
+    = (key "children"      . values %~ f)
+    . (key "childrenPages" . values %~ f)
+    $ f root
+  | has _Array root
+    =  root
+    &  _Array
+    .  each
+    %~ mapDocsRecursively f
+  | otherwise = error $ "Expected object, got " ++ show root
 
 -- Expects a given value and returns the replacement. Errors out if the expected value is not provided.
 assertReplacing :: (Show a, Eq a) => a -> a -> a -> a
