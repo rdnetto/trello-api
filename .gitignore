@@ -25,3 +25,5 @@ bin
 out/
 Notes.md
 docs.yaml
+*.raw
+*.patched

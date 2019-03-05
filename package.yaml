@@ -95,13 +95,10 @@ executables:
     - basic-prelude
     - bytestring
     - containers
-    - directory
     - http-conduit
     - microlens
     - microlens-aeson
-    - process
     - scraper-lib
-    - text
     - unordered-containers
     - yaml
 
