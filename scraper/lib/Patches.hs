@@ -1,12 +1,162 @@
-module Patches where
+{-# LANGUAGE Rank2Types #-}
+
+-- This module contains logic for patching the input files
+-- Expressing the changes in terms of structure rather than text makes them more robust against unrelated changes,
+-- but means that we need to implement our own logic for recognizing when the surrounding document has changed.
+module Patches where -- (patchDocs, patchSwagger) where
 
 import BasicPrelude
-import Data.Aeson (Value)
-import Lens.Micro((^.), _3)
-import Lens.Micro.Aeson (key)
+import Data.Aeson (Value(..))
+import qualified Data.Vector as V
+import Lens.Micro((.~), (%~), Traversal', filtered, toListOf, at)
+import Lens.Micro.Aeson (_Object, _Array, key, values)
+import Lens.Micro.Platform ()
 
+import Util
+
+
+-- Swagger patches.
+-- This fixes the mismatch between the path present in the key, and the explicit defn of the path params
 patchSwagger :: Value -> Value
-patchSwagger = id
+patchSwagger = key "paths" %~ pathModifier where
+  pathModifier
+    =
+    ( key "/boards/{id}/memberships/{idMembership}"
+      .  key "put"
+      .  key "parameters"
+      .  valuesWith "name" "idMembership"
+      .  keyAt "in"
+      .~ Just (String "path")
+    ) . (
+      key "/boards/{boardId}/boardStars"
+      .  key "get"
+      .  keyAt "summary"
+      .~ Just (String "/boards/{boardId}/boardStars")
+    ) . (
+      key "/boards/{boardId}/boardStars"
+      .  key "get"
+      .  key "parameters"
+      .  valuesWith "name" "filter"
+      .  keyAt "in"
+      .~ Just (String "query")
+    ) . (
+      key "/enterprises/{id}/members/{idMember}"
+      .  key "get"
+      .  key "parameters"
+      .  valuesWith "name" "idMember"
+      .  keyAt "in"
+      .~ Just (String "path")
+    ) . (
+      key "/members/{id}/savedSearches/{idSearch}"
+      .  key "get"
+      .  key "parameters"
+      .  _Array
+      %~ V.cons (mkPathParam "idSearch" "The ID of the search")
+    ) . (
+      key "/members/{id}/savedSearches/{idSearch}"
+      .  key "put"
+      .  key "parameters"
+      .  _Array
+      %~ V.cons (mkPathParam "idSearch" "The ID of the search")
+    ) . (
+      key "/members/{id}//customBoardBackgrounds/{idBackground}"
+      .  key "put"
+      .  key "parameters"
+      .  _Array
+      %~ V.cons (mkPathParam "idBackground" "The ID of the background")
+    ) . (
+      key "/members/{id}/customBoardBackgrounds/{idBackground}"
+      .  key "get"
+      .  key "parameters"
+      .  _Array
+      %~ V.cons (mkPathParam "idBackground" "The ID of the background")
+    ) . (
+      key "/enterprises/{id}/organizations/{idOrganization}"
+      .  key "delete"
+      .  key "summary"
+      .~ String "/enterprises/{id}/organizations/{idOrganization}"
+    ) . (
+      key "/enterprises/{id}/organizations/{idOrganization}"
+      .  key "delete"
+      .  key "parameters"
+      .  _Array
+      %~ (V.filter ((/=) (Just "idMember") . getStringKey "name")
+          . V.cons (mkPathParam "idOrganization" "The ID of the organization")
+      )
+    ) . (
+      key "/cards/{id}/attachments"
+      .  key "get"
+      .  key "parameters"
+      .  valuesWith "name" "fields"
+      .  keyAt "in"
+      .~ Just (String "query")
+    ) . (
+      key "/cards/{id}/attachments"
+      .  key "get"
+      .  key "parameters"
+      .  valuesWith "name" "fields"
+      .  keyAt "filter"
+      .~ Just (String "query")
+    )
 
+  mkPathParam name description
+    = mkObject [
+        ("required", Bool True),
+        ("schema", mkSimpleObject "type" "string"),
+        ("in", "path"),
+        ("name", name),
+        ("description", description)
+      ]
+
+
+-- Because docs can be nested, the patching logic here needs to be applied recursively
 patchDocs :: Value -> Value
-patchDocs = id
+patchDocs = mapDocsRecursively (removeExtraQuote . removeExtraComma) where
+  removeExtraQuote = id -- TODO
+
+  -- JSON does not permit trailing commas
+  removeExtraComma
+    =  hasKV "_id" "595aba4f06f0d400155af9a7"
+    .  key "api"
+    .  key "results"
+    .  key "codes"
+    .  valuesWith' "status" (Number 200)
+    .  key "code"
+    %~ assertReplacing
+       "[\n    {\n        \"callbackURL\": \"https://trello.com/\",\n    }\n]"
+       "[\n    {\n        \"callbackURL\": \"https://trello.com/\"\n    }\n]"
+
+-- Apply the specified transformaion to the root and all its (transitive children)
+mapDocsRecursively :: (Value -> Value) -> (Value -> Value)
+mapDocsRecursively f root
+  = (key "children"      . values %~ f)
+  . (key "childrenPages" . values %~ f)
+  $ f root
+
+-- Expects a given value and returns the replacement. Errors out if the expected value is not provided.
+assertReplacing :: (Show a, Eq a) => a -> a -> a -> a
+assertReplacing expected new old
+  | expected == old = new
+  | otherwise       = error $ concat ["Expected ", show expected, ", got ", show new]
+
+-- Traverse into the element(s) of an array which contain the specified key-value pair
+valuesWith :: Text -> Text -> Traversal' Value Value
+valuesWith k = valuesWith' k . String
+
+-- Traverse into the element(s) of an array which contain the specified key-value pair. (General form)
+valuesWith' :: Text -> Value -> Traversal' Value Value
+valuesWith' k v
+  = values
+  . filtered (
+      anyOr False
+      . map (== v)
+      . toListOf (key k)
+  )
+
+keyAt :: Text -> Traversal' Value (Maybe Value)
+keyAt i = _Object . at i
+
+-- TODO: This function is the source of the problem
+hasKV :: Text -> Text -> Traversal' Value Value
+hasKV k v = filtered $ (==) (Just v) . getStringKey k
+

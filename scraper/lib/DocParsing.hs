@@ -146,19 +146,6 @@ isJsonCodeBlob
   . getStringKey "language"
 
 
--- Generic helper for extracting a string from a JSOn object
-getStringKey :: Text -> Value -> Maybe Text
-getStringKey k obj
-  =   zeroOrOne
-  $   obj
-  ^.. key k
-  .   _String
-
-zeroOrOne :: Show a => [a] -> Maybe a
-zeroOrOne [x] = Just x
-zeroOrOne []  = Nothing
-zeroOrOne xs = error $ "Expected <2 results: " ++ show xs
-
 -- Deserializes a JSON snippet
 decodeJson :: FromJSON a => String -> Text -> a
 decodeJson err txt

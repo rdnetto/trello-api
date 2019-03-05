@@ -229,8 +229,6 @@ addResponseSchemas responseSchemas
 -- See https://swagger.io/docs/specification/describing-responses/
 generateResponse :: Value -> Value
 generateResponse schema = res where
-  mkObject = Object . HMS.fromList
-  mkSimpleObject k v = mkObject [(k, v)]
   res
     = mkSimpleObject "200"
     $ mkObject [
