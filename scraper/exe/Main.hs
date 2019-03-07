@@ -4,9 +4,10 @@ import BasicPrelude hiding (decodeUtf8, encodeUtf8)
 import Data.Aeson (Value)
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
-import Lens.Micro((^.), (^?), _3)
-import Lens.Micro.Aeson (_Object, key)
+import Lens.Micro((^.), (^..), (^?), _3, has)
+import Lens.Micro.Aeson (_Object, key, members)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
+import Safe (fromJustNote)
 import System.Exit (exitFailure)
 
 import DocParsing
@@ -51,8 +52,38 @@ main = do
 
   -- Apply the validation / rewrite pass
   case rewriteSwagger responseSchemas patchedSwagger of
-       Right obj -> encodeFilePretty "swagger.yaml" obj
        Left  err -> putStrLn err >> exitFailure
+       Right finalSwagger -> do
+         encodeFilePretty "swagger.yaml" finalSwagger
+
+         let ops
+               = finalSwagger
+               ^.. key "paths"
+               .   members
+               .   members
+
+             missingSchemas
+               = sort
+               . map toDescription
+               . filter (not . has (key "responses"))
+               $ ops
+
+             toDescription obj
+               =   fromJustNote "toDescription"
+               $   (\a b -> a ++ "." ++ b)
+               <$> getStringKey "_path" obj
+               <*> getStringKey "_method" obj
+
+         unless (null missingSchemas)
+           . putStrLn
+           $ concat [
+               "Missing response schemas for ",
+               tshow (length missingSchemas),
+               " / ",
+               tshow (length ops),
+               " operations:"
+             ]
+         mapM_ putStrLn missingSchemas
 
 -- Selects the appropriate swagger entry
 getSwagger :: [(Text, Value)] -> IO Value

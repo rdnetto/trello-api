@@ -98,6 +98,7 @@ executables:
     - http-conduit
     - microlens
     - microlens-aeson
+    - safe
     - scraper-lib
     - unordered-containers
     - yaml
