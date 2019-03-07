@@ -61,6 +61,52 @@ paths:
           default: true
           type: boolean
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    emoji:
+                      properties:
+                        name:
+                          type: string
+                        native:
+                          type: string
+                        shortName:
+                          type: string
+                        skinVariation:
+                          nullable: true
+                        unified:
+                          type: string
+                      type: object
+                    id:
+                      type: string
+                    idEmoji:
+                      type: string
+                    idMember:
+                      type: string
+                    idModel:
+                      type: string
+                    member:
+                      properties:
+                        avatarHash:
+                          type: string
+                        avatarUrl:
+                          type: string
+                        fullName:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        username:
+                          type: string
+                      type: object
+                  type: object
+                type: array
+          description: OK
       summary: /actions/{idAction}/reactions
       tags: []
     post:
@@ -94,6 +140,50 @@ paths:
                   description: The `unified` value of the emoji to add. See [/emoji](#emoji)
                   type: string
               type: object
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  emoji:
+                    properties:
+                      name:
+                        type: string
+                      native:
+                        type: string
+                      shortName:
+                        type: string
+                      skinVariation:
+                        nullable: true
+                      unified:
+                        type: string
+                    type: object
+                  id:
+                    type: string
+                  idEmoji:
+                    type: string
+                  idMember:
+                    type: string
+                  idModel:
+                    type: string
+                  member:
+                    properties:
+                      avatarHash:
+                        type: string
+                      avatarUrl:
+                        type: string
+                      fullName:
+                        type: string
+                      id:
+                        type: string
+                      initials:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                type: object
+          description: OK
       summary: /actions/{idAction}/reactions
       tags: []
   /actions/{idAction}/reactions/{id}:
@@ -154,6 +244,50 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  emoji:
+                    properties:
+                      name:
+                        type: string
+                      native:
+                        type: string
+                      shortName:
+                        type: string
+                      skinVariation:
+                        nullable: true
+                      unified:
+                        type: string
+                    type: object
+                  id:
+                    type: string
+                  idEmoji:
+                    type: string
+                  idMember:
+                    type: string
+                  idModel:
+                    type: string
+                  member:
+                    properties:
+                      avatarHash:
+                        type: string
+                      avatarUrl:
+                        type: string
+                      fullName:
+                        type: string
+                      id:
+                        type: string
+                      initials:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                type: object
+          description: OK
       summary: /actions/{idAction}/reactions/{id}
       tags: []
   /actions/{idAction}/reactionsSummary:
@@ -171,6 +305,42 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    count:
+                      type: integer
+                    emoji:
+                      properties:
+                        name:
+                          type: string
+                        native:
+                          type: string
+                        shortName:
+                          type: string
+                        skinVariation:
+                          nullable: true
+                        unified:
+                          type: string
+                      type: object
+                    firstReacted:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                    idEmoji:
+                      type: string
+                    idModel:
+                      type: string
+                    idReaction:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /actions/{idAction}/reactionsSummary
       tags: []
   /actions/{id}:
@@ -253,6 +423,132 @@ paths:
           default: avatarHash,fullName,initials,username
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      attachment:
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          previewUrl:
+                            type: string
+                          previewUrl2x:
+                            type: string
+                          url:
+                            type: string
+                        type: object
+                      board:
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          shortLink:
+                            type: string
+                        type: object
+                      card:
+                        properties:
+                          id:
+                            type: string
+                          idShort:
+                            type: integer
+                          name:
+                            type: string
+                          shortLink:
+                            type: string
+                        type: object
+                    type: object
+                  date:
+                    format: date-time
+                    type: string
+                  display:
+                    properties:
+                      entities:
+                        properties:
+                          attachment:
+                            properties:
+                              id:
+                                type: string
+                              link:
+                                type: boolean
+                              previewUrl:
+                                type: string
+                              previewUrl2x:
+                                type: string
+                              text:
+                                type: string
+                              type:
+                                type: string
+                              url:
+                                type: string
+                            type: object
+                          attachmentPreview:
+                            properties:
+                              id:
+                                type: string
+                              originalUrl:
+                                type: string
+                              previewUrl:
+                                type: string
+                              previewUrl2x:
+                                type: string
+                              type:
+                                type: string
+                            type: object
+                          card:
+                            properties:
+                              id:
+                                type: string
+                              shortLink:
+                                type: string
+                              text:
+                                type: string
+                              type:
+                                type: string
+                            type: object
+                          memberCreator:
+                            properties:
+                              id:
+                                type: string
+                              text:
+                                type: string
+                              type:
+                                type: string
+                              username:
+                                type: string
+                            type: object
+                        type: object
+                      translationKey:
+                        type: string
+                    type: object
+                  id:
+                    type: string
+                  idMemberCreator:
+                    type: string
+                  memberCreator:
+                    properties:
+                      avatarHash:
+                        type: string
+                      fullName:
+                        type: string
+                      id:
+                        type: string
+                      initials:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  type:
+                    type: string
+                type: object
+          description: OK
       summary: /actions/{id}
       tags: []
     put:
@@ -1289,6 +1585,18 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                type: object
+          description: OK
       summary: /boards/{id}/boardPlugins
       tags: []
   /boards/{id}/boardPlugins/{idPlugin}:
@@ -1652,6 +1960,22 @@ paths:
           format: int32
           type: integer
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    color:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /boards/{id}/labels
       tags: []
     post:
@@ -1726,6 +2050,29 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    cards:
+                      items:
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                        type: object
+                      type: array
+                    id:
+                      type: string
+                    name:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /boards/{id}/lists
       tags: []
     post:
@@ -2828,6 +3175,70 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    data:
+                      properties:
+                        board:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                          type: object
+                        card:
+                          properties:
+                            id:
+                              type: string
+                            idShort:
+                              type: integer
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                          type: object
+                        list:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                          type: object
+                        text:
+                          type: string
+                      type: object
+                    date:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                    memberCreator:
+                      properties:
+                        avatarHash:
+                          type: string
+                        fullName:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        username:
+                          type: string
+                      type: object
+                    type:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/actions
       tags: []
   /cards/{id}/actions/comments:
@@ -2933,6 +3344,54 @@ paths:
           default: 'false'
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    bytes:
+                      type: integer
+                    date:
+                      format: date-time
+                      type: string
+                    edgeColor:
+                      type: string
+                    id:
+                      type: string
+                    idMember:
+                      type: string
+                    isUpload:
+                      type: boolean
+                    mimeType:
+                      nullable: true
+                    name:
+                      type: string
+                    pos:
+                      type: integer
+                    previews:
+                      items:
+                        properties:
+                          _id:
+                            type: string
+                          bytes:
+                            type: integer
+                          height:
+                            type: integer
+                          scaled:
+                            type: boolean
+                          url:
+                            type: string
+                          width:
+                            type: integer
+                        type: object
+                      type: array
+                    url:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/attachments
       tags: []
     post:
@@ -3078,6 +3537,141 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  closed:
+                    type: boolean
+                  dateLastActivity:
+                    format: date-time
+                    type: string
+                  dateLastView:
+                    format: date-time
+                    type: string
+                  datePluginDisable:
+                    nullable: true
+                  desc:
+                    type: string
+                  descData:
+                    nullable: true
+                  id:
+                    type: string
+                  idOrganization:
+                    type: string
+                  idTags:
+                    items: {}
+                    type: array
+                  invitations:
+                    items: {}
+                    type: array
+                  invited:
+                    type: boolean
+                  labelNames:
+                    properties:
+                      black:
+                        type: string
+                      blue:
+                        type: string
+                      green:
+                        type: string
+                      lime:
+                        type: string
+                      orange:
+                        type: string
+                      pink:
+                        type: string
+                      purple:
+                        type: string
+                      red:
+                        type: string
+                      sky:
+                        type: string
+                      yellow:
+                        type: string
+                    type: object
+                  memberships:
+                    items:
+                      properties:
+                        deactivated:
+                          type: boolean
+                        id:
+                          type: string
+                        idMember:
+                          type: string
+                        memberType:
+                          type: string
+                        unconfirmed:
+                          type: boolean
+                      type: object
+                    type: array
+                  name:
+                    type: string
+                  pinned:
+                    type: boolean
+                  powerUps:
+                    items: {}
+                    type: array
+                  prefs:
+                    properties:
+                      background:
+                        type: string
+                      backgroundBrightness:
+                        type: string
+                      backgroundImage:
+                        type: string
+                      backgroundImageScaled:
+                        items:
+                          properties:
+                            height:
+                              type: integer
+                            url:
+                              type: string
+                            width:
+                              type: integer
+                          type: object
+                        type: array
+                      backgroundTile:
+                        type: boolean
+                      calendarFeedEnabled:
+                        type: boolean
+                      canBeOrg:
+                        type: boolean
+                      canBePrivate:
+                        type: boolean
+                      canBePublic:
+                        type: boolean
+                      canInvite:
+                        type: boolean
+                      cardAging:
+                        type: string
+                      cardCovers:
+                        type: boolean
+                      comments:
+                        type: string
+                      invitations:
+                        type: string
+                      permissionLevel:
+                        type: string
+                      selfJoin:
+                        type: boolean
+                      voting:
+                        type: string
+                    type: object
+                  shortLink:
+                    type: string
+                  shortUrl:
+                    type: string
+                  starred:
+                    type: boolean
+                  subscribed:
+                    type: boolean
+                  url:
+                    type: string
+                type: object
+          description: OK
       summary: /cards/{id}/board
       tags: []
   /cards/{id}/checkItem/{idCheckItem}:
@@ -3130,6 +3724,28 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  idChecklist:
+                    type: string
+                  name:
+                    type: string
+                  nameData:
+                    nullable: true
+                  pos:
+                    type: integer
+                  state:
+                    type: string
+                  type:
+                    nullable: true
+                type: object
+          description: OK
       summary: /cards/{id}/checkItem/{idCheckItem}
       tags: []
     put:
@@ -3200,6 +3816,20 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    idCheckItem:
+                      type: string
+                    state:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/checkItemStates
       tags: []
   /cards/{id}/checklists:
@@ -3245,6 +3875,43 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    checkItems:
+                      items:
+                        properties:
+                          id:
+                            type: string
+                          idChecklist:
+                            type: string
+                          name:
+                            type: string
+                          nameData:
+                            nullable: true
+                          pos:
+                            type: integer
+                          state:
+                            type: string
+                        type: object
+                      type: array
+                    id:
+                      type: string
+                    idBoard:
+                      type: string
+                    idCard:
+                      type: string
+                    name:
+                      type: string
+                    pos:
+                      type: integer
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/checklists
       tags: []
     post:
@@ -3320,6 +3987,29 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    idCustomField:
+                      type: string
+                    idModel:
+                      type: string
+                    modelType:
+                      type: string
+                    value:
+                      properties:
+                        text:
+                          type: string
+                      type: object
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/customFieldItems
       tags: []
   /cards/{id}/idLabels:
@@ -3465,6 +4155,26 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  closed:
+                    type: boolean
+                  id:
+                    type: string
+                  idBoard:
+                    type: string
+                  name:
+                    type: string
+                  pos:
+                    type: integer
+                  subscribed:
+                    type: boolean
+                type: object
+          description: OK
       summary: /cards/{id}/list
       tags: []
   /cards/{id}/markAssociatedNotificationsRead:
@@ -3616,6 +4326,45 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    image:
+                      type: string
+                    imageScaled:
+                      items:
+                        properties:
+                          _id:
+                            type: string
+                          height:
+                            type: integer
+                          scaled:
+                            type: boolean
+                          url:
+                            type: string
+                          width:
+                            type: integer
+                        type: object
+                      type: array
+                    imageUrl:
+                      type: string
+                    left:
+                      type: number
+                    rotate:
+                      type: integer
+                    top:
+                      type: integer
+                    zIndex:
+                      type: integer
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/stickers
       tags: []
   /cards/{id}/stickers/{idSticker}:
@@ -3741,6 +4490,16 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  _value:
+                    type: string
+                type: object
+          description: OK
       summary: /cards/{id}/{field}
       tags: []
   /checklists:
@@ -6242,6 +7001,78 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    data:
+                      properties:
+                        board:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                          type: object
+                        card:
+                          properties:
+                            id:
+                              type: string
+                            idShort:
+                              type: integer
+                            name:
+                              type: string
+                            shortLink:
+                              type: string
+                          type: object
+                        list:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                          type: object
+                        text:
+                          type: string
+                        textData:
+                          properties:
+                            emoji:
+                              properties:
+                                morty:
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    date:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                    memberCreator:
+                      properties:
+                        avatarHash:
+                          type: string
+                        fullName:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        username:
+                          type: string
+                      type: object
+                    type:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /members/{id}/actions
       tags: []
   /members/{id}/avatar: {}
@@ -6584,6 +7415,28 @@ paths:
           default: visible
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    idBoard:
+                      type: string
+                    idList:
+                      type: string
+                    idMembers:
+                      items:
+                        type: string
+                      type: array
+                    name:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /members/{id}/cards
       tags: []
   /members/{id}/customBoardBackgrounds:
@@ -6671,6 +7524,22 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    url:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /members/{id}/customEmoji
       tags: []
   /members/{id}/customEmoji/{idEmoji}:
@@ -6701,6 +7570,20 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  url:
+                    type: string
+                type: object
+          description: OK
       summary: /members/{id}/customEmoji/{idEmoji}
       tags: []
   /members/{id}/customStickers:
@@ -6718,6 +7601,37 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    scaled:
+                      items:
+                        properties:
+                          _id:
+                            type: string
+                          bytes:
+                            type: integer
+                          height:
+                            type: integer
+                          scaled:
+                            type: boolean
+                          url:
+                            type: string
+                          width:
+                            type: integer
+                        type: object
+                      type: array
+                    url:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /members/{id}/customStickers
       tags: []
   /members/{id}/customStickers/{idSticker}:
@@ -7653,6 +8567,65 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    data:
+                      properties:
+                        idMemberAdded:
+                          type: string
+                        memberType:
+                          type: string
+                        organization:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                          type: object
+                      type: object
+                    date:
+                      format: date-time
+                      type: string
+                    id:
+                      type: string
+                    idMemberCreator:
+                      type: string
+                    member:
+                      properties:
+                        avatarHash:
+                          type: string
+                        fullName:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        username:
+                          type: string
+                      type: object
+                    memberCreator:
+                      properties:
+                        avatarHash:
+                          type: string
+                        fullName:
+                          type: string
+                        id:
+                          type: string
+                        initials:
+                          type: string
+                        username:
+                          type: string
+                      type: object
+                    type:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /organizations/{id}/actions
       tags: []
   /organizations/{id}/boards:
