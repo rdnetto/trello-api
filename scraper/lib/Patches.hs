@@ -121,8 +121,6 @@ patchSwagger = key "paths" %~ pathModifier where
 -- Because docs can be nested, the patching logic here needs to be applied recursively
 patchDocs :: Value -> Value
 patchDocs = mapDocsRecursively (removeExtraQuote . removeExtraComma) where
-  removeExtraQuote = id -- TODO
-
   -- JSON does not permit trailing commas
   removeExtraComma
     =  hasKV "_id" "595aba4f06f0d400155af9a7"
@@ -134,6 +132,14 @@ patchDocs = mapDocsRecursively (removeExtraQuote . removeExtraComma) where
     %~ assertReplacing
        "[\n    {\n        \"callbackURL\": \"https://trello.com/\",\n    }\n]"
        "[\n    {\n        \"callbackURL\": \"https://trello.com/\"\n    }\n]"
+
+  -- This is just a typo
+  removeExtraQuote
+    = hasKV "_id" "5b6345d62f1997000328177f"
+    . key "body"
+    %~ assertReplacing
+      "[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"[\\n  {\\n    \\\"count\\\": 2,\\n    \\\"id\\\": \\\"5afc2c98bb0aa3d078e30be4:1F64C\\\",\\n    \\\"firstReacted\\\": \\\"2018-05-16T13:58:34.000Z\\\",\\n    \\\"idEmoji\\\": \\\"1F64C\\\",\\n    \\\"idModel\\\": \\\"5afc2c98bb0aa3d078e30be4\\\",\\n    \\\"idReaction\\\": \\\"5afeec8fb0850e36938e465b\\\",\\n    \\\"emoji\\\": {\\n      \\\"unified\\\": \\\"1F64C\\\",\\n      \\\"native\\\": \\\"🙌\\\",\\n      \\\"name\\\": \\\"PERSON RAISING BOTH HANDS IN CELEBRATION\\\",\\n      \\\"skinVariation\\\": null,\\n      \\\"shortName\\\": \\\"raised_hands\\\"\\n    }\\n  }\\n]'\",\n      \"language\": \"json\"\n    }\n  ]\n}\n[/block]"
+      "[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"[\\n  {\\n    \\\"count\\\": 2,\\n    \\\"id\\\": \\\"5afc2c98bb0aa3d078e30be4:1F64C\\\",\\n    \\\"firstReacted\\\": \\\"2018-05-16T13:58:34.000Z\\\",\\n    \\\"idEmoji\\\": \\\"1F64C\\\",\\n    \\\"idModel\\\": \\\"5afc2c98bb0aa3d078e30be4\\\",\\n    \\\"idReaction\\\": \\\"5afeec8fb0850e36938e465b\\\",\\n    \\\"emoji\\\": {\\n      \\\"unified\\\": \\\"1F64C\\\",\\n      \\\"native\\\": \\\"🙌\\\",\\n      \\\"name\\\": \\\"PERSON RAISING BOTH HANDS IN CELEBRATION\\\",\\n      \\\"skinVariation\\\": null,\\n      \\\"shortName\\\": \\\"raised_hands\\\"\\n    }\\n  }\\n]\",\n      \"language\": \"json\"\n    }\n  ]\n}\n[/block]"
 
 -- Apply the specified transformaion to the root and all its (transitive children)
 mapDocsRecursively :: (Value -> Value) -> (Value -> Value)
