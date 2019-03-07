@@ -1,7 +1,7 @@
 module Main where
 
 import BasicPrelude hiding (decodeUtf8, encodeUtf8)
-import Data.Aeson (Value(Object))
+import Data.Aeson (Value)
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.HashMap.Strict as HMS
 import Lens.Micro((^.), (^?), _3)
@@ -42,15 +42,8 @@ main = do
     .   andAlso (encodeFilePretty "docs.yaml.raw")
     $   extractDocs jsonBlobs
 
-  -- Compute the schema for responses from docs (not present in swagger)
-  -- We exclude instances of {} since it's just a placeholder / represents ANY
-  -- Note that responses can be things other than objects. e.g. arrays
-  let isEmptyObject (Object obj) = HMS.null obj
-      isEmptyObject _            = False
-
-      responseSchemas
+  let responseSchemas
         = HMS.map inferSchema
-        . HMS.filter (not . isEmptyObject)
         . extractExampleResponses
         $ docs
 

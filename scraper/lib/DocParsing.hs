@@ -76,7 +76,12 @@ getResponseFromApi obj = do
   guard . not $ T.null json
 
   let decoder = decodeJson $ "Failed to decode code blobs in " ++ renderJson obj
-  return (operationId, decoder json)
+      res = decoder json
+
+  -- Ignore empty objects too
+  guard . not $ isEmptyObject res
+
+  return (operationId, res)
 
 
 -- Gets a sample response from the documentation body
@@ -162,4 +167,11 @@ renderJson
   . decodeUtf8
   . BSL.toStrict
   . encode
+
+  -- Compute the schema for responses from docs (not present in swagger)
+  -- We exclude instances of {} since it's just a placeholder / represents ANY
+  -- Note that responses can be things other than objects. e.g. arrays
+isEmptyObject :: Value -> Bool
+isEmptyObject (Object obj) = HMS.null obj
+isEmptyObject _            = False
 
