@@ -1,1 +1,76 @@
-[block:parameters]\n{\n  \"data\": {\n    \"0-0\": \"**id**\\nstring\",\n    \"1-0\": \"**badges**\\nObject\",\n    \"2-0\": \"**checkItemStates**\\narray\",\n    \"3-0\": \"**closed**\\nboolean\",\n    \"4-0\": \"**dateLastActivity**\\ndate\",\n    \"4-1\": \"The datetime of the last activity on the card. \\n\\nNote: There are activities that update dateLastActivity that do not create a corresponding action. For instance, updating the name field of a checklist item on a card does not create an action but does update the card and board's dateLastActivity value.\",\n    \"5-0\": \"**desc**\\nstring\",\n    \"6-0\": \"**descData**\",\n    \"7-0\": \"**due**\\ndate\",\n    \"8-0\": \"**dueComplete**\\nboolean\",\n    \"9-0\": \"**idAttachmentCover**\\nstring\",\n    \"9-1\": \"The id of the attachment selected as the cover image, if one exists\",\n    \"10-0\": \"**idBoard**\\nstring\",\n    \"10-1\": \"The ID of the board the card is on\",\n    \"11-0\": \"**idChecklists**\\narray of strings\",\n    \"11-1\": \"An array of checklist IDs that are on this card\",\n    \"12-0\": \"**idLabels**\\narray of strings\",\n    \"12-1\": \"An array of label IDs that are on this card\",\n    \"13-0\": \"**idList**\\nstring\",\n    \"13-1\": \"The ID of the list the card is in\",\n    \"14-0\": \"**idMembers**\\narray of strings\",\n    \"14-1\": \"An array of member IDs that are on this card\",\n    \"15-0\": \"**idMembersVoted**\\narray of strings\",\n    \"15-1\": \"An array of member IDs who have voted on this card\",\n    \"16-0\": \"**idShort**\\ninteger\",\n    \"16-1\": \"Numeric ID for the card on this board. Only unique to the board, and subject to change as the card moves\",\n    \"17-0\": \"**labels**\\narray of [Labels](ref:labels)\",\n    \"17-1\": \"Array of label objects on this card\",\n    \"18-0\": \"**manualCoverAttachment**\\nboolean\",\n    \"19-0\": \"**name**\\nstring\",\n    \"19-1\": \"Name of the card\",\n    \"20-0\": \"**pos**\\nfloat\",\n    \"20-1\": \"Position of the card in the list\",\n    \"21-0\": \"**shortLink**\\nstring\",\n    \"21-1\": \"The 8 character shortened ID for the card\",\n    \"22-0\": \"**shortUrl**\\nstring\",\n    \"22-1\": \"URL to the card without the name slug\",\n    \"23-0\": \"**subscribed**\\nboolean\",\n    \"23-1\": \"Whether this member is subscribed to the card\",\n    \"24-0\": \"**url**\\nstring\",\n    \"24-1\": \"Full URL to the card, with the name slug\",\n    \"0-1\": \"The ID of the card\",\n    \"3-1\": \"Whether the card is closed (archived). Note: Archived lists and boards do not cascade archives to cards. A card can have `closed: false` but be on an archived board.\",\n    \"5-1\": \"The description for the card. Up to 16384 chars.\",\n    \"7-1\": \"The due date on the card, if one exists\",\n    \"8-1\": \"Whether the due date has been marked complete\",\n    \"6-1\": \"If the description has custom emoji, this field will provide the data necessary to display them.\\n\\n```json\\n\\\"descData\\\": {\\n    \\\"emoji\\\": {\\n      \\\"morty\\\": \\\"https://trello-emoji.s3.amazonaws.com/556c8537a1928ba745504dd8/f40ea4f5ecea8443875c27986760d8b3/tumblr_nszc7944yh1uccyhso1_1280.png\\\"\\n    }\\n  }\\n```\",\n    \"1-1\": \"Pieces of information about the card that are displayed on the front of the card.\\n\\n```json\\n\\\"badges\\\": {\\n    \\\"votes\\\": 0,\\n    \\\"viewingMemberVoted\\\": false,\\n    \\\"subscribed\\\": true,\\n    \\\"fogbugz\\\": \\\"\\\",\\n    \\\"checkItems\\\": 0,\\n    \\\"checkItemsChecked\\\": 0,\\n    \\\"comments\\\": 1,\\n    \\\"attachments\\\": 2,\\n    \\\"description\\\": true,\\n    \\\"due\\\": null,\\n    \\\"dueComplete\\\": false\\n  }\\n```\",\n    \"18-1\": \"Whether the card cover image was selected automatically by Trello, or manually by the user\",\n    \"25-0\": \"**address**\\nstring\",\n    \"26-0\": \"**locationName**\\nstring\",\n    \"27-0\": \"**coordinates**\\nobject\",\n    \"25-1\": \"Address of card location\",\n    \"26-1\": \"Name of card location\",\n    \"27-1\": \"Either a comma-separated string in the format latitude,longitude or an object containing keys for `latitude` and `longitude` whose values are numbers between -180 and 180.\"\n  },\n  \"cols\": 2,\n  \"rows\": 28\n}\n[/block]\nFor example:\n\n`GET` `/1/cards/560bf4dd7139286471dc009c?fields=all`\n[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"{\\n  \\\"id\\\": \\\"560bf4dd7139286471dc009c\\\",\\n  \\\"badges\\\": {\\n    \\\"votes\\\": 0,\\n    \\\"viewingMemberVoted\\\": false,\\n    \\\"subscribed\\\": true,\\n    \\\"fogbugz\\\": \\\"\\\",\\n    \\\"checkItems\\\": 0,\\n    \\\"checkItemsChecked\\\": 0,\\n    \\\"comments\\\": 0,\\n    \\\"attachments\\\": 2,\\n    \\\"description\\\": false,\\n    \\\"due\\\": null,\\n    \\\"dueComplete\\\": false\\n  },\\n  \\\"checkItemStates\\\": [\\n    \\n  ],\\n  \\\"closed\\\": false,\\n  \\\"dueComplete\\\": false,\\n  \\\"dateLastActivity\\\": \\\"2017-06-26T17:39:49.583Z\\\",\\n  \\\"desc\\\": \\\"\\\",\\n  \\\"descData\\\": null,\\n  \\\"due\\\": null,\\n  \\\"email\\\": null,\\n  \\\"idBoard\\\": \\\"560bf4298b3dda300c18d09c\\\",\\n  \\\"idChecklists\\\": [\\n    \\n  ],\\n  \\\"idList\\\": \\\"560bf44ea68b16bd0fc2a9a9\\\",\\n  \\\"idMembers\\\": [\\n    \\\"556c8537a1928ba745504dd8\\\"\\n  ],\\n  \\\"idMembersVoted\\\": [\\n    \\n  ],\\n  \\\"idShort\\\": 9,\\n  \\\"idAttachmentCover\\\": \\\"5944a06460ed0bee471ad8e0\\\",\\n  \\\"manualCoverAttachment\\\": false,\\n  \\\"labels\\\": [\\n    {\\n      \\\"id\\\": \\\"560bf42919ad3a5dc29f33c5\\\",\\n      \\\"idBoard\\\": \\\"560bf4298b3dda300c18d09c\\\",\\n      \\\"name\\\": \\\"Visited\\\",\\n      \\\"color\\\": \\\"green\\\"\\n    }\\n  ],\\n  \\\"idLabels\\\": [\\n    \\\"560bf42919ad3a5dc29f33c5\\\"\\n  ],\\n  \\\"name\\\": \\\"Grand Canyon National Park\\\",\\n  \\\"pos\\\": 16384,\\n  \\\"shortLink\\\": \\\"nqPiDKmw\\\",\\n  \\\"shortUrl\\\": \\\"https://trello.com/c/nqPiDKmw\\\",\\n  \\\"subscribed\\\": true,\\n  \\\"url\\\": \\\"https://trello.com/c/nqPiDKmw/9-grand-canyon-national-park\\\"\\n  \\\"address\\\": \\\"55 Broadway\\\\nSan Francisco CA 94111\\\\nUnited States\\\",\\n  \\\"locationName\\\": \\\"55 Broadway, NY 10280\\\",\\n  \\\"coordinates\\\": {\\n    \\\"latitude\\\": 37.7986712,\\n    \\\"longitude\\\": -122.3991514\\n  }\\n}\",\n      \"language\": \"json\"\n    }\n  ]\n}\n[/block]
+[block:parameters]
+{
+  "data": {
+    "0-0": "**id**\nstring",
+    "1-0": "**badges**\nObject",
+    "2-0": "**checkItemStates**\narray",
+    "3-0": "**closed**\nboolean",
+    "4-0": "**dateLastActivity**\ndate",
+    "4-1": "The datetime of the last activity on the card. \n\nNote: There are activities that update dateLastActivity that do not create a corresponding action. For instance, updating the name field of a checklist item on a card does not create an action but does update the card and board's dateLastActivity value.",
+    "5-0": "**desc**\nstring",
+    "6-0": "**descData**",
+    "7-0": "**due**\ndate",
+    "8-0": "**dueComplete**\nboolean",
+    "9-0": "**idAttachmentCover**\nstring",
+    "9-1": "The id of the attachment selected as the cover image, if one exists",
+    "10-0": "**idBoard**\nstring",
+    "10-1": "The ID of the board the card is on",
+    "11-0": "**idChecklists**\narray of strings",
+    "11-1": "An array of checklist IDs that are on this card",
+    "12-0": "**idLabels**\narray of strings",
+    "12-1": "An array of label IDs that are on this card",
+    "13-0": "**idList**\nstring",
+    "13-1": "The ID of the list the card is in",
+    "14-0": "**idMembers**\narray of strings",
+    "14-1": "An array of member IDs that are on this card",
+    "15-0": "**idMembersVoted**\narray of strings",
+    "15-1": "An array of member IDs who have voted on this card",
+    "16-0": "**idShort**\ninteger",
+    "16-1": "Numeric ID for the card on this board. Only unique to the board, and subject to change as the card moves",
+    "17-0": "**labels**\narray of [Labels](ref:labels)",
+    "17-1": "Array of label objects on this card",
+    "18-0": "**manualCoverAttachment**\nboolean",
+    "19-0": "**name**\nstring",
+    "19-1": "Name of the card",
+    "20-0": "**pos**\nfloat",
+    "20-1": "Position of the card in the list",
+    "21-0": "**shortLink**\nstring",
+    "21-1": "The 8 character shortened ID for the card",
+    "22-0": "**shortUrl**\nstring",
+    "22-1": "URL to the card without the name slug",
+    "23-0": "**subscribed**\nboolean",
+    "23-1": "Whether this member is subscribed to the card",
+    "24-0": "**url**\nstring",
+    "24-1": "Full URL to the card, with the name slug",
+    "0-1": "The ID of the card",
+    "3-1": "Whether the card is closed (archived). Note: Archived lists and boards do not cascade archives to cards. A card can have `closed: false` but be on an archived board.",
+    "5-1": "The description for the card. Up to 16384 chars.",
+    "7-1": "The due date on the card, if one exists",
+    "8-1": "Whether the due date has been marked complete",
+    "6-1": "If the description has custom emoji, this field will provide the data necessary to display them.\n\n```json\n\"descData\": {\n    \"emoji\": {\n      \"morty\": \"https://trello-emoji.s3.amazonaws.com/556c8537a1928ba745504dd8/f40ea4f5ecea8443875c27986760d8b3/tumblr_nszc7944yh1uccyhso1_1280.png\"\n    }\n  }\n```",
+    "1-1": "Pieces of information about the card that are displayed on the front of the card.\n\n```json\n\"badges\": {\n    \"votes\": 0,\n    \"viewingMemberVoted\": false,\n    \"subscribed\": true,\n    \"fogbugz\": \"\",\n    \"checkItems\": 0,\n    \"checkItemsChecked\": 0,\n    \"comments\": 1,\n    \"attachments\": 2,\n    \"description\": true,\n    \"due\": null,\n    \"dueComplete\": false\n  }\n```",
+    "18-1": "Whether the card cover image was selected automatically by Trello, or manually by the user",
+    "25-0": "**address**\nstring",
+    "26-0": "**locationName**\nstring",
+    "27-0": "**coordinates**\nobject",
+    "25-1": "Address of card location",
+    "26-1": "Name of card location",
+    "27-1": "Either a comma-separated string in the format latitude,longitude or an object containing keys for `latitude` and `longitude` whose values are numbers between -180 and 180."
+  },
+  "cols": 2,
+  "rows": 28
+}
+[/block]
+For example:
+
+`GET` `/1/cards/560bf4dd7139286471dc009c?fields=all`
+[block:code]
+{
+  "codes": [
+    {
+      "code": "{\n  \"id\": \"560bf4dd7139286471dc009c\",\n  \"badges\": {\n    \"votes\": 0,\n    \"viewingMemberVoted\": false,\n    \"subscribed\": true,\n    \"fogbugz\": \"\",\n    \"checkItems\": 0,\n    \"checkItemsChecked\": 0,\n    \"comments\": 0,\n    \"attachments\": 2,\n    \"description\": false,\n    \"due\": null,\n    \"dueComplete\": false\n  },\n  \"checkItemStates\": [\n    \n  ],\n  \"closed\": false,\n  \"dueComplete\": false,\n  \"dateLastActivity\": \"2017-06-26T17:39:49.583Z\",\n  \"desc\": \"\",\n  \"descData\": null,\n  \"due\": null,\n  \"email\": null,\n  \"idBoard\": \"560bf4298b3dda300c18d09c\",\n  \"idChecklists\": [\n    \n  ],\n  \"idList\": \"560bf44ea68b16bd0fc2a9a9\",\n  \"idMembers\": [\n    \"556c8537a1928ba745504dd8\"\n  ],\n  \"idMembersVoted\": [\n    \n  ],\n  \"idShort\": 9,\n  \"idAttachmentCover\": \"5944a06460ed0bee471ad8e0\",\n  \"manualCoverAttachment\": false,\n  \"labels\": [\n    {\n      \"id\": \"560bf42919ad3a5dc29f33c5\",\n      \"idBoard\": \"560bf4298b3dda300c18d09c\",\n      \"name\": \"Visited\",\n      \"color\": \"green\"\n    }\n  ],\n  \"idLabels\": [\n    \"560bf42919ad3a5dc29f33c5\"\n  ],\n  \"name\": \"Grand Canyon National Park\",\n  \"pos\": 16384,\n  \"shortLink\": \"nqPiDKmw\",\n  \"shortUrl\": \"https://trello.com/c/nqPiDKmw\",\n  \"subscribed\": true,\n  \"url\": \"https://trello.com/c/nqPiDKmw/9-grand-canyon-national-park\"\n  \"address\": \"55 Broadway\\nSan Francisco CA 94111\\nUnited States\",\n  \"locationName\": \"55 Broadway, NY 10280\",\n  \"coordinates\": {\n    \"latitude\": 37.7986712,\n    \"longitude\": -122.3991514\n  }\n}",
+      "language": "json"
+    }
+  ]
+}
+[/block]

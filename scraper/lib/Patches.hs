@@ -7,6 +7,7 @@ module Patches (patchDocs, patchSwagger) where
 
 import BasicPrelude
 import Data.Aeson (Value(..))
+import qualified Data.Text as T
 import qualified Data.Vector as V
 import Lens.Micro((.~), (%~), (&), Traversal', filtered, toListOf, at, has, each)
 import Lens.Micro.Aeson (_Object, _Array, _String, key, values)
@@ -160,16 +161,39 @@ mapDocsRecursively f root
   | otherwise = error $ "Expected object, got " ++ show root
 
 -- Expects a given value and returns the replacement. Errors out if the expected value is not provided.
-assertReplacing :: (Show a, Eq a) => a -> a -> a -> a
+assertReplacing :: Text -> Text -> Text -> Text
 assertReplacing expected new old
   | expected == old = new
-  | otherwise       = error $ concat ["Expected ", show expected, ", got ", show new]
+  | otherwise       = error errMsg
+  where
+    errMsg
+      = concat [
+          "Expected:\n",
+          show expected,
+          "\nBut got:\n",
+          show new,
+          "\ndiffering at index ",
+          show i,
+          ":\n",
+          show $ T.take (i + 10) expected,
+          "\n",
+          show $ T.take (i + 10) old,
+          "\n",
+          "Lengths were: ",
+          show $ T.length expected,
+          ", ",
+          show $ T.length old
+        ]
+    i = case T.commonPrefixes expected old of
+             Just (prefix, _, _) -> T.length prefix
+             Nothing             -> 0
 
 -- Some blobs are too large to reasonable embed in source, so we store in them in separate files
 assertReplacingWithFiles :: Text -> FilePath -> IO (Value -> Value)
 assertReplacingWithFiles _id filename = do
-    old <- readFile ("scraper/patches/" ++ filename ++ "_old.txt")
-    new <- readFile ("scraper/patches/" ++ filename ++ "_new.txt")
+    -- Need to drop the trailing newline for equivalence reasons
+    old <- T.stripEnd <$> readFile ("scraper/patches/" ++ filename ++ "_old.txt")
+    new <- T.stripEnd <$> readFile ("scraper/patches/" ++ filename ++ "_new.txt")
 
     return
       $ hasKV "_id" _id

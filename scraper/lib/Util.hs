@@ -65,3 +65,9 @@ ifM cond trueCase falseCase = do
        then trueCase
        else falseCase
 
+-- Given a list of predicates, return a function that ORs their results
+orPreds :: [(a -> Bool)] -> a -> Bool
+orPreds fs x
+  = any id
+  $ map ($ x) fs
+

@@ -22,14 +22,22 @@ import Util
 extractExampleResponses :: Value -> HashMap Text Value
 extractExampleResponses
   = HMS.fromList
-  . catMaybes
-  . map getResponse
-  . filter (
-    (==) "endpoint"
-    . fromJustNote "Expected a single `type`"
-    . getStringKey "type"
-  )
-  . getAllDocs
+    . catMaybes
+    . map getResponse
+    . filter (orPreds [isEndpoint, isObject])
+    . getAllDocs
+  where
+    -- Normal representation of an endpoint
+    isEndpoint
+      = (==) "endpoint"
+        . fromJustNote "Expected a single `type`"
+        . getStringKey "type"
+
+    -- Explicit documentation of an "Object". e.g. the Action Object
+    isObject
+      = T.isSuffixOf "-object"
+      . fromJustNote "Expected a single `slug`"
+      . getStringKey "slug"
 
 
 -- Traverse structure recursively to get a complete list of documents
