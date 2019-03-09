@@ -8,6 +8,7 @@ import Lens.Micro((^.), (^..), (^?), _3, has)
 import Lens.Micro.Aeson (_Object, key, members)
 import Network.HTTP.Simple (httpLBS, getResponseBody, getResponseStatusCode)
 import Safe (fromJustNote)
+import System.Directory (doesFileExist)
 import System.Exit (exitFailure)
 
 import DocParsing
@@ -20,10 +21,13 @@ import Util
 
 main :: IO ()
 main = do
-  -- Use cached version of file to improve dev loop
-  html <- if False
-             then downloadDocs
-             else BSL.readFile "/home/reuben/scratch/reference.html"
+  -- Cache the docs so we don't need to download it each time
+  let docsCache = "/home/reuben/scratch/reference.html"
+  ifM (doesFileExist docsCache)
+    (putStrLn "Using cached docs")
+    (BSL.writeFile docsCache =<< downloadDocs)
+
+  html <- BSL.readFile docsCache
 
   -- Parse and patch the swagger file and docs
   -- We save the pre-patched versions to simplify patch writing

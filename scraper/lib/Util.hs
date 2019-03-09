@@ -1,11 +1,11 @@
 module Util where
 
 import BasicPrelude
-import qualified Data.HashMap.Strict as HMS
 import Data.Aeson (ToJSON, Value(Object))
 import qualified Data.ByteString as BS
 import Data.Either (partitionEithers)
 import Data.Function ((&))
+import qualified Data.HashMap.Strict as HMS
 import Data.Yaml.Pretty (encodePretty, defConfig, setConfCompare)
 import Lens.Micro((^..))
 import Lens.Micro.Aeson (_String, key)
@@ -57,4 +57,11 @@ zeroOrOne :: Show a => [a] -> Maybe a
 zeroOrOne [x] = Just x
 zeroOrOne []  = Nothing
 zeroOrOne xs = error $ "Expected <2 results: " ++ show xs
+
+ifM :: Monad m => m Bool -> m a -> m a -> m a
+ifM cond trueCase falseCase = do
+    c <- cond
+    if c
+       then trueCase
+       else falseCase
 

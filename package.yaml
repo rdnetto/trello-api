@@ -95,6 +95,7 @@ executables:
     - basic-prelude
     - bytestring
     - containers
+    - directory
     - http-conduit
     - microlens
     - microlens-aeson
