@@ -41,11 +41,13 @@ main = do
     .   andAlso (encodeFilePretty "swagger.yaml.raw")
     $   rawSwagger
 
+  rawDocs
+      <- andAlso (encodeFilePretty "docs.yaml.raw")
+      $  extractDocs jsonBlobs
+
   docs
     <-  andAlso (encodeFilePretty "docs.yaml.patched")
-    <=< map patchDocs
-    .   andAlso (encodeFilePretty "docs.yaml.raw")
-    $   extractDocs jsonBlobs
+    =<< patchDocs rawDocs
 
   let responseSchemas
         = HMS.map inferSchema

@@ -1,0 +1,10 @@
+[block:code]
+{
+  "codes": [
+    {
+      "code": "[\n  {\n    \"count\": 2,\n    \"id\": \"5afc2c98bb0aa3d078e30be4:1F64C\",\n    \"firstReacted\": \"2018-05-16T13:58:34.000Z\",\n    \"idEmoji\": \"1F64C\",\n    \"idModel\": \"5afc2c98bb0aa3d078e30be4\",\n    \"idReaction\": \"5afeec8fb0850e36938e465b\",\n    \"emoji\": {\n      \"unified\": \"1F64C\",\n      \"native\": \"🙌\",\n      \"name\": \"PERSON RAISING BOTH HANDS IN CELEBRATION\",\n      \"skinVariation\": null,\n      \"shortName\": \"raised_hands\"\n    }\n  }\n]'",
+      "language": "json"
+    }
+  ]
+}
+[/block]

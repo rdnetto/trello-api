@@ -9,7 +9,7 @@ import BasicPrelude
 import Data.Aeson (Value(..))
 import qualified Data.Vector as V
 import Lens.Micro((.~), (%~), (&), Traversal', filtered, toListOf, at, has, each)
-import Lens.Micro.Aeson (_Object, _Array, key, values)
+import Lens.Micro.Aeson (_Object, _Array, _String, key, values)
 import Lens.Micro.Platform ()
 
 import Util
@@ -119,27 +119,31 @@ patchSwagger = key "paths" %~ pathModifier where
 
 
 -- Because docs can be nested, the patching logic here needs to be applied recursively
-patchDocs :: Value -> Value
-patchDocs = mapDocsRecursively (removeExtraQuote . removeExtraComma) where
+patchDocs :: Value -> IO Value
+patchDocs docs = do
   -- JSON does not permit trailing commas
-  removeExtraComma
-    =  hasKV "_id" "595aba4f06f0d400155af9a7"
-    .  key "api"
-    .  key "results"
-    .  key "codes"
-    .  valuesWith' "status" (Number 200)
-    .  key "code"
-    %~ assertReplacing
-       "[\n    {\n        \"callbackURL\": \"https://trello.com/\",\n    }\n]"
-       "[\n    {\n        \"callbackURL\": \"https://trello.com/\"\n    }\n]"
+  let removeExtraComma
+        =  hasKV "_id" "595aba4f06f0d400155af9a7"
+        .  key "api"
+        .  key "results"
+        .  key "codes"
+        .  valuesWith' "status" (Number 200)
+        .  key "code"
+        .  _String
+        %~ assertReplacing
+           "[\n    {\n        \"callbackURL\": \"https://trello.com/\",\n    }\n]"
+           "[\n    {\n        \"callbackURL\": \"https://trello.com/\"\n    }\n]"
 
-  -- This is just a typo
-  removeExtraQuote
-    = hasKV "_id" "5b6345d62f1997000328177f"
-    . key "body"
-    %~ assertReplacing
-      "[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"[\\n  {\\n    \\\"count\\\": 2,\\n    \\\"id\\\": \\\"5afc2c98bb0aa3d078e30be4:1F64C\\\",\\n    \\\"firstReacted\\\": \\\"2018-05-16T13:58:34.000Z\\\",\\n    \\\"idEmoji\\\": \\\"1F64C\\\",\\n    \\\"idModel\\\": \\\"5afc2c98bb0aa3d078e30be4\\\",\\n    \\\"idReaction\\\": \\\"5afeec8fb0850e36938e465b\\\",\\n    \\\"emoji\\\": {\\n      \\\"unified\\\": \\\"1F64C\\\",\\n      \\\"native\\\": \\\"🙌\\\",\\n      \\\"name\\\": \\\"PERSON RAISING BOTH HANDS IN CELEBRATION\\\",\\n      \\\"skinVariation\\\": null,\\n      \\\"shortName\\\": \\\"raised_hands\\\"\\n    }\\n  }\\n]'\",\n      \"language\": \"json\"\n    }\n  ]\n}\n[/block]"
-      "[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"[\\n  {\\n    \\\"count\\\": 2,\\n    \\\"id\\\": \\\"5afc2c98bb0aa3d078e30be4:1F64C\\\",\\n    \\\"firstReacted\\\": \\\"2018-05-16T13:58:34.000Z\\\",\\n    \\\"idEmoji\\\": \\\"1F64C\\\",\\n    \\\"idModel\\\": \\\"5afc2c98bb0aa3d078e30be4\\\",\\n    \\\"idReaction\\\": \\\"5afeec8fb0850e36938e465b\\\",\\n    \\\"emoji\\\": {\\n      \\\"unified\\\": \\\"1F64C\\\",\\n      \\\"native\\\": \\\"🙌\\\",\\n      \\\"name\\\": \\\"PERSON RAISING BOTH HANDS IN CELEBRATION\\\",\\n      \\\"skinVariation\\\": null,\\n      \\\"shortName\\\": \\\"raised_hands\\\"\\n    }\\n  }\\n]\",\n      \"language\": \"json\"\n    }\n  ]\n}\n[/block]"
+  -- These two are just typos
+  removeExtraQuote <- assertReplacingWithFiles "5b6345d62f1997000328177f" "removeExtraQuote"
+  addMissingComma  <- assertReplacingWithFiles "594d1946f45834003df50221" "addMissingComma"
+
+  return
+    $ mapDocsRecursively (
+      removeExtraQuote
+      . removeExtraComma
+      . addMissingComma
+    ) docs
 
 -- Apply the specified transformaion to the root and all its (transitive children)
 mapDocsRecursively :: (Value -> Value) -> (Value -> Value)
@@ -161,6 +165,18 @@ assertReplacing expected new old
   | expected == old = new
   | otherwise       = error $ concat ["Expected ", show expected, ", got ", show new]
 
+-- Some blobs are too large to reasonable embed in source, so we store in them in separate files
+assertReplacingWithFiles :: Text -> FilePath -> IO (Value -> Value)
+assertReplacingWithFiles _id filename = do
+    old <- readFile ("scraper/patches/" ++ filename ++ "_old.txt")
+    new <- readFile ("scraper/patches/" ++ filename ++ "_new.txt")
+
+    return
+      $ hasKV "_id" _id
+      . key "body"
+      . _String
+      %~ assertReplacing old new
+
 -- Traverse into the element(s) of an array which contain the specified key-value pair
 valuesWith :: Text -> Text -> Traversal' Value Value
 valuesWith k = valuesWith' k . String
@@ -178,7 +194,6 @@ valuesWith' k v
 keyAt :: Text -> Traversal' Value (Maybe Value)
 keyAt i = _Object . at i
 
--- TODO: This function is the source of the problem
 hasKV :: Text -> Text -> Traversal' Value Value
 hasKV k v = filtered $ (==) (Just v) . getStringKey k
 
