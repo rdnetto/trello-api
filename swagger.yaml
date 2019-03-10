@@ -1828,29 +1828,6 @@ paths:
           description: OK
       summary: /boards/{id}/checklists
       tags: []
-    post:
-      _method: post
-      _path: /boards/{id}/checklists
-      deprecated: false
-      description: Create a new checklist.
-      operationId: postBoardsChecklists
-      parameters:
-      - description: The id of the board to update
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-      - description: The name of the checklist to be created. 1 to 16384 characters
-          long.
-        in: query
-        name: name
-        required: true
-        schema:
-          type: string
-      requestBody: null
-      summary: /boards/{id}/checklists
-      tags: []
   /boards/{id}/customFields:
     get:
       _method: get
@@ -2251,6 +2228,14 @@ paths:
         required: true
         schema:
           type: string
+      - description: Optional param that allows organization admins to add multi-board
+          guests onto a board.
+        in: query
+        name: allowBillableGuest
+        required: false
+        schema:
+          default: false
+          type: boolean
       requestBody: null
       summary: /boards/{id}/members/{idMember}
       tags: []
@@ -7312,7 +7297,7 @@ paths:
       _method: get
       _path: /members/{id}/boards
       deprecated: false
-      description: Lists the boards a member has access to
+      description: Lists the boards that the user is a member of.
       operationId: getMembersBoards
       parameters:
       - description: The ID or username of the member
