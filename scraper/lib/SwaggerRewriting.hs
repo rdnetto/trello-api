@@ -8,6 +8,7 @@ import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
 import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at)
+import Lens.Micro.Extras (view)
 import Lens.Micro.Aeson (key, values, _Bool, _String, _Object)
 import Lens.Micro.Platform ()
 import Safe (fromJustNote)
@@ -203,27 +204,46 @@ addResponseSchemas :: HashMap Text Value -> AesonM ()
 addResponseSchemas responseSchemas
   = withChild "paths"
   . forEachKey_ $ \path ->
-      forEachKey_ $ \method -> (do
-          op <- getCurrent
-          let operationId
-                = fromJustNote ("No operation ID in " ++ show (path, method))
-                $ op ^? key "operationId" . _String
+      forEachKey_ $ handler path
+  where
+    handler path method = do
+      op <- getCurrent
+      let operationId
+            = fromJustNote ("No operation ID in " ++ show (path, method))
+            $ op ^? key "operationId" . _String
 
-          let f | key "responses" `has` op
-                  = id
-                | otherwise
-                  = case HMS.lookup operationId responseSchemas of
-                         Just schema ->
-                           -- We need to use `at` here to insert a new element
-                           _Object
-                           .  at "responses"
-                           .~ (Just $ generateResponse schema)
+      let schemas
+            = catMaybes [
+                HMS.lookup operationId responseSchemas,
+                HMS.lookup (objectName op) responseSchemas
+              ]
 
-                         -- TODO: should probably be logging this, as it deserves a warning
-                         Nothing     -> id
+      let f | key "responses" `has` op
+              = id
 
-          setCurrent $ f op
-      )
+            -- TODO: should probably be logging this, as it deserves a warning
+            | null schemas
+              = id
+
+            -- We need to use `at` here to insert a new element
+            | otherwise
+              = _Object
+              .  at "responses"
+              .~ (Just . generateResponse $ head schemas)
+
+      setCurrent $ f op
+
+    objectName
+      = (++ "-object")
+      . T.dropWhileEnd (== 's')    -- De-pluralize name
+      . getLastName
+      . view (key "_path" . _String)
+
+    getLastName
+      = last
+      . filter (not . T.null)
+      . filter (not . T.isPrefixOf "{")
+      . T.splitOn "/"
 
 -- Generate a Swagger response definition given a schema
 -- See https://swagger.io/docs/specification/describing-responses/

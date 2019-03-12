@@ -49,12 +49,15 @@ main = do
     <-  andAlso (encodeFilePretty "docs.yaml.patched")
     =<< patchDocs rawDocs
 
-  let responseSchemas
-        = HMS.map inferSchema
-        . extractExampleResponses
-        $ docs
+  let egResponses
+        = extractExampleResponses docs
 
-  putStrLn $ tshow (HMS.size responseSchemas) ++ " schemas inferred"
+      responseSchemas
+        = HMS.map inferSchema
+        $ egResponses
+
+  putStrLn $ tshow (HMS.size responseSchemas) ++ " schemas inferred - saved to responses.yaml"
+  encodeFilePretty "responses.yaml" egResponses
 
   -- Apply the validation / rewrite pass
   case rewriteSwagger responseSchemas patchedSwagger of
