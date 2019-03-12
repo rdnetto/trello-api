@@ -34,10 +34,10 @@ docParseTests
 
       assertEqual
         (show res)
-        (Just expectedCount)
+        expectedCount
         (length <$> res ^? _Right)
 
-    cases :: [(String, IO Text, Int)]
+    cases :: [(String, IO Text, Maybe Int)]
       = [
         ("Simple case", pure [r|
           [block:code]
@@ -51,12 +51,17 @@ docParseTests
           }
           [/block]
         |],
-        1
+        Just 1
         ),
 
         ("Multiple blocks",
          readFile $ testCasePath </> "docParseMultiBlock.txt",
-         2
+         Just 2
+        ),
+
+        ("Regression test: member object",
+         readFile $ testCasePath </> "docParseMemberObject.txt",
+         Just 1
         ),
 
         -- This isn't a code block, so we expect no parse
@@ -70,7 +75,7 @@ docParseTests
           }
           [/block]
         |],
-        0)
+        Nothing)
       ]
 
 -- End-to-end test of the extraction of the response from a documentation blob

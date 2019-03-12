@@ -1,0 +1,148 @@
+[block:parameters]
+{
+  "data": {
+    "0-0": "**id**\nstring",
+
+   "1-0": "**avatarHash**\nstring",
+    "3-0": "**avatarSource**",
+
+   "4-0": "**bio**\nstring",
+    "5-0": "**bioData**\nobject",
+    "6-0":
+"**confirmed**\nboolean",
+    "7-0": "**email**\nstring",
+    "8-0":
+"**fullName**\nstring",
+    "9-0": "**gravatarHash**\nstring",
+    "9-1":
+"Same as **avatarHash** above; member profile images are hosted at: `https://trello-avatars.s3.amazonaws.com/{gravatarHash}/{size}.png`\n\n`size`
+can be 30, 50, or 170\nstring.",
+    "10-0": "**idBoards**\narray of strings",
+
+   "11-0": "**idBoardsPinned**\narray of strings",
+    "12-0": "**idOrganizations**\narray
+of strings",
+    "15-0": "**initials**\nstring",
+    "16-0": "**loginTypes**\narray
+of strings",
+    "17-0": "**memberType**",
+    "18-0": "**oneTimeMessagesDismissed**\narray
+of strings",
+    "19-0": "**prefs**\nobject",
+    "20-0": "**premiumFeatures**",
+
+   "21-0": "**products**\narray of integers",
+    "22-0": "**status**\nstring",
+
+   "23-0": "**trophies**\narray",
+    "24-0": "**uploadedAvatarHash**\nstring",
+
+   "26-0": "**url**\nstring",
+    "27-0": "**username**\nstring",
+
+   "13-0": "**idEnterprisesAdmin**\narray of strings",
+    "14-0": "**idPremOrgsAdmin**\narray
+of strings",
+    "5-1": "If the bio includes custom emoji, this object will
+contain the information necessary to display them.",
+    "4-1": "Optional
+bio for the member",
+    "0-1": "The ID of the member",
+    "1-1": "Member
+profile images are hosted at: `https://trello-avatars.s3.amazonaws.com/{avatarHash}/{size}.png`\n\n`size`
+can be 30, 50, or 170",
+    "6-1": "Whether the member has confirmed their
+email address after signing up",
+    "7-1": "The primary email address for
+the member. You can only read your own.",
+    "8-1": "The full display name
+for the member",
+    "10-1": "An array of board IDs this member is on",
+
+   "12-1": "An array of organization IDs this member is in",
+    "13-1":
+"An array of enterprise IDs this member is an admin of",
+    "15-1": "The
+member's initials, used for display when there isn't an avatar set",
+    "22-1":
+"**deprecated**",
+    "23-1": "**deprecated**",
+    "26-1": "The URL
+to the member's profile page",
+    "27-1": "The username for the member.
+What is shown in @mentions for example",
+    "11-1": "**deprecated**",
+
+   "21-1": "`10` - member has Trello Gold as a result of being in a Business
+Class team\n`37` - member has monthly Trello Gold\n`38` - member has annual
+Trello Gold",
+    "19-1": "```json\n\"prefs\": {\n    \"sendSummaries\":
+true,\n    \"minutesBetweenSummaries\": -1,\n    \"minutesBeforeDeadlineToNotify\":
+1440,\n    \"colorBlind\": false,\n    \"locale\": \"en-US\",\n
+   \"timezoneInfo\": {\n      \"timezoneNext\": \"EST\",\n      \"dateNext\":
+\"2017-11-05T06:00:00.000Z\",\n      \"offsetNext\": 300,\n      \"timezoneCurrent\":
+\"EDT\",\n      \"offsetCurrent\": 240\n    },\n    \"twoFactor\":
+{\n      \"enabled\": true,\n      \"needsNewBackups\": false\n    }\n
+ }\n```",
+    "3-1": "The source of the user's avatar - either via \"upload\"
+or \"gravatar\".",
+    "2-0": "**avatarUrl**\nstring",
+    "2-1":
+"The URL of the current avatar being used, regardless of whether it is a gravatar
+or uploaded avatar.",
+    "16-1": "The types of logins a user can use:\n`password`,
+`saml`, `google`, or `android`",
+    "17-1": "One of: \"normal\", \"ghost\"\n\nA
+`ghost` is an individual who has been invited to join but has not yet created
+a Trello account.",
+    "25-0": "**uploadedAvatarUrl**\nstring",
+    "24-1":
+"Same as **avatarHash** - member profile images are hosted at: `https://trello-avatars.s3.amazonaws.com/{uploadedAvatarHash}/{size}.png`\n\n`size`
+can be 30, 50, or 170",
+    "25-1": "The URL of the uploaded avatar if one
+has been uploaded."
+  },
+  "cols": 2,
+  "rows": 28
+}
+[/block]
+`GET`
+`/1/members/taco?fields=all`
+[block:code]
+{
+  "codes": [
+    {
+      "code":
+"{\n  \"id\": \"50095233f62adbe04d935195\",\n  \"avatarHash\":
+\"10e3fec8aee92d177b22290b7cff669d\",\n  \"bio\": \"\",\n  \"bioData\":
+null,\n  \"confirmed\": true,\n  \"fullName\": \"Taco\",\n  \"idPremOrgsAdmin\":
+[\n    \n  ],\n  \"initials\": \"T\",\n  \"memberType\": \"normal\",\n
+ \"products\": [\n    \n  ],\n  \"status\": \"disconnected\",\n
+ \"url\": \"https://trello.com/taco\",\n  \"username\": \"taco\",\n
+ \"avatarSource\": null,\n  \"email\": null,\n  \"gravatarHash\":
+null,\n  \"idBoards\": [\n    \"5824e427857eea92ad0a93fc\",\n    \"58f7becd7a76210902b2f846\",\n
+   \"50e1d37994dd425b620035ff\",\n    \"51227842c0cb5a7d740002cb\",\n
+   \"512e491a6d7fc071590043a6\",\n    \"58f7b25fcf2a8696f734edfc\",\n
+   \"58fa50037361735963976675\",\n    \"592db6c67e4c126659137b88\",\n
+   \"592f28ad8271344b504b016d\"\n  ],\n  \"idEnterprise\": null,\n
+ \"idOrganizations\": [\n    \n  ],\n  \"idEnterprisesAdmin\": [\n
+   \n  ],\n  \"loginTypes\": null,\n  \"oneTimeMessagesDismissed\":
+null,\n  \"prefs\": null,\n  \"trophies\": [\n    \n  ],\n  \"uploadedAvatarHash\":
+null,\n  \"premiumFeatures\": [\n    \n  ],\n  \"idBoardsPinned\":
+null\n}",
+      "language": "json"
+    }
+  ]
+}
+[/block]
+
+[block:callout]
+{
+
+ "type": "info",
+  "title": "me",
+  "body": "When using any `/1/members/`
+route, you can specify `me` in place of the username or id, to get back information
+about the user associated with the token used to make the request"
+}
+[/block]

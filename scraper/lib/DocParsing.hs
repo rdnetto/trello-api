@@ -12,7 +12,7 @@ import qualified Data.Vector as V
 import Lens.Micro ((^..), (&), (^?), _Right, filtered, toListOf)
 import Lens.Micro.Aeson (_String, _Integer, key, values)
 import Safe (fromJustNote)
-import Text.Parsec (ParseError, many, parse, eof, try, manyTill)
+import Text.Parsec (ParseError, many1, parse, try, manyTill)
 import Text.Parsec.Char (string, anyChar)
 
 import Util
@@ -139,17 +139,15 @@ getResponseFromBody obj = do
 
    Note that there may be multiple code blocks in some cases, though not all of them may be JSON.
    e.g. 'http' is used for examples of query params
+   Note also that we intentionally omit `eof`, since there may be additional junk text after the code block
 -}
 extractCodeBlockContents :: String -> Text -> Either ParseError [Text]
 extractCodeBlockContents name raw = parse p name raw where
-  p = (try codeBlockParser <|> whatever) <* eof
-  codeBlockParser = many $ do
+  p = many1 $ try codeBlockParser
+  codeBlockParser = do
     void $ manyTill anyChar (try $ string "[block:code]")
     txt <- manyTill anyChar (try $ string "[/block]")
     return $ T.pack txt
-
-  -- If there are no code blocks, we still want the parse to succeed
-  whatever = many anyChar >> pure []
 
 -- Determines if a given code block contains JSON
 isJsonCodeBlob :: Value -> Bool
