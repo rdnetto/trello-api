@@ -66,7 +66,7 @@ main = do
                = finalSwagger
                ^.. key "paths"
                .   members
-               .   members
+               .   key "get"
 
              missingSchemas
                = sort
@@ -87,7 +87,7 @@ main = do
                tshow (length missingSchemas),
                " / ",
                tshow (length ops),
-               " operations:"
+               " GET operations:"
              ]
          mapM_ putStrLn missingSchemas
 
