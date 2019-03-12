@@ -7,9 +7,9 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at)
-import Lens.Micro.Extras (view)
+import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at, ix)
 import Lens.Micro.Aeson (key, values, _Bool, _String, _Object)
+import Lens.Micro.Extras (view)
 import Lens.Micro.Platform ()
 import Safe (fromJustNote)
 
@@ -111,7 +111,9 @@ generateOperationId path method pathParams
   = concat (T.toLower method : path' ++ qualifier)
   where
     path'
-      = map T.toTitle
+      = (ix 0 %~ depluralize)       -- if the first word is in plural form, we usually want the singular
+      . map T.toTitle
+      . filter (not . T.null)
       . filter (not . T.isPrefixOf "{")
       $ splitPath path
 
@@ -235,7 +237,7 @@ addResponseSchemas responseSchemas
 
     objectName
       = (++ "-object")
-      . T.dropWhileEnd (== 's')    -- De-pluralize name
+      . depluralize
       . getLastName
       . view (key "_path" . _String)
 
@@ -285,3 +287,11 @@ isPathParam
   = anyOr False
   . map (== "path")
   . (^.. key "in")
+
+-- Heuristically convert a plural form to a singular
+depluralize :: Text -> Text
+depluralize s
+  | T.isSuffixOf "es" s = T.dropEnd 2 s
+  | T.isSuffixOf "s"  s = T.dropEnd 1 s
+  | otherwise           = s
+

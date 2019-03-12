@@ -37,7 +37,7 @@ paths:
       _path: /actions/{idAction}/reactions
       deprecated: false
       description: List reactions for an action
-      operationId: getActionsReactions
+      operationId: getActionReactions
       parameters:
       - description: The ID of the action
         in: path
@@ -114,7 +114,7 @@ paths:
       _path: /actions/{idAction}/reactions
       deprecated: false
       description: Adds a new reaction to an action
-      operationId: postActionsReactions
+      operationId: postActionReactions
       parameters:
       - description: The ID of the action
         in: path
@@ -192,7 +192,7 @@ paths:
       _path: /actions/{idAction}/reactions/{id}
       deprecated: false
       description: Deletes a reaction
-      operationId: deleteActionsReactionsByAction
+      operationId: deleteActionReactionsByAction
       parameters:
       - description: The ID of the action
         in: path
@@ -214,7 +214,7 @@ paths:
       _path: /actions/{idAction}/reactions/{id}
       deprecated: false
       description: Get information for a reaction
-      operationId: getActionsReactionsByAction
+      operationId: getActionReactionsByAction
       parameters:
       - description: The ID of the action
         in: path
@@ -296,7 +296,7 @@ paths:
       _path: /actions/{idAction}/reactionsSummary
       deprecated: false
       description: List a summary of all reactions for an action
-      operationId: getActionsReactionssummary
+      operationId: getActionReactionssummary
       parameters:
       - description: The ID of the action
         in: path
@@ -349,7 +349,7 @@ paths:
       _path: /actions/{id}
       deprecated: false
       description: Delete a comment action
-      operationId: deleteActions
+      operationId: deleteAction
       parameters:
       - description: The ID of the commentCard action to delete
         in: path
@@ -475,7 +475,7 @@ paths:
       _path: /actions/{id}
       deprecated: false
       description: Get information about an action
-      operationId: getActions
+      operationId: getAction
       parameters:
       - description: The ID of the action
         in: path
@@ -666,7 +666,7 @@ paths:
       _path: /actions/{id}
       deprecated: false
       description: Update a comment action
-      operationId: putActions
+      operationId: putAction
       parameters:
       - description: The ID of the action to update
         in: path
@@ -799,7 +799,7 @@ paths:
       _path: /actions/{id}/board
       deprecated: false
       description: Get the board for an action
-      operationId: getActionsBoard
+      operationId: getActionBoard
       parameters:
       - description: The ID of the action
         in: path
@@ -1065,7 +1065,7 @@ paths:
       _path: /actions/{id}/card
       deprecated: false
       description: Get the card for an action
-      operationId: getActionsCard
+      operationId: getActionCard
       parameters:
       - description: The ID of the action
         in: path
@@ -1202,7 +1202,7 @@ paths:
       _path: /actions/{id}/display
       deprecated: false
       description: Get the display information for an action.
-      operationId: getActionsDisplay
+      operationId: getActionDisplay
       parameters:
       - description: The ID of the action
         in: path
@@ -1263,7 +1263,7 @@ paths:
       _path: /actions/{id}/list
       deprecated: false
       description: Get the list for an action
-      operationId: getActionsList
+      operationId: getActionList
       parameters:
       - description: The ID of the action
         in: path
@@ -1307,7 +1307,7 @@ paths:
       _path: /actions/{id}/member
       deprecated: false
       description: Gets the member of an action (not the creator)
-      operationId: getActionsMember
+      operationId: getActionMember
       parameters:
       - description: The ID of the action
         in: path
@@ -1401,7 +1401,7 @@ paths:
       _path: /actions/{id}/memberCreator
       deprecated: false
       description: Gets the member who created the action
-      operationId: getActionsMembercreator
+      operationId: getActionMembercreator
       parameters:
       - description: The ID of the action
         in: path
@@ -1425,7 +1425,7 @@ paths:
       _path: /actions/{id}/organization
       deprecated: false
       description: Get the organization of an action
-      operationId: getActionsOrganization
+      operationId: getActionOrganization
       parameters:
       - description: The ID of the action
         in: path
@@ -1536,7 +1536,7 @@ paths:
       _path: /actions/{id}/text
       deprecated: false
       description: Update a comment action
-      operationId: putActionsText
+      operationId: putActionText
       parameters:
       - description: The ID of the action to update
         in: path
@@ -1559,7 +1559,7 @@ paths:
       _path: /actions/{id}/{field}
       deprecated: false
       description: Get a specific property of an action
-      operationId: getActionsByField
+      operationId: getActionByField
       parameters:
       - description: The ID of the action
         in: path
@@ -1711,7 +1711,7 @@ paths:
       _path: /boards/
       deprecated: false
       description: Create a new board.
-      operationId: postBoards
+      operationId: postBoard
       parameters:
       - description: The new name for the board. 1 to 16384 characters long.
         in: query
@@ -2080,7 +2080,7 @@ paths:
       _path: /boards/{boardId}/actions
       deprecated: false
       description: ''
-      operationId: getBoardsActions
+      operationId: getBoardActions
       parameters:
       - description: ''
         in: path
@@ -2166,7 +2166,7 @@ paths:
       _path: /boards/{boardId}/boardStars
       deprecated: false
       description: ''
-      operationId: getBoardsBoardstars
+      operationId: getBoardBoardstars
       parameters:
       - description: ''
         in: path
@@ -2211,7 +2211,7 @@ paths:
       _path: /boards/{boardId}/cards/{filter}
       deprecated: false
       description: ''
-      operationId: getBoardsCardsByBoardidFilter
+      operationId: getBoardCardsByBoardidFilter
       parameters:
       - description: ''
         in: path
@@ -2323,7 +2323,7 @@ paths:
       _path: /boards/{id}
       deprecated: false
       description: Delete a board.
-      operationId: deleteBoards
+      operationId: deleteBoard
       parameters:
       - description: The id of the board to delete
         in: path
@@ -2581,7 +2581,7 @@ paths:
       _path: /boards/{id}
       deprecated: false
       description: Request a single board.
-      operationId: getBoards
+      operationId: getBoard
       parameters:
       - description: ''
         in: path
@@ -2986,7 +2986,7 @@ paths:
       _path: /boards/{id}
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoards
+      operationId: putBoard
       parameters:
       - description: The id of the board to update
         in: path
@@ -3368,7 +3368,7 @@ paths:
       _path: /boards/{id}/boardPlugins
       deprecated: false
       description: Get the enabled Power-Ups on a board
-      operationId: getBoardsBoardplugins
+      operationId: getBoardBoardplugins
       parameters:
       - description: The ID of the board
         in: path
@@ -3400,7 +3400,7 @@ paths:
       _path: /boards/{id}/boardPlugins
       deprecated: false
       description: Enable a Power-Up on a board
-      operationId: postBoardsBoardplugins
+      operationId: postBoardBoardplugins
       parameters:
       - description: The ID of the board
         in: path
@@ -3435,7 +3435,7 @@ paths:
       _path: /boards/{id}/boardPlugins/{idPlugin}
       deprecated: false
       description: Disable a Power-Up on a board
-      operationId: deleteBoardsBoardpluginsByPlugin
+      operationId: deleteBoardBoardpluginsByPlugin
       parameters:
       - description: The ID of the board
         in: path
@@ -3458,7 +3458,7 @@ paths:
       _path: /boards/{id}/calendarKey/generate
       deprecated: false
       description: Create a new board.
-      operationId: postBoardsCalendarkeyGenerate
+      operationId: postBoardCalendarkeyGenerate
       parameters:
       - description: The id of the board to update
         in: path
@@ -3475,7 +3475,7 @@ paths:
       _path: /boards/{id}/cards
       deprecated: false
       description: ''
-      operationId: getBoardsCards
+      operationId: getBoardCards
       parameters:
       - description: ''
         in: path
@@ -3509,7 +3509,7 @@ paths:
       _path: /boards/{id}/cards/{idCard}
       deprecated: false
       description: ''
-      operationId: getBoardsCardsByCard
+      operationId: getBoardCardsByCard
       parameters:
       - description: The ID of the board
         in: path
@@ -3622,7 +3622,7 @@ paths:
       _path: /boards/{id}/checklists
       deprecated: false
       description: ''
-      operationId: getBoardsChecklists
+      operationId: getBoardChecklists
       parameters:
       - description: The ID of the board
         in: path
@@ -3664,7 +3664,7 @@ paths:
       _path: /boards/{id}/customFields
       deprecated: false
       description: Get the Custom Field Definitions that exist on a board.
-      operationId: getBoardsCustomfields
+      operationId: getBoardCustomfields
       parameters:
       - description: The ID of the board
         in: path
@@ -3703,7 +3703,7 @@ paths:
       _path: /boards/{id}/emailKey/generate
       deprecated: false
       description: ''
-      operationId: postBoardsEmailkeyGenerate
+      operationId: postBoardEmailkeyGenerate
       parameters:
       - description: The id of the board to update
         in: path
@@ -3720,7 +3720,7 @@ paths:
       _path: /boards/{id}/idTags
       deprecated: false
       description: ''
-      operationId: postBoardsIdtags
+      operationId: postBoardIdtags
       parameters:
       - description: The id of the board to update
         in: path
@@ -3743,7 +3743,7 @@ paths:
       _path: /boards/{id}/labels
       deprecated: false
       description: ''
-      operationId: getBoardsLabels
+      operationId: getBoardLabels
       parameters:
       - description: The ID of the board
         in: path
@@ -3790,7 +3790,7 @@ paths:
       _path: /boards/{id}/labels
       deprecated: false
       description: ''
-      operationId: postBoardsLabels
+      operationId: postBoardLabels
       parameters:
       - description: The id of the board to update
         in: path
@@ -3836,7 +3836,7 @@ paths:
       _path: /boards/{id}/lists
       deprecated: false
       description: ''
-      operationId: getBoardsLists
+      operationId: getBoardLists
       parameters:
       - description: The ID of the board
         in: path
@@ -3903,7 +3903,7 @@ paths:
       _path: /boards/{id}/lists
       deprecated: false
       description: ''
-      operationId: postBoardsLists
+      operationId: postBoardLists
       parameters:
       - description: The id of the board to update
         in: path
@@ -3954,7 +3954,7 @@ paths:
       _path: /boards/{id}/lists/{filter}
       deprecated: false
       description: ''
-      operationId: getBoardsListsByFilter
+      operationId: getBoardListsByFilter
       parameters:
       - description: The ID of the board
         in: path
@@ -3997,7 +3997,7 @@ paths:
       _path: /boards/{id}/markedAsViewed
       deprecated: false
       description: ''
-      operationId: postBoardsMarkedasviewed
+      operationId: postBoardMarkedasviewed
       parameters:
       - description: The id of the board to update
         in: path
@@ -4014,7 +4014,7 @@ paths:
       _path: /boards/{id}/members
       deprecated: false
       description: Get the members for a board
-      operationId: getBoardsMembers
+      operationId: getBoardMembers
       parameters:
       - description: The ID of the board
         in: path
@@ -4100,7 +4100,7 @@ paths:
       _path: /boards/{id}/members
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMembers
+      operationId: putBoardMembers
       parameters:
       - description: The id of the board to update
         in: path
@@ -4210,7 +4210,7 @@ paths:
       _path: /boards/{id}/members/{idMember}
       deprecated: false
       description: ''
-      operationId: deleteBoardsMembersByMember
+      operationId: deleteBoardMembersByMember
       parameters:
       - description: The id of the board to update
         in: path
@@ -4303,7 +4303,7 @@ paths:
       _path: /boards/{id}/members/{idMember}
       deprecated: false
       description: Add a member to the board.
-      operationId: putBoardsMembersByMember
+      operationId: putBoardMembersByMember
       parameters:
       - description: The id of the board to update
         in: path
@@ -4411,7 +4411,7 @@ paths:
       _path: /boards/{id}/memberships
       deprecated: false
       description: Get information about the memberships users have to the board.
-      operationId: getBoardsMemberships
+      operationId: getBoardMemberships
       parameters:
       - description: The ID of the board
         in: path
@@ -4494,7 +4494,7 @@ paths:
       _path: /boards/{id}/memberships/{idMembership}
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMembershipsByMembership
+      operationId: putBoardMembershipsByMembership
       parameters:
       - description: The id of the board to update
         in: path
@@ -4532,7 +4532,7 @@ paths:
       _path: /boards/{id}/myPrefs/emailPosition
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsEmailposition
+      operationId: putBoardMyprefsEmailposition
       parameters:
       - description: The id of the board to update
         in: path
@@ -4556,7 +4556,7 @@ paths:
       _path: /boards/{id}/myPrefs/idEmailList
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsIdemaillist
+      operationId: putBoardMyprefsIdemaillist
       parameters:
       - description: The id of the board to update
         in: path
@@ -4579,7 +4579,7 @@ paths:
       _path: /boards/{id}/myPrefs/showListGuide
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsShowlistguide
+      operationId: putBoardMyprefsShowlistguide
       parameters:
       - description: The id of the board to update
         in: path
@@ -4602,7 +4602,7 @@ paths:
       _path: /boards/{id}/myPrefs/showSidebar
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsShowsidebar
+      operationId: putBoardMyprefsShowsidebar
       parameters:
       - description: The id of the board to update
         in: path
@@ -4625,7 +4625,7 @@ paths:
       _path: /boards/{id}/myPrefs/showSidebarActivity
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsShowsidebaractivity
+      operationId: putBoardMyprefsShowsidebaractivity
       parameters:
       - description: The id of the board to update
         in: path
@@ -4648,7 +4648,7 @@ paths:
       _path: /boards/{id}/myPrefs/showSidebarBoardActions
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsShowsidebarboardactions
+      operationId: putBoardMyprefsShowsidebarboardactions
       parameters:
       - description: The id of the board to update
         in: path
@@ -4671,7 +4671,7 @@ paths:
       _path: /boards/{id}/myPrefs/showSidebarMembers
       deprecated: false
       description: Update an existing board by id
-      operationId: putBoardsMyprefsShowsidebarmembers
+      operationId: putBoardMyprefsShowsidebarmembers
       parameters:
       - description: The id of the board to update
         in: path
@@ -4694,7 +4694,7 @@ paths:
       _path: /boards/{id}/plugins
       deprecated: false
       description: List the Power-Ups for a board
-      operationId: getBoardsPlugins
+      operationId: getBoardPlugins
       parameters:
       - description: The ID of the board
         in: path
@@ -4736,7 +4736,7 @@ paths:
       _path: /boards/{id}/powerUps
       deprecated: false
       description: ''
-      operationId: postBoardsPowerups
+      operationId: postBoardPowerups
       parameters:
       - description: The id of the board to update
         in: path
@@ -4760,7 +4760,7 @@ paths:
       _path: /boards/{id}/powerUps/{powerUp}
       deprecated: false
       description: ''
-      operationId: deleteBoardsPowerupsByPowerup
+      operationId: deleteBoardPowerupsByPowerup
       parameters:
       - description: The id of the board to update
         in: path
@@ -4784,7 +4784,7 @@ paths:
       _path: /boards/{id}/tags
       deprecated: false
       description: ''
-      operationId: getBoardsTags
+      operationId: getBoardTags
       parameters:
       - description: The ID of the board
         in: path
@@ -4801,7 +4801,7 @@ paths:
       _path: /boards/{id}/{field}
       deprecated: false
       description: ''
-      operationId: getBoardsByField
+      operationId: getBoardByField
       parameters:
       - description: The ID of the board.
         in: path
@@ -4891,7 +4891,7 @@ paths:
       _path: /cards
       deprecated: false
       description: Create a new card
-      operationId: postCards
+      operationId: postCard
       parameters:
       - description: The name for the card
         in: query
@@ -5085,7 +5085,7 @@ paths:
       _path: /cards/{idCard}/checklist/{idChecklist}/checkItem/{idCheckItem}
       deprecated: false
       description: Update an item in a checklist on a card.
-      operationId: putCardsChecklistCheckitemByCardCheckitemChecklist
+      operationId: putCardChecklistCheckitemByCardCheckitemChecklist
       parameters:
       - description: The ID of the card
         in: path
@@ -5120,7 +5120,7 @@ paths:
       _path: /cards/{id}
       deprecated: false
       description: Delete a card
-      operationId: deleteCards
+      operationId: deleteCard
       parameters:
       - description: The ID of the card
         in: path
@@ -5249,7 +5249,7 @@ paths:
       _path: /cards/{id}
       deprecated: false
       description: Get a card by its ID
-      operationId: getCards
+      operationId: getCard
       parameters:
       - description: The ID of the card
         in: path
@@ -5480,7 +5480,7 @@ paths:
       _path: /cards/{id}
       deprecated: false
       description: Update a card
-      operationId: putCards
+      operationId: putCard
       parameters:
       - description: The ID of the card to update
         in: path
@@ -5685,7 +5685,7 @@ paths:
       _path: /cards/{id}/actions
       deprecated: false
       description: List the actions on a card
-      operationId: getCardsActions
+      operationId: getCardActions
       parameters:
       - description: The ID of the card
         in: path
@@ -5766,7 +5766,7 @@ paths:
       _path: /cards/{id}/actions/comments
       deprecated: false
       description: Add a new comment to a card
-      operationId: postCardsActionsComments
+      operationId: postCardActionsComments
       parameters:
       - description: The ID of the card
         in: path
@@ -5789,7 +5789,7 @@ paths:
       _path: /cards/{id}/actions/{idAction}/comments
       deprecated: false
       description: Delete a comment
-      operationId: deleteCardsActionsCommentsByAction
+      operationId: deleteCardActionsCommentsByAction
       parameters:
       - description: The ID of the card
         in: path
@@ -5811,7 +5811,7 @@ paths:
       _path: /cards/{id}/actions/{idAction}/comments
       deprecated: false
       description: Update an existing comment
-      operationId: putCardsActionsCommentsByAction
+      operationId: putCardActionsCommentsByAction
       parameters:
       - description: The ID of the card
         in: path
@@ -5840,7 +5840,7 @@ paths:
       _path: /cards/{id}/attachments
       deprecated: false
       description: List the attachments on a card
-      operationId: getCardsAttachments
+      operationId: getCardAttachments
       parameters:
       - description: The ID of the card
         in: path
@@ -5918,7 +5918,7 @@ paths:
       _path: /cards/{id}/attachments
       deprecated: false
       description: Add an attachment to a card
-      operationId: postCardsAttachments
+      operationId: postCardAttachments
       parameters:
       - description: The ID of the card
         in: path
@@ -5988,7 +5988,7 @@ paths:
       _path: /cards/{id}/attachments/{idAttachment}
       deprecated: false
       description: Delete an attachment
-      operationId: deleteCardsAttachmentsByAttachment
+      operationId: deleteCardAttachmentsByAttachment
       parameters:
       - description: The ID of the card
         in: path
@@ -6010,7 +6010,7 @@ paths:
       _path: /cards/{id}/attachments/{idAttachment}
       deprecated: false
       description: Get a specific attachment on a card
-      operationId: getCardsAttachmentsByAttachment
+      operationId: getCardAttachmentsByAttachment
       parameters:
       - description: The ID of the card
         in: path
@@ -6040,7 +6040,7 @@ paths:
       _path: /cards/{id}/board
       deprecated: false
       description: Get the board a card is on
-      operationId: getCardsBoard
+      operationId: getCardBoard
       parameters:
       - description: The ID of the card
         in: path
@@ -6199,7 +6199,7 @@ paths:
       _path: /cards/{id}/checkItem/{idCheckItem}
       deprecated: false
       description: Delete a checklist item
-      operationId: deleteCardsCheckitemByCheckitem
+      operationId: deleteCardCheckitemByCheckitem
       parameters:
       - description: The ID of the card
         in: path
@@ -6221,7 +6221,7 @@ paths:
       _path: /cards/{id}/checkItem/{idCheckItem}
       deprecated: false
       description: Get a specific checkItem on a card
-      operationId: getCardsCheckitemByCheckitem
+      operationId: getCardCheckitemByCheckitem
       parameters:
       - description: The ID of the card
         in: path
@@ -6272,7 +6272,7 @@ paths:
       _path: /cards/{id}/checkItem/{idCheckItem}
       deprecated: false
       description: Update an item in a checklist on a card.
-      operationId: putCardsCheckitemByCheckitem
+      operationId: putCardCheckitemByCheckitem
       parameters:
       - description: The ID of the card
         in: path
@@ -6319,7 +6319,7 @@ paths:
       _path: /cards/{id}/checkItemStates
       deprecated: false
       description: Get the completed checklist items on a card
-      operationId: getCardsCheckitemstates
+      operationId: getCardCheckitemstates
       parameters:
       - description: The ID of the card
         in: path
@@ -6357,7 +6357,7 @@ paths:
       _path: /cards/{id}/checklists
       deprecated: false
       description: Get the checklists on a card
-      operationId: getCardsChecklists
+      operationId: getCardChecklists
       parameters:
       - description: The ID of the card
         in: path
@@ -6438,7 +6438,7 @@ paths:
       _path: /cards/{id}/checklists
       deprecated: false
       description: Create a new checklist on a card
-      operationId: postCardsChecklists
+      operationId: postCardChecklists
       parameters:
       - description: The ID of the card
         in: path
@@ -6509,7 +6509,7 @@ paths:
       _path: /cards/{id}/checklists/{idChecklist}
       deprecated: false
       description: Delete a checklist from a card
-      operationId: deleteCardsChecklistsByChecklist
+      operationId: deleteCardChecklistsByChecklist
       parameters:
       - description: The ID of the card
         in: path
@@ -6567,7 +6567,7 @@ paths:
       _path: /cards/{id}/customFieldItems
       deprecated: false
       description: Get the custom field items for a card.
-      operationId: getCardsCustomfielditems
+      operationId: getCardCustomfielditems
       parameters:
       - description: The ID of the card
         in: path
@@ -6607,7 +6607,7 @@ paths:
       _path: /cards/{id}/idLabels
       deprecated: false
       description: Add a label to a card
-      operationId: postCardsIdlabels
+      operationId: postCardIdlabels
       parameters:
       - description: The ID of the card
         in: path
@@ -6630,7 +6630,7 @@ paths:
       _path: /cards/{id}/idLabels/{idLabel}
       deprecated: false
       description: Remove a label from a card
-      operationId: deleteCardsIdlabelsByLabel
+      operationId: deleteCardIdlabelsByLabel
       parameters:
       - description: The ID of the card
         in: path
@@ -6653,7 +6653,7 @@ paths:
       _path: /cards/{id}/idMembers
       deprecated: false
       description: Add a member to a card
-      operationId: postCardsIdmembers
+      operationId: postCardIdmembers
       parameters:
       - description: The ID of the card
         in: path
@@ -6676,7 +6676,7 @@ paths:
       _path: /cards/{id}/idMembers/{idMember}
       deprecated: false
       description: Remove a member from a card
-      operationId: deleteCardsIdmembersByMember
+      operationId: deleteCardIdmembersByMember
       parameters:
       - description: The ID of the card
         in: path
@@ -6699,7 +6699,7 @@ paths:
       _path: /cards/{id}/labels
       deprecated: false
       description: Add a new label to a card
-      operationId: postCardsLabels
+      operationId: postCardLabels
       parameters:
       - description: The ID of the card
         in: path
@@ -6744,7 +6744,7 @@ paths:
       _path: /cards/{id}/list
       deprecated: false
       description: Get the list a card is in
-      operationId: getCardsList
+      operationId: getCardList
       parameters:
       - description: The ID of the card
         in: path
@@ -6788,7 +6788,7 @@ paths:
       _path: /cards/{id}/markAssociatedNotificationsRead
       deprecated: false
       description: Mark notifications about this card as read
-      operationId: postCardsMarkassociatednotificationsread
+      operationId: postCardMarkassociatednotificationsread
       parameters:
       - description: The ID of the card
         in: path
@@ -6805,7 +6805,7 @@ paths:
       _path: /cards/{id}/members
       deprecated: false
       description: Get the members on a card
-      operationId: getCardsMembers
+      operationId: getCardMembers
       parameters:
       - description: The ID of the card
         in: path
@@ -6899,7 +6899,7 @@ paths:
       _path: /cards/{id}/membersVoted
       deprecated: false
       description: Get the members who have voted on a card
-      operationId: getCardsMembersvoted
+      operationId: getCardMembersvoted
       parameters:
       - description: The ID of the card
         in: path
@@ -6922,7 +6922,7 @@ paths:
       _path: /cards/{id}/membersVoted
       deprecated: false
       description: Vote on the card
-      operationId: postCardsMembersvoted
+      operationId: postCardMembersvoted
       parameters:
       - description: The ID of the card
         in: path
@@ -6945,7 +6945,7 @@ paths:
       _path: /cards/{id}/membersVoted/{idMember}
       deprecated: false
       description: Remove a member's vote from a card
-      operationId: deleteCardsMembersvotedByMember
+      operationId: deleteCardMembersvotedByMember
       parameters:
       - description: The ID of the card
         in: path
@@ -6968,7 +6968,7 @@ paths:
       _path: /cards/{id}/pluginData
       deprecated: false
       description: Get any shared pluginData on a card
-      operationId: getCardsPlugindata
+      operationId: getCardPlugindata
       parameters:
       - description: The ID of the card
         in: path
@@ -6985,7 +6985,7 @@ paths:
       _path: /cards/{id}/stickers
       deprecated: false
       description: Get the stickers on a card
-      operationId: getCardsStickers
+      operationId: getCardStickers
       parameters:
       - description: The ID of the card
         in: path
@@ -7048,7 +7048,7 @@ paths:
       _path: /cards/{id}/stickers/{idSticker}
       deprecated: false
       description: Remove a sticker from the card
-      operationId: deleteCardsStickersBySticker
+      operationId: deleteCardStickersBySticker
       parameters:
       - description: The ID of the card
         in: path
@@ -7070,7 +7070,7 @@ paths:
       _path: /cards/{id}/stickers/{idSticker}
       deprecated: false
       description: Get a specific sticker on a card
-      operationId: getCardsStickersBySticker
+      operationId: getCardStickersBySticker
       parameters:
       - description: The ID of the card
         in: path
@@ -7099,7 +7099,7 @@ paths:
       _path: /cards/{id}/stickers/{idSticker}
       deprecated: false
       description: Update a sticker on a card
-      operationId: putCardsStickersBySticker
+      operationId: putCardStickersBySticker
       parameters:
       - description: The ID of the card
         in: path
@@ -7150,7 +7150,7 @@ paths:
       _path: /cards/{id}/{field}
       deprecated: false
       description: Get a specific property of a card
-      operationId: getCardsByField
+      operationId: getCardByField
       parameters:
       - description: The id of the card
         in: path
@@ -7183,7 +7183,7 @@ paths:
       _path: /checklists
       deprecated: false
       description: ''
-      operationId: postChecklists
+      operationId: postChecklist
       parameters:
       - description: The ID of the card that the checklist should be added to.
         in: query
@@ -7255,7 +7255,7 @@ paths:
       _path: /checklists/{id}
       deprecated: false
       description: Delete a checklist
-      operationId: deleteChecklists
+      operationId: deleteChecklist
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7306,7 +7306,7 @@ paths:
       _path: /checklists/{id}
       deprecated: false
       description: ''
-      operationId: getChecklists
+      operationId: getChecklist
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7390,7 +7390,7 @@ paths:
       _path: /checklists/{id}
       deprecated: false
       description: Update an existing checklist.
-      operationId: putChecklists
+      operationId: putChecklist
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7456,7 +7456,7 @@ paths:
       _path: /checklists/{id}/board
       deprecated: false
       description: ''
-      operationId: getChecklistsBoard
+      operationId: getChecklistBoard
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7722,7 +7722,7 @@ paths:
       _path: /checklists/{id}/cards
       deprecated: false
       description: ''
-      operationId: getChecklistsCards
+      operationId: getChecklistCards
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7852,7 +7852,7 @@ paths:
       _path: /checklists/{id}/checkItems
       deprecated: false
       description: ''
-      operationId: getChecklistsCheckitems
+      operationId: getChecklistCheckitems
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7902,7 +7902,7 @@ paths:
       _path: /checklists/{id}/checkItems
       deprecated: false
       description: ''
-      operationId: postChecklistsCheckitems
+      operationId: postChecklistCheckitems
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7941,7 +7941,7 @@ paths:
       _path: /checklists/{id}/checkItems/{idCheckItem}
       deprecated: false
       description: Remove an item from a checklist
-      operationId: deleteChecklistsCheckitemsByCheckitem
+      operationId: deleteChecklistCheckitemsByCheckitem
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7963,7 +7963,7 @@ paths:
       _path: /checklists/{id}/checkItems/{idCheckItem}
       deprecated: false
       description: ''
-      operationId: getChecklistsCheckitemsByCheckitem
+      operationId: getChecklistCheckitemsByCheckitem
       parameters:
       - description: ID of a checklist.
         in: path
@@ -7992,7 +7992,7 @@ paths:
       _path: /checklists/{id}/checkItems/{idCheckItem}
       deprecated: false
       description: Update check item.
-      operationId: putChecklistsCheckitemsByCheckitem
+      operationId: putChecklistCheckitemsByCheckitem
       parameters:
       - description: ID of a checklist.
         in: path
@@ -8022,7 +8022,7 @@ paths:
       _path: /checklists/{id}/name
       deprecated: false
       description: ''
-      operationId: putChecklistsName
+      operationId: putChecklistName
       parameters:
       - description: ID of a checklist.
         in: path
@@ -8046,7 +8046,7 @@ paths:
       _path: /checklists/{id}/{field}
       deprecated: false
       description: ''
-      operationId: getChecklistsByField
+      operationId: getChecklistByField
       parameters:
       - description: ID of a checklist.
         in: path
@@ -8104,7 +8104,7 @@ paths:
       _path: /customFields
       deprecated: false
       description: Create a new Custom Field on a board.
-      operationId: postCustomfields
+      operationId: postCustomfield
       parameters: []
       requestBody:
         content:
@@ -8177,7 +8177,7 @@ paths:
       _path: /customFields/{id}/options
       deprecated: false
       description: Get the options of a drop down Custom Field
-      operationId: getCustomfieldsOptions
+      operationId: getCustomfieldOptions
       parameters:
       - description: ID of the customfield.
         in: path
@@ -8214,7 +8214,7 @@ paths:
       _path: /customFields/{id}/options
       deprecated: false
       description: Add an option to a dropdown Custom Field
-      operationId: postCustomfieldsOptions
+      operationId: postCustomfieldOptions
       parameters:
       - description: ID of the customfield.
         in: path
@@ -8252,7 +8252,7 @@ paths:
       _path: /customFields/{id}/options/{idCustomFieldOption}
       deprecated: false
       description: ''
-      operationId: getCustomfieldsOptionsByCustomfieldoption
+      operationId: getCustomfieldOptionsByCustomfieldoption
       parameters:
       - description: ID of the customfielditem.
         in: path
@@ -8296,7 +8296,7 @@ paths:
       _path: /customfields/{id}
       deprecated: false
       description: Delete a Custom Field from a board.
-      operationId: deleteCustomfields
+      operationId: deleteCustomfield
       parameters:
       - description: ID of the customfield to delete.
         in: path
@@ -8312,7 +8312,7 @@ paths:
       _path: /customfields/{id}
       deprecated: false
       description: ''
-      operationId: getCustomfields
+      operationId: getCustomfield
       parameters:
       - description: ID of the customfield to retrieve.
         in: path
@@ -8355,7 +8355,7 @@ paths:
       _path: /customfields/{id}
       deprecated: false
       description: Update a Custom Field definition.
-      operationId: putCustomfields
+      operationId: putCustomfield
       parameters:
       - description: ID of the customfield to update.
         in: path
@@ -8416,7 +8416,7 @@ paths:
       _path: /customfields/{id}/options/{idCustomFieldOption}
       deprecated: false
       description: Delete an option from a Custom Field dropdown.
-      operationId: deleteCustomfieldsOptionsByCustomfieldoption
+      operationId: deleteCustomfieldOptionsByCustomfieldoption
       parameters:
       - description: ID of the customfielditem.
         in: path
@@ -8564,7 +8564,7 @@ paths:
       _path: /enterprises/{id}
       deprecated: false
       description: Get an enterprise by its ID.
-      operationId: getEnterprises
+      operationId: getEnterpris
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -8764,7 +8764,7 @@ paths:
       _path: /enterprises/{id}/admins
       deprecated: false
       description: Get an enterprise's admin members.
-      operationId: getEnterprisesAdmins
+      operationId: getEnterprisAdmins
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -8788,7 +8788,7 @@ paths:
       _path: /enterprises/{id}/admins/{idMember}
       deprecated: false
       description: Make member an admin of enterprise.
-      operationId: putEnterprisesAdminsByMember
+      operationId: putEnterprisAdminsByMember
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -8811,7 +8811,7 @@ paths:
       _path: /enterprises/{id}/members
       deprecated: false
       description: Get the members of an enterprise.
-      operationId: getEnterprisesMembers
+      operationId: getEnterprisMembers
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -8977,7 +8977,7 @@ paths:
       _path: /enterprises/{id}/members/{idMember}
       deprecated: false
       description: Get a specific member of an enterprise by ID.
-      operationId: getEnterprisesMembersByMember
+      operationId: getEnterprisMembersByMember
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9095,7 +9095,7 @@ paths:
       _path: /enterprises/{id}/members/{idMember}/deactivated
       deprecated: false
       description: Deactivate a member of an enterprise.
-      operationId: putEnterprisesMembersDeactivatedByMember
+      operationId: putEnterprisMembersDeactivatedByMember
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9148,7 +9148,7 @@ paths:
       _path: /enterprises/{id}/organizations
       deprecated: false
       description: Transfer an organization to an enterprise.
-      operationId: putEnterprisesOrganizations
+      operationId: putEnterprisOrganizations
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9258,7 +9258,7 @@ paths:
       _path: /enterprises/{id}/organizations/{idOrganization}
       deprecated: false
       description: Remove an member as admin from an enterprise.
-      operationId: deleteEnterprisesOrganizationsByOrganization
+      operationId: deleteEnterprisOrganizationsByOrganization
       parameters:
       - description: The ID of the organization
         in: path
@@ -9368,7 +9368,7 @@ paths:
       _path: /enterprises/{id}/signupUrl
       deprecated: false
       description: Get the signup URL for an enterprise.
-      operationId: getEnterprisesSignupurl
+      operationId: getEnterprisSignupurl
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9414,7 +9414,7 @@ paths:
       _path: /enterprises/{id}/tokens
       deprecated: false
       description: Generate an auth token for an enterprise.
-      operationId: postEnterprisesTokens
+      operationId: postEnterprisTokens
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9438,7 +9438,7 @@ paths:
       _path: /enterprises/{id}/transferrable/organization/{idOrganization}
       deprecated: false
       description: Get whether an organization can be transferred to an enterprise.
-      operationId: getEnterprisesTransferrableOrganizationByOrganization
+      operationId: getEnterprisTransferrableOrganizationByOrganization
       parameters:
       - description: ID of the enterprise to retrieve.
         in: path
@@ -9548,7 +9548,7 @@ paths:
       _path: /labels
       deprecated: false
       description: Create a new label on a board.
-      operationId: postLabels
+      operationId: postLabel
       parameters:
       - description: Name for the label
         in: query
@@ -9594,7 +9594,7 @@ paths:
       _path: /labels/{id}
       deprecated: false
       description: Delete a label by ID.
-      operationId: deleteLabels
+      operationId: deleteLabel
       parameters:
       - description: The ID of the label to delete.
         in: path
@@ -9626,7 +9626,7 @@ paths:
       _path: /labels/{id}
       deprecated: false
       description: Get information about a label by ID.
-      operationId: getLabels
+      operationId: getLabel
       parameters:
       - description: all or a comma-separated list of [fields](#label-object)
         in: query
@@ -9665,7 +9665,7 @@ paths:
       _path: /labels/{id}
       deprecated: false
       description: Update a label by ID.
-      operationId: putLabels
+      operationId: putLabel
       parameters:
       - description: The id of the label to update
         in: path
@@ -9711,7 +9711,7 @@ paths:
       _path: /labels/{id}/color
       deprecated: false
       description: Update the color of a label by ID.
-      operationId: putLabelsColor
+      operationId: putLabelColor
       parameters:
       - description: The id of the label
         in: path
@@ -9735,7 +9735,7 @@ paths:
       _path: /labels/{id}/name
       deprecated: false
       description: Update the name of a label by ID.
-      operationId: putLabelsName
+      operationId: putLabelName
       parameters:
       - description: The id of the label to update
         in: path
@@ -9758,7 +9758,7 @@ paths:
       _path: /lists
       deprecated: false
       description: Create a new list on a board
-      operationId: postLists
+      operationId: postList
       parameters:
       - description: Name for the list
         in: query
@@ -9814,7 +9814,7 @@ paths:
       _path: /lists/{id}
       deprecated: false
       description: Get information about a list
-      operationId: getLists
+      operationId: getList
       parameters:
       - description: The ID of the list
         in: path
@@ -9857,7 +9857,7 @@ paths:
       _path: /lists/{id}
       deprecated: false
       description: Update the properties of a list
-      operationId: putLists
+      operationId: putList
       parameters:
       - description: The ID of the list to update
         in: path
@@ -9925,7 +9925,7 @@ paths:
       _path: /lists/{id}/actions
       deprecated: false
       description: List the actions on a list
-      operationId: getListsActions
+      operationId: getListActions
       parameters:
       - description: The ID of the list
         in: path
@@ -10017,7 +10017,7 @@ paths:
       _path: /lists/{id}/archiveAllCards
       deprecated: false
       description: Archive all cards in a list
-      operationId: postListsArchiveallcards
+      operationId: postListArchiveallcards
       parameters:
       - description: The ID of the list
         in: path
@@ -10034,7 +10034,7 @@ paths:
       _path: /lists/{id}/board
       deprecated: false
       description: Get the board a list is on
-      operationId: getListsBoard
+      operationId: getListBoard
       parameters:
       - description: The ID of the list
         in: path
@@ -10193,7 +10193,7 @@ paths:
       _path: /lists/{id}/cards
       deprecated: false
       description: List the cards in a list
-      operationId: getListsCards
+      operationId: getListCards
       parameters:
       - description: The ID of the list
         in: path
@@ -10264,7 +10264,7 @@ paths:
       _path: /lists/{id}/closed
       deprecated: false
       description: Archive or unarchive a list
-      operationId: putListsClosed
+      operationId: putListClosed
       parameters:
       - description: The ID of the list
         in: path
@@ -10287,7 +10287,7 @@ paths:
       _path: /lists/{id}/idBoard
       deprecated: false
       description: Move a list to a new board
-      operationId: putListsIdboard
+      operationId: putListIdboard
       parameters:
       - description: The ID of the list
         in: path
@@ -10310,7 +10310,7 @@ paths:
       _path: /lists/{id}/moveAllCards
       deprecated: false
       description: Move all cards in a list
-      operationId: postListsMoveallcards
+      operationId: postListMoveallcards
       parameters:
       - description: The ID of the list
         in: path
@@ -10339,7 +10339,7 @@ paths:
       _path: /lists/{id}/name
       deprecated: false
       description: Rename a list
-      operationId: putListsName
+      operationId: putListName
       parameters:
       - description: The ID of the list
         in: path
@@ -10362,7 +10362,7 @@ paths:
       _path: /lists/{id}/pos
       deprecated: false
       description: Change the position of a list
-      operationId: putListsPos
+      operationId: putListPos
       parameters:
       - description: The ID of the list
         in: path
@@ -10385,7 +10385,7 @@ paths:
       _path: /lists/{id}/subscribed
       deprecated: false
       description: Subscribe or unsubscribe from a list
-      operationId: putListsSubscribed
+      operationId: putListSubscribed
       parameters:
       - description: The ID of the list
         in: path
@@ -10408,7 +10408,7 @@ paths:
       _path: /lists/{id}/{field}
       deprecated: false
       description: Get a specific property of a list
-      operationId: getListsByField
+      operationId: getListByField
       parameters:
       - description: The ID of the list
         in: path
@@ -10451,7 +10451,7 @@ paths:
       _path: /members/{id}
       deprecated: false
       description: Get a member
-      operationId: getMembers
+      operationId: getMember
       parameters:
       - description: The ID or username of the member
         in: path
@@ -10675,7 +10675,7 @@ paths:
       _path: /members/{id}
       deprecated: false
       description: Update a member
-      operationId: putMembers
+      operationId: putMember
       parameters:
       - description: The ID or username of the member
         in: path
@@ -10812,7 +10812,7 @@ paths:
       _path: /members/{id}//customBoardBackgrounds/{idBackground}
       deprecated: false
       description: ''
-      operationId: putMembersCustomboardbackgroundsByBackground
+      operationId: putMemberCustomboardbackgroundsByBackground
       parameters:
       - description: The ID of the background
         in: path
@@ -10847,7 +10847,7 @@ paths:
       _path: /members/{id}/actions
       deprecated: false
       description: List the actions for a member
-      operationId: getMembersActions
+      operationId: getMemberActions
       parameters:
       - description: The ID or username of the member
         in: path
@@ -10937,7 +10937,7 @@ paths:
       _path: /members/{id}/boardBackgrounds
       deprecated: false
       description: Get a member's custom board backgrounds
-      operationId: getMembersBoardbackgrounds
+      operationId: getMemberBoardbackgrounds
       parameters:
       - description: The ID or username of the member
         in: path
@@ -10961,7 +10961,7 @@ paths:
       _path: /members/{id}/boardBackgrounds/{idBackground}
       deprecated: false
       description: Delete a board background
-      operationId: deleteMembersBoardbackgroundsByBackground
+      operationId: deleteMemberBoardbackgroundsByBackground
       parameters:
       - description: The ID or username of the member
         in: path
@@ -10983,7 +10983,7 @@ paths:
       _path: /members/{id}/boardBackgrounds/{idBackground}
       deprecated: false
       description: Get a member's board background
-      operationId: getMembersBoardbackgroundsByBackground
+      operationId: getMemberBoardbackgroundsByBackground
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11013,7 +11013,7 @@ paths:
       _path: /members/{id}/boardBackgrounds/{idBackground}
       deprecated: false
       description: Update a board background
-      operationId: putMembersBoardbackgroundsByBackground
+      operationId: putMemberBoardbackgroundsByBackground
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11048,7 +11048,7 @@ paths:
       _path: /members/{id}/boardStars
       deprecated: false
       description: List a member's board stars
-      operationId: getMembersBoardstars
+      operationId: getMemberBoardstars
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11064,7 +11064,7 @@ paths:
       _path: /members/{id}/boardStars
       deprecated: false
       description: Star a new board
-      operationId: postMembersBoardstars
+      operationId: postMemberBoardstars
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11094,7 +11094,7 @@ paths:
       _path: /members/{id}/boardStars/{idStar}
       deprecated: false
       description: Unstar a board
-      operationId: deleteMembersBoardstarsByStar
+      operationId: deleteMemberBoardstarsByStar
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11116,7 +11116,7 @@ paths:
       _path: /members/{id}/boardStars/{idStar}
       deprecated: false
       description: Get a specific boardStar
-      operationId: getMembersBoardstarsByStar
+      operationId: getMemberBoardstarsByStar
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11138,7 +11138,7 @@ paths:
       _path: /members/{id}/boardStars/{idStar}
       deprecated: false
       description: Update the position of a starred board
-      operationId: putMembersBoardstarsByStar
+      operationId: putMemberBoardstarsByStar
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11168,7 +11168,7 @@ paths:
       _path: /members/{id}/boards
       deprecated: false
       description: Lists the boards that the user is a member of.
-      operationId: getMembersBoards
+      operationId: getMemberBoards
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11472,7 +11472,7 @@ paths:
       _path: /members/{id}/boardsInvited
       deprecated: false
       description: Get the boards the member has been invited to
-      operationId: getMembersBoardsinvited
+      operationId: getMemberBoardsinvited
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11496,7 +11496,7 @@ paths:
       _path: /members/{id}/cards
       deprecated: false
       description: Gets the cards a member is on
-      operationId: getMembersCards
+      operationId: getMemberCards
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11542,7 +11542,7 @@ paths:
       _path: /members/{id}/customBoardBackgrounds
       deprecated: false
       description: Get a member's custom board backgrounds
-      operationId: getMembersCustomboardbackgrounds
+      operationId: getMemberCustomboardbackgrounds
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11559,7 +11559,7 @@ paths:
       _path: /members/{id}/customBoardBackgrounds/{idBackground}
       deprecated: false
       description: Delete a custom board background
-      operationId: deleteMembersCustomboardbackgroundsByBackground
+      operationId: deleteMemberCustomboardbackgroundsByBackground
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11581,7 +11581,7 @@ paths:
       _path: /members/{id}/customBoardBackgrounds/{idBackground}
       deprecated: false
       description: Get a specific custom board background
-      operationId: getMembersCustomboardbackgroundsByBackground
+      operationId: getMemberCustomboardbackgroundsByBackground
       parameters:
       - description: The ID of the background
         in: path
@@ -11612,7 +11612,7 @@ paths:
       _path: /members/{id}/customEmoji
       deprecated: false
       description: Get a member's uploaded custom emoji
-      operationId: getMembersCustomemoji
+      operationId: getMemberCustomemoji
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11645,7 +11645,7 @@ paths:
       _path: /members/{id}/customEmoji/{idEmoji}
       deprecated: false
       description: Get a custom emoji
-      operationId: getMembersCustomemojiByEmoji
+      operationId: getMemberCustomemojiByEmoji
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11689,7 +11689,7 @@ paths:
       _path: /members/{id}/customStickers
       deprecated: false
       description: Get a member's uploaded stickers
-      operationId: getMembersCustomstickers
+      operationId: getMemberCustomstickers
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11737,7 +11737,7 @@ paths:
       _path: /members/{id}/customStickers/{idSticker}
       deprecated: false
       description: Delete a custom sticker
-      operationId: deleteMembersCustomstickersBySticker
+      operationId: deleteMemberCustomstickersBySticker
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11759,7 +11759,7 @@ paths:
       _path: /members/{id}/customStickers/{idSticker}
       deprecated: false
       description: Get the enterprises that a member belongs to.
-      operationId: getMembersCustomstickersBySticker
+      operationId: getMemberCustomstickersBySticker
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11805,7 +11805,7 @@ paths:
       _path: /members/{id}/notifications
       deprecated: false
       description: Get a member's notifications
-      operationId: getMembersNotifications
+      operationId: getMemberNotifications
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11947,7 +11947,7 @@ paths:
       _path: /members/{id}/oneTimeMessagesDismissed
       deprecated: false
       description: Dismiss a message
-      operationId: postMembersOnetimemessagesdismissed
+      operationId: postMemberOnetimemessagesdismissed
       parameters:
       - description: The ID or username of the member
         in: path
@@ -11970,7 +11970,7 @@ paths:
       _path: /members/{id}/organizations
       deprecated: false
       description: Get a member's teams
-      operationId: getMembersOrganizations
+      operationId: getMemberOrganizations
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12096,7 +12096,7 @@ paths:
       _path: /members/{id}/organizationsInvited
       deprecated: false
       description: Get a member's teams they have been invited to
-      operationId: getMembersOrganizationsinvited
+      operationId: getMemberOrganizationsinvited
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12120,7 +12120,7 @@ paths:
       _path: /members/{id}/savedSearches
       deprecated: false
       description: List the saved searches of a member
-      operationId: getMembersSavedsearches
+      operationId: getMemberSavedsearches
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12136,7 +12136,7 @@ paths:
       _path: /members/{id}/savedSearches
       deprecated: false
       description: Create a new saved search
-      operationId: postMembersSavedsearches
+      operationId: postMemberSavedsearches
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12172,7 +12172,7 @@ paths:
       _path: /members/{id}/savedSearches/{idSearch}
       deprecated: false
       description: Delete a saved search
-      operationId: deleteMembersSavedsearchesBySearch
+      operationId: deleteMemberSavedsearchesBySearch
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12194,7 +12194,7 @@ paths:
       _path: /members/{id}/savedSearches/{idSearch}
       deprecated: false
       description: Get a saved search
-      operationId: getMembersSavedsearchesBySearch
+      operationId: getMemberSavedsearchesBySearch
       parameters:
       - description: The ID of the search
         in: path
@@ -12216,7 +12216,7 @@ paths:
       _path: /members/{id}/savedSearches/{idSearch}
       deprecated: false
       description: Update a saved search
-      operationId: putMembersSavedsearchesBySearch
+      operationId: putMemberSavedsearchesBySearch
       parameters:
       - description: The ID of the search
         in: path
@@ -12258,7 +12258,7 @@ paths:
       _path: /members/{id}/tokens
       deprecated: false
       description: List a members app tokens
-      operationId: getMembersTokens
+      operationId: getMemberTokens
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12282,7 +12282,7 @@ paths:
       _path: /members/{id}/{field}
       deprecated: false
       description: Get a particular property of a member
-      operationId: getMembersByField
+      operationId: getMemberByField
       parameters:
       - description: The ID or username of the member
         in: path
@@ -12375,7 +12375,7 @@ paths:
       _path: /notifications/all/read
       deprecated: false
       description: Mark all notifications as read
-      operationId: postNotificationsAllRead
+      operationId: postNotificationAllRead
       parameters: []
       requestBody: null
       summary: /notifications/all/read
@@ -12386,7 +12386,7 @@ paths:
       _path: /notifications/{id}
       deprecated: false
       description: ''
-      operationId: getNotifications
+      operationId: getNotification
       parameters:
       - description: The ID of the notification
         in: path
@@ -12548,7 +12548,7 @@ paths:
       _path: /notifications/{id}
       deprecated: false
       description: Update the read status of a notification
-      operationId: putNotifications
+      operationId: putNotification
       parameters:
       - description: The ID of the notification
         in: path
@@ -12619,7 +12619,7 @@ paths:
       _path: /notifications/{id}/board
       deprecated: false
       description: Get the board a notification is associated with
-      operationId: getNotificationsBoard
+      operationId: getNotificationBoard
       parameters:
       - description: The ID of the notification
         in: path
@@ -12885,7 +12885,7 @@ paths:
       _path: /notifications/{id}/card
       deprecated: false
       description: Get the card a notification is associated with
-      operationId: getNotificationsCard
+      operationId: getNotificationCard
       parameters:
       - description: The ID of the notification
         in: path
@@ -13022,7 +13022,7 @@ paths:
       _path: /notifications/{id}/list
       deprecated: false
       description: Get the list a notification is associated with
-      operationId: getNotificationsList
+      operationId: getNotificationList
       parameters:
       - description: The ID of the notification
         in: path
@@ -13066,7 +13066,7 @@ paths:
       _path: /notifications/{id}/member
       deprecated: false
       description: Get the member (not the creator) a notification is about
-      operationId: getNotificationsMember
+      operationId: getNotificationMember
       parameters:
       - description: The ID of the notification
         in: path
@@ -13160,7 +13160,7 @@ paths:
       _path: /notifications/{id}/memberCreator
       deprecated: false
       description: Get the member who created the notification
-      operationId: getNotificationsMembercreator
+      operationId: getNotificationMembercreator
       parameters:
       - description: The ID of the notification
         in: path
@@ -13184,7 +13184,7 @@ paths:
       _path: /notifications/{id}/organization
       deprecated: false
       description: Get the organization a notification is associated with
-      operationId: getNotificationsOrganization
+      operationId: getNotificationOrganization
       parameters:
       - description: The ID of the notification
         in: path
@@ -13295,7 +13295,7 @@ paths:
       _path: /notifications/{id}/unread
       deprecated: false
       description: Update the read status of a notification
-      operationId: putNotificationsUnread
+      operationId: putNotificationUnread
       parameters:
       - description: The ID of the notification
         in: path
@@ -13318,7 +13318,7 @@ paths:
       _path: /notifications/{id}/{field}
       deprecated: false
       description: Get a specific property of a notification
-      operationId: getNotificationsByField
+      operationId: getNotificationByField
       parameters:
       - description: The ID of the notification
         in: path
@@ -13389,7 +13389,7 @@ paths:
       _path: /organizations
       deprecated: false
       description: Create a new team
-      operationId: postOrganizations
+      operationId: postOrganization
       parameters:
       - description: ''
         in: query
@@ -13512,7 +13512,7 @@ paths:
       _path: /organizations/{id}
       deprecated: false
       description: Delete a team
-      operationId: deleteOrganizations
+      operationId: deleteOrganization
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -13615,7 +13615,7 @@ paths:
       _path: /organizations/{id}
       deprecated: false
       description: ''
-      operationId: getOrganizations
+      operationId: getOrganization
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -13718,7 +13718,7 @@ paths:
       _path: /organizations/{id}
       deprecated: false
       description: Update an organization
-      operationId: putOrganizations
+      operationId: putOrganization
       parameters:
       - description: The id or name of the organization to update
         in: path
@@ -13900,7 +13900,7 @@ paths:
       _path: /organizations/{id}/actions
       deprecated: false
       description: List the actions on a team
-      operationId: getOrganizationsActions
+      operationId: getOrganizationActions
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -13976,7 +13976,7 @@ paths:
       _path: /organizations/{id}/boards
       deprecated: false
       description: List the boards in a team
-      operationId: getOrganizationsBoards
+      operationId: getOrganizationBoards
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14250,7 +14250,7 @@ paths:
       _path: /organizations/{id}/exports
       deprecated: false
       description: Retrieve the exports that exist for the given organization
-      operationId: getOrganizationsExports
+      operationId: getOrganizationExports
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14298,7 +14298,7 @@ paths:
       _path: /organizations/{id}/exports
       deprecated: false
       description: Kick off CSV export for an organization
-      operationId: postOrganizationsExports
+      operationId: postOrganizationExports
       parameters:
       - description: The ID or name of the team
         in: path
@@ -14348,7 +14348,7 @@ paths:
       _path: /organizations/{id}/logo
       deprecated: false
       description: Delete a the logo from a team
-      operationId: deleteOrganizationsLogo
+      operationId: deleteOrganizationLogo
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14364,7 +14364,7 @@ paths:
       _path: /organizations/{id}/logo
       deprecated: false
       description: Set the logo image for a team
-      operationId: postOrganizationsLogo
+      operationId: postOrganizationLogo
       parameters:
       - description: The ID or name of the team
         in: path
@@ -14381,7 +14381,7 @@ paths:
       _path: /organizations/{id}/members
       deprecated: false
       description: List the members in a team
-      operationId: getOrganizationsMembers
+      operationId: getOrganizationMembers
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14467,7 +14467,7 @@ paths:
       _path: /organizations/{id}/members
       deprecated: false
       description: ''
-      operationId: putOrganizationsMembers
+      operationId: putOrganizationMembers
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14574,7 +14574,7 @@ paths:
       _path: /organizations/{id}/members/{filter}
       deprecated: false
       description: ''
-      operationId: getOrganizationsMembersByFilter
+      operationId: getOrganizationMembersByFilter
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14667,7 +14667,7 @@ paths:
       _path: /organizations/{id}/members/{idMember}
       deprecated: false
       description: Remove a member from a team
-      operationId: deleteOrganizationsMembersByMember
+      operationId: deleteOrganizationMembersByMember
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14759,7 +14759,7 @@ paths:
       _path: /organizations/{id}/members/{idMember}
       deprecated: false
       description: Add a member to a team or update their member type.
-      operationId: putOrganizationsMembersByMember
+      operationId: putOrganizationMembersByMember
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14858,7 +14858,7 @@ paths:
       _path: /organizations/{id}/members/{idMember}/all
       deprecated: false
       description: Remove a member from a team and from all team boards
-      operationId: deleteOrganizationsMembersAllByMember
+      operationId: deleteOrganizationMembersAllByMember
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14881,7 +14881,7 @@ paths:
       _path: /organizations/{id}/members/{idMember}/deactivated
       deprecated: false
       description: Deactivate or reactivate a member of a team
-      operationId: putOrganizationsMembersDeactivatedByMember
+      operationId: putOrganizationMembersDeactivatedByMember
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14910,7 +14910,7 @@ paths:
       _path: /organizations/{id}/membersInvited
       deprecated: false
       description: List the members with pending invites to a team
-      operationId: getOrganizationsMembersinvited
+      operationId: getOrganizationMembersinvited
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14934,7 +14934,7 @@ paths:
       _path: /organizations/{id}/memberships
       deprecated: false
       description: List the memberships of a team
-      operationId: getOrganizationsMemberships
+      operationId: getOrganizationMemberships
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14966,7 +14966,7 @@ paths:
       _path: /organizations/{id}/memberships/{idMembership}
       deprecated: false
       description: List the memberships of a team
-      operationId: getOrganizationsMembershipsByMembership
+      operationId: getOrganizationMembershipsByMembership
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -14997,7 +14997,7 @@ paths:
       deprecated: false
       description: Used to check whether the given board has new billable guests on
         it.
-      operationId: getOrganizationsNewbillableguestsByBoard
+      operationId: getOrganizationNewbillableguestsByBoard
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15020,7 +15020,7 @@ paths:
       _path: /organizations/{id}/pluginData
       deprecated: false
       description: Get organization scoped pluginData on this team
-      operationId: getOrganizationsPlugindata
+      operationId: getOrganizationPlugindata
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15037,7 +15037,7 @@ paths:
       _path: /organizations/{id}/prefs/associatedDomain
       deprecated: false
       description: Remove the associated Google Apps domain from a team
-      operationId: deleteOrganizationsPrefsAssociateddomain
+      operationId: deleteOrganizationPrefsAssociateddomain
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15055,7 +15055,7 @@ paths:
       deprecated: false
       description: Remove the email domain restriction on who can be invited to the
         team
-      operationId: deleteOrganizationsPrefsOrginviterestrict
+      operationId: deleteOrganizationPrefsOrginviterestrict
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15072,7 +15072,7 @@ paths:
       _path: /organizations/{id}/tags
       deprecated: false
       description: List the organization's collections
-      operationId: getOrganizationsTags
+      operationId: getOrganizationTags
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15088,7 +15088,7 @@ paths:
       _path: /organizations/{id}/tags
       deprecated: false
       description: Create a new collection in a team
-      operationId: postOrganizationsTags
+      operationId: postOrganizationTags
       parameters:
       - description: The ID or name of the team
         in: path
@@ -15111,7 +15111,7 @@ paths:
       _path: /organizations/{id}/tags/{idTag}
       deprecated: false
       description: Delete an organization's tag
-      operationId: deleteOrganizationsTagsByTag
+      operationId: deleteOrganizationTagsByTag
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15134,7 +15134,7 @@ paths:
       _path: /organizations/{id}/{field}
       deprecated: false
       description: ''
-      operationId: getOrganizationsByField
+      operationId: getOrganizationByField
       parameters:
       - description: The ID or name of the organization
         in: path
@@ -15529,7 +15529,7 @@ paths:
       _path: /tokens/{token}
       deprecated: false
       description: Retrieve information about a token.
-      operationId: getTokens
+      operationId: getToken
       parameters:
       - description: ''
         in: path
@@ -15596,7 +15596,7 @@ paths:
       _path: /tokens/{token}/
       deprecated: false
       description: Delete a token.
-      operationId: deleteTokens
+      operationId: deleteToken
       parameters:
       - description: ''
         in: path
@@ -15654,7 +15654,7 @@ paths:
       _path: /tokens/{token}/member
       deprecated: false
       description: Retrieve information about a token's owner by token.
-      operationId: getTokensMember
+      operationId: getTokenMember
       parameters:
       - description: ''
         in: path
@@ -15714,7 +15714,7 @@ paths:
       _path: /tokens/{token}/webhooks
       deprecated: false
       description: Retrieve all webhooks created with a token.
-      operationId: getTokensWebhooks
+      operationId: getTokenWebhooks
       parameters:
       - description: ''
         in: path
@@ -15750,7 +15750,7 @@ paths:
       _path: /tokens/{token}/webhooks
       deprecated: false
       description: Create a new webhook for a token.
-      operationId: postTokensWebhooks
+      operationId: postTokenWebhooks
       parameters:
       - description: ''
         in: path
@@ -15804,7 +15804,7 @@ paths:
       _path: /tokens/{token}/webhooks/{idWebhook}
       deprecated: false
       description: Delete a webhook created with given token.
-      operationId: deleteTokensWebhooksByTokenWebhook
+      operationId: deleteTokenWebhooksByTokenWebhook
       parameters:
       - description: ''
         in: path
@@ -15836,7 +15836,7 @@ paths:
       _path: /tokens/{token}/webhooks/{idWebhook}
       deprecated: false
       description: Retrieve a webhook created with a token.
-      operationId: getTokensWebhooksByTokenWebhook
+      operationId: getTokenWebhooksByTokenWebhook
       parameters:
       - description: ''
         in: path
@@ -15877,7 +15877,7 @@ paths:
       _path: /tokens/{token}/webhooks/{webhookId}
       deprecated: false
       description: Update an existing webhook.
-      operationId: putTokensWebhooksByTokenWebhookid
+      operationId: putTokenWebhooksByTokenWebhookid
       parameters:
       - description: The token to which the webhook belongs
         in: path
@@ -15937,7 +15937,7 @@ paths:
       _path: /webhooks/
       deprecated: false
       description: Create a new webhook.
-      operationId: postWebhooks
+      operationId: postWebhook
       parameters:
       - description: A string with a length from `0` to `16384`.
         in: query
@@ -15992,7 +15992,7 @@ paths:
       _path: /webhooks/{id}
       deprecated: false
       description: Delete a webhook by ID.
-      operationId: deleteWebhooks
+      operationId: deleteWebhook
       parameters:
       - description: ID of the webhook to delete.
         in: path
@@ -16018,7 +16018,7 @@ paths:
       _path: /webhooks/{id}
       deprecated: false
       description: Get a webhook by ID.
-      operationId: getWebhooks
+      operationId: getWebhook
       parameters:
       - description: ID of the webhook to retrieve.
         in: path
@@ -16054,7 +16054,7 @@ paths:
       _path: /webhooks/{id}
       deprecated: false
       description: Update a webhook by ID.
-      operationId: putWebhooks
+      operationId: putWebhook
       parameters:
       - description: A string with a length from `0` to `16384`.
         in: query
@@ -16115,7 +16115,7 @@ paths:
       _path: /webhooks/{id}/{field}
       deprecated: false
       description: Get a webhook's field.
-      operationId: getWebhooksByField
+      operationId: getWebhookByField
       parameters:
       - description: ID of the webhook.
         in: path
