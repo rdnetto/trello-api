@@ -217,7 +217,9 @@ addResponseSchemas responseSchemas
       let schemas
             = catMaybes [
                 HMS.lookup operationId responseSchemas,
-                HMS.lookup (objectName op) responseSchemas
+                if (method == "get")
+                   then pluralizer <$> HMS.lookup objName responseSchemas
+                   else Nothing
               ]
 
       let f | key "responses" `has` op
