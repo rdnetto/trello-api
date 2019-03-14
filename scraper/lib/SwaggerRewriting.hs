@@ -214,7 +214,8 @@ addResponseSchemas responseSchemas
             = fromJustNote ("No operation ID in " ++ show (path, method))
             $ op ^? key "operationId" . _String
 
-      let schemas
+      let (objName, pluralizer) = parsePath op
+          schemas
             = catMaybes [
                 HMS.lookup operationId responseSchemas,
                 if (method == "get")
@@ -237,17 +238,25 @@ addResponseSchemas responseSchemas
 
       setCurrent $ f op
 
-    objectName
-      = (++ "-object")
-      . depluralize
-      . getLastName
-      . view (key "_path" . _String)
+    -- Given the path, determines the object name that would match and a post-processing
+    -- function if the result is a list
+    parsePath op = (objName, pluralizer) where
+      lastName
+        = getLastName
+        . view (key "_path" . _String)
+        $ op
 
-    getLastName
-      = last
-      . filter (not . T.null)
-      . filter (not . T.isPrefixOf "{")
-      . T.splitOn "/"
+      lastName' = depluralize lastName
+      objName   = lastName' ++ "-object"
+      pluralizer
+        | lastName == lastName' = id
+        | otherwise             = mkArraySchema
+
+      getLastName
+        = last
+        . filter (not . T.null)
+        . filter (not . T.isPrefixOf "{")
+        . T.splitOn "/"
 
 -- Generate a Swagger response definition given a schema
 -- See https://swagger.io/docs/specification/describing-responses/
@@ -297,3 +306,10 @@ depluralize s
   | T.isSuffixOf "s"  s = T.dropEnd 1 s
   | otherwise           = s
 
+-- Creates a Swagger schema for an array of the specified type
+mkArraySchema :: Value -> Value
+mkArraySchema itemSchema
+  = mkObject [
+      ("type", String "array"),
+      ("items", itemSchema)
+    ]
