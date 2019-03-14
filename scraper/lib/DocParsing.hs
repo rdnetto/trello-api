@@ -24,21 +24,7 @@ extractExampleResponses
   = HMS.fromList
     . catMaybes
     . map getResponse
-    . filter (orPreds [isEndpoint, isObject])
     . getAllDocs
-  where
-    -- Normal representation of an endpoint
-    isEndpoint
-      = (==) "endpoint"
-        . fromJustNote "Expected a single `type`"
-        . getStringKey "type"
-
-    -- Explicit documentation of an "Object". e.g. the Action Object
-    isObject
-      = T.isSuffixOf "-object"
-      . fromJustNote "Expected a single `slug`"
-      . getStringKey "slug"
-
 
 -- Traverse structure recursively to get a complete list of documents
 getAllDocs :: Value -> [Value]
@@ -122,9 +108,10 @@ getResponseFromBody obj = do
 
   case responses of
        -- Not all endpoints have example code blocks
-       []  -> Nothing
+       -- Note that we also exclude the cases with multiple code blocks,
+       -- since atm it's just the nested resource sections which we don't need
        [x] -> Just (operationId, x)
-       _   -> error $ "Could not find unique response for " ++ show obj
+       _   -> Nothing
 
 {- Body has the following structure:
    Optional header explaining stuff.
