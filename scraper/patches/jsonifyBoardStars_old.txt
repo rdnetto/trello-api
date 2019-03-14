@@ -1,0 +1,24 @@
+Board Stars are used to determine the order in which to display a user's starred boards. There are various times throughout the Trello clients that users are able to drag and drop to re-order their starred boards.
+
+Example request:
+[block:code]
+{
+  "codes": [
+    {
+      "code": "curl https://api.trello.com/1/members/me/boardstars?key={yourKey}&token={yourToken}",
+      "language": "curl"
+    }
+  ]
+}
+[/block]
+And the response:
+[block:code]
+{
+  "codes": [
+    {
+      "code": "[\n  {\n    \"id\": \"58502089add56d6d23e0fa57\",\n    \"idBoard\": \"57c4aac0bea72cca6d3ed608\",\n    \"pos\": 16384\n  },\n  {\n    \"id\": \"585063850027165010be15a8\",\n    \"idBoard\": \"57f7df684f1ca8c2877162e0\",\n    \"pos\": 32768\n  },\n  {\n    \"id\": \"585063a35d4db49ff65ccfc9\",\n    \"idBoard\": \"57f53f3bf85527b1389acd08\",\n    \"pos\": 65536\n  },\n  {\n    \"id\": \"585063a932fbd311ac75b511\",\n    \"idBoard\": \"57c477432ea981b66f3c7bef\",\n    \"pos\": 147456\n  },\n  {\n    \"id\": \"585063ec582d6c1f5f992153\",\n    \"idBoard\": \"57c467a050472389ad8ca7c0\",\n    \"pos\": 131072\n  },\n  {\n    \"id\": \"58514b6cdeb7bed28dbc3c48\",\n    \"idBoard\": \"569810be3d5d84d40a936105\",\n    \"pos\": 196608\n  },\n  {\n    \"id\": \"585455c118a1e26506d5471a\",\n    \"idBoard\": \"57f39ce1b2dc643ce0568f41\",\n    \"pos\": 212992\n  }\n]",
+      "language": "text"
+    }
+  ]
+}
+[/block]

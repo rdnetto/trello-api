@@ -1197,6 +1197,76 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  avatarHash:
+                    type: string
+                  avatarSource:
+                    nullable: true
+                  bio:
+                    type: string
+                  bioData:
+                    nullable: true
+                  confirmed:
+                    type: boolean
+                  email:
+                    nullable: true
+                  fullName:
+                    type: string
+                  gravatarHash:
+                    nullable: true
+                  id:
+                    type: string
+                  idBoards:
+                    items:
+                      type: string
+                    type: array
+                  idBoardsPinned:
+                    nullable: true
+                  idEnterprise:
+                    nullable: true
+                  idEnterprisesAdmin:
+                    items: {}
+                    type: array
+                  idOrganizations:
+                    items: {}
+                    type: array
+                  idPremOrgsAdmin:
+                    items: {}
+                    type: array
+                  initials:
+                    type: string
+                  loginTypes:
+                    nullable: true
+                  memberType:
+                    type: string
+                  oneTimeMessagesDismissed:
+                    nullable: true
+                  prefs:
+                    nullable: true
+                  premiumFeatures:
+                    items: {}
+                    type: array
+                  products:
+                    items: {}
+                    type: array
+                  status:
+                    type: string
+                  trophies:
+                    items: {}
+                    type: array
+                  uploadedAvatarHash:
+                    nullable: true
+                  url:
+                    type: string
+                  username:
+                    type: string
+                type: object
+          description: OK
       summary: /actions/{id}/memberCreator
       tags: []
   /actions/{id}/organization:
@@ -4509,6 +4579,52 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  bytes:
+                    type: integer
+                  date:
+                    format: date-time
+                    type: string
+                  edgeColor:
+                    type: string
+                  id:
+                    type: string
+                  idMember:
+                    type: string
+                  isUpload:
+                    type: boolean
+                  mimeType:
+                    nullable: true
+                  name:
+                    type: string
+                  pos:
+                    type: integer
+                  previews:
+                    items:
+                      properties:
+                        _id:
+                          type: string
+                        bytes:
+                          type: integer
+                        height:
+                          type: integer
+                        scaled:
+                          type: boolean
+                        url:
+                          type: string
+                        width:
+                          type: integer
+                      type: object
+                    type: array
+                  url:
+                    type: string
+                type: object
+          description: OK
       summary: /cards/{id}/attachments/{idAttachment}
       tags: []
   /cards/{id}/board:
@@ -5308,6 +5424,78 @@ paths:
           default: avatarHash,fullName,initials,username
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    avatarHash:
+                      type: string
+                    avatarSource:
+                      nullable: true
+                    bio:
+                      type: string
+                    bioData:
+                      nullable: true
+                    confirmed:
+                      type: boolean
+                    email:
+                      nullable: true
+                    fullName:
+                      type: string
+                    gravatarHash:
+                      nullable: true
+                    id:
+                      type: string
+                    idBoards:
+                      items:
+                        type: string
+                      type: array
+                    idBoardsPinned:
+                      nullable: true
+                    idEnterprise:
+                      nullable: true
+                    idEnterprisesAdmin:
+                      items: {}
+                      type: array
+                    idOrganizations:
+                      items: {}
+                      type: array
+                    idPremOrgsAdmin:
+                      items: {}
+                      type: array
+                    initials:
+                      type: string
+                    loginTypes:
+                      nullable: true
+                    memberType:
+                      type: string
+                    oneTimeMessagesDismissed:
+                      nullable: true
+                    prefs:
+                      nullable: true
+                    premiumFeatures:
+                      items: {}
+                      type: array
+                    products:
+                      items: {}
+                      type: array
+                    status:
+                      type: string
+                    trophies:
+                      items: {}
+                      type: array
+                    uploadedAvatarHash:
+                      nullable: true
+                    url:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /cards/{id}/membersVoted
       tags: []
     post:
@@ -5485,6 +5673,43 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  image:
+                    type: string
+                  imageScaled:
+                    items:
+                      properties:
+                        _id:
+                          type: string
+                        height:
+                          type: integer
+                        scaled:
+                          type: boolean
+                        url:
+                          type: string
+                        width:
+                          type: integer
+                      type: object
+                    type: array
+                  imageUrl:
+                    type: string
+                  left:
+                    type: number
+                  rotate:
+                    type: integer
+                  top:
+                    type: integer
+                  zIndex:
+                    type: integer
+                type: object
+          description: OK
       summary: /cards/{id}/stickers/{idSticker}
       tags: []
     put:
@@ -6275,6 +6500,24 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameData:
+                    nullable: true
+                  pos:
+                    type: integer
+                  state:
+                    type: string
+                type: object
+          description: OK
       summary: /checklists/{id}/checkItems/{idCheckItem}
       tags: []
     put:
@@ -7072,6 +7315,78 @@ paths:
           default: fullName, userName
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    avatarHash:
+                      type: string
+                    avatarSource:
+                      nullable: true
+                    bio:
+                      type: string
+                    bioData:
+                      nullable: true
+                    confirmed:
+                      type: boolean
+                    email:
+                      nullable: true
+                    fullName:
+                      type: string
+                    gravatarHash:
+                      nullable: true
+                    id:
+                      type: string
+                    idBoards:
+                      items:
+                        type: string
+                      type: array
+                    idBoardsPinned:
+                      nullable: true
+                    idEnterprise:
+                      nullable: true
+                    idEnterprisesAdmin:
+                      items: {}
+                      type: array
+                    idOrganizations:
+                      items: {}
+                      type: array
+                    idPremOrgsAdmin:
+                      items: {}
+                      type: array
+                    initials:
+                      type: string
+                    loginTypes:
+                      nullable: true
+                    memberType:
+                      type: string
+                    oneTimeMessagesDismissed:
+                      nullable: true
+                    prefs:
+                      nullable: true
+                    premiumFeatures:
+                      items: {}
+                      type: array
+                    products:
+                      items: {}
+                      type: array
+                    status:
+                      type: string
+                    trophies:
+                      items: {}
+                      type: array
+                    uploadedAvatarHash:
+                      nullable: true
+                    url:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /enterprises/{id}/admins
       tags: []
   /enterprises/{id}/admins/{idMember}:
@@ -9029,6 +9344,22 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    idBoard:
+                      type: string
+                    pos:
+                      type: integer
+                  type: object
+                type: array
+          description: OK
       summary: /members/{id}/boardStars
       tags: []
     post:
@@ -9103,6 +9434,20 @@ paths:
         schema:
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+                  idBoard:
+                    type: string
+                  pos:
+                    type: integer
+                type: object
+          description: OK
       summary: /members/{id}/boardStars/{idStar}
       tags: []
     put:
@@ -11110,6 +11455,76 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                properties:
+                  avatarHash:
+                    type: string
+                  avatarSource:
+                    nullable: true
+                  bio:
+                    type: string
+                  bioData:
+                    nullable: true
+                  confirmed:
+                    type: boolean
+                  email:
+                    nullable: true
+                  fullName:
+                    type: string
+                  gravatarHash:
+                    nullable: true
+                  id:
+                    type: string
+                  idBoards:
+                    items:
+                      type: string
+                    type: array
+                  idBoardsPinned:
+                    nullable: true
+                  idEnterprise:
+                    nullable: true
+                  idEnterprisesAdmin:
+                    items: {}
+                    type: array
+                  idOrganizations:
+                    items: {}
+                    type: array
+                  idPremOrgsAdmin:
+                    items: {}
+                    type: array
+                  initials:
+                    type: string
+                  loginTypes:
+                    nullable: true
+                  memberType:
+                    type: string
+                  oneTimeMessagesDismissed:
+                    nullable: true
+                  prefs:
+                    nullable: true
+                  premiumFeatures:
+                    items: {}
+                    type: array
+                  products:
+                    items: {}
+                    type: array
+                  status:
+                    type: string
+                  trophies:
+                    items: {}
+                    type: array
+                  uploadedAvatarHash:
+                    nullable: true
+                  url:
+                    type: string
+                  username:
+                    type: string
+                type: object
+          description: OK
       summary: /notifications/{id}/memberCreator
       tags: []
   /notifications/{id}/organization:
@@ -12399,6 +12814,78 @@ paths:
           default: all
           type: string
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    avatarHash:
+                      type: string
+                    avatarSource:
+                      nullable: true
+                    bio:
+                      type: string
+                    bioData:
+                      nullable: true
+                    confirmed:
+                      type: boolean
+                    email:
+                      nullable: true
+                    fullName:
+                      type: string
+                    gravatarHash:
+                      nullable: true
+                    id:
+                      type: string
+                    idBoards:
+                      items:
+                        type: string
+                      type: array
+                    idBoardsPinned:
+                      nullable: true
+                    idEnterprise:
+                      nullable: true
+                    idEnterprisesAdmin:
+                      items: {}
+                      type: array
+                    idOrganizations:
+                      items: {}
+                      type: array
+                    idPremOrgsAdmin:
+                      items: {}
+                      type: array
+                    initials:
+                      type: string
+                    loginTypes:
+                      nullable: true
+                    memberType:
+                      type: string
+                    oneTimeMessagesDismissed:
+                      nullable: true
+                    prefs:
+                      nullable: true
+                    premiumFeatures:
+                      items: {}
+                      type: array
+                    products:
+                      items: {}
+                      type: array
+                    status:
+                      type: string
+                    trophies:
+                      items: {}
+                      type: array
+                    uploadedAvatarHash:
+                      nullable: true
+                    url:
+                      type: string
+                    username:
+                      type: string
+                  type: object
+                type: array
+          description: OK
       summary: /organizations/{id}/membersInvited
       tags: []
   /organizations/{id}/memberships:
@@ -12431,6 +12918,26 @@ paths:
           default: false
           type: boolean
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  items:
+                    properties:
+                      id:
+                        type: string
+                      idMember:
+                        type: string
+                      memberType:
+                        type: string
+                      unconfirmed:
+                        type: boolean
+                    type: object
+                  type: array
+                type: array
+          description: OK
       summary: /organizations/{id}/memberships
       tags: []
   /organizations/{id}/memberships/{idMembership}:
@@ -12461,6 +12968,24 @@ paths:
           default: false
           type: boolean
       requestBody: null
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    id:
+                      type: string
+                    idMember:
+                      type: string
+                    memberType:
+                      type: string
+                    unconfirmed:
+                      type: boolean
+                  type: object
+                type: array
+          description: OK
       summary: /organizations/{id}/memberships/{idMembership}
       tags: []
   /organizations/{id}/newBillableGuests/{idBoard}:

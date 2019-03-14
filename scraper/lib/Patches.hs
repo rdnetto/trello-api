@@ -136,14 +136,16 @@ patchDocs docs = do
            "[\n    {\n        \"callbackURL\": \"https://trello.com/\"\n    }\n]"
 
   -- These two are just typos
-  removeExtraQuote <- assertReplacingWithFiles "5b6345d62f1997000328177f" "removeExtraQuote"
-  addMissingComma  <- assertReplacingWithFiles "594d1946f45834003df50221" "addMissingComma"
+  removeExtraQuote  <- assertReplacingWithFiles "5b6345d62f1997000328177f" "removeExtraQuote"
+  addMissingComma   <- assertReplacingWithFiles "594d1946f45834003df50221" "addMissingComma"
+  jsonifyBoardStars <- assertReplacingWithFiles "59540344341432001554ebac" "jsonifyBoardStars"
 
   return
     $ mapDocsRecursively (
       removeExtraQuote
       . removeExtraComma
       . addMissingComma
+      . jsonifyBoardStars
     ) docs
 
 -- Apply the specified transformaion to the root and all its (transitive children)

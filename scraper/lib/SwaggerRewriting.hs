@@ -7,11 +7,11 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Vector as V
-import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at, ix)
+import Lens.Micro ((&), (.~), (^..), (^?), (%~), Traversal', _Left, filtered, has, at, ix, toListOf)
 import Lens.Micro.Aeson (key, values, _Bool, _String, _Object)
 import Lens.Micro.Extras (view)
 import Lens.Micro.Platform ()
-import Safe (fromJustNote)
+import Safe (fromJustNote, headNote)
 
 import AesonMonad
 import Util
@@ -31,6 +31,9 @@ rewriteSwagger responseSchemas obj
 
     -- This needs to be done *before* we rewrite the operation IDs, since we correlate on them
     addResponseSchemas responseSchemas
+
+    -- Handles the cases missed by addResponseSchemas
+    fixMissingResponseSchemas responseSchemas
 
     -- Rewrite passes
     rewriteOperationIDs
@@ -274,6 +277,42 @@ generateResponse schema = res where
     $ schema
 
 
+-- Sets some missing response schemas in terms of other inferred schemas
+fixMissingResponseSchemas :: HashMap Text Value -> AesonM ()
+fixMissingResponseSchemas responseSchemas = mapCurrent res where
+  setResponse :: (Value -> Value) -> Text -> Text -> (Value -> Value)
+  setResponse f path refName
+    =  key "paths"
+    .  key path
+    .  key "get"
+    .  _Object
+    .  at "responses"
+    .~ (Just
+       . generateResponse
+       . f
+       . fromJustNote ("setResponse: " ++ show refName)
+       $ HMS.lookup refName responseSchemas
+       )
+
+  getOrgMembership obj
+    = headNote ("Failed to locate memberships in: " ++ show obj)
+    . toListOf (key "properties" . key "memberships")
+    $ obj
+
+  res
+    = setResponse id "/actions/{id}/memberCreator" "member-object"
+    . setResponse id "/cards/{id}/attachments/{idAttachment}" "attachments"
+    . setResponse mkArraySchema "/cards/{id}/membersVoted" "member-object"
+    . setResponse unArraySchema "/cards/{id}/stickers/{idSticker}" "cardsidstickers"
+    . setResponse unArraySchema "/checklists/{id}/checkItems/{idCheckItem}" "checklistsidcardscheckitems"
+    . setResponse mkArraySchema "/enterprises/{id}/admins" "member-object"
+    . setResponse unArraySchema "/members/{id}/boardStars/{idStar}" "membersidboardstars"
+    . setResponse id "/notifications/{id}/memberCreator" "member-object"
+    . setResponse mkArraySchema "/organizations/{id}/membersInvited" "member-object"
+    . setResponse (mkArraySchema . getOrgMembership) "/organizations/{id}/memberships" "organization-object"
+    . setResponse getOrgMembership "/organizations/{id}/memberships/{idMembership}" "organization-object"
+
+
 -- Traversal for parameters on an operation.
 opParams :: Traversal' Value Value
 opParams
@@ -313,3 +352,9 @@ mkArraySchema itemSchema
       ("type", String "array"),
       ("items", itemSchema)
     ]
+
+-- Given an array schema, returns the element type
+unArraySchema :: Value -> Value
+unArraySchema = expectOne . toListOf (key "items") where
+  expectOne [x] = x
+  expectOne xs  = error $ "Expected a unique element, got: " ++ show xs
